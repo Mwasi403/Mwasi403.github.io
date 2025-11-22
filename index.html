@@ -1,0 +1,406 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lumiminds - Premium Vehicle Import Solutions</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <!-- Header -->
+    <header>
+        <div class="container">
+            <nav class="nav-container">
+                <a href="index.html" class="logo">
+                    <i class="fas fa-car-side"></i>
+                    Lumiminds
+                </a>
+                
+                <ul class="nav-links">
+                    <li><a href="index.html" class="active">Home</a></li>
+                    <li><a href="services.html">Services</a></li>
+                    <li><a href="vehicles.html">Vehicles</a></li>
+                    <li><a href="about.html">About</a></li>
+                    <li><a href="contact.html">Contact</a></li>
+                </ul>
+                
+
+                
+                <button class="mobile-menu-btn">
+                    <i class="fas fa-bars"></i>
+                </button>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Mobile Menu -->
+    <div class="mobile-menu">
+        <div class="mobile-menu-header">
+            <div class="logo">
+                <i class="fas fa-car-side"></i>
+                Lumiminds
+            </div>
+            <button class="mobile-menu-close">
+                <i class="fas fa-times"></i>
+            </button>
+        </div>
+        <ul class="mobile-nav-links">
+            <li><a href="index.html" class="active">Home</a></li>
+            <li><a href="services.html">Services</a></li>
+            <li><a href="vehicles.html">Vehicles</a></li>
+            <li><a href="about.html">About</a></li>
+            <li><a href="contact.html">Contact</a></li>
+        </ul>
+        <div class="mobile-nav-buttons">
+            <button class="btn btn-outline" onclick="openLoginModal()">Log in</button>
+            <button class="btn btn-primary" onclick="openRegisterModal()">Get Started</button>
+        </div>
+    </div>
+
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="container">
+            <div class="hero-content">
+                <div class="hero-text">
+                    <div class="hero-badge">PREMIUM IMPORT SOLUTIONS</div>
+                    <h1 class="hero-title">Drive Your Dream Vehicle Sooner Than You Think</h1>
+                    <p class="hero-description">
+                        Experience seamless vehicle importing with Lumiminds. We handle everything from sourcing to delivery, 
+                        ensuring you get the best quality vehicles at competitive prices with complete transparency.
+                    </p>
+                    <div class="hero-stats">
+                        <div class="stat">
+                            <div class="stat-number">100+</div>
+                            <div class="stat-label">Vehicles Imported</div>
+                        </div>
+                        <div class="stat">
+                            <div class="stat-number">98%</div>
+                            <div class="stat-label">Client Satisfaction</div>
+                        </div>
+                        <div class="stat">
+                            <div class="stat-number">5+</div>
+                            <div class="stat-label">Countries Sourced</div>
+                        </div>
+                    </div>
+                    <div class="hero-buttons">
+                        <button class="btn btn-primary" onclick="location.href='vehicles.html'">Browse Vehicles</button>
+                        <button class="btn btn-outline" onclick="location.href='contact.html'">Get Free Consultation</button>
+                    </div>
+                </div>
+                <div class="hero-image">
+                    <div class="image-overlay">
+                        <div class="featured-vehicle">
+                            <h4>Featured Vehicle</h4>
+                            <h3>Toyota Land Cruiser 2023</h3>
+                            <p>Available for Import</p>
+                            <button class="btn btn-primary btn-sm">View Details</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Why Choose Us Section -->
+    <section class="why-choose">
+        <div class="container">
+            <h2 class="section-title">Why Choose Lumiminds?</h2>
+            <p class="section-subtitle">We make vehicle importing simple, reliable, and cost-effective</p>
+            
+            <div class="features-grid">
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <i class="fas fa-shield-alt"></i>
+                    </div>
+                    <h3 class="feature-title">Verified Quality</h3>
+                    <p class="feature-description">Every vehicle undergoes 150-point inspection and comes with comprehensive vehicle history reports</p>
+                </div>
+                
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <i class="fas fa-money-bill-wave"></i>
+                    </div>
+                    <h3 class="feature-title">Best Prices</h3>
+                    <p class="feature-description">Save up to 40% compared to local market prices with our global sourcing network</p>
+                </div>
+                
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <i class="fas fa-clock"></i>
+                    </div>
+                    <h3 class="feature-title">Fast Delivery</h3>
+                    <p class="feature-description">Average delivery time of 4-6 weeks with real-time tracking and updates</p>
+                </div>
+                
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <i class="fas fa-headset"></i>
+                    </div>
+                    <h3 class="feature-title">Dedicated Support</h3>
+                    <p class="feature-description">Personal import specialist assigned to guide you through every step of the process</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Popular Vehicles Section -->
+    <section class="popular-vehicles">
+        <div class="container">
+            <h2 class="section-title">Popular Vehicles</h2>
+            <p class="section-subtitle">Most requested vehicles by our clients</p>
+            
+            <div class="vehicles-grid">
+                <div class="vehicle-card">
+                    <div class="vehicle-image" style="">
+                        <div class="vehicle-badge">Hot Deal</div>
+                    </div>
+                    <div class="vehicle-info">
+                        <h3>Toyota Hilux</h3>
+                        <p class="vehicle-year">2023 Model</p>
+                        <div class="vehicle-features">
+                            <span><i class="fas fa-gas-pump"></i> Diesel</span>
+                            <span><i class="fas fa-cog"></i> Automatic</span>
+                            <span><i class="fas fa-road"></i> 15,000 km</span>
+                        </div>
+
+                    </div>
+                </div>
+                
+                <div class="vehicle-card">
+                    <div class="vehicle-image" style="">
+                        <div class="vehicle-badge new">New</div>
+                    </div>
+                    <div class="vehicle-info">
+                        <h3>BMW X5</h3>
+                        <p class="vehicle-year">2024 Model</p>
+                        <div class="vehicle-features">
+                            <span><i class="fas fa-gas-pump"></i> Petrol</span>
+                            <span><i class="fas fa-cog"></i> Automatic</span>
+                            <span><i class="fas fa-road"></i> 5,000 km</span>
+                        </div>
+
+                    </div>
+                </div>
+                
+                <div class="vehicle-card">
+                    <div class="vehicle-image" style="">
+                        <div class="vehicle-badge">Best Seller</div>
+                    </div>
+                    <div class="vehicle-info">
+                        <h3>Mercedes-Benz GLE</h3>
+                        <p class="vehicle-year">2023 Model</p>
+                        <div class="vehicle-features">
+                            <span><i class="fas fa-gas-pump"></i> Diesel</span>
+                            <span><i class="fas fa-cog"></i> Automatic</span>
+                            <span><i class="fas fa-road"></i> 20,000 km</span>
+                        </div>
+                        <div class="vehicle-price">
+
+                    </div>
+                </div>
+            </div>
+            
+            <div class="text-center">
+                <button class="btn btn-outline" onclick="location.href='vehicles.html'">View All Vehicles</button>
+            </div>
+        </div>
+    </section>
+
+    <!-- Testimonials Section -->
+    <section class="testimonials">
+        <div class="container">
+            <h2 class="section-title">What Our Clients Say</h2>
+            <p class="section-subtitle">Trusted by hundreds of satisfied customers</p>
+            
+            <div class="testimonials-grid">
+                <div class="testimonial-card">
+                    <div class="testimonial-content">
+                        <div class="stars">
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                        </div>
+                        <p>"Lumiminds made importing my Toyota Land Cruiser incredibly smooth. Their team handled all the paperwork and logistics. Saved me both time and money!"</p>
+                    </div>
+                    <div class="testimonial-author">
+                        <div class="author-image"></div>
+                        <div class="author-info">
+                            <h4>James Mulenga</h4>
+                            <p>Business Owner, Lusaka</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="testimonial-card">
+                    <div class="testimonial-content">
+                        <div class="stars">
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                        </div>
+                        <p>"The quality check process was thorough. My BMW arrived in perfect condition, exactly as described. Will definitely use their services again."</p>
+                    </div>
+                    <div class="testimonial-author">
+                        <div class="author-image"></div>
+                        <div class="author-info">
+                            <h4>Sarah Chibwe</h4>
+                            <p>Medical Doctor, Ndola</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="testimonial-card">
+                    <div class="testimonial-content">
+                        <div class="stars">
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star-half-alt"></i>
+                        </div>
+                        <p>"Professional service from start to finish. My import specialist kept me updated throughout the process. Highly recommended for anyone looking to import vehicles."</p>
+                    </div>
+                    <div class="testimonial-author">
+                        <div class="author-image"></div>
+                        <div class="author-info">
+                            <h4>David Banda</h4>
+                            <p>Construction Company CEO, Kitwe</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- CTA Section -->
+    <section class="cta">
+        <div class="container">
+            <div class="cta-content">
+                <h2>Ready to Import Your Dream Vehicle?</h2>
+                <p>Get started today with our free consultation and discover how much you can save</p>
+                <div class="cta-buttons">
+                    <button class="btn btn-primary btn-large" onclick="location.href='contact.html'">Start Your Import</button>
+                    <button class="btn btn-outline btn-large" onclick="location.href='tel:+260000000000'">
+                        <i class="fas fa-phone"></i> Call Us Now
+                    </button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h3>
+                        <i class="fas fa-car-side"></i>
+                        Lumiminds
+                    </h3>
+                    <p>Your trusted partner for premium vehicle import solutions. We bring global automotive excellence to your doorstep with complete transparency and professional service.</p>
+                    <div class="social-links">
+                        <a href="#"><i class="fab fa-facebook"></i></a>
+                        <a href="#"><i class="fab fa-twitter"></i></a>
+                        <a href="#"><i class="fab fa-instagram"></i></a>
+                        <a href="#"><i class="fab fa-linkedin"></i></a>
+                        <a href="#"><i class="fab fa-whatsapp"></i></a>
+                    </div>
+                </div>
+                
+                <div class="footer-section">
+                    <h3>Quick Links</h3>
+                    <ul class="footer-links">
+                        <li><a href="index.html">Home</a></li>
+                        <li><a href="services.html">Services</a></li>
+                        <li><a href="vehicles.html">Vehicles</a></li>
+                        <li><a href="about.html">About Us</a></li>
+                        <li><a href="contact.html">Contact</a></li>
+                        <li><a href="faq.html">FAQ</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-section">
+                    <h3>Our Services</h3>
+                    <ul class="footer-links">
+                        <li><a href="services.html#sourcing">Vehicle Sourcing</a></li>
+                        <li><a href="services.html#inspection">Quality Inspection</a></li>
+                        <li><a href="services.html#shipping">Shipping & Logistics</a></li>
+                        <li><a href="services.html#customs">Customs Clearance</a></li>
+                        <li><a href="services.html#delivery">Final Delivery</a></li>
+                        <li><a href="services.html#aftercare">Aftercare Support</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-section">
+                    <h3>Contact Info</h3>
+                    <ul class="footer-links">
+                        <li><i class="fas fa-map-marker-alt"></i> 📍 Musili Rd, Mine Masala, Ndola, Zambia</li>
+                        <li><i class="fas fa-envelope"></i> 📧 lumimindszambia@gmail.com</li>
+                        <li><i class="fas fa-phone"></i> 📞 +260969820643</li>
+                        <li><i class="fas fa-clock"></i> 🕒 Mon-Fri: 8AM-6PM, Sat: 9AM-1PM</li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="copyright">
+                <p>&copy; 2025 Lumiminds Vehicle Import Solutions. All rights reserved. | <a href="privacy.html">Privacy Policy</a> | <a href="terms.html">Terms of Service</a></p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Login Modal -->
+    <div id="loginModal" class="modal">
+        <div class="modal-content">
+            <span class="close-modal" onclick="closeLoginModal()">&times;</span>
+            <h2>Welcome Back</h2>
+            <form class="modal-form">
+                <div class="form-group">
+                    <label class="form-label">Email</label>
+                    <input type="email" class="form-input" placeholder="Enter your email" required>
+                </div>
+                <div class="form-group">
+                    <label class="form-label">Password</label>
+                    <input type="password" class="form-input" placeholder="Enter your password" required>
+                </div>
+                <button type="submit" class="btn btn-primary btn-full">Log In</button>
+            </form>
+            <p class="modal-footer">Don't have an account? <a href="#" onclick="switchToRegister()">Sign up here</a></p>
+        </div>
+    </div>
+
+    <!-- Register Modal -->
+    <div id="registerModal" class="modal">
+        <div class="modal-content">
+            <span class="close-modal" onclick="closeRegisterModal()">&times;</span>
+            <h2>Create Account</h2>
+            <form class="modal-form">
+                <div class="form-group">
+                    <label class="form-label">Full Name</label>
+                    <input type="text" class="form-input" placeholder="Enter your full name" required>
+                </div>
+                <div class="form-group">
+                    <label class="form-label">Email</label>
+                    <input type="email" class="form-input" placeholder="Enter your email" required>
+                </div>
+                <div class="form-group">
+                    <label class="form-label">Phone Number</label>
+                    <input type="tel" class="form-input" placeholder="Enter your phone number" required>
+                </div>
+                <div class="form-group">
+                    <label class="form-label">Password</label>
+                    <input type="password" class="form-input" placeholder="Create a password" required>
+                </div>
+                <button type="submit" class="btn btn-primary btn-full">Create Account</button>
+            </form>
+            <p class="modal-footer">Already have an account? <a href="#" onclick="switchToLogin()">Log in here</a></p>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>

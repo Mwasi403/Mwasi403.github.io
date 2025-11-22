@@ -1,0 +1,290 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Contact Us - Lumiminds</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <!-- Header -->
+    <header>
+        <div class="container">
+            <nav class="nav-container">
+                <a href="index.html" class="logo">
+                    <i class="fas fa-car-side"></i>
+                    Lumiminds
+                </a>
+                
+                <ul class="nav-links">
+                    <li><a href="index.html">Home</a></li>
+                    <li><a href="services.html">Services</a></li>
+                    <li><a href="vehicles.html">Vehicles</a></li>
+                    <li><a href="about.html">About</a></li>
+                    <li><a href="contact.html" class="active">Contact</a></li>
+                </ul>
+                
+
+                
+                <button class="mobile-menu-btn">
+                    <i class="fas fa-bars"></i>
+                </button>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Mobile Menu -->
+    <div class="mobile-menu">
+        <div class="mobile-menu-header">
+            <div class="logo">
+                <i class="fas fa-car-side"></i>
+                Lumiminds
+            </div>
+            <button class="mobile-menu-close">
+                <i class="fas fa-times"></i>
+            </button>
+        </div>
+        <ul class="mobile-nav-links">
+            <li><a href="index.html">Home</a></li>
+            <li><a href="services.html">Services</a></li>
+            <li><a href="vehicles.html">Vehicles</a></li>
+            <li><a href="about.html">About</a></li>
+            <li><a href="contact.html" class="active">Contact</a></li>
+        </ul>
+
+    </div>
+
+    <!-- Page Header -->
+    <section class="page-header">
+        <div class="container">
+            <h1>Contact Us</h1>
+            <p>Get in touch with our team for personalized vehicle import assistance</p>
+        </div>
+    </section>
+
+
+
+    <!-- Contact Form Section -->
+    <section class="contact-form-section">
+        <div class="container">
+            <div class="contact-content">
+                <div class="contact-info">
+                    <div class="contact-badge">GET PERSONALIZED ASSISTANCE</div>
+                    <h2 class="contact-title">Let's Discuss Your Vehicle Import Needs</h2>
+                    <p class="contact-description">
+                        Whether you're looking for a specific model, need guidance on the import process, or want to compare options, 
+                        our team is here to help. Fill out the form and we'll provide you with a comprehensive solution.
+                    </p>
+                    
+                    <div class="contact-details">
+                        <div class="contact-detail">
+                            <div class="contact-detail-title">
+                                <i class="fas fa-clock"></i>
+                                Business Hours
+                            </div>
+                            <div class="contact-detail-content">
+                                <div>Monday - Friday: 8:00 AM - 6:00 PM</div>
+                                <div>Saturday: 9:00 AM - 1:00 PM</div>
+                                <div>Sunday: Closed</div>
+                            </div>
+                        </div>
+                        
+                        <div class="contact-detail">
+                            <div class="contact-detail-title">
+                                <i class="fas fa-map-marker-alt"></i>
+                                Our Location
+                            </div>
+                            <div class="contact-detail-content">
+                                Mushili Rd, Mine Masala<br>
+                                Ndola, Zambia<br>
+                                
+                            </div>
+                        </div>
+                        
+                        <div class="contact-detail">
+                            <div class="contact-detail-title">
+                                <i class="fas fa-phone"></i>
+                                Phone Numbers
+                            </div>
+                            <div class="contact-detail-content">
+                                <div>Main: +2609</div>
+                                <div>Support: +260762706892</div>
+                       
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="quick-actions">
+                        <h3>Quick Actions</h3>
+                        <div class="action-buttons">
+                            <button class="btn btn-outline btn-sm" onclick="location.href='vehicles.html'">
+                                <i class="fas fa-car"></i> Browse Vehicles
+                            </button>
+                            <button class="btn btn-outline btn-sm" onclick="location.href='services.html'">
+                                <i class="fas fa-cog"></i> View Services
+                            </button>
+                            <button class="btn btn-outline btn-sm" onclick="location.href='faq.html'">
+                                <i class="fas fa-question-circle"></i> FAQ
+                            </button>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="contact-form">
+                    <h3 class="form-title">Get a Free Consultation</h3>
+                    <p class="form-subtitle">Fill out the form below and we'll get back to you within 2 hours</p>
+                    
+                    <form id="contactForm">
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label class="form-label">Full Name *</label>
+                                <input type="text" class="form-input" placeholder="Enter your full name" required>
+                            </div>
+                            
+                            <div class="form-group">
+                                <label class="form-label">Phone Number *</label>
+                                <input type="tel" class="form-input" placeholder="Enter your phone number" required>
+                            </div>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label class="form-label">Email Address *</label>
+                            <input type="email" class="form-input" placeholder="Enter your email address" required>
+                        </div>
+
+                            
+
+                        
+                        <div class="form-group">
+                            <label class="form-label">How did you hear about us?</label>
+                            <select class="form-select">
+                                <option value="">Select option...</option>
+                                <option value="google">Google Search</option>
+                                <option value="social">Social Media</option>
+                                <option value="referral">Friend Referral</option>
+                                <option value="advertisement">Advertisement</option>
+                                <option value="other">Other</option>
+                            </select>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label class="form-label">Message *</label>
+                            <textarea class="form-textarea" placeholder="Tell us about your vehicle import requirements, specific models you're interested in, or any questions you have..." required></textarea>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label class="checkbox-label">
+                                <input type="checkbox" required>
+                                <span class="checkmark"></span>
+                                I agree to receive communications from Lumiminds regarding my vehicle import inquiry
+                            </label>
+                        </div>
+                        
+                        <button type="submit" class="btn btn-primary btn-full">
+                            <i class="fas fa-paper-plane"></i> Send Message
+                        </button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- FAQ Preview -->
+    <section class="faq-preview">
+        <div class="container">
+            <h2 class="section-title">Frequently Asked Questions</h2>
+            <p class="section-subtitle">Quick answers to common questions</p>
+            
+            <div class="faq-grid">
+                <div class="faq-item">
+                    <h3>How long does the import process take?</h3>
+                    <p>The complete process typically takes 4-6 weeks from vehicle selection to delivery, depending on the source country and shipping method.</p>
+                </div>
+                
+                <div class="faq-item">
+                    <h3>What documents do I need?</h3>
+                    <p>We handle most documentation. You'll mainly need a valid ID, proof of address, and import duty payment. We guide you through everything.</p>
+                </div>
+                
+                <div class="faq-item">
+                    <h3>Can I inspect the vehicle before purchase?</h3>
+                    <p>Yes! We provide detailed inspection reports, photos, and can arrange video calls for virtual inspections before you commit.</p>
+                </div>
+                
+                <div class="faq-item">
+                    <h3>What about warranty and after-sales support?</h3>
+                    <p>We offer 3-month aftercare support and can help source spare parts. Many vehicles come with remaining manufacturer warranty.</p>
+                </div>
+            </div>
+            
+            <div class="text-center">
+                <button class="btn btn-outline" onclick="location.href='faq.html'">View All FAQs</button>
+            </div>
+        </div>
+    </section>
+
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h3>
+                        <i class="fas fa-car-side"></i>
+                        Lumiminds
+                    </h3>
+                    <p>Your trusted partner for premium vehicle import solutions. We bring global automotive excellence to your doorstep with complete transparency and professional service.</p>
+                    <div class="social-links">
+                        <a href="#"><i class="fab fa-facebook"></i></a>
+                        <a href="#"><i class="fab fa-twitter"></i></a>
+                        <a href="#"><i class="fab fa-instagram"></i></a>
+                        <a href="#"><i class="fab fa-linkedin"></i></a>
+                        <a href="#"><i class="fab fa-whatsapp"></i></a>
+                    </div>
+                </div>
+                
+                <div class="footer-section">
+                    <h3>Quick Links</h3>
+                    <ul class="footer-links">
+                        <li><a href="index.html">Home</a></li>
+                        <li><a href="services.html">Services</a></li>
+                        <li><a href="vehicles.html">Vehicles</a></li>
+                        <li><a href="about.html">About Us</a></li>
+                        <li><a href="contact.html">Contact</a></li>
+                        <li><a href="faq.html">FAQ</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-section">
+                    <h3>Our Services</h3>
+                    <ul class="footer-links">
+                        <li><a href="services.html#sourcing">Vehicle Sourcing</a></li>
+                        <li><a href="services.html#inspection">Quality Inspection</a></li>
+                        <li><a href="services.html#shipping">Shipping & Logistics</a></li>
+                        <li><a href="services.html#customs">Customs Clearance</a></li>
+                        <li><a href="services.html#delivery">Final Delivery</a></li>
+                        <li><a href="services.html#aftercare">Aftercare Support</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-section">
+                    <h3>Contact Info</h3>
+                    <ul class="footer-links">
+                        <li><i class="fas fa-map-marker-alt"></i> 📍 Musili Rd, Mine Masala, Ndola, Zambia</li>
+                        <li><i class="fas fa-envelope"></i> 📧 lumimindszambia@gmail.com</li>
+                        <li><i class="fas fa-phone"></i> 📞 +260969820643</li>
+                        <li><i class="fas fa-clock"></i> 🕒 Mon-Fri: 8AM-6PM, Sat: 9AM-1PM</li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="copyright">
+                <p>&copy; 2025 Lumiminds Vehicle Import Solutions. All rights reserved. | <a href="privacy.html">Privacy Policy</a> | <a href="terms.html">Terms of Service</a></p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+</html>
