@@ -3,10 +3,164 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>LumiMinds Zambia</title>
+    <title>LumiMinds Zambia - Services</title>
     <link rel="icon" type="image/x-icon" href="logo.png">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link rel="stylesheet" href="styles.css">
+    <style>
+        /* Service Category Tabs */
+        .service-categories {
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 1rem;
+            margin: 3rem 0;
+        }
+        
+        .category-tab {
+            padding: 1rem 2rem;
+            background: var(--white);
+            border: 2px solid var(--primary);
+            border-radius: 50px;
+            color: var(--primary);
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            box-shadow: var(--shadow);
+        }
+        
+        .category-tab:hover {
+            background: var(--primary-light);
+            transform: translateY(-2px);
+        }
+        
+        .category-tab.active {
+            background: var(--primary);
+            color: var(--white);
+        }
+        
+        .category-tab i {
+            font-size: 1.2rem;
+        }
+        
+        /* Service Category Content */
+        .service-category-content {
+            display: none;
+            animation: fadeIn 0.5s ease;
+        }
+        
+        .service-category-content.active {
+            display: block;
+        }
+        
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        
+        .category-header {
+            text-align: center;
+            margin-bottom: 3rem;
+        }
+        
+        .category-title {
+            font-size: 2.5rem;
+            font-weight: 600;
+            margin-bottom: 1rem;
+            color: var(--primary);
+        }
+        
+        .category-description {
+            font-size: 1.2rem;
+            color: var(--text-light);
+            max-width: 600px;
+            margin: 0 auto;
+        }
+        
+        /* Service Grid */
+        .services-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 2rem;
+            margin-bottom: 4rem;
+        }
+        
+        .service-card {
+            background: var(--white);
+            padding: 2rem;
+            border-radius: 12px;
+            box-shadow: var(--shadow);
+            border-left: 4px solid var(--primary);
+            transition: transform 0.3s ease;
+        }
+        
+        .service-card:hover {
+            transform: translateY(-5px);
+        }
+        
+        .service-icon {
+            width: 60px;
+            height: 60px;
+            background: rgba(45, 74, 50, 0.1);
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 1rem;
+            color: var(--primary);
+            font-size: 1.5rem;
+        }
+        
+        .service-card h3 {
+            font-size: 1.5rem;
+            margin-bottom: 1rem;
+        }
+        
+        .service-features {
+            list-style: none;
+            margin: 1.5rem 0;
+        }
+        
+        .service-features li {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            margin-bottom: 0.5rem;
+        }
+        
+        .service-features i {
+            color: var(--primary);
+        }
+        
+        .service-time {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            color: var(--text-light);
+            font-size: 0.875rem;
+        }
+        
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .service-categories {
+                flex-direction: column;
+                align-items: center;
+            }
+            
+            .category-tab {
+                width: 100%;
+                max-width: 300px;
+                justify-content: center;
+            }
+            
+            .services-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
 </head>
 <body>
     <!-- Header -->
@@ -57,373 +211,416 @@
     <section class="page-header">
         <div class="container">
             <h1>Our Services</h1>
-            <p>Comprehensive solutions tailored to your specific needs across multiple domains</p>
+            <p>Explore our comprehensive range of solutions tailored to your specific needs</p>
         </div>
     </section>
 
-    <!-- Services Overview -->
-    <section class="services-overview">
+    <!-- Service Categories Navigation -->
+    <section class="service-categories-section">
         <div class="container">
-            <!-- Vehicles Category -->
-            <div class="service-category">
-                <h2 class="category-title">Vehicles</h2>
-                <p class="category-description">Complete vehicle import solutions from sourcing to delivery</p>
-                
-                <div class="services-grid">
-                    <div class="service-card" id="sourcing">
-                        <div class="service-icon">
-                            <i class="fas fa-search"></i>
-                        </div>
-                        <h3>Vehicle Sourcing</h3>
-                        <p>We find the perfect vehicle that matches your specifications, budget, and requirements from our global network of trusted suppliers.</p>
-                        <ul class="service-features">
-                            <li><i class="fas fa-check"></i> Global market access</li>
-                            <li><i class="fas fa-check"></i> Price negotiation</li>
-                            <li><i class="fas fa-check"></i> Vehicle history reports</li>
-                            <li><i class="fas fa-check"></i> Multiple options presented</li>
-                        </ul>
-                        <div class="service-time">
-                            <i class="fas fa-clock"></i>
-                            <span>2-5 business days</span>
-                        </div>
-                    </div>
+            <div class="service-categories">
+                <div class="category-tab active" data-category="vehicles">
+                    <i class="fas fa-car"></i>
+                    Vehicles
+                </div>
+                <div class="category-tab" data-category="gadgets">
+                    <i class="fas fa-mobile-alt"></i>
+                    Gadgets
+                </div>
+                <div class="category-tab" data-category="it-support">
+                    <i class="fas fa-headset"></i>
+                    IT Support
+                </div>
+                <div class="category-tab" data-category="web-development">
+                    <i class="fas fa-code"></i>
+                    Web Development
+                </div>
+                <div class="category-tab" data-category="mobile-apps">
+                    <i class="fas fa-mobile"></i>
+                    Mobile Apps
+                </div>
+            </div>
+        </div>
+    </section>
 
-                    <div class="service-card" id="inspection">
-                        <div class="service-icon">
-                            <i class="fas fa-check-circle"></i>
-                        </div>
-                        <h3>Quality Inspection</h3>
-                        <p>Comprehensive 150-point inspection conducted by certified mechanics to ensure vehicle quality and condition.</p>
-                        <ul class="service-features">
-                            <li><i class="fas fa-check"></i> Mechanical inspection</li>
-                            <li><i class="fas fa-check"></i> Electrical systems check</li>
-                            <li><i class="fas fa-check"></i> Body and paint assessment</li>
-                            <li><i class="fas fa-check"></i> Test drive evaluation</li>
-                        </ul>
-                        <div class="service-time">
-                            <i class="fas fa-clock"></i>
-                            <span>1-2 business days</span>
-                        </div>
+    <!-- Vehicles Services -->
+    <section class="service-category-content active" id="vehicles">
+        <div class="container">
+            <div class="category-header">
+                <h2 class="category-title">Vehicle Import Services</h2>
+                <p class="category-description">Complete vehicle import solutions from sourcing to delivery with our comprehensive service packages</p>
+            </div>
+            
+            <div class="services-grid">
+                <div class="service-card" id="sourcing">
+                    <div class="service-icon">
+                        <i class="fas fa-search"></i>
                     </div>
-
-                    <div class="service-card" id="shipping">
-                        <div class="service-icon">
-                            <i class="fas fa-shipping-fast"></i>
-                        </div>
-                        <h3>Shipping & Logistics</h3>
-                        <p>Professional handling of all shipping arrangements, documentation, and international logistics.</p>
-                        <ul class="service-features">
-                            <li><i class="fas fa-check"></i> Container shipping</li>
-                            <li><i class="fas fa-check"></i> RORO (Roll-on/Roll-off)</li>
-                            <li><i class="fas fa-check"></i> Insurance coverage</li>
-                            <li><i class="fas fa-check"></i> Real-time tracking</li>
-                        </ul>
-                        <div class="service-time">
-                            <i class="fas fa-clock"></i>
-                            <span>3-6 weeks transit</span>
-                        </div>
+                    <h3>Vehicle Sourcing</h3>
+                    <p>We find the perfect vehicle that matches your specifications, budget, and requirements from our global network of trusted suppliers.</p>
+                    <ul class="service-features">
+                        <li><i class="fas fa-check"></i> Global market access</li>
+                        <li><i class="fas fa-check"></i> Price negotiation</li>
+                        <li><i class="fas fa-check"></i> Vehicle history reports</li>
+                        <li><i class="fas fa-check"></i> Multiple options presented</li>
+                    </ul>
+                    <div class="service-time">
+                        <i class="fas fa-clock"></i>
+                        <span>2-5 business days</span>
                     </div>
+                </div>
 
-                    <div class="service-card" id="customs">
-                        <div class="service-icon">
-                            <i class="fas fa-file-contract"></i>
-                        </div>
-                        <h3>Customs Clearance</h3>
-                        <p>Expert handling of all customs documentation, duties, taxes, and regulatory compliance requirements.</p>
-                        <ul class="service-features">
-                            <li><i class="fas fa-check"></i> Import duty calculation</li>
-                            <li><i class="fas fa-check"></i> Tax documentation</li>
-                            <li><i class="fas fa-check"></i> Regulatory compliance</li>
-                            <li><i class="fas fa-check"></i> Fast clearance processing</li>
-                        </ul>
-                        <div class="service-time">
-                            <i class="fas fa-clock"></i>
-                            <span>3-7 business days</span>
-                        </div>
+                <div class="service-card" id="inspection">
+                    <div class="service-icon">
+                        <i class="fas fa-check-circle"></i>
                     </div>
-
-                    <div class="service-card" id="delivery">
-                        <div class="service-icon">
-                            <i class="fas fa-truck"></i>
-                        </div>
-                        <h3>Final Delivery</h3>
-                        <p>Safe and secure delivery of your vehicle to your specified location with comprehensive handover process.</p>
-                        <ul class="service-features">
-                            <li><i class="fas fa-check"></i> Door-to-door delivery</li>
-                            <li><i class="fas fa-check"></i> Final inspection</li>
-                            <li><i class="fas fa-check"></i> Documentation handover</li>
-                            <li><i class="fas fa-check"></i> Operating instructions</li>
-                        </ul>
-                        <div class="service-time">
-                            <i class="fas fa-clock"></i>
-                            <span>1-3 business days</span>
-                        </div>
+                    <h3>Quality Inspection</h3>
+                    <p>Comprehensive 150-point inspection conducted by certified mechanics to ensure vehicle quality and condition.</p>
+                    <ul class="service-features">
+                        <li><i class="fas fa-check"></i> Mechanical inspection</li>
+                        <li><i class="fas fa-check"></i> Electrical systems check</li>
+                        <li><i class="fas fa-check"></i> Body and paint assessment</li>
+                        <li><i class="fas fa-check"></i> Test drive evaluation</li>
+                    </ul>
+                    <div class="service-time">
+                        <i class="fas fa-clock"></i>
+                        <span>1-2 business days</span>
                     </div>
+                </div>
 
-                    <div class="service-card" id="aftercare">
-                        <div class="service-icon">
-                            <i class="fas fa-headset"></i>
-                        </div>
-                        <h3>Aftercare Support</h3>
-                        <p>Ongoing support and assistance to ensure your complete satisfaction with our services.</p>
-                        <ul class="service-features">
-                            <li><i class="fas fa-check"></i> 3-month support period</li>
-                            <li><i class="fas fa-check"></i> Service recommendations</li>
-                            <li><i class="fas fa-check"></i> Spare parts sourcing</li>
-                            <li><i class="fas fa-check"></i> Maintenance guidance</li>
-                        </ul>
-                        <div class="service-time">
-                            <i class="fas fa-clock"></i>
-                            <span>Ongoing support</span>
-                        </div>
+                <div class="service-card" id="shipping">
+                    <div class="service-icon">
+                        <i class="fas fa-shipping-fast"></i>
+                    </div>
+                    <h3>Shipping & Logistics</h3>
+                    <p>Professional handling of all shipping arrangements, documentation, and international logistics.</p>
+                    <ul class="service-features">
+                        <li><i class="fas fa-check"></i> Container shipping</li>
+                        <li><i class="fas fa-check"></i> RORO (Roll-on/Roll-off)</li>
+                        <li><i class="fas fa-check"></i> Insurance coverage</li>
+                        <li><i class="fas fa-check"></i> Real-time tracking</li>
+                    </ul>
+                    <div class="service-time">
+                        <i class="fas fa-clock"></i>
+                        <span>3-6 weeks transit</span>
+                    </div>
+                </div>
+
+                <div class="service-card" id="customs">
+                    <div class="service-icon">
+                        <i class="fas fa-file-contract"></i>
+                    </div>
+                    <h3>Customs Clearance</h3>
+                    <p>Expert handling of all customs documentation, duties, taxes, and regulatory compliance requirements.</p>
+                    <ul class="service-features">
+                        <li><i class="fas fa-check"></i> Import duty calculation</li>
+                        <li><i class="fas fa-check"></i> Tax documentation</li>
+                        <li><i class="fas fa-check"></i> Regulatory compliance</li>
+                        <li><i class="fas fa-check"></i> Fast clearance processing</li>
+                    </ul>
+                    <div class="service-time">
+                        <i class="fas fa-clock"></i>
+                        <span>3-7 business days</span>
+                    </div>
+                </div>
+
+                <div class="service-card" id="delivery">
+                    <div class="service-icon">
+                        <i class="fas fa-truck"></i>
+                    </div>
+                    <h3>Final Delivery</h3>
+                    <p>Safe and secure delivery of your vehicle to your specified location with comprehensive handover process.</p>
+                    <ul class="service-features">
+                        <li><i class="fas fa-check"></i> Door-to-door delivery</li>
+                        <li><i class="fas fa-check"></i> Final inspection</li>
+                        <li><i class="fas fa-check"></i> Documentation handover</li>
+                        <li><i class="fas fa-check"></i> Operating instructions</li>
+                    </ul>
+                    <div class="service-time">
+                        <i class="fas fa-clock"></i>
+                        <span>1-3 business days</span>
+                    </div>
+                </div>
+
+                <div class="service-card" id="aftercare">
+                    <div class="service-icon">
+                        <i class="fas fa-headset"></i>
+                    </div>
+                    <h3>Aftercare Support</h3>
+                    <p>Ongoing support and assistance to ensure your complete satisfaction with our services.</p>
+                    <ul class="service-features">
+                        <li><i class="fas fa-check"></i> 3-month support period</li>
+                        <li><i class="fas fa-check"></i> Service recommendations</li>
+                        <li><i class="fas fa-check"></i> Spare parts sourcing</li>
+                        <li><i class="fas fa-check"></i> Maintenance guidance</li>
+                    </ul>
+                    <div class="service-time">
+                        <i class="fas fa-clock"></i>
+                        <span>Ongoing support</span>
                     </div>
                 </div>
             </div>
+        </div>
+    </section>
+
+    <!-- Gadgets Services -->
+    <section class="service-category-content" id="gadgets">
+        <div class="container">
+            <div class="category-header">
+                <h2 class="category-title">Gadgets & Electronics</h2>
+                <p class="category-description">Import and sourcing of the latest technology gadgets and electronics from global markets</p>
+            </div>
             
-            <!-- Gadgets Category -->
-            <div class="service-category">
-                <h2 class="category-title">Gadgets</h2>
-                <p class="category-description">Import and sourcing of the latest technology gadgets and electronics</p>
-                
-                <div class="services-grid">
-                    <div class="service-card">
-                        <div class="service-icon">
-                            <i class="fas fa-mobile-alt"></i>
-                        </div>
-                        <h3>Smartphone Import</h3>
-                        <p>Source the latest smartphones and mobile devices from global markets at competitive prices.</p>
-                        <ul class="service-features">
-                            <li><i class="fas fa-check"></i> Latest models</li>
-                            <li><i class="fas fa-check"></i> Warranty coverage</li>
-                            <li><i class="fas fa-check"></i> Quality verification</li>
-                            <li><i class="fas fa-check"></i> Competitive pricing</li>
-                        </ul>
-                        <div class="service-time">
-                            <i class="fas fa-clock"></i>
-                            <span>2-4 weeks</span>
-                        </div>
+            <div class="services-grid">
+                <div class="service-card">
+                    <div class="service-icon">
+                        <i class="fas fa-mobile-alt"></i>
                     </div>
-
-                    <div class="service-card">
-                        <div class="service-icon">
-                            <i class="fas fa-laptop"></i>
-                        </div>
-                        <h3>Laptops & Computers</h3>
-                        <p>Import high-performance laptops, desktops, and computer accessories for personal and business use.</p>
-                        <ul class="service-features">
-                            <li><i class="fas fa-check"></i> Business-grade systems</li>
-                            <li><i class="fas fa-check"></i> Gaming computers</li>
-                            <li><i class="fas fa-check"></i> Custom configurations</li>
-                            <li><i class="fas fa-check"></i> Peripherals sourcing</li>
-                        </ul>
-                        <div class="service-time">
-                            <i class="fas fa-clock"></i>
-                            <span>3-5 weeks</span>
-                        </div>
+                    <h3>Smartphone Import</h3>
+                    <p>Source the latest smartphones and mobile devices from global markets at competitive prices.</p>
+                    <ul class="service-features">
+                        <li><i class="fas fa-check"></i> Latest models</li>
+                        <li><i class="fas fa-check"></i> Warranty coverage</li>
+                        <li><i class="fas fa-check"></i> Quality verification</li>
+                        <li><i class="fas fa-check"></i> Competitive pricing</li>
+                    </ul>
+                    <div class="service-time">
+                        <i class="fas fa-clock"></i>
+                        <span>2-4 weeks</span>
                     </div>
+                </div>
 
-                    <div class="service-card">
-                        <div class="service-icon">
-                            <i class="fas fa-tablet-alt"></i>
-                        </div>
-                        <h3>Tablets & Accessories</h3>
-                        <p>Source tablets, e-readers, and related accessories from international markets.</p>
-                        <ul class="service-features">
-                            <li><i class="fas fa-check"></i> Various brands & models</li>
-                            <li><i class="fas fa-check"></i> Protective cases</li>
-                            <li><i class="fas fa-check"></i> Styluses & keyboards</li>
-                            <li><i class="fas fa-check"></i> Screen protectors</li>
-                        </ul>
-                        <div class="service-time">
-                            <i class="fas fa-clock"></i>
-                            <span>2-4 weeks</span>
-                        </div>
+                <div class="service-card">
+                    <div class="service-icon">
+                        <i class="fas fa-laptop"></i>
+                    </div>
+                    <h3>Laptops & Computers</h3>
+                    <p>Import high-performance laptops, desktops, and computer accessories for personal and business use.</p>
+                    <ul class="service-features">
+                        <li><i class="fas fa-check"></i> Business-grade systems</li>
+                        <li><i class="fas fa-check"></i> Gaming computers</li>
+                        <li><i class="fas fa-check"></i> Custom configurations</li>
+                        <li><i class="fas fa-check"></i> Peripherals sourcing</li>
+                    </ul>
+                    <div class="service-time">
+                        <i class="fas fa-clock"></i>
+                        <span>3-5 weeks</span>
+                    </div>
+                </div>
+
+                <div class="service-card">
+                    <div class="service-icon">
+                        <i class="fas fa-tablet-alt"></i>
+                    </div>
+                    <h3>Tablets & Accessories</h3>
+                    <p>Source tablets, e-readers, and related accessories from international markets.</p>
+                    <ul class="service-features">
+                        <li><i class="fas fa-check"></i> Various brands & models</li>
+                        <li><i class="fas fa-check"></i> Protective cases</li>
+                        <li><i class="fas fa-check"></i> Styluses & keyboards</li>
+                        <li><i class="fas fa-check"></i> Screen protectors</li>
+                    </ul>
+                    <div class="service-time">
+                        <i class="fas fa-clock"></i>
+                        <span>2-4 weeks</span>
                     </div>
                 </div>
             </div>
+        </div>
+    </section>
+
+    <!-- IT Support Services -->
+    <section class="service-category-content" id="it-support">
+        <div class="container">
+            <div class="category-header">
+                <h2 class="category-title">IT Support Services</h2>
+                <p class="category-description">Comprehensive IT infrastructure and technical support services for businesses</p>
+            </div>
             
-            <!-- IT Support Category -->
-            <div class="service-category">
-                <h2 class="category-title">IT Support</h2>
-                <p class="category-description">Comprehensive IT infrastructure and technical support services</p>
-                
-                <div class="services-grid">
-                    <div class="service-card">
-                        <div class="service-icon">
-                            <i class="fas fa-network-wired"></i>
-                        </div>
-                        <h3>Network Setup & Management</h3>
-                        <p>Design, implement, and maintain robust network infrastructure for businesses of all sizes.</p>
-                        <ul class="service-features">
-                            <li><i class="fas fa-check"></i> Network design</li>
-                            <li><i class="fas fa-check"></i> Installation & configuration</li>
-                            <li><i class="fas fa-check"></i> Security implementation</li>
-                            <li><i class="fas fa-check"></i> Ongoing maintenance</li>
-                        </ul>
-                        <div class="service-time">
-                            <i class="fas fa-clock"></i>
-                            <span>Ongoing support</span>
-                        </div>
+            <div class="services-grid">
+                <div class="service-card">
+                    <div class="service-icon">
+                        <i class="fas fa-network-wired"></i>
                     </div>
-
-                    <div class="service-card">
-                        <div class="service-icon">
-                            <i class="fas fa-server"></i>
-                        </div>
-                        <h3>Server Management</h3>
-                        <p>Setup, configuration, and maintenance of server infrastructure for optimal performance.</p>
-                        <ul class="service-features">
-                            <li><i class="fas fa-check"></i> Server installation</li>
-                            <li><i class="fas fa-check"></i> Performance optimization</li>
-                            <li><i class="fas fa-check"></i> Security hardening</li>
-                            <li><i class="fas fa-check"></i> Backup solutions</li>
-                        </ul>
-                        <div class="service-time">
-                            <i class="fas fa-clock"></i>
-                            <span>Ongoing support</span>
-                        </div>
+                    <h3>Network Setup & Management</h3>
+                    <p>Design, implement, and maintain robust network infrastructure for businesses of all sizes.</p>
+                    <ul class="service-features">
+                        <li><i class="fas fa-check"></i> Network design</li>
+                        <li><i class="fas fa-check"></i> Installation & configuration</li>
+                        <li><i class="fas fa-check"></i> Security implementation</li>
+                        <li><i class="fas fa-check"></i> Ongoing maintenance</li>
+                    </ul>
+                    <div class="service-time">
+                        <i class="fas fa-clock"></i>
+                        <span>Ongoing support</span>
                     </div>
+                </div>
 
-                    <div class="service-card">
-                        <div class="service-icon">
-                            <i class="fas fa-shield-alt"></i>
-                        </div>
-                        <h3>Cybersecurity Solutions</h3>
-                        <p>Protect your business from cyber threats with comprehensive security solutions and monitoring.</p>
-                        <ul class="service-features">
-                            <li><i class="fas fa-check"></i> Threat assessment</li>
-                            <li><i class="fas fa-check"></i> Security implementation</li>
-                            <li><i class="fas fa-check"></i> 24/7 monitoring</li>
-                            <li><i class="fas fa-check"></i> Incident response</li>
-                        </ul>
-                        <div class="service-time">
-                            <i class="fas fa-clock"></i>
-                            <span>Ongoing support</span>
-                        </div>
+                <div class="service-card">
+                    <div class="service-icon">
+                        <i class="fas fa-server"></i>
+                    </div>
+                    <h3>Server Management</h3>
+                    <p>Setup, configuration, and maintenance of server infrastructure for optimal performance.</p>
+                    <ul class="service-features">
+                        <li><i class="fas fa-check"></i> Server installation</li>
+                        <li><i class="fas fa-check"></i> Performance optimization</li>
+                        <li><i class="fas fa-check"></i> Security hardening</li>
+                        <li><i class="fas fa-check"></i> Backup solutions</li>
+                    </ul>
+                    <div class="service-time">
+                        <i class="fas fa-clock"></i>
+                        <span>Ongoing support</span>
+                    </div>
+                </div>
+
+                <div class="service-card">
+                    <div class="service-icon">
+                        <i class="fas fa-shield-alt"></i>
+                    </div>
+                    <h3>Cybersecurity Solutions</h3>
+                    <p>Protect your business from cyber threats with comprehensive security solutions and monitoring.</p>
+                    <ul class="service-features">
+                        <li><i class="fas fa-check"></i> Threat assessment</li>
+                        <li><i class="fas fa-check"></i> Security implementation</li>
+                        <li><i class="fas fa-check"></i> 24/7 monitoring</li>
+                        <li><i class="fas fa-check"></i> Incident response</li>
+                    </ul>
+                    <div class="service-time">
+                        <i class="fas fa-clock"></i>
+                        <span>Ongoing support</span>
                     </div>
                 </div>
             </div>
-            
-            <!-- Web Development Category -->
-            <div class="service-category">
+        </div>
+    </section>
+
+    <!-- Web Development Services -->
+    <section class="service-category-content" id="web-development">
+        <div class="container">
+            <div class="category-header">
                 <h2 class="category-title">Web Development</h2>
                 <p class="category-description">Custom web solutions to establish and grow your online presence</p>
-                
-                <div class="services-grid">
-                    <div class="service-card">
-                        <div class="service-icon">
-                            <i class="fas fa-code"></i>
-                        </div>
-                        <h3>Custom Website Development</h3>
-                        <p>Build responsive, user-friendly websites tailored to your business needs and brand identity.</p>
-                        <ul class="service-features">
-                            <li><i class="fas fa-check"></i> Responsive design</li>
-                            <li><i class="fas fa-check"></i> SEO optimization</li>
-                            <li><i class="fas fa-check"></i> Content management</li>
-                            <li><i class="fas fa-check"></i> E-commerce integration</li>
-                        </ul>
-                        <div class="service-time">
-                            <i class="fas fa-clock"></i>
-                            <span>4-8 weeks</span>
-                        </div>
+            </div>
+            
+            <div class="services-grid">
+                <div class="service-card">
+                    <div class="service-icon">
+                        <i class="fas fa-code"></i>
                     </div>
-
-                    <div class="service-card">
-                        <div class="service-icon">
-                            <i class="fas fa-shopping-cart"></i>
-                        </div>
-                        <h3>E-commerce Solutions</h3>
-                        <p>Develop robust online stores with secure payment processing and inventory management.</p>
-                        <ul class="service-features">
-                            <li><i class="fas fa-check"></i> Payment integration</li>
-                            <li><i class="fas fa-check"></i> Inventory management</li>
-                            <li><i class="fas fa-check"></i> Order processing</li>
-                            <li><i class="fas fa-check"></i> Customer accounts</li>
-                        </ul>
-                        <div class="service-time">
-                            <i class="fas fa-clock"></i>
-                            <span>6-10 weeks</span>
-                        </div>
+                    <h3>Custom Website Development</h3>
+                    <p>Build responsive, user-friendly websites tailored to your business needs and brand identity.</p>
+                    <ul class="service-features">
+                        <li><i class="fas fa-check"></i> Responsive design</li>
+                        <li><i class="fas fa-check"></i> SEO optimization</li>
+                        <li><i class="fas fa-check"></i> Content management</li>
+                        <li><i class="fas fa-check"></i> E-commerce integration</li>
+                    </ul>
+                    <div class="service-time">
+                        <i class="fas fa-clock"></i>
+                        <span>4-8 weeks</span>
                     </div>
+                </div>
 
-                    <div class="service-card">
-                        <div class="service-icon">
-                            <i class="fas fa-tools"></i>
-                        </div>
-                        <h3>Website Maintenance</h3>
-                        <p>Keep your website running smoothly with regular updates, security patches, and performance optimization.</p>
-                        <ul class="service-features">
-                            <li><i class="fas fa-check"></i> Regular updates</li>
-                            <li><i class="fas fa-check"></i> Security monitoring</li>
-                            <li><i class="fas fa-check"></i> Performance optimization</li>
-                            <li><i class="fas fa-check"></i> Content updates</li>
-                        </ul>
-                        <div class="service-time">
-                            <i class="fas fa-clock"></i>
-                            <span>Ongoing support</span>
-                        </div>
+                <div class="service-card">
+                    <div class="service-icon">
+                        <i class="fas fa-shopping-cart"></i>
+                    </div>
+                    <h3>E-commerce Solutions</h3>
+                    <p>Develop robust online stores with secure payment processing and inventory management.</p>
+                    <ul class="service-features">
+                        <li><i class="fas fa-check"></i> Payment integration</li>
+                        <li><i class="fas fa-check"></i> Inventory management</li>
+                        <li><i class="fas fa-check"></i> Order processing</li>
+                        <li><i class="fas fa-check"></i> Customer accounts</li>
+                    </ul>
+                    <div class="service-time">
+                        <i class="fas fa-clock"></i>
+                        <span>6-10 weeks</span>
+                    </div>
+                </div>
+
+                <div class="service-card">
+                    <div class="service-icon">
+                        <i class="fas fa-tools"></i>
+                    </div>
+                    <h3>Website Maintenance</h3>
+                    <p>Keep your website running smoothly with regular updates, security patches, and performance optimization.</p>
+                    <ul class="service-features">
+                        <li><i class="fas fa-check"></i> Regular updates</li>
+                        <li><i class="fas fa-check"></i> Security monitoring</li>
+                        <li><i class="fas fa-check"></i> Performance optimization</li>
+                        <li><i class="fas fa-check"></i> Content updates</li>
+                    </ul>
+                    <div class="service-time">
+                        <i class="fas fa-clock"></i>
+                        <span>Ongoing support</span>
                     </div>
                 </div>
             </div>
-            
-            <!-- Mobile App Development Category -->
-            <div class="service-category">
+        </div>
+    </section>
+
+    <!-- Mobile App Development Services -->
+    <section class="service-category-content" id="mobile-apps">
+        <div class="container">
+            <div class="category-header">
                 <h2 class="category-title">Mobile App Development</h2>
                 <p class="category-description">Create engaging mobile applications for iOS and Android platforms</p>
-                
-                <div class="services-grid">
-                    <div class="service-card">
-                        <div class="service-icon">
-                            <i class="fab fa-apple"></i>
-                        </div>
-                        <h3>iOS App Development</h3>
-                        <p>Design and develop native iOS applications for iPhones and iPads with seamless user experience.</p>
-                        <ul class="service-features">
-                            <li><i class="fas fa-check"></i> Native development</li>
-                            <li><i class="fas fa-check"></i> App Store submission</li>
-                            <li><i class="fas fa-check"></i> UI/UX design</li>
-                            <li><i class="fas fa-check"></i> Performance optimization</li>
-                        </ul>
-                        <div class="service-time">
-                            <i class="fas fa-clock"></i>
-                            <span>8-16 weeks</span>
-                        </div>
+            </div>
+            
+            <div class="services-grid">
+                <div class="service-card">
+                    <div class="service-icon">
+                        <i class="fab fa-apple"></i>
                     </div>
-
-                    <div class="service-card">
-                        <div class="service-icon">
-                            <i class="fab fa-android"></i>
-                        </div>
-                        <h3>Android App Development</h3>
-                        <p>Build powerful Android applications compatible with a wide range of devices and screen sizes.</p>
-                        <ul class="service-features">
-                            <li><i class="fas fa-check"></i> Native development</li>
-                            <li><i class="fas fa-check"></i> Google Play submission</li>
-                            <li><i class="fas fa-check"></i> Device compatibility</li>
-                            <li><i class="fas fa-check"></i> Material design</li>
-                        </ul>
-                        <div class="service-time">
-                            <i class="fas fa-clock"></i>
-                            <span>8-16 weeks</span>
-                        </div>
+                    <h3>iOS App Development</h3>
+                    <p>Design and develop native iOS applications for iPhones and iPads with seamless user experience.</p>
+                    <ul class="service-features">
+                        <li><i class="fas fa-check"></i> Native development</li>
+                        <li><i class="fas fa-check"></i> App Store submission</li>
+                        <li><i class="fas fa-check"></i> UI/UX design</li>
+                        <li><i class="fas fa-check"></i> Performance optimization</li>
+                    </ul>
+                    <div class="service-time">
+                        <i class="fas fa-clock"></i>
+                        <span>8-16 weeks</span>
                     </div>
+                </div>
 
-                    <div class="service-card">
-                        <div class="service-icon">
-                            <i class="fas fa-sync-alt"></i>
-                        </div>
-                        <h3>Cross-Platform Development</h3>
-                        <p>Develop applications that work seamlessly across both iOS and Android platforms with shared codebase.</p>
-                        <ul class="service-features">
-                            <li><i class="fas fa-check"></i> Single codebase</li>
-                            <li><i class="fas fa-check"></i> Faster development</li>
-                            <li><i class="fas fa-check"></i> Consistent experience</li>
-                            <li><i class="fas fa-check"></i> Cost-effective</li>
-                        </ul>
-                        <div class="service-time">
-                            <i class="fas fa-clock"></i>
-                            <span>6-12 weeks</span>
-                        </div>
+                <div class="service-card">
+                    <div class="service-icon">
+                        <i class="fab fa-android"></i>
+                    </div>
+                    <h3>Android App Development</h3>
+                    <p>Build powerful Android applications compatible with a wide range of devices and screen sizes.</p>
+                    <ul class="service-features">
+                        <li><i class="fas fa-check"></i> Native development</li>
+                        <li><i class="fas fa-check"></i> Google Play submission</li>
+                        <li><i class="fas fa-check"></i> Device compatibility</li>
+                        <li><i class="fas fa-check"></i> Material design</li>
+                    </ul>
+                    <div class="service-time">
+                        <i class="fas fa-clock"></i>
+                        <span>8-16 weeks</span>
+                    </div>
+                </div>
+
+                <div class="service-card">
+                    <div class="service-icon">
+                        <i class="fas fa-sync-alt"></i>
+                    </div>
+                    <h3>Cross-Platform Development</h3>
+                    <p>Develop applications that work seamlessly across both iOS and Android platforms with shared codebase.</p>
+                    <ul class="service-features">
+                        <li><i class="fas fa-check"></i> Single codebase</li>
+                        <li><i class="fas fa-check"></i> Faster development</li>
+                        <li><i class="fas fa-check"></i> Consistent experience</li>
+                        <li><i class="fas fa-check"></i> Cost-effective</li>
+                    </ul>
+                    <div class="service-time">
+                        <i class="fas fa-clock"></i>
+                        <span>6-12 weeks</span>
                     </div>
                 </div>
             </div>
@@ -559,6 +756,49 @@
         </div>
     </footer>
 
+    <script>
+        // Service Category Tabs Functionality
+        document.addEventListener('DOMContentLoaded', function() {
+            const categoryTabs = document.querySelectorAll('.category-tab');
+            const categoryContents = document.querySelectorAll('.service-category-content');
+            
+            // Function to show a specific category
+            function showCategory(categoryId) {
+                // Hide all category contents
+                categoryContents.forEach(content => {
+                    content.classList.remove('active');
+                });
+                
+                // Remove active class from all tabs
+                categoryTabs.forEach(tab => {
+                    tab.classList.remove('active');
+                });
+                
+                // Show selected category content
+                const selectedContent = document.getElementById(categoryId);
+                if (selectedContent) {
+                    selectedContent.classList.add('active');
+                }
+                
+                // Add active class to clicked tab
+                const selectedTab = document.querySelector(`.category-tab[data-category="${categoryId}"]`);
+                if (selectedTab) {
+                    selectedTab.classList.add('active');
+                }
+            }
+            
+            // Add click event listeners to tabs
+            categoryTabs.forEach(tab => {
+                tab.addEventListener('click', function() {
+                    const categoryId = this.getAttribute('data-category');
+                    showCategory(categoryId);
+                });
+            });
+            
+            // Show vehicles category by default
+            showCategory('vehicles');
+        });
+    </script>
     <script src="script.js"></script>
 </body>
 </html>
