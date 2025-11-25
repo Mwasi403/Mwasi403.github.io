@@ -3,10 +3,218 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>LumiMinds Zambia</title>
-        <link rel="icon" type="image/x-icon" href="logo.png">
+    <title>LumiMinds Zambia - About Us</title>
+    <link rel="icon" type="image/x-icon" href="logo.png">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link rel="stylesheet" href="styles.css">
+    <style>
+        /* Service Highlights Section */
+        .service-highlights {
+            padding: 80px 0;
+            background: var(--bg-light);
+        }
+        
+        .services-overview {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 2rem;
+            margin-top: 3rem;
+        }
+        
+        .service-overview-card {
+            background: var(--white);
+            padding: 2rem;
+            border-radius: 12px;
+            text-align: center;
+            box-shadow: var(--shadow);
+            transition: transform 0.3s ease;
+            border-top: 4px solid var(--primary);
+        }
+        
+        .service-overview-card:hover {
+            transform: translateY(-5px);
+        }
+        
+        .service-overview-icon {
+            width: 80px;
+            height: 80px;
+            background: rgba(45, 74, 50, 0.1);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 1.5rem;
+            color: var(--primary);
+            font-size: 2rem;
+        }
+        
+        .service-overview-card h3 {
+            font-size: 1.5rem;
+            margin-bottom: 1rem;
+            color: var(--text-dark);
+        }
+        
+        .service-overview-card p {
+            color: var(--text-light);
+            margin-bottom: 1.5rem;
+            line-height: 1.6;
+        }
+        
+        .service-features-list {
+            list-style: none;
+            text-align: left;
+            margin-bottom: 1.5rem;
+        }
+        
+        .service-features-list li {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            margin-bottom: 0.5rem;
+            font-size: 0.9rem;
+        }
+        
+        .service-features-list i {
+            color: var(--primary);
+            font-size: 0.8rem;
+        }
+        
+        .service-cta {
+            margin-top: auto;
+        }
+        
+        /* Why Choose Us Section */
+        .why-choose-detailed {
+            padding: 80px 0;
+        }
+        
+        .values-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+            margin-top: 3rem;
+        }
+        
+        .value-card {
+            background: var(--white);
+            padding: 2rem;
+            border-radius: 12px;
+            text-align: center;
+            box-shadow: var(--shadow);
+            transition: transform 0.3s ease;
+        }
+        
+        .value-card:hover {
+            transform: translateY(-5px);
+        }
+        
+        .value-icon {
+            width: 70px;
+            height: 70px;
+            background: rgba(45, 74, 50, 0.1);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 1.5rem;
+            color: var(--primary);
+            font-size: 1.8rem;
+        }
+        
+        /* Team Section Updates */
+        .team-grid-detailed {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+        }
+        
+        .team-member {
+            background: var(--white);
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: var(--shadow);
+            transition: transform 0.3s ease;
+        }
+        
+        .team-member:hover {
+            transform: translateY(-5px);
+        }
+        
+        .member-image {
+            height: 200px;
+            background: var(--border);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--text-light);
+            font-size: 3rem;
+        }
+        
+        .member-info {
+            padding: 1.5rem;
+        }
+        
+        .member-expertise {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+            margin: 1rem 0;
+        }
+        
+        .expertise-tag {
+            background: var(--primary-light);
+            color: var(--primary);
+            padding: 0.25rem 0.75rem;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            font-weight: 500;
+        }
+        
+        /* Stats Section */
+        .stats-section {
+            padding: 80px 0;
+            background: var(--primary);
+            color: var(--white);
+            text-align: center;
+        }
+        
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 2rem;
+            margin-top: 3rem;
+        }
+        
+        .stat-item {
+            padding: 1.5rem;
+        }
+        
+        .stat-number {
+            font-size: 3rem;
+            font-weight: 700;
+            margin-bottom: 0.5rem;
+        }
+        
+        .stat-label {
+            font-size: 1.1rem;
+            opacity: 0.9;
+        }
+        
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .services-overview {
+                grid-template-columns: 1fr;
+            }
+            
+            .stats-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+            
+            .team-grid-detailed {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
 </head>
 <body>
     <!-- Header -->
@@ -19,14 +227,12 @@
                 </a>
                 
                 <ul class="nav-links">
-                    <li><a href="index.html" >Home</a></li>
+                    <li><a href="index.html">Home</a></li>
                     <li><a href="services.html">Services</a></li>
                     <li><a href="vehicles.html">Vehicles</a></li>
                     <li><a href="about.html" class="active">About</a></li>
                     <li><a href="contact.html">Contact</a></li>
                 </ul>
-                
-
                 
                 <button class="mobile-menu-btn">
                     <i class="fas fa-bars"></i>
@@ -53,14 +259,13 @@
             <li><a href="about.html" class="active">About</a></li>
             <li><a href="contact.html">Contact</a></li>
         </ul>
-
     </div>
 
     <!-- Page Header -->
     <section class="page-header">
         <div class="container">
             <h1>About LumiMinds</h1>
-            <p>Your trusted partner in premium vehicle import solutions since 2018</p>
+            <p>Your trusted partner for comprehensive solutions - from vehicle imports to cutting-edge technology services</p>
         </div>
     </section>
 
@@ -72,7 +277,7 @@
                     <h2>Our Journey</h2>
                     <p>Founded in 2018, Lumiminds emerged from a simple observation: importing vehicles to Zambia was often complicated, expensive, and filled with uncertainty. Our founders, experienced in international trade and automotive industries, saw an opportunity to revolutionize this process.</p>
                     
-                    <p>What started as a small operation helping friends and family import their dream vehicles has grown into Zambia's most trusted vehicle import service. We've successfully imported over 500 vehicles and built a reputation for transparency, reliability, and exceptional customer service.</p>
+                    <p>What started as a small operation helping friends and family import their dream vehicles has grown into Zambia's most trusted multi-service provider. We've successfully expanded our expertise beyond vehicle imports to include technology solutions, gadget sourcing, and digital services.</p>
                     
                     <div class="milestones">
                         <div class="milestone">
@@ -100,6 +305,141 @@
         </div>
     </section>
 
+    <!-- Service Highlights -->
+    <section class="service-highlights">
+        <div class="container">
+            <h2 class="section-title">Our Comprehensive Services</h2>
+            <p class="section-subtitle">Beyond vehicle imports - we provide end-to-end solutions across multiple domains</p>
+            
+            <div class="services-overview">
+                <!-- Vehicles Service -->
+                <div class="service-overview-card">
+                    <div class="service-overview-icon">
+                        <i class="fas fa-car"></i>
+                    </div>
+                    <h3>Vehicle Import Services</h3>
+                    <p>Complete vehicle import solutions from global sourcing to final delivery with comprehensive aftercare support.</p>
+                    <ul class="service-features-list">
+                        <li><i class="fas fa-check"></i> Global vehicle sourcing</li>
+                        <li><i class="fas fa-check"></i> Quality inspections</li>
+                        <li><i class="fas fa-check"></i> Shipping & logistics</li>
+                        <li><i class="fas fa-check"></i> Customs clearance</li>
+                    </ul>
+                    <div class="service-cta">
+                        <button class="btn btn-primary btn-sm" onclick="location.href='services.html#vehicles'">Explore Vehicles</button>
+                    </div>
+                </div>
+                
+                <!-- Gadgets Service -->
+                <div class="service-overview-card">
+                    <div class="service-overview-icon">
+                        <i class="fas fa-mobile-alt"></i>
+                    </div>
+                    <h3>Gadgets & Electronics</h3>
+                    <p>Import the latest technology gadgets, smartphones, laptops, and electronics from global markets.</p>
+                    <ul class="service-features-list">
+                        <li><i class="fas fa-check"></i> Latest smartphone models</li>
+                        <li><i class="fas fa-check"></i> High-performance laptops</li>
+                        <li><i class="fas fa-check"></i> Tablets & accessories</li>
+                        <li><i class="fas fa-check"></i> Competitive pricing</li>
+                    </ul>
+                    <div class="service-cta">
+                        <button class="btn btn-primary btn-sm" onclick="location.href='services.html#gadgets'">Explore Gadgets</button>
+                    </div>
+                </div>
+                
+                <!-- IT Support Service -->
+                <div class="service-overview-card">
+                    <div class="service-overview-icon">
+                        <i class="fas fa-headset"></i>
+                    </div>
+                    <h3>IT Support Services</h3>
+                    <p>Comprehensive IT infrastructure setup, network management, and cybersecurity solutions for businesses.</p>
+                    <ul class="service-features-list">
+                        <li><i class="fas fa-check"></i> Network setup & management</li>
+                        <li><i class="fas fa-check"></i> Server configuration</li>
+                        <li><i class="fas fa-check"></i> Cybersecurity solutions</li>
+                        <li><i class="fas fa-check"></i> 24/7 technical support</li>
+                    </ul>
+                    <div class="service-cta">
+                        <button class="btn btn-primary btn-sm" onclick="location.href='services.html#it-support'">Explore IT Support</button>
+                    </div>
+                </div>
+                
+                <!-- Web Development Service -->
+                <div class="service-overview-card">
+                    <div class="service-overview-icon">
+                        <i class="fas fa-code"></i>
+                    </div>
+                    <h3>Web Development</h3>
+                    <p>Custom website development, e-commerce solutions, and ongoing maintenance for your online presence.</p>
+                    <ul class="service-features-list">
+                        <li><i class="fas fa-check"></i> Custom website development</li>
+                        <li><i class="fas fa-check"></i> E-commerce solutions</li>
+                        <li><i class="fas fa-check"></i> SEO optimization</li>
+                        <li><i class="fas fa-check"></i> Ongoing maintenance</li>
+                    </ul>
+                    <div class="service-cta">
+                        <button class="btn btn-primary btn-sm" onclick="location.href='services.html#web-development'">Explore Web Dev</button>
+                    </div>
+                </div>
+                
+                <!-- Mobile Apps Service -->
+                <div class="service-overview-card">
+                    <div class="service-overview-icon">
+                        <i class="fas fa-mobile"></i>
+                    </div>
+                    <h3>Mobile App Development</h3>
+                    <p>Native and cross-platform mobile application development for iOS and Android platforms.</p>
+                    <ul class="service-features-list">
+                        <li><i class="fas fa-check"></i> iOS app development</li>
+                        <li><i class="fas fa-check"></i> Android app development</li>
+                        <li><i class="fas fa-check"></i> Cross-platform solutions</li>
+                        <li><i class="fas fa-check"></i> App store submission</li>
+                    </ul>
+                    <div class="service-cta">
+                        <button class="btn btn-primary btn-sm" onclick="location.href='services.html#mobile-apps'">Explore Mobile Apps</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Stats Section -->
+    <section class="stats-section">
+        <div class="container">
+            <h2 class="section-title">Our Impact in Numbers</h2>
+            <p class="section-subtitle">Delivering excellence across all our service domains</p>
+            
+            <div class="stats-grid">
+                <div class="stat-item">
+                    <div class="stat-number">500+</div>
+                    <div class="stat-label">Vehicles Imported</div>
+                </div>
+                <div class="stat-item">
+                    <div class="stat-number">200+</div>
+                    <div class="stat-label">Gadgets Delivered</div>
+                </div>
+                <div class="stat-item">
+                    <div class="stat-number">50+</div>
+                    <div class="stat-label">IT Projects Completed</div>
+                </div>
+                <div class="stat-item">
+                    <div class="stat-number">30+</div>
+                    <div class="stat-label">Websites Developed</div>
+                </div>
+                <div class="stat-item">
+                    <div class="stat-number">15+</div>
+                    <div class="stat-label">Mobile Apps Created</div>
+                </div>
+                <div class="stat-item">
+                    <div class="stat-number">98%</div>
+                    <div class="stat-label">Client Satisfaction</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
     <!-- Mission & Vision -->
     <section class="mission-vision">
         <div class="container">
@@ -109,7 +449,7 @@
                         <i class="fas fa-bullseye"></i>
                     </div>
                     <h3>Our Mission</h3>
-                    <p>To make premium vehicle ownership accessible to everyone in Zambia by providing transparent, reliable, and cost-effective import solutions. We strive to eliminate the complexities and uncertainties of vehicle importing through our expertise and dedication to customer satisfaction.</p>
+                    <p>To provide comprehensive, reliable, and innovative solutions that empower our clients across vehicle imports, technology services, and digital solutions. We strive to eliminate complexities through expertise and dedication to customer satisfaction.</p>
                 </div>
                 
                 <div class="mv-card">
@@ -117,7 +457,7 @@
                         <i class="fas fa-eye"></i>
                     </div>
                     <h3>Our Vision</h3>
-                    <p>To become Zambia's most trusted and preferred vehicle import partner, recognized for our integrity, innovation, and commitment to delivering exceptional value. We envision a future where anyone can easily access their dream vehicle from anywhere in the world.</p>
+                    <p>To become Zambia's most trusted multi-service provider, recognized for integrity, innovation, and exceptional value delivery across all our service domains - from automotive solutions to cutting-edge technology services.</p>
                 </div>
                 
                 <div class="mv-card">
@@ -125,7 +465,49 @@
                         <i class="fas fa-handshake"></i>
                     </div>
                     <h3>Our Values</h3>
-                    <p>Transparency in all our dealings, integrity in every transaction, excellence in service delivery, innovation in our processes, and commitment to our clients' satisfaction. These values form the foundation of everything we do at Lumiminds.</p>
+                    <p>Transparency in all dealings, integrity in every transaction, excellence in service delivery, innovation across all domains, and unwavering commitment to our clients' success. These values form our foundation.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Why Choose Us -->
+    <section class="why-choose-detailed">
+        <div class="container">
+            <h2 class="section-title">Why Choose LumiMinds?</h2>
+            <p class="section-subtitle">We deliver excellence across all our service domains</p>
+            
+            <div class="values-grid">
+                <div class="value-card">
+                    <div class="value-icon">
+                        <i class="fas fa-globe"></i>
+                    </div>
+                    <h3>Global Sourcing</h3>
+                    <p>Access to international markets for vehicles, gadgets, and technology solutions</p>
+                </div>
+                
+                <div class="value-card">
+                    <div class="value-icon">
+                        <i class="fas fa-award"></i>
+                    </div>
+                    <h3>Quality Assurance</h3>
+                    <p>Rigorous quality checks and standards across all our services and products</p>
+                </div>
+                
+                <div class="value-card">
+                    <div class="value-icon">
+                        <i class="fas fa-clock"></i>
+                    </div>
+                    <h3>Timely Delivery</h3>
+                    <p>Efficient processes ensuring on-time delivery for all our services</p>
+                </div>
+                
+                <div class="value-card">
+                    <div class="value-icon">
+                        <i class="fas fa-shield-alt"></i>
+                    </div>
+                    <h3>Comprehensive Support</h3>
+                    <p>End-to-end support and aftercare for all our services and products</p>
                 </div>
             </div>
         </div>
@@ -134,65 +516,57 @@
     <!-- Team Section -->
     <section class="team-detailed">
         <div class="container">
-            <h2 class="section-title">Meet The Team</h2>
-            <p class="section-subtitle">Experienced professionals dedicated to your vehicle import success</p>
+            <h2 class="section-title">Meet Our Leadership Team</h2>
+            <p class="section-subtitle">Experienced professionals driving innovation across all our service domains</p>
             
             <div class="team-grid-detailed">
                 <div class="team-member">
                     <div class="member-image">
-                        <img src="" alt="Lewis Tembo">
+                        <i class="fas fa-user"></i>
                     </div>
                     <div class="member-info">
                         <h3>Lewis Tembo</h3>
                         <p class="member-position">CEO & Founder</p>
-                        <p class="member-bio">His vision drives our commitment to excellence.</p>
-
+                        <p class="member-bio">Visionary leader with expertise in international trade and business strategy. His leadership drives our commitment to excellence across all service domains.</p>
+                        <div class="member-expertise">
+                            <span class="expertise-tag">Business Strategy</span>
+                            <span class="expertise-tag">International Trade</span>
+                            <span class="expertise-tag">Leadership</span>
+                        </div>
                     </div>
                 </div>
                 
                 <div class="team-member">
                     <div class="member-image">
-                        <img src="" alt="Mwasimba Juma">
+                        <i class="fas fa-user"></i>
                     </div>
                     <div class="member-info">
                         <h3>Mwasimba Juma</h3>
                         <p class="member-position">IT Director</p>
-                        <p class="member-bio">Ensures every import process runs smoothly and efficiently from start to finish.</p>
-                        <div class="member-contact">
-
+                        <p class="member-bio">Technology expert overseeing our IT support, web development, and mobile app services. Ensures all technology solutions meet the highest standards.</p>
+                        <div class="member-expertise">
+                            <span class="expertise-tag">Technology</span>
+                            <span class="expertise-tag">Web Development</span>
+                            <span class="expertise-tag">IT Infrastructure</span>
                         </div>
                     </div>
                 </div>
                 
-
-                
-    </section>
-
-    <!-- Certifications & Partnerships -->
-    <section class="certifications">
-        <div class="container">
-            <h2 class="section-title">Certifications & Partnerships</h2>
-            <p class="section-subtitle">Trusted by industry leaders and certified for excellence</p>
-            
-
-                
-                <div class="certification-item">
-                    <div class="cert-icon">
-                        <i class="fas fa-handshake"></i>
+                <div class="team-member">
+                    <div class="member-image">
+                        <i class="fas fa-user"></i>
                     </div>
-                    <h3>Authorized Partner</h3>
-                    <p>Official partnerships with major auction houses and dealerships worldwide</p>
-                </div>
-                
-                <div class="certification-item">
-                    <div class="cert-icon">
-                        <i class="fas fa-shield-alt"></i>
+                    <div class="member-info">
+                        <h3>Sarah Banda</h3>
+                        <p class="member-position">Operations Manager</p>
+                        <p class="member-bio">Overseas all import operations, logistics, and customer service. Ensures seamless processes from sourcing to delivery across all services.</p>
+                        <div class="member-expertise">
+                            <span class="expertise-tag">Operations</span>
+                            <span class="expertise-tag">Logistics</span>
+                            <span class="expertise-tag">Customer Service</span>
+                        </div>
                     </div>
-                    <h3>Fully Licensed</h3>
-                    <p>Licensed and regulated by Zambian authorities for vehicle import services</p>
                 </div>
-                
-
             </div>
         </div>
     </section>
@@ -201,11 +575,11 @@
     <section class="cta">
         <div class="container">
             <div class="cta-content">
-                <h2>Join Hundreds of Satisfied Customers</h2>
-                <p>Experience the Lumiminds difference - professional, transparent, and reliable vehicle import services</p>
+                <h2>Ready to Experience the LumiMinds Difference?</h2>
+                <p>Whether you need vehicle imports, technology solutions, or digital services - we have you covered</p>
                 <div class="cta-buttons">
-                    <button class="btn btn-primary btn-large" onclick="location.href='contact.html'">Start Your Import</button>
-                    <button class="btn btn-outline btn-large" onclick="location.href='tel:+260000000000'">
+                    <button class="btn btn-primary btn-large" onclick="location.href='contact.html'">Get Started Today</button>
+                    <button class="btn btn-outline btn-large" onclick="location.href='tel:+260969820643'">
                         <i class="fas fa-phone"></i> Call Us Now
                     </button>
                 </div>
@@ -222,7 +596,7 @@
                         <i class="fas fa-car-side"></i>
                         Lumiminds
                     </h3>
-                    <p>Your trusted partner for premium vehicle import solutions. We bring global automotive excellence to your doorstep with complete transparency and professional service.</p>
+                    <p>Your trusted partner for comprehensive solutions - from vehicle imports to cutting-edge technology services. We bring global excellence to your doorstep.</p>
                     <div class="social-links">
                         <a href="#"><i class="fab fa-facebook"></i></a>
                         <a href="#"><i class="fab fa-twitter"></i></a>
@@ -247,28 +621,27 @@
                 <div class="footer-section">
                     <h3>Our Services</h3>
                     <ul class="footer-links">
-                        <li><a href="services.html#sourcing">Vehicle Sourcing</a></li>
-                        <li><a href="services.html#inspection">Quality Inspection</a></li>
-                        <li><a href="services.html#shipping">Shipping & Logistics</a></li>
-                        <li><a href="services.html#customs">Customs Clearance</a></li>
-                        <li><a href="services.html#delivery">Final Delivery</a></li>
-                        <li><a href="services.html#aftercare">Aftercare Support</a></li>
+                        <li><a href="services.html#vehicles">Vehicle Import Services</a></li>
+                        <li><a href="services.html#gadgets">Gadgets & Electronics</a></li>
+                        <li><a href="services.html#it-support">IT Support Services</a></li>
+                        <li><a href="services.html#web-development">Web Development</a></li>
+                        <li><a href="services.html#mobile-apps">Mobile App Development</a></li>
                     </ul>
                 </div>
                 
                 <div class="footer-section">
                     <h3>Contact Info</h3>
                     <ul class="footer-links">
-                        <li><i class="fas fa-map-marker-alt"></i> 📍 Musili Rd, Mine Masala, Ndola, Zambia</li>
-                        <li><i class="fas fa-envelope"></i> 📧 lumimindszambia@gmail.com</li>
-                        <li><i class="fas fa-phone"></i> 📞 +260969820643</li>
-                        <li><i class="fas fa-clock"></i> 🕒 Mon-Fri: 8AM-6PM, Sat: 9AM-1PM</li>
+                        <li><i class="fas fa-map-marker-alt"></i> 45 mwasumina Itawa, Ndola, Zambia</li>
+                        <li><i class="fas fa-envelope"></i> lumimindszambia@gmail.com</li>
+                        <li><i class="fas fa-phone"></i> +260 969 820 643</li>
+                        <li><i class="fas fa-clock"></i> Mon-Fri: 8AM-6PM, Sat: 9AM-1PM</li>
                     </ul>
                 </div>
             </div>
             
             <div class="copyright">
-                <p>&copy; 2025 Lumiminds Vehicle Import Solutions. All rights reserved. | <a href="privacy.html">Privacy Policy</a> | <a href="terms.html">Terms of Service</a></p>
+                <p>&copy; 2025 Lumiminds Multi-Service Solutions. All rights reserved. | <a href="privacy.html">Privacy Policy</a> | <a href="terms.html">Terms of Service</a></p>
             </div>
         </div>
     </footer>
