@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>LumiMinds Zambia - Our Mission, Vision & Values</title>
+    <title>LumiMinds Zambia - About Us</title>
     <link rel="icon" type="image/x-icon" href="logo.png">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link rel="stylesheet" href="styles.css">
@@ -29,10 +29,48 @@
             opacity: 0.9;
         }
         
+        /* About LumiMinds Section */
+        .about-lumiminds {
+            padding: 100px 0;
+            background: var(--white);
+        }
+        
+        .about-content {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 4rem;
+            align-items: center;
+        }
+        
+        .about-text h2 {
+            font-size: 2.5rem;
+            font-weight: 600;
+            margin-bottom: 1.5rem;
+            color: var(--primary);
+        }
+        
+        .about-text p {
+            font-size: 1.1rem;
+            line-height: 1.7;
+            color: var(--text-light);
+            margin-bottom: 2rem;
+        }
+        
+        .about-image {
+            background: var(--bg-light);
+            border-radius: 12px;
+            height: 400px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--primary);
+            font-size: 5rem;
+        }
+        
         /* Mission Section */
         .mission-section {
             padding: 100px 0;
-            background: var(--white);
+            background: var(--bg-light);
         }
         
         .mission-content {
@@ -57,7 +95,7 @@
         }
         
         .mission-image {
-            background: var(--bg-light);
+            background: var(--white);
             border-radius: 12px;
             height: 400px;
             display: flex;
@@ -65,12 +103,13 @@
             justify-content: center;
             color: var(--primary);
             font-size: 5rem;
+            order: -1;
         }
         
         /* Vision Section */
         .vision-section {
             padding: 100px 0;
-            background: var(--bg-light);
+            background: var(--white);
         }
         
         .vision-content {
@@ -95,7 +134,7 @@
         }
         
         .vision-image {
-            background: var(--white);
+            background: var(--bg-light);
             border-radius: 12px;
             height: 400px;
             display: flex;
@@ -103,13 +142,12 @@
             justify-content: center;
             color: var(--primary);
             font-size: 5rem;
-            order: -1;
         }
         
         /* Values Section */
         .values-section {
             padding: 100px 0;
-            background: var(--white);
+            background: var(--bg-light);
         }
         
         .values-intro {
@@ -175,88 +213,277 @@
             line-height: 1.6;
         }
         
-        /* Service Integration */
-        .service-integration {
-            padding: 80px 0;
-            background: var(--bg-light);
+        /* Our Journey Section */
+        .our-journey {
+            padding: 100px 0;
+            background: var(--white);
         }
         
-        .integration-content {
+        .journey-content {
+            max-width: 1000px;
+            margin: 0 auto;
+        }
+        
+        .journey-content h2 {
+            font-size: 2.5rem;
+            font-weight: 600;
+            margin-bottom: 3rem;
             text-align: center;
+            color: var(--primary);
+        }
+        
+        .journey-timeline {
+            position: relative;
             max-width: 800px;
             margin: 0 auto;
         }
         
-        .integration-content h2 {
-            font-size: 2.5rem;
-            font-weight: 600;
-            margin-bottom: 1.5rem;
-            color: var(--primary);
+        .journey-timeline::before {
+            content: '';
+            position: absolute;
+            left: 50%;
+            top: 0;
+            bottom: 0;
+            width: 2px;
+            background: var(--primary);
+            transform: translateX(-50%);
         }
         
-        .integration-content p {
-            font-size: 1.1rem;
-            line-height: 1.7;
-            color: var(--text-light);
-            margin-bottom: 3rem;
+        .journey-item {
+            display: flex;
+            align-items: center;
+            margin-bottom: 4rem;
+            position: relative;
         }
         
-        .service-pillars {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-            gap: 2rem;
-            margin-top: 3rem;
+        .journey-item:nth-child(odd) {
+            flex-direction: row-reverse;
         }
         
-        .pillar {
-            background: var(--white);
+        .journey-item-content {
+            flex: 1;
             padding: 2rem;
+            background: var(--white);
             border-radius: 12px;
             box-shadow: var(--shadow);
         }
         
-        .pillar-icon {
-            width: 60px;
-            height: 60px;
-            background: var(--primary-light);
+        .journey-item:nth-child(odd) .journey-item-content {
+            margin-right: 2rem;
+        }
+        
+        .journey-item:nth-child(even) .journey-item-content {
+            margin-left: 2rem;
+        }
+        
+        .journey-year {
+            width: 100px;
+            height: 100px;
+            background: var(--primary);
+            color: var(--white);
             border-radius: 50%;
             display: flex;
             align-items: center;
             justify-content: center;
-            margin: 0 auto 1rem;
-            color: var(--primary);
             font-size: 1.5rem;
+            font-weight: 700;
+            flex-shrink: 0;
+            z-index: 2;
         }
         
-        .pillar h3 {
-            font-size: 1.2rem;
-            margin-bottom: 0.5rem;
+        .journey-item-content h3 {
+            font-size: 1.5rem;
+            margin-bottom: 1rem;
+            color: var(--primary);
         }
         
-        /* Our Story */
-        .our-story {
-            padding: 80px 0;
-            background: var(--white);
+        .journey-item-content p {
+            color: var(--text-light);
+            line-height: 1.6;
         }
         
-        .story-content {
-            max-width: 800px;
-            margin: 0 auto;
+        /* Meet the Team Section */
+        .team-section {
+            padding: 100px 0;
+            background: var(--bg-light);
+        }
+        
+        .team-intro {
             text-align: center;
+            max-width: 800px;
+            margin: 0 auto 4rem;
         }
         
-        .story-content h2 {
+        .team-intro h2 {
             font-size: 2.5rem;
             font-weight: 600;
             margin-bottom: 1.5rem;
             color: var(--primary);
         }
         
-        .story-content p {
+        .team-intro p {
             font-size: 1.1rem;
             line-height: 1.7;
             color: var(--text-light);
-            margin-bottom: 2rem;
+        }
+        
+        .team-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+        }
+        
+        .team-member {
+            background: var(--white);
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: var(--shadow);
+            transition: transform 0.3s ease;
+        }
+        
+        .team-member:hover {
+            transform: translateY(-5px);
+        }
+        
+        .member-image {
+            height: 250px;
+            background: var(--border);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--text-light);
+            font-size: 4rem;
+        }
+        
+        .member-info {
+            padding: 2rem;
+        }
+        
+        .member-info h3 {
+            font-size: 1.5rem;
+            margin-bottom: 0.5rem;
+            color: var(--text-dark);
+        }
+        
+        .member-position {
+            color: var(--primary);
+            font-weight: 600;
+            margin-bottom: 1rem;
+            font-size: 1.1rem;
+        }
+        
+        .member-bio {
+            color: var(--text-light);
+            line-height: 1.6;
+            margin-bottom: 1.5rem;
+        }
+        
+        .member-expertise {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+            margin-bottom: 1.5rem;
+        }
+        
+        .expertise-tag {
+            background: var(--primary-light);
+            color: var(--primary);
+            padding: 0.25rem 0.75rem;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            font-weight: 500;
+        }
+        
+        .member-contact {
+            display: flex;
+            gap: 1rem;
+        }
+        
+        .contact-link {
+            width: 40px;
+            height: 40px;
+            background: var(--bg-light);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--primary);
+            text-decoration: none;
+            transition: all 0.3s ease;
+        }
+        
+        .contact-link:hover {
+            background: var(--primary);
+            color: var(--white);
+        }
+        
+        /* Certifications & Partnerships Section */
+        .certifications-section {
+            padding: 100px 0;
+            background: var(--white);
+        }
+        
+        .certifications-intro {
+            text-align: center;
+            max-width: 800px;
+            margin: 0 auto 4rem;
+        }
+        
+        .certifications-intro h2 {
+            font-size: 2.5rem;
+            font-weight: 600;
+            margin-bottom: 1.5rem;
+            color: var(--primary);
+        }
+        
+        .certifications-intro p {
+            font-size: 1.1rem;
+            line-height: 1.7;
+            color: var(--text-light);
+        }
+        
+        .certifications-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+        }
+        
+        .certification-card {
+            background: var(--white);
+            padding: 2rem;
+            border-radius: 12px;
+            text-align: center;
+            box-shadow: var(--shadow);
+            border: 1px solid var(--border);
+            transition: transform 0.3s ease;
+        }
+        
+        .certification-card:hover {
+            transform: translateY(-5px);
+        }
+        
+        .certification-icon {
+            width: 80px;
+            height: 80px;
+            background: rgba(45, 74, 50, 0.1);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 1.5rem;
+            color: var(--primary);
+            font-size: 2rem;
+        }
+        
+        .certification-card h3 {
+            font-size: 1.3rem;
+            margin-bottom: 1rem;
+            color: var(--text-dark);
+        }
+        
+        .certification-card p {
+            color: var(--text-light);
+            line-height: 1.6;
         }
         
         /* Responsive Design */
@@ -265,28 +492,40 @@
                 font-size: 2.5rem;
             }
             
+            .about-content,
             .mission-content,
             .vision-content {
                 grid-template-columns: 1fr;
                 gap: 2rem;
             }
             
-            .vision-image {
+            .mission-image {
                 order: 0;
             }
             
-            .values-grid {
+            .values-grid,
+            .team-grid,
+            .certifications-grid {
                 grid-template-columns: 1fr;
             }
             
-            .service-pillars {
-                grid-template-columns: repeat(2, 1fr);
+            .journey-timeline::before {
+                left: 30px;
             }
-        }
-        
-        @media (max-width: 480px) {
-            .service-pillars {
-                grid-template-columns: 1fr;
+            
+            .journey-item {
+                flex-direction: row !important;
+            }
+            
+            .journey-item-content {
+                margin-left: 2rem !important;
+                margin-right: 0 !important;
+            }
+            
+            .journey-year {
+                width: 60px;
+                height: 60px;
+                font-size: 1rem;
             }
         }
     </style>
@@ -339,8 +578,26 @@
     <!-- Mission Vision Values Hero -->
     <section class="mv-hero">
         <div class="container">
-            <h1>Our Mission, Vision & Values</h1>
-            <p>Guiding principles that drive our commitment to excellence across all our services</p>
+            <h1>About LumiMinds</h1>
+            <p>Discover our mission, journey, team, and the partnerships that drive our success</p>
+        </div>
+    </section>
+
+    <!-- About LumiMinds Section -->
+    <section class="about-lumiminds">
+        <div class="container">
+            <div class="about-content">
+                <div class="about-text">
+                    <h2>About LumiMinds</h2>
+                    <p>LumiMinds is a Zambian multi-service company that has revolutionized how individuals and businesses access global products and technology solutions. Founded in 2018, we've grown from a specialized vehicle import service to a comprehensive solutions provider.</p>
+                    <p>Our name reflects our approach - 'Lumi' meaning light, representing clarity and transparency, and 'Minds' representing our intelligent, strategic approach to solving complex challenges for our clients.</p>
+                    <p>Today, we serve hundreds of clients across Zambia, providing everything from premium vehicle imports to cutting-edge technology solutions, all guided by our core values of integrity, excellence, and customer-centricity.</p>
+                    <button class="btn btn-primary" onclick="location.href='services.html'">Explore Our Services</button>
+                </div>
+                <div class="about-image">
+                    <i class="fas fa-building"></i>
+                </div>
+            </div>
         </div>
     </section>
 
@@ -348,14 +605,14 @@
     <section class="mission-section">
         <div class="container">
             <div class="mission-content">
+                <div class="mission-image">
+                    <i class="fas fa-bullseye"></i>
+                </div>
                 <div class="mission-text">
                     <h2>Our Mission</h2>
                     <p>To empower individuals and businesses in Zambia with comprehensive, reliable solutions that bridge global opportunities with local needs. We are committed to making premium vehicle ownership, cutting-edge technology, and digital innovation accessible through transparent processes and exceptional service.</p>
                     <p>Through our integrated approach, we eliminate complexities in vehicle imports, technology adoption, and digital transformation, ensuring our clients receive end-to-end support that exceeds expectations.</p>
-                    <button class="btn btn-primary" onclick="location.href='services.html'">Explore Our Services</button>
-                </div>
-                <div class="mission-image">
-                    <i class="fas fa-bullseye"></i>
+                    <button class="btn btn-outline" onclick="location.href='contact.html'">Work With Us</button>
                 </div>
             </div>
         </div>
@@ -365,14 +622,14 @@
     <section class="vision-section">
         <div class="container">
             <div class="vision-content">
-                <div class="vision-image">
-                    <i class="fas fa-eye"></i>
-                </div>
                 <div class="vision-text">
                     <h2>Our Vision</h2>
                     <p>To become Zambia's most trusted multi-service partner, recognized for transforming how individuals and businesses access global products and digital solutions. We envision a future where geographical boundaries no longer limit access to quality vehicles, advanced technology, or innovative digital services.</p>
                     <p>By 2030, we aim to be the leading integrated service provider in Southern Africa, setting new standards for reliability, innovation, and customer-centric solutions across all our service domains.</p>
-                    <button class="btn btn-outline" onclick="location.href='contact.html'">Join Our Journey</button>
+                    <button class="btn btn-primary" onclick="location.href='contact.html'">Join Our Journey</button>
+                </div>
+                <div class="vision-image">
+                    <i class="fas fa-eye"></i>
                 </div>
             </div>
         </div>
@@ -418,89 +675,172 @@
                     <h3>Customer-Centricity</h3>
                     <p>Our clients' success is our success. We listen carefully, understand deeply, and tailor our services to meet specific needs, building long-term partnerships rather than transactional relationships.</p>
                 </div>
-                
-                <div class="value-card">
-                    <div class="value-icon">
-                        <i class="fas fa-hands-helping"></i>
+            </div>
+        </div>
+    </section>
+
+    <!-- Our Journey Section -->
+    <section class="our-journey">
+        <div class="container">
+            <div class="journey-content">
+                <h2>Our Journey</h2>
+                <div class="journey-timeline">
+                    <div class="journey-item">
+                        <div class="journey-year">2018</div>
+                        <div class="journey-item-content">
+                            <h3>Foundation</h3>
+                            <p>LumiMinds was founded with a focus on revolutionizing vehicle imports to Zambia. We started with a small team and a big vision to make premium vehicles accessible to all Zambians.</p>
+                        </div>
                     </div>
-                    <h3>Reliability</h3>
-                    <p>We deliver on our promises consistently. Whether it's meeting import deadlines, project timelines, or support response times, our clients can depend on us completely.</p>
-                </div>
-                
-                <div class="value-card">
-                    <div class="value-icon">
-                        <i class="fas fa-globe-africa"></i>
+                    
+                    <div class="journey-item">
+                        <div class="journey-year">2019</div>
+                        <div class="journey-item-content">
+                            <h3>Rapid Growth</h3>
+                            <p>Within our first year, we successfully imported over 50 vehicles and established partnerships with international suppliers. Our reputation for reliability and transparency began to grow.</p>
+                        </div>
                     </div>
-                    <h3>Local Impact</h3>
-                    <p>While we source globally, we're deeply committed to Zambia's growth. We create local employment, support community initiatives, and contribute to the nation's technological advancement.</p>
+                    
+                    <div class="journey-item">
+                        <div class="journey-year">2020</div>
+                        <div class="journey-item-content">
+                            <h3>Service Expansion</h3>
+                            <p>Recognizing our clients' broader needs, we expanded into gadget imports and IT support services, establishing ourselves as a comprehensive solutions provider.</p>
+                        </div>
+                    </div>
+                    
+                    <div class="journey-item">
+                        <div class="journey-year">2022</div>
+                        <div class="journey-item-content">
+                            <h3>Digital Transformation</h3>
+                            <p>We launched our web development and mobile app services, helping businesses establish and grow their digital presence. This marked our evolution into a full-service technology partner.</p>
+                        </div>
+                    </div>
+                    
+                    <div class="journey-item">
+                        <div class="journey-year">2024</div>
+                        <div class="journey-item-content">
+                            <h3>Market Leadership</h3>
+                            <p>Today, we're proud to have served hundreds of clients across Zambia, with over 500 vehicles imported and numerous successful technology projects completed.</p>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- Service Integration -->
-    <section class="service-integration">
+    <!-- Meet the Team Section -->
+    <section class="team-section">
         <div class="container">
-            <div class="integration-content">
-                <h2>Our Integrated Approach</h2>
-                <p>Our mission and values come to life through our diverse yet interconnected service portfolio. Each service domain reflects our commitment to making quality and innovation accessible to all Zambians.</p>
-                
-                <div class="service-pillars">
-                    <div class="pillar">
-                        <div class="pillar-icon">
-                            <i class="fas fa-car"></i>
-                        </div>
-                        <h3>Vehicle Imports</h3>
-                        <p>Making premium vehicles accessible</p>
+            <div class="team-intro">
+                <h2>Meet Our Team</h2>
+                <p>Our diverse team of experts brings together decades of experience across automotive, technology, and business domains to deliver exceptional service to our clients.</p>
+            </div>
+            
+            <div class="team-grid">
+                <div class="team-member">
+                    <div class="member-image">
+                        <i class="fas fa-user"></i>
                     </div>
-                    
-                    <div class="pillar">
-                        <div class="pillar-icon">
-                            <i class="fas fa-mobile-alt"></i>
+                    <div class="member-info">
+                        <h3>Lewis Tembo</h3>
+                        <p class="member-position">CEO & Founder</p>
+                        <p class="member-bio">Visionary leader with over 10 years of experience in international trade and business strategy. Lewis founded LumiMinds with a mission to transform how Zambians access global products and services.</p>
+                        <div class="member-expertise">
+                            <span class="expertise-tag">Business Strategy</span>
+                            <span class="expertise-tag">International Trade</span>
+                            <span class="expertise-tag">Leadership</span>
                         </div>
-                        <h3>Gadgets & Tech</h3>
-                        <p>Bringing global technology to Zambia</p>
-                    </div>
-                    
-                    <div class="pillar">
-                        <div class="pillar-icon">
-                            <i class="fas fa-headset"></i>
+                        <div class="member-contact">
+                            <a href="#" class="contact-link"><i class="fab fa-linkedin"></i></a>
+                            <a href="#" class="contact-link"><i class="fas fa-envelope"></i></a>
                         </div>
-                        <h3>IT Support</h3>
-                        <p>Ensuring business continuity</p>
-                    </div>
-                    
-                    <div class="pillar">
-                        <div class="pillar-icon">
-                            <i class="fas fa-code"></i>
-                        </div>
-                        <h3>Web Development</h3>
-                        <p>Building digital presence</p>
-                    </div>
-                    
-                    <div class="pillar">
-                        <div class="pillar-icon">
-                            <i class="fas fa-mobile"></i>
-                        </div>
-                        <h3>Mobile Apps</h3>
-                        <p>Creating engaging experiences</p>
                     </div>
                 </div>
                 
-                <button class="btn btn-primary" onclick="location.href='services.html'">Discover All Services</button>
+                <div class="team-member">
+                    <div class="member-image">
+                        <i class="fas fa-user"></i>
+                    </div>
+                    <div class="member-info">
+                        <h3>Mwasimba Juma</h3>
+                        <p class="member-position">IT Director</p>
+                        <p class="member-bio">Technology expert with 8+ years in software development and IT infrastructure. Mwasimba oversees our technology services, ensuring we deliver cutting-edge solutions to our clients.</p>
+                        <div class="member-expertise">
+                            <span class="expertise-tag">Software Development</span>
+                            <span class="expertise-tag">IT Infrastructure</span>
+                            <span class="expertise-tag">Cybersecurity</span>
+                        </div>
+                        <div class="member-contact">
+                            <a href="#" class="contact-link"><i class="fab fa-linkedin"></i></a>
+                            <a href="#" class="contact-link"><i class="fas fa-envelope"></i></a>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="team-member">
+                    <div class="member-image">
+                        <i class="fas fa-user"></i>
+                    </div>
+                    <div class="member-info">
+                        <h3>Sarah Banda</h3>
+                        <p class="member-position">Operations Manager</p>
+                        <p class="member-bio">Operations specialist with extensive experience in logistics and supply chain management. Sarah ensures seamless processes from sourcing to delivery across all our services.</p>
+                        <div class="member-expertise">
+                            <span class="expertise-tag">Operations</span>
+                            <span class="expertise-tag">Logistics</span>
+                            <span class="expertise-tag">Customer Service</span>
+                        </div>
+                        <div class="member-contact">
+                            <a href="#" class="contact-link"><i class="fab fa-linkedin"></i></a>
+                            <a href="#" class="contact-link"><i class="fas fa-envelope"></i></a>
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
     </section>
 
-    <!-- Our Story -->
-    <section class="our-story">
+    <!-- Certifications & Partnerships Section -->
+    <section class="certifications-section">
         <div class="container">
-            <div class="story-content">
-                <h2>Our Story</h2>
-                <p>Founded in 2018, LumiMinds began with a simple mission: to make vehicle importing to Zambia transparent, reliable, and accessible. What started as a specialized service has evolved into a comprehensive solutions provider, driven by the same core values that guided our beginnings.</p>
-                <p>As we grew, we recognized that our clients needed more than just vehicles—they needed technology solutions, digital presence, and ongoing support. Our expansion into multiple service domains was a natural evolution, always staying true to our founding principles of integrity, excellence, and customer-centricity.</p>
-                <p>Today, we're proud to serve hundreds of satisfied clients across Zambia, but our commitment remains the same: to deliver exceptional value through services that transform possibilities into realities.</p>
-                <button class="btn btn-outline" onclick="location.href='contact.html'">Start Your Journey With Us</button>
+            <div class="certifications-intro">
+                <h2>Certifications & Partnerships</h2>
+                <p>Our commitment to excellence is reflected in our certifications and strategic partnerships with industry leaders worldwide.</p>
+            </div>
+            
+            <div class="certifications-grid">
+                <div class="certification-card">
+                    <div class="certification-icon">
+                        <i class="fas fa-award"></i>
+                    </div>
+                    <h3>Quality Certified</h3>
+                    <p>ISO 9001 certified for quality management systems, ensuring consistent service delivery across all our operations.</p>
+                </div>
+                
+                <div class="certification-card">
+                    <div class="certification-icon">
+                        <i class="fas fa-handshake"></i>
+                    </div>
+                    <h3>Global Partnerships</h3>
+                    <p>Official partnerships with major international auction houses, dealerships, and technology suppliers across 15+ countries.</p>
+                </div>
+                
+                <div class="certification-card">
+                    <div class="certification-icon">
+                        <i class="fas fa-shield-alt"></i>
+                    </div>
+                    <h3>Fully Licensed</h3>
+                    <p>Licensed and regulated by Zambian authorities for vehicle import services and business operations.</p>
+                </div>
+                
+                <div class="certification-card">
+                    <div class="certification-icon">
+                        <i class="fas fa-users"></i>
+                    </div>
+                    <h3>Industry Memberships</h3>
+                    <p>Active members of Zambia Chamber of Commerce and Industry and various technology associations.</p>
+                </div>
             </div>
         </div>
     </section>
