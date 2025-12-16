@@ -1,0 +1,1293 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Project Showcase - LumiMinds Zambia</title>
+    <link rel="icon" type="image/x-icon" href="logo.png">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        /* Global Styles */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --primary: #3f88c5;
+            --primary-light: #e3f2fd;
+            --primary-dark: #1E3324;
+            --secondary: #D4AF37;
+            --text-dark: #1A1A1A;
+            --text-light: #666666;
+            --bg-light: #F8F9FA;
+            --bg-lighter: #FCFCFC;
+            --border: #E5E5E5;
+            --white: #FFFFFF;
+            --shadow: 0 4px 20px rgba(0,0,0,0.08);
+            --shadow-lg: 0 10px 40px rgba(0,0,0,0.12);
+            --modal-overlay: rgba(0, 0, 0, 0.92);
+        }
+
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+            line-height: 1.6;
+            color: var(--text-dark);
+            background-color: var(--white);
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        .btn {
+            padding: 0.75rem 1.5rem;
+            border-radius: 8px;
+            text-decoration: none;
+            font-weight: 500;
+            transition: all 0.3s;
+            border: none;
+            cursor: pointer;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .btn-primary {
+            background: var(--primary);
+            color: var(--white);
+        }
+
+        .btn-primary:hover {
+            background: var(--primary-dark);
+            transform: translateY(-2px);
+            box-shadow: var(--shadow);
+        }
+
+        .btn-outline {
+            border: 2px solid var(--primary);
+            color: var(--primary);
+            background: transparent;
+        }
+
+        .btn-outline:hover {
+            background: var(--primary);
+            color: var(--white);
+        }
+
+        .section-title {
+            text-align: center;
+            font-size: 2.5rem;
+            font-weight: 600;
+            margin-bottom: 1rem;
+        }
+
+        .section-subtitle {
+            text-align: center;
+            color: var(--text-light);
+            margin-bottom: 3rem;
+            font-size: 1.125rem;
+        }
+
+        /* Header Styles */
+        header {
+            background: var(--white);
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 1000;
+        }
+
+        .nav-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1rem 0;
+        }
+
+        .logo {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--primary);
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .logo-image {
+            height: 40px;
+            width: 40px;
+        }
+
+        .nav-links {
+            display: flex;
+            list-style: none;
+            gap: 2rem;
+        }
+
+        .nav-links a {
+            text-decoration: none;
+            color: var(--text-light);
+            font-weight: 400;
+            transition: color 0.3s;
+            position: relative;
+        }
+
+        .nav-links a:hover,
+        .nav-links a.active {
+            color: var(--primary);
+            font-weight: 500;
+        }
+
+        .nav-links a.active::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            width: 100%;
+            height: 2px;
+            background: var(--primary);
+        }
+
+        .mobile-menu-btn {
+            display: none;
+            background: none;
+            border: none;
+            font-size: 1.5rem;
+            color: var(--primary);
+            cursor: pointer;
+        }
+
+        /* Mobile Menu */
+        .mobile-menu {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: var(--white);
+            z-index: 2000;
+            transform: translateX(-100%);
+            transition: transform 0.3s ease;
+        }
+
+        .mobile-menu.active {
+            transform: translateX(0);
+        }
+
+        .mobile-menu-header {
+            padding: 1rem;
+            border-bottom: 1px solid var(--border);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .mobile-menu-close {
+            background: none;
+            border: none;
+            font-size: 1.5rem;
+            cursor: pointer;
+        }
+
+        .mobile-nav-links {
+            list-style: none;
+            padding: 2rem;
+        }
+
+        .mobile-nav-links li {
+            margin-bottom: 1rem;
+        }
+
+        .mobile-nav-links a {
+            text-decoration: none;
+            color: var(--text-dark);
+            font-size: 1.125rem;
+            display: block;
+            padding: 0.5rem 0;
+        }
+
+        /* Page Header */
+        .page-header {
+            padding: 140px 0 60px;
+            background: linear-gradient(135deg, var(--primary-light) 0%, #e3f2fd 100%);
+            color: var(--text-dark);
+            text-align: center;
+        }
+
+        .page-header h1 {
+            font-size: 3rem;
+            font-weight: 700;
+            margin-bottom: 1rem;
+        }
+
+        .page-header p {
+            font-size: 1.2rem;
+            opacity: 0.9;
+        }
+
+        /* Project Categories */
+        .project-categories {
+            padding: 40px 0;
+            background: var(--bg-light);
+        }
+
+        .category-filters {
+            display: flex;
+            gap: 1rem;
+            flex-wrap: wrap;
+            justify-content: center;
+        }
+
+        .filter-btn {
+            padding: 0.75rem 1.5rem;
+            background: var(--white);
+            border: 2px solid var(--border);
+            border-radius: 8px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .filter-btn:hover {
+            border-color: var(--primary);
+            color: var(--primary);
+        }
+
+        .filter-btn.active {
+            background: var(--primary);
+            color: var(--white);
+            border-color: var(--primary);
+        }
+
+        /* Image-Only Projects Grid */
+        .projects-grid-section {
+            padding: 80px 0;
+        }
+
+        .projects-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+            gap: 20px;
+        }
+
+        .project-image-item {
+            position: relative;
+            border-radius: 12px;
+            overflow: hidden;
+            cursor: pointer;
+            aspect-ratio: 4/3;
+            transition: all 0.3s ease;
+            box-shadow: var(--shadow);
+        }
+
+        .project-image-item:hover {
+            transform: translateY(-5px);
+            box-shadow: var(--shadow-lg);
+        }
+
+        .project-image {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.5s ease;
+        }
+
+        .project-image-item:hover .project-image {
+            transform: scale(1.05);
+        }
+
+        .image-overlay {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            padding: 1.5rem;
+            background: linear-gradient(transparent, rgba(0,0,0,0.8));
+            color: var(--white);
+            opacity: 0;
+            transform: translateY(20px);
+            transition: all 0.3s ease;
+        }
+
+        .project-image-item:hover .image-overlay {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .category-badge {
+            position: absolute;
+            top: 15px;
+            right: 15px;
+            background: var(--secondary);
+            color: var(--white);
+            padding: 0.4rem 0.8rem;
+            border-radius: 20px;
+            font-size: 0.75rem;
+            font-weight: 600;
+            z-index: 2;
+        }
+
+        .category-badge.vehicle {
+            background: var(--primary);
+        }
+
+        .category-badge.gadget {
+            background: #8e44ad;
+        }
+
+        .category-badge.it {
+            background: #27ae60;
+        }
+
+        /* Modal/Lightbox Styles */
+        .modal-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: var(--modal-overlay);
+            z-index: 3000;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            opacity: 0;
+            visibility: hidden;
+            transition: all 0.3s ease;
+            padding: 20px;
+        }
+
+        .modal-overlay.active {
+            opacity: 1;
+            visibility: visible;
+        }
+
+        .modal {
+            background: var(--white);
+            border-radius: 12px;
+            width: 90%;
+            max-width: 1200px;
+            max-height: 90vh;
+            overflow-y: auto;
+            transform: translateY(30px);
+            transition: transform 0.4s ease;
+            position: relative;
+        }
+
+        .modal-overlay.active .modal {
+            transform: translateY(0);
+        }
+
+        .modal-close {
+            position: absolute;
+            top: 1rem;
+            right: 1rem;
+            background: var(--white);
+            border: none;
+            width: 45px;
+            height: 45px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.25rem;
+            color: var(--text-dark);
+            cursor: pointer;
+            z-index: 10;
+            box-shadow: var(--shadow);
+            transition: all 0.3s ease;
+        }
+
+        .modal-close:hover {
+            background: var(--primary);
+            color: var(--white);
+        }
+
+        .modal-content {
+            padding: 2.5rem;
+        }
+
+        .modal-header {
+            margin-bottom: 2rem;
+            padding-bottom: 1.5rem;
+            border-bottom: 2px solid var(--bg-light);
+        }
+
+        .modal-category {
+            font-size: 0.875rem;
+            color: var(--primary);
+            font-weight: 600;
+            margin-bottom: 0.5rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .modal-header h2 {
+            font-size: 2rem;
+            margin-bottom: 0.5rem;
+            line-height: 1.3;
+        }
+
+        .modal-description {
+            color: var(--text-light);
+            line-height: 1.6;
+            margin-bottom: 2rem;
+            font-size: 1.1rem;
+        }
+
+        /* Project Images Gallery */
+        .project-gallery {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 1rem;
+            margin-bottom: 2rem;
+        }
+
+        .gallery-image {
+            width: 100%;
+            height: 200px;
+            object-fit: cover;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: transform 0.3s ease;
+        }
+
+        .gallery-image:hover {
+            transform: scale(1.03);
+        }
+
+        .project-details-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 1.5rem;
+            margin-bottom: 2.5rem;
+        }
+
+        .detail-item {
+            background: var(--bg-light);
+            padding: 1.2rem;
+            border-radius: 8px;
+            border-left: 3px solid var(--primary);
+        }
+
+        .detail-label {
+            font-size: 0.8rem;
+            color: var(--text-light);
+            margin-bottom: 0.25rem;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            font-weight: 600;
+        }
+
+        .detail-value {
+            font-weight: 600;
+            font-size: 1rem;
+        }
+
+        .client-testimonial {
+            background: var(--bg-lighter);
+            padding: 1.8rem;
+            border-radius: 8px;
+            border-left: 4px solid var(--secondary);
+            margin-top: 2rem;
+        }
+
+        .client-quote {
+            font-style: italic;
+            color: var(--text-light);
+            margin-bottom: 1rem;
+            line-height: 1.6;
+            font-size: 1.05rem;
+        }
+
+        .client-name {
+            font-weight: 600;
+            font-size: 0.95rem;
+            color: var(--text-dark);
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        /* Navigation buttons in modal */
+        .modal-nav {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            background: var(--white);
+            border: none;
+            width: 55px;
+            height: 55px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+            color: var(--text-dark);
+            cursor: pointer;
+            z-index: 10;
+            box-shadow: var(--shadow);
+            transition: all 0.3s ease;
+        }
+
+        .modal-nav:hover {
+            background: var(--primary);
+            color: var(--white);
+        }
+
+        .modal-prev {
+            left: -25px;
+        }
+
+        .modal-next {
+            right: -25px;
+        }
+
+        /* CTA Section */
+        .cta {
+            padding: 80px 0;
+            background: linear-gradient(135deg, var(--primary) 0%, var(--primary-dark) 100%);
+            color: var(--white);
+            text-align: center;
+        }
+
+        .cta h2 {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+        }
+
+        .cta p {
+            font-size: 1.125rem;
+            margin-bottom: 2rem;
+            opacity: 0.9;
+        }
+
+        .cta-buttons {
+            display: flex;
+            gap: 1rem;
+            justify-content: center;
+        }
+
+        /* Footer */
+        footer {
+            background: var(--text-dark);
+            color: var(--white);
+            padding: 3rem 0;
+        }
+
+        .footer-content {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+        }
+
+        .footer-section h3 {
+            margin-bottom: 1rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .footer-links {
+            list-style: none;
+        }
+
+        .footer-links li {
+            margin-bottom: 0.5rem;
+        }
+
+        .footer-links a {
+            color: #ccc;
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+
+        .footer-links a:hover {
+            color: var(--white);
+        }
+
+        .social-links {
+            display: flex;
+            gap: 1rem;
+            margin-top: 1rem;
+        }
+
+        .social-links a {
+            width: 40px;
+            height: 40px;
+            background: rgba(255,255,255,0.1);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--white);
+            text-decoration: none;
+            transition: background 0.3s;
+        }
+
+        .social-links a:hover {
+            background: var(--primary);
+        }
+
+        .copyright {
+            text-align: center;
+            margin-top: 3rem;
+            padding-top: 2rem;
+            border-top: 1px solid #444;
+            color: #ccc;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .nav-links {
+                display: none;
+            }
+
+            .mobile-menu-btn {
+                display: block;
+            }
+
+            .page-header h1 {
+                font-size: 2.5rem;
+            }
+
+            .category-filters {
+                flex-direction: column;
+                align-items: center;
+            }
+
+            .filter-btn {
+                width: 100%;
+                max-width: 300px;
+                justify-content: center;
+            }
+
+            .projects-grid {
+                grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+                gap: 15px;
+            }
+
+            .project-image-item {
+                aspect-ratio: 1/1;
+            }
+
+            .modal-content {
+                padding: 1.5rem;
+            }
+
+            .modal-header h2 {
+                font-size: 1.5rem;
+            }
+
+            .project-gallery {
+                grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+            }
+
+            .gallery-image {
+                height: 150px;
+            }
+
+            .project-details-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .modal-nav {
+                width: 45px;
+                height: 45px;
+                font-size: 1.25rem;
+            }
+
+            .modal-prev {
+                left: 10px;
+            }
+
+            .modal-next {
+                right: 10px;
+            }
+
+            .cta-buttons {
+                flex-direction: column;
+            }
+
+            .section-title {
+                font-size: 2rem;
+            }
+        }
+
+        .text-center {
+            text-align: center;
+        }
+
+        .btn-large {
+            padding: 1rem 2rem;
+            font-size: 1rem;
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header>
+        <div class="container">
+            <nav class="nav-container">
+                <a href="index.html" class="logo">
+                    <img src="logo1.png" alt="Lumiminds Logo" class="logo-image">
+                    LumiMinds
+                </a>
+                
+                <ul class="nav-links">
+                    <li><a href="index.html">Home</a></li>
+                    <li><a href="services.html">Services</a></li>
+                    <li><a href="work.html" class="active">Our Works</a></li>
+                    <li><a href="about.html">About</a></li>
+                    <li><a href="contact.html">Contact</a></li>
+                </ul>
+                
+                <button class="mobile-menu-btn">
+                    <i class="fas fa-bars"></i>
+                </button>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Mobile Menu -->
+    <div class="mobile-menu">
+        <div class="mobile-menu-header">
+            <div class="logo">
+                <img src="logo1.png" alt="Lumiminds Logo" class="logo-image">
+                LumiMinds
+            </div>
+            <button class="mobile-menu-close">
+                <i class="fas fa-times"></i>
+            </button>
+        </div>
+        <ul class="mobile-nav-links">
+            <li><a href="index.html">Home</a></li>
+            <li><a href="services.html">Services</a></li>
+            <li><a href="vehicles.html">Vehicles</a></li>
+            <li><a href="gadgets.html">Gadgets</a></li>
+            <li><a href="works.html" class="active">Our Works</a></li>
+            <li><a href="about.html">About</a></li>
+            <li><a href="contact.html">Contact</a></li>
+        </ul>
+    </div>
+
+    <!-- Page Header -->
+    <section class="page-header">
+        <div class="container">
+            <h1>Our Project Gallery</h1>
+            <p>Click on any project image to view detailed information and additional photos</p>
+        </div>
+    </section>
+
+    <!-- Project Categories -->
+    <section class="project-categories">
+        <div class="container">
+            <div class="category-filters">
+                <button class="filter-btn active" data-filter="all">
+                    <i class="fas fa-th"></i> All Projects
+                </button>
+                <button class="filter-btn" data-filter="vehicle">
+                    <i class="fas fa-car"></i> Vehicle Imports
+                </button>
+                <button class="filter-btn" data-filter="gadget">
+                    <i class="fas fa-mobile-alt"></i> Gadget Orders
+                </button>
+                <button class="filter-btn" data-filter="it">
+                    <i class="fas fa-laptop-code"></i> IT Services
+                </button>
+            </div>
+        </div>
+    </section>
+
+    <!-- Image-Only Projects Grid -->
+    <section class="projects-grid-section">
+        <div class="container">
+            <div class="projects-grid" id="projectsContainer">
+                <!-- Project images will be dynamically generated here -->
+            </div>
+        </div>
+    </section>
+
+    <!-- Modal/Lightbox -->
+    <div class="modal-overlay" id="modalOverlay">
+        <div class="modal" id="modal">
+            <button class="modal-close" id="modalClose">
+                <i class="fas fa-times"></i>
+            </button>
+            <button class="modal-nav modal-prev" id="modalPrev">
+                <i class="fas fa-chevron-left"></i>
+            </button>
+            <button class="modal-nav modal-next" id="modalNext">
+                <i class="fas fa-chevron-right"></i>
+            </button>
+            <div class="modal-content" id="modalContent">
+                <!-- Modal content will be dynamically generated here -->
+            </div>
+        </div>
+    </div>
+
+    <!-- CTA Section -->
+    <section class="cta">
+        <div class="container">
+            <div class="cta-content">
+                <h2>Ready to Start Your Project?</h2>
+                <p>Join our growing list of satisfied clients and experience professional service delivery</p>
+                <div class="cta-buttons">
+                    <button class="btn btn-outline btn-large" onclick="location.href='contact.html'">
+                        Start a Project
+                    </button>
+                    <button class="btn btn-primary btn-large" onclick="location.href='tel:+260969820643'">
+                        <i class="fas fa-phone"></i> Call for Consultation
+                    </button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h3>
+                        <i class="fas fa-lightbulb"></i>
+                        LumiMinds
+                    </h3>
+                    <p>Your trusted partner for comprehensive business solutions including product sourcing and IT services.</p>
+                    <div class="social-links">
+                        <a href="#"><i class="fab fa-facebook"></i></a>
+                        <a href="#"><i class="fab fa-twitter"></i></a>
+                        <a href="#"><i class="fab fa-instagram"></i></a>
+                        <a href="#"><i class="fab fa-linkedin"></i></a>
+                        <a href="#"><i class="fab fa-whatsapp"></i></a>
+                    </div>
+                </div>
+                
+                <div class="footer-section">
+                    <h3>Quick Links</h3>
+                    <ul class="footer-links">
+                        <li><a href="index.html">Home</a></li>
+                        <li><a href="services.html">Services</a></li>
+                        <li><a href="vehicles.html">Vehicles</a></li>
+                        <li><a href="gadgets.html">Gadgets</a></li>
+                        <li><a href="works.html">Our Works</a></li>
+                        <li><a href="about.html">About Us</a></li>
+                        <li><a href="contact.html">Contact</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-section">
+                    <h3>Our Services</h3>
+                    <ul class="footer-links">
+                        <li><a href="services.html#product-sourcing">Product Sourcing</a></li>
+                        <li><a href="services.html#it-support">IT Support</a></li>
+                        <li><a href="vehicles.html">Vehicle Import</a></li>
+                        <li><a href="gadgets.html">Gadget Import</a></li>
+                        <li><a href="services.html#web-dev">Web Development</a></li>
+                        <li><a href="services.html#consultation">IT Consultation</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-section">
+                    <h3>Contact Info</h3>
+                    <ul class="footer-links">
+                        <li><i class="fas fa-map-marker-alt"></i> 45 mwasumina Itawa, Ndola, Zambia</li>
+                        <li><i class="fas fa-envelope"></i> lumimindszambia@gmail.com</li>
+                        <li><i class="fas fa-phone"></i> +260 969 820 643</li>
+                        <li><i class="fas fa-clock"></i> Mon-Fri: 8AM-6PM, Sat: 9AM-1PM</li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="copyright">
+                <p>&copy; 2025 LumiMinds Solutions. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Mobile Menu Toggle
+        const mobileMenuBtn = document.querySelector('.mobile-menu-btn');
+        const mobileMenu = document.querySelector('.mobile-menu');
+        const mobileMenuClose = document.querySelector('.mobile-menu-close');
+        const mobileNavLinks = document.querySelectorAll('.mobile-nav-links a');
+
+        mobileMenuBtn.addEventListener('click', () => {
+            mobileMenu.classList.add('active');
+            document.body.style.overflow = 'hidden';
+        });
+
+        mobileMenuClose.addEventListener('click', () => {
+            mobileMenu.classList.remove('active');
+            document.body.style.overflow = 'auto';
+        });
+
+        mobileNavLinks.forEach(link => {
+            link.addEventListener('click', () => {
+                mobileMenu.classList.remove('active');
+                document.body.style.overflow = 'auto';
+            });
+        });
+
+        // Project Data with multiple images
+        const projects = [
+            {
+                id: 1,
+                category: "vehicle",
+                title: "Toyota Land Cruiser 2023 for Business Fleet",
+                description: "Successfully imported and delivered this premium SUV for a corporate client's executive fleet in Lusaka. Complete end-to-end service including sourcing, inspection, shipping, and delivery.",
+                images: [
+                    "https://images.unsplash.com/photo-1494976388531-d1058494cdd8?ixlib=rb-4.0.3&auto=format&fit=crop&w=1000&q=80",
+                    "https://images.unsplash.com/photo-1553440569-bcc63803a83d?ixlib=rb-4.0.3&auto=format&fit=crop&w=1000&q=80",
+                    "https://images.unsplash.com/photo-1503376780353-7e6692767b70?ixlib=rb-4.0.3&auto=format&fit=crop&w=1000&q=80"
+                ],
+                details: [
+                    { label: "Client", value: "ABC Mining Ltd." },
+                    { label: "Timeline", value: "4 Weeks" },
+                    { label: "Location", value: "Lusaka, Zambia" },
+                    { label: "Vehicle Type", value: "Toyota Land Cruiser 2023" },
+                    { label: "Color", value: "Pearl White" },
+                    { label: "Status", value: "Completed & Delivered" }
+                ],
+                testimonial: {
+                    quote: "Professional service from start to finish. The Land Cruiser arrived exactly as promised and has been performing excellently in our fleet operations.",
+                    author: "Lewis Tembo"
+                }
+            },
+            {
+                id: 2,
+                category: "it",
+                title: "Fashion Retail E-commerce Platform",
+                description: "Developed a fully responsive e-commerce website with integrated payment systems, inventory management, and customer relationship management tools for a growing fashion retailer.",
+                images: [
+                    "https://images.unsplash.com/photo-1558494949-ef010cbdcc31?ixlib=rb-4.0.3&auto=format&fit=crop&w=1000&q=80",
+                    "https://images.unsplash.com/photo-1460925895917-afdab827c52f?ixlib=rb-4.0.3&auto=format&fit=crop&w=1000&q=80",
+                    "https://images.unsplash.com/photo-1556742049-0cfed4f6a45d?ixlib=rb-4.0.3&auto=format&fit=crop&w=1000&q=80"
+                ],
+                details: [
+                    { label: "Client", value: "Zambian Fashion Hub" },
+                    { label: "Timeline", value: "6 Weeks" },
+                    { label: "Technologies", value: "WordPress, WooCommerce, PHP" },
+                    { label: "Features", value: "Payment Gateway, Inventory System" },
+                    { label: "Mobile Support", value: "Fully Responsive" },
+                    { label: "Status", value: "Live & Maintained" }
+                ],
+                testimonial: {
+                    quote: "Our online sales increased by 300% after launching the new website. The team was professional and delivered exactly what we needed.",
+                    author: "Mwasimba Juma"
+                }
+            },
+            {
+                id: 3,
+                category: "gadget",
+                title: "Corporate Laptop & Smartphone Procurement",
+                description: "Supplied 50 high-performance laptops and 100 smartphones for a corporate client's digital transformation project. All equipment came with valid warranties and corporate support packages.",
+                images: [
+                    "https://images.unsplash.com/photo-1498049794561-7780e7231661?ixlib=rb-4.0.3&auto=format&fit=crop&w=1000&q=80",
+                    "https://images.unsplash.com/photo-1512941937669-90a1b58e7e9c?ixlib=rb-4.0.3&auto=format&fit=crop&w=1000&q=80",
+                    "https://images.unsplash.com/photo-1581094794329-c8112a89af12?ixlib=rb-4.0.3&auto=format&fit=crop&w=1000&q=80"
+                ],
+                details: [
+                    { label: "Client", value: "Tech Solutions Zambia" },
+                    { label: "Quantity", value: "150 Units Total" },
+                    { label: "Delivery Time", value: "3 Weeks" },
+                    { label: "Savings", value: "25% vs Local Market" },
+                    { label: "Warranty", value: "2 Years Comprehensive" },
+                    { label: "Support", value: "24/7 Technical Support" }
+                ],
+                testimonial: {
+                    quote: "Significant cost savings and all equipment arrived in perfect condition with valid warranties. The bulk procurement process was handled professionally.",
+                    author: "Raymond Mukosha"
+                }
+            },
+            {
+                id: 4,
+                category: "vehicle",
+                title: "Fleet of 5 Toyota Hilux for Construction",
+                description: "Imported a fleet of 5 Toyota Hilux double cabs for a construction company's site operations. All vehicles were customized with off-road packages and safety features.",
+                images: [
+                    "https://images.unsplash.com/photo-1580273916550-e323be2ae537?ixlib=rb-4.0.3&auto=format&fit=crop&w=1000&q=80",
+                    "https://images.unsplash.com/photo-1507136566006-cfc505b114fc?ixlib=rb-4.0.3&auto=format&fit=crop&w=1000&q=80",
+                    "https://images.unsplash.com/photo-1533473359331-0135ef1b58bf?ixlib=rb-4.0.3&auto=format&fit=crop&w=1000&q=80"
+                ],
+                details: [
+                    { label: "Client", value: "BuildRight Construction" },
+                    { label: "Quantity", value: "5 Vehicles" },
+                    { label: "Timeline", value: "5 Weeks" },
+                    { label: "Cost Saving", value: "$15,000 Total" },
+                    { label: "Customization", value: "Off-road Package Added" },
+                    { label: "Status", value: "Operational on Sites" }
+                ],
+                testimonial: {
+                    quote: "All vehicles were delivered on time and have been performing excellently on our construction sites. The customization options were perfect for our needs.",
+                    author: "Lewis Tembo"
+                }
+            },
+            {
+                id: 5,
+                category: "it",
+                title: "Network Infrastructure Setup",
+                description: "Designed and implemented a complete network infrastructure for a new office building in Ndola. Included server setup, wireless access points, security systems, and VoIP telephony.",
+                images: [
+                    "https://images.unsplash.com/photo-1552664730-d307ca884978?ixlib=rb-4.0.3&auto=format&fit=crop&w=1000&q=80",
+                    "https://images.unsplash.com/photo-1558494949-ef010cbdcc31?ixlib=rb-4.0.3&auto=format&fit=crop&w=1000&q=80",
+                    "https://images.unsplash.com/photo-1629654291660-3c98113a0438?ixlib=rb-4.0.3&auto=format&fit=crop&w=1000&q=80"
+                ],
+                details: [
+                    { label: "Client", value: "Prime Consulting Ltd." },
+                    { label: "Timeline", value: "2 Weeks" },
+                    { label: "Users", value: "75 Workstations" },
+                    { label: "Uptime", value: "99.9% Guaranteed" },
+                    { label: "Security", value: "Enterprise Firewall" },
+                    { label: "Support", value: "24/7 Monitoring" }
+                ],
+                testimonial: {
+                    quote: "Reliable network infrastructure that has supported our operations seamlessly for over a year. The setup was completed ahead of schedule.",
+                    author: "Mwasimba Juma"
+                }
+            },
+            {
+                id: 6,
+                category: "gadget",
+                title: "Professional Studio Equipment Package",
+                description: "Supplied complete photography studio equipment for a professional photography business. Package included cameras, lenses, lighting equipment, backdrops, and editing workstations.",
+                images: [
+                    "https://images.unsplash.com/photo-1511707171634-5f897ff02aa9?ixlib=rb-4.0.3&auto=format&fit=crop&w=1000&q=80",
+                    "https://images.unsplash.com/photo-1516035069371-29a1b244cc32?ixlib=rb-4.0.3&auto=format&fit=crop&w=1000&q=80",
+                    "https://images.unsplash.com/photo-1554048612-b6a482bc67e5?ixlib=rb-4.0.3&auto=format&fit=crop&w=1000&q=80"
+                ],
+                details: [
+                    { label: "Client", value: "Capture Moments Studio" },
+                    { label: "Items", value: "25+ Equipment Pieces" },
+                    { label: "Delivery", value: "Express 1 Week" },
+                    { label: "Savings", value: "30% vs Local Retail" },
+                    { label: "Brands", value: "Canon, Nikon, Profoto" },
+                    { label: "Training", value: "Included Setup & Training" }
+                ],
+                testimonial: {
+                    quote: "High-quality equipment at unbeatable prices. My studio is now fully equipped thanks to LumiMinds. The setup assistance was invaluable.",
+                    author: "Raymond Mukosha"
+                }
+            }
+        ];
+
+        // Category data
+        const categoryData = {
+            vehicle: { icon: "fas fa-car", label: "Vehicle Import", colorClass: "vehicle" },
+            gadget: { icon: "fas fa-mobile-alt", label: "Gadget Order", colorClass: "gadget" },
+            it: { icon: "fas fa-laptop-code", label: "IT Service", colorClass: "it" }
+        };
+
+        // Modal elements
+        const modalOverlay = document.getElementById('modalOverlay');
+        const modal = document.getElementById('modal');
+        const modalClose = document.getElementById('modalClose');
+        const modalPrev = document.getElementById('modalPrev');
+        const modalNext = document.getElementById('modalNext');
+        const modalContent = document.getElementById('modalContent');
+
+        let currentProjectIndex = 0;
+        let filteredProjects = [...projects];
+
+        // Initialize the page
+        document.addEventListener('DOMContentLoaded', function() {
+            renderProjects('all');
+            setupFilterButtons();
+            setupModalEvents();
+        });
+
+        // Render project images to the grid
+        function renderProjects(filter) {
+            const container = document.getElementById('projectsContainer');
+            container.innerHTML = '';
+            
+            filteredProjects = filter === 'all' 
+                ? [...projects] 
+                : projects.filter(project => project.category === filter);
+            
+            filteredProjects.forEach((project, index) => {
+                const categoryInfo = categoryData[project.category];
+                const projectElement = document.createElement('div');
+                projectElement.className = 'project-image-item';
+                projectElement.setAttribute('data-category', project.category);
+                projectElement.setAttribute('data-index', index);
+                
+                projectElement.innerHTML = `
+                    <img src="${project.images[0]}" alt="${project.title}" class="project-image">
+                    <div class="category-badge ${categoryInfo.colorClass}">${categoryInfo.label}</div>
+                    <div class="image-overlay">
+                        <h3>${project.title}</h3>
+                        <p>Click to view project details</p>
+                    </div>
+                `;
+                
+                projectElement.addEventListener('click', () => openModal(index));
+                container.appendChild(projectElement);
+            });
+        }
+
+        // Setup filter buttons
+        function setupFilterButtons() {
+            const filterButtons = document.querySelectorAll('.filter-btn');
+            
+            filterButtons.forEach(button => {
+                button.addEventListener('click', function() {
+                    const filter = this.dataset.filter;
+                    
+                    // Update active button
+                    filterButtons.forEach(btn => btn.classList.remove('active'));
+                    this.classList.add('active');
+                    
+                    // Render filtered projects
+                    renderProjects(filter);
+                });
+            });
+        }
+
+        // Setup modal events
+        function setupModalEvents() {
+            // Close modal
+            modalClose.addEventListener('click', closeModal);
+            modalOverlay.addEventListener('click', (e) => {
+                if (e.target === modalOverlay) closeModal();
+            });
+            
+            // Navigation
+            modalPrev.addEventListener('click', showPreviousProject);
+            modalNext.addEventListener('click', showNextProject);
+            
+            // Keyboard navigation
+            document.addEventListener('keydown', (e) => {
+                if (!modalOverlay.classList.contains('active')) return;
+                
+                if (e.key === 'Escape') closeModal();
+                if (e.key === 'ArrowLeft') showPreviousProject();
+                if (e.key === 'ArrowRight') showNextProject();
+            });
+        }
+
+        // Open modal with project details
+        function openModal(index) {
+            currentProjectIndex = index;
+            const project = filteredProjects[index];
+            const categoryInfo = categoryData[project.category];
+            
+            // Generate gallery images HTML
+            let galleryHTML = '';
+            project.images.forEach((image, imgIndex) => {
+                galleryHTML += `<img src="${image}" alt="Project Image ${imgIndex + 1}" class="gallery-image" onclick="viewFullImage('${image}')">`;
+            });
+            
+            // Generate details HTML
+            let detailsHTML = '';
+            project.details.forEach(detail => {
+                detailsHTML += `
+                    <div class="detail-item">
+                        <div class="detail-label">${detail.label}</div>
+                        <div class="detail-value">${detail.value}</div>
+                    </div>
+                `;
+            });
+            
+            // Set modal content
+            modalContent.innerHTML = `
+                <div class="modal-header">
+                    <div class="modal-category">
+                        <i class="${categoryInfo.icon}"></i> ${categoryInfo.label}
+                    </div>
+                    <h2>${project.title}</h2>
+                </div>
+                
+                <p class="modal-description">${project.description}</p>
+                
+                <h3 style="margin-bottom: 1rem; color: var(--text-dark);">Project Images</h3>
+                <div class="project-gallery">
+                    ${galleryHTML}
+                </div>
+                
+                <h3 style="margin-bottom: 1rem; color: var(--text-dark);">Project Details</h3>
+                <div class="project-details-grid">
+                    ${detailsHTML}
+                </div>
+                
+                <div class="client-testimonial">
+                    <p class="client-quote">"${project.testimonial.quote}"</p>
+                    <p class="client-name">
+                        <i class="fas fa-user-circle"></i> ${project.testimonial.author}
+                    </p>
+                </div>
+            `;
+            
+            // Show modal
+            document.body.style.overflow = 'hidden';
+            modalOverlay.classList.add('active');
+        }
+
+        // View full image in modal
+        function viewFullImage(imageUrl) {
+            modalContent.innerHTML = `
+                <div style="text-align: center; padding: 2rem;">
+                    <img src="${imageUrl}" alt="Full Size Image" style="max-width: 100%; max-height: 70vh; border-radius: 8px; margin-bottom: 1rem;">
+                    <button class="btn btn-outline" onclick="openModal(${currentProjectIndex})">
+                        <i class="fas fa-arrow-left"></i> Back to Project Details
+                    </button>
+                </div>
+            `;
+        }
+
+        // Close modal
+        function closeModal() {
+            document.body.style.overflow = 'auto';
+            modalOverlay.classList.remove('active');
+        }
+
+        // Show previous project
+        function showPreviousProject() {
+            currentProjectIndex = (currentProjectIndex - 1 + filteredProjects.length) % filteredProjects.length;
+            openModal(currentProjectIndex);
+        }
+
+        // Show next project
+        function showNextProject() {
+            currentProjectIndex = (currentProjectIndex + 1) % filteredProjects.length;
+            openModal(currentProjectIndex);
+        }
+
+        // Smooth scrolling
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                }
+            });
+        });
+
+        // Navbar background on scroll
+        window.addEventListener('scroll', () => {
+            const header = document.querySelector('header');
+            if (window.scrollY > 100) {
+                header.style.background = 'rgba(255, 255, 255, 0.95)';
+                header.style.backdropFilter = 'blur(10px)';
+            } else {
+                header.style.background = 'var(--white)';
+                header.style.backdropFilter = 'none';
+            }
+        });
+    </script>
+</body>
+</html>

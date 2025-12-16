@@ -3,196 +3,327 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>LumiMinds Zambia - About Us</title>
+    <title>About Us - LumiMinds Zambia</title>
     <link rel="icon" type="image/x-icon" href="logo.png">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <link rel="stylesheet" href="styles.css">
     <style>
-        /* Mission Vision Values Hero */
-        .mv-hero {
-            padding: 120px 0 80px;
-            background: linear-gradient(135deg, var(--primary) 0%, var(--primary-dark) 100%);
+        /* Global Styles */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --primary: #3f88c5;
+            --primary-light: #e3f2fd;
+            --primary-dark: #1E3324;
+            --secondary: #D4AF37;
+            --text-dark: #1A1A1A;
+            --text-light: #666666;
+            --bg-light: #F8F9FA;
+            --bg-lighter: #FCFCFC;
+            --border: #E5E5E5;
+            --white: #FFFFFF;
+            --shadow: 0 4px 20px rgba(0,0,0,0.08);
+            --shadow-lg: 0 10px 40px rgba(0,0,0,0.12);
+        }
+
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+            line-height: 1.6;
+            color: var(--text-dark);
+            background-color: var(--white);
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        .btn {
+            padding: 0.75rem 1.5rem;
+            border-radius: 8px;
+            text-decoration: none;
+            font-weight: 500;
+            transition: all 0.3s;
+            border: none;
+            cursor: pointer;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .btn-primary {
+            background: var(--primary);
             color: var(--white);
+        }
+
+        .btn-primary:hover {
+            background: var(--primary-dark);
+            transform: translateY(-2px);
+            box-shadow: var(--shadow);
+        }
+
+        .btn-outline {
+            border: 2px solid var(--primary);
+            color: var(--primary);
+            background: transparent;
+        }
+
+        .btn-outline:hover {
+            background: var(--primary);
+            color: var(--white);
+        }
+
+        .section-title {
+            text-align: center;
+            font-size: 2.5rem;
+            font-weight: 600;
+            margin-bottom: 1rem;
+        }
+
+        .section-subtitle {
+            text-align: center;
+            color: var(--text-light);
+            margin-bottom: 3rem;
+            font-size: 1.125rem;
+        }
+
+        /* Header Styles */
+        header {
+            background: var(--white);
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 1000;
+        }
+
+        .nav-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1rem 0;
+        }
+
+        .logo {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--primary);
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .logo-image {
+            height: 40px;
+            width: 40px;
+        }
+
+        .nav-links {
+            display: flex;
+            list-style: none;
+            gap: 2rem;
+        }
+
+        .nav-links a {
+            text-decoration: none;
+            color: var(--text-light);
+            font-weight: 400;
+            transition: color 0.3s;
+            position: relative;
+        }
+
+        .nav-links a:hover,
+        .nav-links a.active {
+            color: var(--primary);
+            font-weight: 500;
+        }
+
+        .nav-links a.active::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            width: 100%;
+            height: 2px;
+            background: var(--primary);
+        }
+
+        .mobile-menu-btn {
+            display: none;
+            background: none;
+            border: none;
+            font-size: 1.5rem;
+            color: var(--primary);
+            cursor: pointer;
+        }
+
+        /* Mobile Menu */
+        .mobile-menu {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: var(--white);
+            z-index: 2000;
+            transform: translateX(-100%);
+            transition: transform 0.3s ease;
+        }
+
+        .mobile-menu.active {
+            transform: translateX(0);
+        }
+
+        .mobile-menu-header {
+            padding: 1rem;
+            border-bottom: 1px solid var(--border);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .mobile-menu-close {
+            background: none;
+            border: none;
+            font-size: 1.5rem;
+            cursor: pointer;
+        }
+
+        .mobile-nav-links {
+            list-style: none;
+            padding: 2rem;
+        }
+
+        .mobile-nav-links li {
+            margin-bottom: 1rem;
+        }
+
+        .mobile-nav-links a {
+            text-decoration: none;
+            color: var(--text-dark);
+            font-size: 1.125rem;
+            display: block;
+            padding: 0.5rem 0;
+        }
+
+        /* Page Header */
+        .page-header {
+            padding: 140px 0 60px;
+            background: linear-gradient(135deg, var(--primary-light) 0%, #e3f2fd 100%);
+            color: var(--text-dark);
             text-align: center;
         }
-        
-        .mv-hero h1 {
-            font-size: 3.5rem;
+
+        .page-header h1 {
+            font-size: 3rem;
             font-weight: 700;
-            margin-bottom: 1.5rem;
+            margin-bottom: 1rem;
         }
-        
-        .mv-hero p {
-            font-size: 1.3rem;
-            max-width: 600px;
-            margin: 0 auto;
+
+        .page-header p {
+            font-size: 1.2rem;
             opacity: 0.9;
         }
-        
-        /* About LumiMinds Section */
-        .about-lumiminds {
-            padding: 100px 0;
-            background: var(--white);
+
+        /* Our Story Section */
+        .our-story {
+            padding: 80px 0;
         }
-        
-        .about-content {
+
+        .story-content {
             display: grid;
             grid-template-columns: 1fr 1fr;
             gap: 4rem;
             align-items: center;
         }
-        
-        .about-text h2 {
+
+        .story-text h2 {
             font-size: 2.5rem;
-            font-weight: 600;
             margin-bottom: 1.5rem;
-            color: var(--primary);
+            color: var(--text-dark);
         }
-        
-        .about-text p {
-            font-size: 1.1rem;
-            line-height: 1.7;
+
+        .story-text p {
+            margin-bottom: 1.5rem;
             color: var(--text-light);
-            margin-bottom: 2rem;
+            line-height: 1.7;
         }
-        
-        .about-image {
-            background: var(--bg-light);
+
+        .story-image {
             border-radius: 12px;
+            overflow: hidden;
+            box-shadow: var(--shadow-lg);
+        }
+
+        .story-image img {
+            width: 100%;
             height: 400px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            color: var(--primary);
-            font-size: 5rem;
+            object-fit: cover;
+            border-radius: 12px;
         }
-        
-        /* Mission Section */
-        .mission-section {
-            padding: 100px 0;
-            background: var(--bg-light);
-        }
-        
-        .mission-content {
+
+        /* Milestones */
+        .milestones {
             display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 4rem;
-            align-items: center;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 2rem;
+            margin-top: 3rem;
         }
-        
-        .mission-text h2 {
-            font-size: 2.5rem;
-            font-weight: 600;
-            margin-bottom: 1.5rem;
-            color: var(--primary);
-        }
-        
-        .mission-text p {
-            font-size: 1.1rem;
-            line-height: 1.7;
-            color: var(--text-light);
-            margin-bottom: 2rem;
-        }
-        
-        .mission-image {
-            background: var(--white);
-            border-radius: 12px;
-            height: 400px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            color: var(--primary);
-            font-size: 5rem;
-            order: -1;
-        }
-        
-        /* Vision Section */
-        .vision-section {
-            padding: 100px 0;
-            background: var(--white);
-        }
-        
-        .vision-content {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 4rem;
-            align-items: center;
-        }
-        
-        .vision-text h2 {
-            font-size: 2.5rem;
-            font-weight: 600;
-            margin-bottom: 1.5rem;
-            color: var(--primary);
-        }
-        
-        .vision-text p {
-            font-size: 1.1rem;
-            line-height: 1.7;
-            color: var(--text-light);
-            margin-bottom: 2rem;
-        }
-        
-        .vision-image {
-            background: var(--bg-light);
-            border-radius: 12px;
-            height: 400px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            color: var(--primary);
-            font-size: 5rem;
-        }
-        
-        /* Values Section */
-        .values-section {
-            padding: 100px 0;
-            background: var(--bg-light);
-        }
-        
-        .values-intro {
+
+        .milestone {
             text-align: center;
-            max-width: 800px;
-            margin: 0 auto 4rem;
+            padding: 1.5rem;
+            background: var(--white);
+            border-radius: 12px;
+            box-shadow: var(--shadow);
         }
-        
-        .values-intro h2 {
+
+        .milestone-number {
             font-size: 2.5rem;
-            font-weight: 600;
-            margin-bottom: 1.5rem;
+            font-weight: 700;
             color: var(--primary);
+            margin-bottom: 0.5rem;
         }
-        
-        .values-intro p {
-            font-size: 1.1rem;
-            line-height: 1.7;
+
+        .milestone-text {
             color: var(--text-light);
+            font-size: 0.9rem;
         }
-        
+
+        /* Mission & Values */
+        .mission-values {
+            padding: 80px 0;
+            background: var(--bg-light);
+        }
+
         .values-grid {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
             gap: 2rem;
         }
-        
+
         .value-card {
             background: var(--white);
-            padding: 3rem 2rem;
+            padding: 2rem;
             border-radius: 12px;
             text-align: center;
             box-shadow: var(--shadow);
-            border-top: 4px solid var(--primary);
             transition: transform 0.3s ease;
         }
-        
+
         .value-card:hover {
             transform: translateY(-5px);
         }
-        
+
         .value-icon {
             width: 80px;
             height: 80px;
-            background: rgba(45, 74, 50, 0.1);
+            background: rgba(63, 136, 197, 0.1);
             border-radius: 50%;
             display: flex;
             align-items: center;
@@ -201,138 +332,18 @@
             color: var(--primary);
             font-size: 2rem;
         }
-        
-        .value-card h3 {
-            font-size: 1.5rem;
-            margin-bottom: 1rem;
-            color: var(--text-dark);
+
+        /* Our Team */
+        .our-team {
+            padding: 80px 0;
         }
-        
-        .value-card p {
-            color: var(--text-light);
-            line-height: 1.6;
-        }
-        
-        /* Our Journey Section */
-        .our-journey {
-            padding: 100px 0;
-            background: var(--white);
-        }
-        
-        .journey-content {
-            max-width: 1000px;
-            margin: 0 auto;
-        }
-        
-        .journey-content h2 {
-            font-size: 2.5rem;
-            font-weight: 600;
-            margin-bottom: 3rem;
-            text-align: center;
-            color: var(--primary);
-        }
-        
-        .journey-timeline {
-            position: relative;
-            max-width: 800px;
-            margin: 0 auto;
-        }
-        
-        .journey-timeline::before {
-            content: '';
-            position: absolute;
-            left: 50%;
-            top: 0;
-            bottom: 0;
-            width: 2px;
-            background: var(--primary);
-            transform: translateX(-50%);
-        }
-        
-        .journey-item {
-            display: flex;
-            align-items: center;
-            margin-bottom: 4rem;
-            position: relative;
-        }
-        
-        .journey-item:nth-child(odd) {
-            flex-direction: row-reverse;
-        }
-        
-        .journey-item-content {
-            flex: 1;
-            padding: 2rem;
-            background: var(--white);
-            border-radius: 12px;
-            box-shadow: var(--shadow);
-        }
-        
-        .journey-item:nth-child(odd) .journey-item-content {
-            margin-right: 2rem;
-        }
-        
-        .journey-item:nth-child(even) .journey-item-content {
-            margin-left: 2rem;
-        }
-        
-        .journey-year {
-            width: 100px;
-            height: 100px;
-            background: var(--primary);
-            color: var(--white);
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 1.5rem;
-            font-weight: 700;
-            flex-shrink: 0;
-            z-index: 2;
-        }
-        
-        .journey-item-content h3 {
-            font-size: 1.5rem;
-            margin-bottom: 1rem;
-            color: var(--primary);
-        }
-        
-        .journey-item-content p {
-            color: var(--text-light);
-            line-height: 1.6;
-        }
-        
-        /* Meet the Team Section */
-        .team-section {
-            padding: 100px 0;
-            background: var(--bg-light);
-        }
-        
-        .team-intro {
-            text-align: center;
-            max-width: 800px;
-            margin: 0 auto 4rem;
-        }
-        
-        .team-intro h2 {
-            font-size: 2.5rem;
-            font-weight: 600;
-            margin-bottom: 1.5rem;
-            color: var(--primary);
-        }
-        
-        .team-intro p {
-            font-size: 1.1rem;
-            line-height: 1.7;
-            color: var(--text-light);
-        }
-        
+
         .team-grid {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
             gap: 2rem;
         }
-        
+
         .team-member {
             background: var(--white);
             border-radius: 12px;
@@ -340,132 +351,74 @@
             box-shadow: var(--shadow);
             transition: transform 0.3s ease;
         }
-        
+
         .team-member:hover {
             transform: translateY(-5px);
         }
-        
+
         .member-image {
             height: 250px;
-            background: var(--border);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            color: var(--text-light);
-            font-size: 4rem;
+            background-size: cover;
+            background-position: center;
         }
-        
+
         .member-info {
-            padding: 2rem;
+            padding: 1.5rem;
         }
-        
+
         .member-info h3 {
-            font-size: 1.5rem;
-            margin-bottom: 0.5rem;
-            color: var(--text-dark);
+            font-size: 1.25rem;
+            margin-bottom: 0.25rem;
         }
-        
+
         .member-position {
             color: var(--primary);
             font-weight: 600;
             margin-bottom: 1rem;
-            font-size: 1.1rem;
         }
-        
+
         .member-bio {
             color: var(--text-light);
-            line-height: 1.6;
-            margin-bottom: 1.5rem;
+            font-size: 0.9rem;
+            margin-bottom: 1rem;
         }
-        
-        .member-expertise {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 0.5rem;
-            margin-bottom: 1.5rem;
-        }
-        
-        .expertise-tag {
-            background: var(--primary-light);
-            color: var(--primary);
-            padding: 0.25rem 0.75rem;
-            border-radius: 20px;
-            font-size: 0.8rem;
-            font-weight: 500;
-        }
-        
+
         .member-contact {
             display: flex;
-            gap: 1rem;
+            flex-direction: column;
+            gap: 0.25rem;
+            font-size: 0.875rem;
         }
-        
-        .contact-link {
-            width: 40px;
-            height: 40px;
+
+        /* Why Choose Us */
+        .why-choose {
+            padding: 80px 0;
             background: var(--bg-light);
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            color: var(--primary);
-            text-decoration: none;
-            transition: all 0.3s ease;
         }
-        
-        .contact-link:hover {
-            background: var(--primary);
-            color: var(--white);
-        }
-        
-        /* Certifications & Partnerships Section */
-        .certifications-section {
-            padding: 100px 0;
-            background: var(--white);
-        }
-        
-        .certifications-intro {
-            text-align: center;
-            max-width: 800px;
-            margin: 0 auto 4rem;
-        }
-        
-        .certifications-intro h2 {
-            font-size: 2.5rem;
-            font-weight: 600;
-            margin-bottom: 1.5rem;
-            color: var(--primary);
-        }
-        
-        .certifications-intro p {
-            font-size: 1.1rem;
-            line-height: 1.7;
-            color: var(--text-light);
-        }
-        
-        .certifications-grid {
+
+        .features-grid {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
             gap: 2rem;
         }
-        
-        .certification-card {
+
+        .feature-card {
             background: var(--white);
             padding: 2rem;
             border-radius: 12px;
             text-align: center;
             box-shadow: var(--shadow);
-            border: 1px solid var(--border);
             transition: transform 0.3s ease;
         }
-        
-        .certification-card:hover {
+
+        .feature-card:hover {
             transform: translateY(-5px);
         }
-        
-        .certification-icon {
+
+        .feature-icon {
             width: 80px;
             height: 80px;
-            background: rgba(45, 74, 50, 0.1);
+            background: rgba(63, 136, 197, 0.1);
             border-radius: 50%;
             display: flex;
             align-items: center;
@@ -474,59 +427,145 @@
             color: var(--primary);
             font-size: 2rem;
         }
-        
-        .certification-card h3 {
-            font-size: 1.3rem;
+
+        /* CTA Section */
+        .cta {
+            padding: 80px 0;
+            background: linear-gradient(135deg, var(--primary) 0%, var(--primary-dark) 100%);
+            color: var(--white);
+            text-align: center;
+        }
+
+        .cta h2 {
+            font-size: 2.5rem;
             margin-bottom: 1rem;
-            color: var(--text-dark);
         }
-        
-        .certification-card p {
-            color: var(--text-light);
-            line-height: 1.6;
+
+        .cta p {
+            font-size: 1.125rem;
+            margin-bottom: 2rem;
+            opacity: 0.9;
         }
-        
+
+        .cta-buttons {
+            display: flex;
+            gap: 1rem;
+            justify-content: center;
+        }
+
+        /* Footer */
+        footer {
+            background: var(--text-dark);
+            color: var(--white);
+            padding: 3rem 0;
+        }
+
+        .footer-content {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+        }
+
+        .footer-section h3 {
+            margin-bottom: 1rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .footer-links {
+            list-style: none;
+        }
+
+        .footer-links li {
+            margin-bottom: 0.5rem;
+        }
+
+        .footer-links a {
+            color: #ccc;
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+
+        .footer-links a:hover {
+            color: var(--white);
+        }
+
+        .social-links {
+            display: flex;
+            gap: 1rem;
+            margin-top: 1rem;
+        }
+
+        .social-links a {
+            width: 40px;
+            height: 40px;
+            background: rgba(255,255,255,0.1);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--white);
+            text-decoration: none;
+            transition: background 0.3s;
+        }
+
+        .social-links a:hover {
+            background: var(--primary);
+        }
+
+        .copyright {
+            text-align: center;
+            margin-top: 3rem;
+            padding-top: 2rem;
+            border-top: 1px solid #444;
+            color: #ccc;
+        }
+
         /* Responsive Design */
         @media (max-width: 768px) {
-            .mv-hero h1 {
+            .nav-links {
+                display: none;
+            }
+
+            .mobile-menu-btn {
+                display: block;
+            }
+
+            .page-header h1 {
                 font-size: 2.5rem;
             }
-            
-            .about-content,
-            .mission-content,
-            .vision-content {
+
+            .story-content {
                 grid-template-columns: 1fr;
                 gap: 2rem;
             }
-            
-            .mission-image {
-                order: 0;
+
+            .milestones {
+                grid-template-columns: repeat(2, 1fr);
+                gap: 1rem;
             }
-            
-            .values-grid,
-            .team-grid,
-            .certifications-grid {
+
+            .team-grid {
                 grid-template-columns: 1fr;
             }
-            
-            .journey-timeline::before {
-                left: 30px;
+
+            .cta-buttons {
+                flex-direction: column;
             }
-            
-            .journey-item {
-                flex-direction: row !important;
+
+            .section-title {
+                font-size: 2rem;
             }
-            
-            .journey-item-content {
-                margin-left: 2rem !important;
-                margin-right: 0 !important;
-            }
-            
-            .journey-year {
-                width: 60px;
-                height: 60px;
-                font-size: 1rem;
-            }
+        }
+
+        .text-center {
+            text-align: center;
+        }
+
+        .btn-large {
+            padding: 1rem 2rem;
+            font-size: 1rem;
         }
     </style>
 </head>
@@ -540,11 +579,12 @@
                     LumiMinds
                 </a>
                 
+                
                 <ul class="nav-links">
                     <li><a href="index.html">Home</a></li>
                     <li><a href="services.html">Services</a></li>
-                    <li><a href="vehicles.html">Vehicles</a></li>
-                    <li><a href="about.html" class="active">About</a></li>
+                    <li><a href="work.html" >Our Works</a></li>
+                    <li><a href="about.html"class="active">About</a></li>
                     <li><a href="contact.html">Contact</a></li>
                 </ul>
                 
@@ -570,230 +610,155 @@
             <li><a href="index.html">Home</a></li>
             <li><a href="services.html">Services</a></li>
             <li><a href="vehicles.html">Vehicles</a></li>
+            <li><a href="gadgets.html">Gadgets</a></li>
             <li><a href="about.html" class="active">About</a></li>
             <li><a href="contact.html">Contact</a></li>
         </ul>
     </div>
 
-    <!-- Mission Vision Values Hero -->
-    <section class="mv-hero">
+    <!-- Page Header -->
+    <section class="page-header">
         <div class="container">
             <h1>About LumiMinds</h1>
-            <p>Discover our mission, journey, team, and the partnerships that drive our success</p>
+            <p>Your trusted partner for comprehensive business solutions</p>
         </div>
     </section>
 
-    <!-- About LumiMinds Section -->
-    <section class="about-lumiminds">
+    <!-- Our Story Section -->
+    <section class="our-story">
         <div class="container">
-            <div class="about-content">
-                <div class="about-text">
-                    <h2>About LumiMinds</h2>
-                    <p>LumiMinds is a Zambian multi-service company that has revolutionized how individuals and businesses access global products and technology solutions. Founded in 2018, we've grown from a specialized vehicle import service to a comprehensive solutions provider.</p>
-                    <p>Our name reflects our approach - 'Lumi' meaning light, representing clarity and transparency, and 'Minds' representing our intelligent, strategic approach to solving complex challenges for our clients.</p>
-                    <p>Today, we serve hundreds of clients across Zambia, providing everything from premium vehicle imports to cutting-edge technology solutions, all guided by our core values of integrity, excellence, and customer-centricity.</p>
-                    <button class="btn btn-primary" onclick="location.href='services.html'">Explore Our Services</button>
+            <div class="story-content">
+                <div class="story-text">
+                    <h2>Our Journey</h2>
+                    <p>
+                        Founded in 2018, LumiMinds began as a vision to bridge the gap between global markets 
+                        and Zambian businesses and individuals. What started as a vehicle import service has 
+                        evolved into a comprehensive solutions provider, offering product sourcing and IT services.
+                    </p>
+                    <p>
+                        Our founders, with backgrounds in international trade, automotive industries, and 
+                        technology, recognized the need for reliable, transparent, and professional services 
+                        in Zambia's growing market. They combined their expertise to create a company that 
+                        not only imports quality products but also provides technological solutions to help 
+                        businesses thrive in the digital age.
+                    </p>
+                    <p>
+                        Today, LumiMinds stands as a trusted partner for hundreds of satisfied clients, 
+                        successfully importing over 500 vehicles and gadgets while delivering numerous 
+                        IT projects that have transformed businesses across Zambia.
+                    </p>
                 </div>
-                <div class="about-image">
-                    <i class="fas fa-building"></i>
+                <div class="story-image">
+                    <img src="about.jpeg" alt="LumiMinds Team">
+                </div>
+            </div>
+
+            <div class="milestones">
+                <div class="milestone">
+                    <div class="milestone-number">70</div>
+                    <div class="milestone-text">Products Imported</div>
+                </div>
+                <div class="milestone">
+                    <div class="milestone-number">98</div>
+                    <div class="milestone-text">Client Satisfaction</div>
+                </div>
+                <div class="milestone">
+                    <div class="milestone-number">20</div>
+                    <div class="milestone-text">IT Projects Completed</div>
+                </div>
+                <div class="milestone">
+                    <div class="milestone-number">6</div>
+                    <div class="milestone-text">Years of Excellence</div>
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- Mission Section -->
-    <section class="mission-section">
+    <!-- Mission & Values -->
+    <section class="mission-values">
         <div class="container">
-            <div class="mission-content">
-                <div class="mission-image">
-                    <i class="fas fa-bullseye"></i>
-                </div>
-                <div class="mission-text">
-                    <h2>Our Mission</h2>
-                    <p>To empower individuals and businesses in Zambia with comprehensive, reliable solutions that bridge global opportunities with local needs. We are committed to making premium vehicle ownership, cutting-edge technology, and digital innovation accessible through transparent processes and exceptional service.</p>
-                    <p>Through our integrated approach, we eliminate complexities in vehicle imports, technology adoption, and digital transformation, ensuring our clients receive end-to-end support that exceeds expectations.</p>
-                    <button class="btn btn-outline" onclick="location.href='contact.html'">Work With Us</button>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Vision Section -->
-    <section class="vision-section">
-        <div class="container">
-            <div class="vision-content">
-                <div class="vision-text">
-                    <h2>Our Vision</h2>
-                    <p>To become Zambia's most trusted multi-service partner, recognized for transforming how individuals and businesses access global products and digital solutions. We envision a future where geographical boundaries no longer limit access to quality vehicles, advanced technology, or innovative digital services.</p>
-                    <p>By 2030, we aim to be the leading integrated service provider in Southern Africa, setting new standards for reliability, innovation, and customer-centric solutions across all our service domains.</p>
-                    <button class="btn btn-primary" onclick="location.href='contact.html'">Join Our Journey</button>
-                </div>
-                <div class="vision-image">
-                    <i class="fas fa-eye"></i>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Values Section -->
-    <section class="values-section">
-        <div class="container">
-            <div class="values-intro">
-                <h2>Our Core Values</h2>
-                <p>These fundamental principles guide every decision we make and every service we deliver, ensuring consistency and excellence across all our operations.</p>
-            </div>
+            <h2 class="section-title">Our Mission & Values</h2>
+            <p class="section-subtitle">The principles that guide everything we do</p>
             
             <div class="values-grid">
                 <div class="value-card">
                     <div class="value-icon">
-                        <i class="fas fa-shield-alt"></i>
+                        <i class="fas fa-bullseye"></i>
                     </div>
-                    <h3>Integrity</h3>
-                    <p>We maintain absolute transparency in all our dealings, providing honest assessments, clear pricing, and straightforward communication. Our clients trust us because we consistently do what we say we will do.</p>
+                    <h3>Our Mission</h3>
+                    <p>To empower Zambian businesses and individuals with access to global products and technology solutions through reliable, transparent, and professional services.</p>
                 </div>
                 
                 <div class="value-card">
                     <div class="value-icon">
-                        <i class="fas fa-star"></i>
+                        <i class="fas fa-eye"></i>
                     </div>
-                    <h3>Excellence</h3>
-                    <p>From vehicle inspections to code quality, we never compromise on standards. We continuously improve our processes and services to deliver exceptional quality that exceeds client expectations.</p>
+                    <h3>Our Vision</h3>
+                    <p>To be Zambia's most trusted partner for comprehensive business solutions, recognized for innovation, integrity, and exceptional customer service.</p>
                 </div>
                 
                 <div class="value-card">
                     <div class="value-icon">
-                        <i class="fas fa-lightbulb"></i>
+                        <i class="fas fa-handshake"></i>
                     </div>
-                    <h3>Innovation</h3>
-                    <p>We embrace new technologies and creative approaches to solve complex challenges. Our multi-service model itself is an innovation that provides clients with comprehensive solutions.</p>
-                </div>
-                
-                <div class="value-card">
-                    <div class="value-icon">
-                        <i class="fas fa-users"></i>
-                    </div>
-                    <h3>Customer-Centricity</h3>
-                    <p>Our clients' success is our success. We listen carefully, understand deeply, and tailor our services to meet specific needs, building long-term partnerships rather than transactional relationships.</p>
+                    <h3>Our Values</h3>
+                    <p>Integrity, transparency, excellence, innovation, and customer-centricity form the foundation of our business relationships and service delivery.</p>
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- Our Journey Section -->
-    <section class="our-journey">
+    <!-- Our Team -->
+    <section class="our-team">
         <div class="container">
-            <div class="journey-content">
-                <h2>Our Journey</h2>
-                <div class="journey-timeline">
-                    <div class="journey-item">
-                        <div class="journey-year">2018</div>
-                        <div class="journey-item-content">
-                            <h3>Foundation</h3>
-                            <p>LumiMinds was founded with a focus on revolutionizing vehicle imports to Zambia. We started with a small team and a big vision to make premium vehicles accessible to all Zambians.</p>
-                        </div>
-                    </div>
-                    
-                    <div class="journey-item">
-                        <div class="journey-year">2019</div>
-                        <div class="journey-item-content">
-                            <h3>Rapid Growth</h3>
-                            <p>Within our first year, we successfully imported over 50 vehicles and established partnerships with international suppliers. Our reputation for reliability and transparency began to grow.</p>
-                        </div>
-                    </div>
-                    
-                    <div class="journey-item">
-                        <div class="journey-year">2020</div>
-                        <div class="journey-item-content">
-                            <h3>Service Expansion</h3>
-                            <p>Recognizing our clients' broader needs, we expanded into gadget imports and IT support services, establishing ourselves as a comprehensive solutions provider.</p>
-                        </div>
-                    </div>
-                    
-                    <div class="journey-item">
-                        <div class="journey-year">2022</div>
-                        <div class="journey-item-content">
-                            <h3>Digital Transformation</h3>
-                            <p>We launched our web development and mobile app services, helping businesses establish and grow their digital presence. This marked our evolution into a full-service technology partner.</p>
-                        </div>
-                    </div>
-                    
-                    <div class="journey-item">
-                        <div class="journey-year">2024</div>
-                        <div class="journey-item-content">
-                            <h3>Market Leadership</h3>
-                            <p>Today, we're proud to have served hundreds of clients across Zambia, with over 500 vehicles imported and numerous successful technology projects completed.</p>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Meet the Team Section -->
-    <section class="team-section">
-        <div class="container">
-            <div class="team-intro">
-                <h2>Meet Our Team</h2>
-                <p>Our diverse team of experts brings together decades of experience across automotive, technology, and business domains to deliver exceptional service to our clients.</p>
-            </div>
+            <h2 class="section-title">Meet Our Leadership Team</h2>
+            <p class="section-subtitle">Experienced professionals dedicated to your success</p>
             
             <div class="team-grid">
                 <div class="team-member">
-                    <div class="member-image">
-                        <i class="fas fa-user"></i>
-                    </div>
+                    <div class="member-image" style="background-image: url('')"></div>
                     <div class="member-info">
                         <h3>Lewis Tembo</h3>
-                        <p class="member-position">CEO & Founder</p>
-                        <p class="member-bio">Visionary leader with over 10 years of experience in international trade and business strategy. Lewis founded LumiMinds with a mission to transform how Zambians access global products and services.</p>
-                        <div class="member-expertise">
-                            <span class="expertise-tag">Business Strategy</span>
-                            <span class="expertise-tag">International Trade</span>
-                            <span class="expertise-tag">Leadership</span>
-                        </div>
+                        <p class="member-position">Chief Executive Officer (CEO)</p>
+                        <p class="member-bio">
+                            With over 15 years in international trade and business development, 
+                            Lewis leads LumiMinds with a vision for innovation and customer satisfaction.
+                        </p>
                         <div class="member-contact">
-                            <a href="#" class="contact-link"><i class="fab fa-linkedin"></i></a>
-                            <a href="#" class="contact-link"><i class="fas fa-envelope"></i></a>
+                            <span><i class="fas fa-envelope"></i> lewis@lumiminds.com</span>
+                            <span><i class="fas fa-phone"></i> +260 969 820 643</span>
                         </div>
                     </div>
                 </div>
                 
                 <div class="team-member">
-                    <div class="member-image">
-                        <i class="fas fa-user"></i>
-                    </div>
+                    <div class="member-image" style="background-image: url('')"></div>
                     <div class="member-info">
                         <h3>Mwasimba Juma</h3>
-                        <p class="member-position">IT Director</p>
-                        <p class="member-bio">Technology expert with 8+ years in software development and IT infrastructure. Mwasimba oversees our technology services, ensuring we deliver cutting-edge solutions to our clients.</p>
-                        <div class="member-expertise">
-                            <span class="expertise-tag">Software Development</span>
-                            <span class="expertise-tag">IT Infrastructure</span>
-                            <span class="expertise-tag">Cybersecurity</span>
-                        </div>
+                        <p class="member-position">Chief Technology Officer (CTO)</p>
+                        <p class="member-bio">
+                            A technology expert with 12 years of experience in web development 
+                            and IT solutions, Mwasimba ensures every project meets the highest standards.
+                        </p>
                         <div class="member-contact">
-                            <a href="#" class="contact-link"><i class="fab fa-linkedin"></i></a>
-                            <a href="#" class="contact-link"><i class="fas fa-envelope"></i></a>
+                            <span><i class="fas fa-envelope"></i> mwasimba@lumiminds.com</span>
+                            <span><i class="fas fa-phone"></i> +260 762 706 892</span>
                         </div>
                     </div>
                 </div>
                 
                 <div class="team-member">
-                    <div class="member-image">
-                        <i class="fas fa-user"></i>
-                    </div>
+                    <div class="member-image" style="background-image: url('')"></div>
                     <div class="member-info">
-                        <h3>Sarah Banda</h3>
-                        <p class="member-position">Operations Manager</p>
-                        <p class="member-bio">Operations specialist with extensive experience in logistics and supply chain management. Sarah ensures seamless processes from sourcing to delivery across all our services.</p>
-                        <div class="member-expertise">
-                            <span class="expertise-tag">Operations</span>
-                            <span class="expertise-tag">Logistics</span>
-                            <span class="expertise-tag">Customer Service</span>
-                        </div>
+                        <h3>Raymond Mukosha </h3>
+                        <p class="member-position">Chief Operating Officerr (COO)</p>
+                        <p class="member-bio">
+                            With expertise in logistics and supply chain management, Raymond ensures 
+                            seamless operations and timely delivery of all products and services.
+                        </p>
                         <div class="member-contact">
-                            <a href="#" class="contact-link"><i class="fab fa-linkedin"></i></a>
-                            <a href="#" class="contact-link"><i class="fas fa-envelope"></i></a>
+                            <span><i class="fas fa-envelope"></i> Raymond@lumiminds.com</span>
+                            <span><i class="fas fa-phone"></i> +260 977 123 456</span>
                         </div>
                     </div>
                 </div>
@@ -801,45 +766,59 @@
         </div>
     </section>
 
-    <!-- Certifications & Partnerships Section -->
-    <section class="certifications-section">
+    <!-- Why Choose Us -->
+    <section class="why-choose">
         <div class="container">
-            <div class="certifications-intro">
-                <h2>Certifications & Partnerships</h2>
-                <p>Our commitment to excellence is reflected in our certifications and strategic partnerships with industry leaders worldwide.</p>
-            </div>
+            <h2 class="section-title">Why Choose LumiMinds?</h2>
+            <p class="section-subtitle">What sets us apart from the competition</p>
             
-            <div class="certifications-grid">
-                <div class="certification-card">
-                    <div class="certification-icon">
-                        <i class="fas fa-award"></i>
-                    </div>
-                    <h3>Quality Certified</h3>
-                    <p>ISO 9001 certified for quality management systems, ensuring consistent service delivery across all our operations.</p>
-                </div>
-                
-                <div class="certification-card">
-                    <div class="certification-icon">
-                        <i class="fas fa-handshake"></i>
-                    </div>
-                    <h3>Global Partnerships</h3>
-                    <p>Official partnerships with major international auction houses, dealerships, and technology suppliers across 15+ countries.</p>
-                </div>
-                
-                <div class="certification-card">
-                    <div class="certification-icon">
+            <div class="features-grid">
+                <div class="feature-card">
+                    <div class="feature-icon">
                         <i class="fas fa-shield-alt"></i>
                     </div>
-                    <h3>Fully Licensed</h3>
-                    <p>Licensed and regulated by Zambian authorities for vehicle import services and business operations.</p>
+                    <h3>Trust & Reliability</h3>
+                    <p>6 years of proven track record with 98% customer satisfaction rate</p>
                 </div>
                 
-                <div class="certification-card">
-                    <div class="certification-icon">
-                        <i class="fas fa-users"></i>
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <i class="fas fa-globe"></i>
                     </div>
-                    <h3>Industry Memberships</h3>
-                    <p>Active members of Zambia Chamber of Commerce and Industry and various technology associations.</p>
+                    <h3>Global Network</h3>
+                    <p>Extensive connections with suppliers and partners worldwide</p>
+                </div>
+                
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <i class="fas fa-cogs"></i>
+                    </div>
+                    <h3>Comprehensive Solutions</h3>
+                    <p>One-stop shop for product sourcing and IT services</p>
+                </div>
+                
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <i class="fas fa-headset"></i>
+                    </div>
+                    <h3>Dedicated Support</h3>
+                    <p>Personal account managers for each client throughout the process</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- CTA Section -->
+    <section class="cta">
+        <div class="container">
+            <div class="cta-content">
+                <h2>Ready to Work With Us?</h2>
+                <p>Join hundreds of satisfied clients who trust LumiMinds for their business solutions</p>
+                <div class="cta-buttons">
+                    <button class="btn btn-outline btn-large" onclick="location.href='contact.html'">Start a Project</button>
+                    <button class="btn btn-primary btn-large" onclick="location.href='tel:+260969820643'">
+                        <i class="fas fa-phone"></i> Call Us Now
+                    </button>
                 </div>
             </div>
         </div>
@@ -851,10 +830,10 @@
             <div class="footer-content">
                 <div class="footer-section">
                     <h3>
-                        <i class="fas fa-car-side"></i>
-                        Lumiminds
+                        <i class="fas fa-lightbulb"></i>
+                        LumiMinds
                     </h3>
-                    <p>Your trusted partner for comprehensive solutions - from vehicle imports to cutting-edge technology services. Guided by our mission to make excellence accessible.</p>
+                    <p>Your trusted partner for comprehensive business solutions including product sourcing and IT services.</p>
                     <div class="social-links">
                         <a href="#"><i class="fab fa-facebook"></i></a>
                         <a href="#"><i class="fab fa-twitter"></i></a>
@@ -870,20 +849,21 @@
                         <li><a href="index.html">Home</a></li>
                         <li><a href="services.html">Services</a></li>
                         <li><a href="vehicles.html">Vehicles</a></li>
+                        <li><a href="gadgets.html">Gadgets</a></li>
                         <li><a href="about.html">About Us</a></li>
                         <li><a href="contact.html">Contact</a></li>
-                        <li><a href="faq.html">FAQ</a></li>
                     </ul>
                 </div>
                 
                 <div class="footer-section">
                     <h3>Our Services</h3>
                     <ul class="footer-links">
-                        <li><a href="services.html#vehicles">Vehicle Import Services</a></li>
-                        <li><a href="services.html#gadgets">Gadgets & Electronics</a></li>
-                        <li><a href="services.html#it-support">IT Support Services</a></li>
-                        <li><a href="services.html#web-development">Web Development</a></li>
-                        <li><a href="services.html#mobile-apps">Mobile App Development</a></li>
+                        <li><a href="services.html#product-sourcing">Product Sourcing</a></li>
+                        <li><a href="services.html#it-support">IT Support</a></li>
+                        <li><a href="vehicles.html">Vehicle Import</a></li>
+                        <li><a href="gadgets.html">Gadget Import</a></li>
+                        <li><a href="services.html#web-dev">Web Development</a></li>
+                        <li><a href="services.html#consultation">IT Consultation</a></li>
                     </ul>
                 </div>
                 
@@ -899,11 +879,125 @@
             </div>
             
             <div class="copyright">
-                <p>&copy; 2025 Lumiminds Multi-Service Solutions. All rights reserved. | <a href="privacy.html">Privacy Policy</a> | <a href="terms.html">Terms of Service</a></p>
+                <p>&copy; 2025 LumiMinds Solutions. All rights reserved.</p>
             </div>
         </div>
     </footer>
 
-    <script src="script.js"></script>
+    <script>
+        // Mobile Menu Toggle
+        const mobileMenuBtn = document.querySelector('.mobile-menu-btn');
+        const mobileMenu = document.querySelector('.mobile-menu');
+        const mobileMenuClose = document.querySelector('.mobile-menu-close');
+        const mobileNavLinks = document.querySelectorAll('.mobile-nav-links a');
+
+        mobileMenuBtn.addEventListener('click', () => {
+            mobileMenu.classList.add('active');
+            document.body.style.overflow = 'hidden';
+        });
+
+        mobileMenuClose.addEventListener('click', () => {
+            mobileMenu.classList.remove('active');
+            document.body.style.overflow = 'auto';
+        });
+
+        mobileNavLinks.forEach(link => {
+            link.addEventListener('click', () => {
+                mobileMenu.classList.remove('active');
+                document.body.style.overflow = 'auto';
+            });
+        });
+
+        // Smooth scrolling
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                }
+            });
+        });
+
+        // Form submission handling
+        document.addEventListener('DOMContentLoaded', function() {
+            const forms = document.querySelectorAll('form');
+            forms.forEach(form => {
+                form.addEventListener('submit', function(e) {
+                    e.preventDefault();
+                    
+                    const submitBtn = this.querySelector('button[type="submit"]');
+                    if (submitBtn) {
+                        const originalText = submitBtn.innerHTML;
+                        submitBtn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Sending...';
+                        submitBtn.disabled = true;
+                        
+                        setTimeout(() => {
+                            alert('Thank you for your message! We will get back to you soon.');
+                            this.reset();
+                            submitBtn.innerHTML = originalText;
+                            submitBtn.disabled = false;
+                        }, 2000);
+                    }
+                });
+            });
+        });
+
+        // Counter animation for milestones
+        function animateCounters() {
+            const counters = document.querySelectorAll('.milestone-number');
+            const speed = 200; // The lower the slower
+            
+            counters.forEach(counter => {
+                const updateCount = () => {
+                    const target = +counter.getAttribute('data-target');
+                    const count = +counter.innerText;
+                    const increment = target / speed;
+                    
+                    if (count < target) {
+                        counter.innerText = Math.ceil(count + increment);
+                        setTimeout(updateCount, 1);
+                    } else {
+                        counter.innerText = target;
+                    }
+                };
+                
+                // Set initial values
+                const targetValue = counter.innerText;
+                counter.setAttribute('data-target', targetValue);
+                counter.innerText = '0';
+                
+                // Start animation when element is in viewport
+                const observer = new IntersectionObserver((entries) => {
+                    entries.forEach(entry => {
+                        if (entry.isIntersecting) {
+                            updateCount();
+                            observer.unobserve(entry.target);
+                        }
+                    });
+                });
+                
+                observer.observe(counter);
+            });
+        }
+
+        // Initialize counter animation when page loads
+        window.addEventListener('load', animateCounters);
+
+        // Navbar background on scroll
+        window.addEventListener('scroll', () => {
+            const header = document.querySelector('header');
+            if (window.scrollY > 100) {
+                header.style.background = 'rgba(255, 255, 255, 0.95)';
+                header.style.backdropFilter = 'blur(10px)';
+            } else {
+                header.style.background = 'var(--white)';
+                header.style.backdropFilter = 'none';
+            }
+        });
+    </script>
 </body>
 </html>

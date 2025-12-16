@@ -3,10 +3,628 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>LumiMinds Zambia</title>
-        <link rel="icon" type="image/x-icon" href="logo.png">
+    <title>Contact Us - LumiMinds Zambia</title>
+    <link rel="icon" type="image/x-icon" href="logo.png">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <link rel="stylesheet" href="styles.css">
+    <style>
+        /* Global Styles */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --primary: #3f88c5;
+            --primary-light: #e3f2fd;
+            --primary-dark: #1E3324;
+            --secondary: #D4AF37;
+            --text-dark: #1A1A1A;
+            --text-light: #666666;
+            --bg-light: #F8F9FA;
+            --bg-lighter: #FCFCFC;
+            --border: #E5E5E5;
+            --white: #FFFFFF;
+            --shadow: 0 4px 20px rgba(0,0,0,0.08);
+            --shadow-lg: 0 10px 40px rgba(0,0,0,0.12);
+        }
+
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+            line-height: 1.6;
+            color: var(--text-dark);
+            background-color: var(--white);
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        .btn {
+            padding: 0.75rem 1.5rem;
+            border-radius: 8px;
+            text-decoration: none;
+            font-weight: 500;
+            transition: all 0.3s;
+            border: none;
+            cursor: pointer;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .btn-primary {
+            background: var(--primary);
+            color: var(--white);
+        }
+
+        .btn-primary:hover {
+            background: var(--primary-dark);
+            transform: translateY(-2px);
+            box-shadow: var(--shadow);
+        }
+
+        .btn-outline {
+            border: 2px solid var(--primary);
+            color: var(--primary);
+            background: transparent;
+        }
+
+        .btn-outline:hover {
+            background: var(--primary);
+            color: var(--white);
+        }
+
+        .section-title {
+            text-align: center;
+            font-size: 2.5rem;
+            font-weight: 600;
+            margin-bottom: 1rem;
+        }
+
+        .section-subtitle {
+            text-align: center;
+            color: var(--text-light);
+            margin-bottom: 3rem;
+            font-size: 1.125rem;
+        }
+
+        /* Header Styles */
+        header {
+            background: var(--white);
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 1000;
+        }
+
+        .nav-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1rem 0;
+        }
+
+        .logo {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--primary);
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .logo-image {
+            height: 40px;
+            width: 40px;
+        }
+
+        .nav-links {
+            display: flex;
+            list-style: none;
+            gap: 2rem;
+        }
+
+        .nav-links a {
+            text-decoration: none;
+            color: var(--text-light);
+            font-weight: 400;
+            transition: color 0.3s;
+            position: relative;
+        }
+
+        .nav-links a:hover,
+        .nav-links a.active {
+            color: var(--primary);
+            font-weight: 500;
+        }
+
+        .nav-links a.active::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            width: 100%;
+            height: 2px;
+            background: var(--primary);
+        }
+
+        .mobile-menu-btn {
+            display: none;
+            background: none;
+            border: none;
+            font-size: 1.5rem;
+            color: var(--primary);
+            cursor: pointer;
+        }
+
+        /* Mobile Menu */
+        .mobile-menu {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: var(--white);
+            z-index: 2000;
+            transform: translateX(-100%);
+            transition: transform 0.3s ease;
+        }
+
+        .mobile-menu.active {
+            transform: translateX(0);
+        }
+
+        .mobile-menu-header {
+            padding: 1rem;
+            border-bottom: 1px solid var(--border);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .mobile-menu-close {
+            background: none;
+            border: none;
+            font-size: 1.5rem;
+            cursor: pointer;
+        }
+
+        .mobile-nav-links {
+            list-style: none;
+            padding: 2rem;
+        }
+
+        .mobile-nav-links li {
+            margin-bottom: 1rem;
+        }
+
+        .mobile-nav-links a {
+            text-decoration: none;
+            color: var(--text-dark);
+            font-size: 1.125rem;
+            display: block;
+            padding: 0.5rem 0;
+        }
+
+        /* Page Header */
+        .page-header {
+            padding: 140px 0 60px;
+            background: linear-gradient(135deg, var(--primary-light) 0%, #e3f2fd 100%);
+            color: var(--text-dark);
+            text-align: center;
+        }
+
+        .page-header h1 {
+            font-size: 3rem;
+            font-weight: 700;
+            margin-bottom: 1rem;
+        }
+
+        .page-header p {
+            font-size: 1.2rem;
+            opacity: 0.9;
+        }
+
+        /* Contact Methods */
+        .contact-methods {
+            padding: 80px 0;
+        }
+
+        .methods-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+        }
+
+        .method-card {
+            background: var(--white);
+            padding: 2rem;
+            border-radius: 12px;
+            text-align: center;
+            box-shadow: var(--shadow);
+            transition: transform 0.3s ease;
+            border-top: 4px solid var(--primary);
+        }
+
+        .method-card:hover {
+            transform: translateY(-5px);
+        }
+
+        .method-icon {
+            width: 80px;
+            height: 80px;
+            background: rgba(63, 136, 197, 0.1);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 1.5rem;
+            color: var(--primary);
+            font-size: 2rem;
+        }
+
+        .method-info {
+            margin: 1.5rem 0;
+        }
+
+        .method-info h3 {
+            margin-bottom: 0.5rem;
+        }
+
+        .contact-detail {
+            font-weight: 600;
+            margin: 0.5rem 0;
+            color: var(--text-dark);
+        }
+
+        .contact-note {
+            color: var(--text-light);
+            font-size: 0.875rem;
+            margin-top: 0.5rem;
+        }
+
+        /* Contact Form Section */
+        .contact-form-section {
+            padding: 80px 0;
+            background: var(--bg-light);
+        }
+
+        .contact-content {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 4rem;
+        }
+
+        .contact-info {
+            padding-right: 2rem;
+        }
+
+        .contact-badge {
+            background: var(--secondary);
+            color: var(--white);
+            padding: 0.5rem 1rem;
+            border-radius: 25px;
+            font-weight: 600;
+            display: inline-block;
+            margin-bottom: 1rem;
+            font-size: 0.875rem;
+        }
+
+        .contact-title {
+            font-size: 2.5rem;
+            font-weight: 600;
+            margin-bottom: 1.5rem;
+        }
+
+        .contact-description {
+            color: var(--text-light);
+            margin-bottom: 2rem;
+            line-height: 1.6;
+        }
+
+        .contact-details {
+            margin-bottom: 2rem;
+        }
+
+        .contact-detail-item {
+            margin-bottom: 2rem;
+        }
+
+        .contact-detail-title {
+            font-weight: 600;
+            margin-bottom: 0.5rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .contact-detail-content {
+            color: var(--text-light);
+            line-height: 1.6;
+        }
+
+        .quick-actions {
+            margin-top: 2rem;
+        }
+
+        .quick-actions h3 {
+            margin-bottom: 1rem;
+        }
+
+        .action-buttons {
+            display: flex;
+            gap: 0.5rem;
+            flex-wrap: wrap;
+        }
+
+        /* Form Styles */
+        .contact-form {
+            background: var(--white);
+            padding: 2.5rem;
+            border-radius: 12px;
+            border: 1px solid var(--border);
+            box-shadow: var(--shadow);
+        }
+
+        .form-title {
+            font-size: 1.5rem;
+            font-weight: 600;
+            margin-bottom: 0.5rem;
+        }
+
+        .form-subtitle {
+            color: var(--text-light);
+            margin-bottom: 2rem;
+        }
+
+        .form-row {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 1rem;
+        }
+
+        .form-group {
+            margin-bottom: 1.5rem;
+        }
+
+        .form-label {
+            display: block;
+            margin-bottom: 0.5rem;
+            font-weight: 500;
+        }
+
+        .form-input,
+        .form-select,
+        .form-textarea {
+            width: 100%;
+            padding: 1rem;
+            border: 1px solid var(--border);
+            border-radius: 8px;
+            background: var(--bg-light);
+            font-family: inherit;
+            font-size: 1rem;
+            transition: border-color 0.3s;
+        }
+
+        .form-input:focus,
+        .form-select:focus,
+        .form-textarea:focus {
+            outline: none;
+            border-color: var(--primary);
+        }
+
+        .form-textarea {
+            resize: vertical;
+            min-height: 120px;
+        }
+
+        .form-select {
+            appearance: none;
+            background-image: url("data:image/svg+xml;charset=UTF-8,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='currentColor' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3e%3cpolyline points='6 9 12 15 18 9'%3e%3c/polyline%3e%3c/svg%3e");
+            background-repeat: no-repeat;
+            background-position: right 1rem center;
+            background-size: 1em;
+        }
+
+        .checkbox-label {
+            display: flex;
+            align-items: flex-start;
+            gap: 0.5rem;
+            font-size: 0.875rem;
+            cursor: pointer;
+        }
+
+        .checkbox-label input {
+            margin-top: 0.25rem;
+        }
+
+        .btn-full {
+            width: 100%;
+            justify-content: center;
+        }
+
+        /* FAQ Section */
+        .faq-section {
+            padding: 80px 0;
+        }
+
+        .faq-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            margin-bottom: 3rem;
+        }
+
+        .faq-item {
+            background: var(--white);
+            padding: 1.5rem;
+            border-radius: 8px;
+            box-shadow: var(--shadow);
+        }
+
+        .faq-item h3 {
+            font-size: 1.125rem;
+            margin-bottom: 0.5rem;
+            color: var(--text-dark);
+        }
+
+        .faq-item p {
+            color: var(--text-light);
+        }
+
+        /* CTA Section */
+        .cta {
+            padding: 80px 0;
+            background: var(--white);
+            color: var(--text-dark);
+            text-align: center;
+        }
+
+        .cta h2 {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+        }
+
+        .cta p {
+            font-size: 1.125rem;
+            margin-bottom: 2rem;
+            opacity: 0.9;
+        }
+
+        .cta-buttons {
+            display: flex;
+            gap: 1rem;
+            justify-content: center;
+        }
+
+        /* Footer */
+        footer {
+            background: var(--text-dark);
+            color: var(--white);
+            padding: 3rem 0;
+        }
+
+        .footer-content {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+        }
+
+        .footer-section h3 {
+            margin-bottom: 1rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .footer-links {
+            list-style: none;
+        }
+
+        .footer-links li {
+            margin-bottom: 0.5rem;
+        }
+
+        .footer-links a {
+            color: #ccc;
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+
+        .footer-links a:hover {
+            color: var(--white);
+        }
+
+        .social-links {
+            display: flex;
+            gap: 1rem;
+            margin-top: 1rem;
+        }
+
+        .social-links a {
+            width: 40px;
+            height: 40px;
+            background: rgba(255,255,255,0.1);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--white);
+            text-decoration: none;
+            transition: background 0.3s;
+        }
+
+        .social-links a:hover {
+            background: var(--primary);
+        }
+
+        .copyright {
+            text-align: center;
+            margin-top: 3rem;
+            padding-top: 2rem;
+            border-top: 1px solid #444;
+            color: #ccc;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .nav-links {
+                display: none;
+            }
+
+            .mobile-menu-btn {
+                display: block;
+            }
+
+            .page-header h1 {
+                font-size: 2.5rem;
+            }
+
+            .contact-content {
+                grid-template-columns: 1fr;
+                gap: 2rem;
+            }
+
+            .contact-info {
+                padding-right: 0;
+            }
+
+            .form-row {
+                grid-template-columns: 1fr;
+            }
+
+            .methods-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .cta-buttons {
+                flex-direction: column;
+            }
+
+            .section-title {
+                font-size: 2rem;
+            }
+        }
+
+        .text-center {
+            text-align: center;
+        }
+
+        .btn-large {
+            padding: 1rem 2rem;
+            font-size: 1rem;
+        }
+
+        .btn-sm {
+            padding: 0.5rem 1rem;
+            font-size: 0.875rem;
+        }
+    </style>
 </head>
 <body>
     <!-- Header -->
@@ -18,15 +636,14 @@
                     LumiMinds
                 </a>
                 
-                <ul class="nav-links">
-                    <li><a href="index.html" >Home</a></li>
-                    <li><a href="services.html">Services</a></li>
-                    <li><a href="vehicles.html">Vehicles</a></li>
-                    <li><a href="about.html">About</a></li>
-                    <li><a href="contact.html" class="active">Contact</a></li>
-                </ul>
                 
-
+                <ul class="nav-links">
+                    <li><a href="index.html">Home</a></li>
+                    <li><a href="services.html">Services</a></li>
+                    <li><a href="work.html" >Our Works</a></li>
+                    <li><a href="about.html">About</a></li>
+                    <li><a href="contact.html"class="active">Contact</a></li>
+                </ul>
                 
                 <button class="mobile-menu-btn">
                     <i class="fas fa-bars"></i>
@@ -50,17 +667,17 @@
             <li><a href="index.html">Home</a></li>
             <li><a href="services.html">Services</a></li>
             <li><a href="vehicles.html">Vehicles</a></li>
+            <li><a href="gadgets.html">Gadgets</a></li>
             <li><a href="about.html">About</a></li>
             <li><a href="contact.html" class="active">Contact</a></li>
         </ul>
-
     </div>
 
     <!-- Page Header -->
     <section class="page-header">
         <div class="container">
-            <h1>Contact Us</h1>
-            <p>Get in touch with our team for personalized vehicle import assistance</p>
+            <h1>Contact LumiMinds</h1>
+            <p>Get in touch with us for all your business solution needs</p>
         </div>
     </section>
 
@@ -72,14 +689,15 @@
             <div class="contact-content">
                 <div class="contact-info">
                     <div class="contact-badge">GET PERSONALIZED ASSISTANCE</div>
-                    <h2 class="contact-title">Let's Discuss Your Vehicle Import Needs</h2>
+                    <h2 class="contact-title">Let's Discuss Your Requirements</h2>
                     <p class="contact-description">
-                        Whether you're looking for a specific model, need guidance on the import process, or want to compare options, 
-                        our team is here to help. Fill out the form and we'll provide you with a comprehensive solution.
+                        Whether you're looking to import a vehicle, source gadgets, need IT solutions, 
+                        or have any other business requirements, our team is ready to assist you. 
+                        Fill out the form and we'll provide you with a comprehensive solution.
                     </p>
                     
                     <div class="contact-details">
-                        <div class="contact-detail">
+                        <div class="contact-detail-item">
                             <div class="contact-detail-title">
                                 <i class="fas fa-clock"></i>
                                 Business Hours
@@ -91,27 +709,25 @@
                             </div>
                         </div>
                         
-                        <div class="contact-detail">
+                        <div class="contact-detail-item">
                             <div class="contact-detail-title">
                                 <i class="fas fa-map-marker-alt"></i>
                                 Our Location
                             </div>
                             <div class="contact-detail-content">
-                                Mushili Rd, Mine Masala<br>
-                                Ndola, Zambia<br>
-                                
+                                45 mwasumina Itawa<br>
+                                Ndola, Zambia
                             </div>
                         </div>
                         
-                        <div class="contact-detail">
+                        <div class="contact-detail-item">
                             <div class="contact-detail-title">
                                 <i class="fas fa-phone"></i>
-                                Phone Numbers
+                                Emergency Contact
                             </div>
                             <div class="contact-detail-content">
-                                <div>Main: +260969820643</div>
-                                <div>Support: +260762706892</div>
-                       
+                                For urgent matters outside business hours:<br>
+                                +260 969 820 643
                             </div>
                         </div>
                     </div>
@@ -122,18 +738,18 @@
                             <button class="btn btn-outline btn-sm" onclick="location.href='vehicles.html'">
                                 <i class="fas fa-car"></i> Browse Vehicles
                             </button>
-                            <button class="btn btn-outline btn-sm" onclick="location.href='services.html'">
-                                <i class="fas fa-cog"></i> View Services
+                            <button class="btn btn-outline btn-sm" onclick="location.href='gadgets.html'">
+                                <i class="fas fa-laptop"></i> View Gadgets
                             </button>
-                            <button class="btn btn-outline btn-sm" onclick="location.href='faq.html'">
-                                <i class="fas fa-question-circle"></i> FAQ
+                            <button class="btn btn-outline btn-sm" onclick="location.href='services.html'">
+                                <i class="fas fa-cog"></i> Our Services
                             </button>
                         </div>
                     </div>
                 </div>
                 
                 <div class="contact-form">
-                    <h3 class="form-title">Get a Free Consultation</h3>
+                    <h3 class="form-title">Send Us a Message</h3>
                     <p class="form-subtitle">Fill out the form below and we'll get back to you within 2 hours</p>
                     
                     <form id="contactForm">
@@ -154,8 +770,18 @@
                             <input type="email" class="form-input" placeholder="Enter your email address" required>
                         </div>
 
-                            
-
+                        <div class="form-group">
+                            <label class="form-label">Service Interested In *</label>
+                            <select class="form-select" required>
+                                <option value="">Select a service...</option>
+                                <option value="vehicle-import">Vehicle Import</option>
+                                <option value="gadget-import">Gadget Import</option>
+                                <option value="web-development">Web Development</option>
+                                <option value="it-consultation">IT Consultation</option>
+                                <option value="multiple">Multiple Services</option>
+                                <option value="other">Other</option>
+                            </select>
+                        </div>
                         
                         <div class="form-group">
                             <label class="form-label">How did you hear about us?</label>
@@ -171,14 +797,14 @@
                         
                         <div class="form-group">
                             <label class="form-label">Message *</label>
-                            <textarea class="form-textarea" placeholder="Tell us about your vehicle import requirements, specific models you're interested in, or any questions you have..." required></textarea>
+                            <textarea class="form-textarea" placeholder="Tell us about your requirements, specific products you're interested in, or any questions you have..." required></textarea>
                         </div>
                         
                         <div class="form-group">
                             <label class="checkbox-label">
                                 <input type="checkbox" required>
                                 <span class="checkmark"></span>
-                                I agree to receive communications from Lumiminds regarding my vehicle import inquiry
+                                I agree to receive communications from LumiMinds regarding my inquiry
                             </label>
                         </div>
                         
@@ -191,40 +817,63 @@
         </div>
     </section>
 
-    <!-- FAQ Preview -->
-    <section class="faq-preview">
+    <!-- FAQ Section -->
+    <section class="faq-section">
         <div class="container">
             <h2 class="section-title">Frequently Asked Questions</h2>
             <p class="section-subtitle">Quick answers to common questions</p>
             
             <div class="faq-grid">
                 <div class="faq-item">
-                    <h3>How long does the import process take?</h3>
-                    <p>The complete process typically takes 4-6 weeks from vehicle selection to delivery, depending on the source country and shipping method.</p>
+                    <h3>What is your response time?</h3>
+                    <p>We respond to all inquiries within 2 hours during business hours (Monday-Friday, 8AM-6PM).</p>
                 </div>
                 
                 <div class="faq-item">
-                    <h3>What documents do I need?</h3>
-                    <p>We handle most documentation. You'll mainly need a valid ID, proof of address, and import duty payment. We guide you through everything.</p>
+                    <h3>Do you provide free consultations?</h3>
+                    <p>Yes! We offer free initial consultations for all our services to understand your requirements.</p>
                 </div>
                 
                 <div class="faq-item">
-                    <h3>Can I inspect the vehicle before purchase?</h3>
-                    <p>Yes! We provide detailed inspection reports, photos, and can arrange video calls for virtual inspections before you commit.</p>
+                    <h3>What payment methods do you accept?</h3>
+                    <p>We accept bank transfers, mobile money (Zambia), and other secure payment methods.</p>
                 </div>
                 
                 <div class="faq-item">
-                    <h3>What about warranty and after-sales support?</h3>
-                    <p>We offer 3-month aftercare support and can help source spare parts. Many vehicles come with remaining manufacturer warranty.</p>
+                    <h3>Can you source custom products?</h3>
+                    <p>Absolutely! We can source any vehicle, gadget, or product based on your specific requirements.</p>
                 </div>
-            </div>
-            
-            <div class="text-center">
-                <button class="btn btn-outline" onclick="location.href='faq.html'">View All FAQs</button>
+                
+                <div class="faq-item">
+                    <h3>What is your service area?</h3>
+                    <p>We serve all of Zambia with our main office in Ndola.</p>
+                </div>
+                
+                <div class="faq-item">
+                    <h3>Do you offer after-sales support?</h3>
+                    <p>Yes, we provide comprehensive after-sales support for all our products and services.</p>
+                </div>
             </div>
         </div>
     </section>
 
+    <!-- CTA Section -->
+    <section class="cta">
+        <div class="container">
+            <div class="cta-content">
+                <h2>Ready to Start Your Project?</h2>
+                <p>Contact us today and let's discuss how we can help your business grow</p>
+                <div class="cta-buttons">
+                    <button class="btn btn-outline btn-large" onclick="location.href='tel:+260969820643'">
+                        <i class="fas fa-phone"></i> Call Now
+                    </button>
+                    <button class="btn btn-primary btn-large" onclick="location.href='mailto:lumimindszambia@gmail.com'">
+                        <i class="fas fa-envelope"></i> Email Us
+                    </button>
+                </div>
+            </div>
+        </div>
+    </section>
 
     <!-- Footer -->
     <footer>
@@ -232,10 +881,10 @@
             <div class="footer-content">
                 <div class="footer-section">
                     <h3>
-                        <i class="fas fa-car-side"></i>
-                        Lumiminds
+                        <i class="fas fa-lightbulb"></i>
+                        LumiMinds
                     </h3>
-                    <p>Your trusted partner for premium vehicle import solutions. We bring global automotive excellence to your doorstep with complete transparency and professional service.</p>
+                    <p>Your trusted partner for comprehensive business solutions including product sourcing and IT services.</p>
                     <div class="social-links">
                         <a href="#"><i class="fab fa-facebook"></i></a>
                         <a href="#"><i class="fab fa-twitter"></i></a>
@@ -251,41 +900,199 @@
                         <li><a href="index.html">Home</a></li>
                         <li><a href="services.html">Services</a></li>
                         <li><a href="vehicles.html">Vehicles</a></li>
+                        <li><a href="gadgets.html">Gadgets</a></li>
                         <li><a href="about.html">About Us</a></li>
                         <li><a href="contact.html">Contact</a></li>
-                        <li><a href="faq.html">FAQ</a></li>
                     </ul>
                 </div>
                 
                 <div class="footer-section">
                     <h3>Our Services</h3>
                     <ul class="footer-links">
-                        <li><a href="services.html#sourcing">Vehicle Sourcing</a></li>
-                        <li><a href="services.html#inspection">Quality Inspection</a></li>
-                        <li><a href="services.html#shipping">Shipping & Logistics</a></li>
-                        <li><a href="services.html#customs">Customs Clearance</a></li>
-                        <li><a href="services.html#delivery">Final Delivery</a></li>
-                        <li><a href="services.html#aftercare">Aftercare Support</a></li>
+                        <li><a href="services.html#product-sourcing">Product Sourcing</a></li>
+                        <li><a href="services.html#it-support">IT Support</a></li>
+                        <li><a href="vehicles.html">Vehicle Import</a></li>
+                        <li><a href="gadgets.html">Gadget Import</a></li>
+                        <li><a href="services.html#web-dev">Web Development</a></li>
+                        <li><a href="services.html#consultation">IT Consultation</a></li>
                     </ul>
                 </div>
                 
                 <div class="footer-section">
                     <h3>Contact Info</h3>
                     <ul class="footer-links">
-                        <li><i class="fas fa-map-marker-alt"></i> 📍 Musili Rd, Mine Masala, Ndola, Zambia</li>
-                        <li><i class="fas fa-envelope"></i> 📧 lumimindszambia@gmail.com</li>
-                        <li><i class="fas fa-phone"></i> 📞 +260969820643</li>
-                        <li><i class="fas fa-clock"></i> 🕒 Mon-Fri: 8AM-6PM, Sat: 9AM-1PM</li>
+                        <li><i class="fas fa-map-marker-alt"></i> 45 mwasumina Itawa, Ndola, Zambia</li>
+                        <li><i class="fas fa-envelope"></i> lumimindszambia@gmail.com</li>
+                        <li><i class="fas fa-phone"></i> +260 969 820 643</li>
+                        <li><i class="fas fa-clock"></i> Mon-Fri: 8AM-6PM, Sat: 9AM-1PM</li>
                     </ul>
                 </div>
             </div>
             
             <div class="copyright">
-                <p>&copy; 2025 Lumiminds Vehicle Import Solutions. All rights reserved. | <a href="privacy.html">Privacy Policy</a> | <a href="terms.html">Terms of Service</a></p>
+                <p>&copy; 2025 LumiMinds Solutions. All rights reserved.</p>
             </div>
         </div>
     </footer>
 
-    <script src="script.js"></script>
+    <script>
+        // Mobile Menu Toggle
+        const mobileMenuBtn = document.querySelector('.mobile-menu-btn');
+        const mobileMenu = document.querySelector('.mobile-menu');
+        const mobileMenuClose = document.querySelector('.mobile-menu-close');
+        const mobileNavLinks = document.querySelectorAll('.mobile-nav-links a');
+
+        mobileMenuBtn.addEventListener('click', () => {
+            mobileMenu.classList.add('active');
+            document.body.style.overflow = 'hidden';
+        });
+
+        mobileMenuClose.addEventListener('click', () => {
+            mobileMenu.classList.remove('active');
+            document.body.style.overflow = 'auto';
+        });
+
+        mobileNavLinks.forEach(link => {
+            link.addEventListener('click', () => {
+                mobileMenu.classList.remove('active');
+                document.body.style.overflow = 'auto';
+            });
+        });
+
+        // Form submission handling
+        document.getElementById('contactForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            // Show loading state
+            const submitBtn = this.querySelector('button[type="submit"]');
+            const originalText = submitBtn.innerHTML;
+            submitBtn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Sending...';
+            submitBtn.disabled = true;
+            
+            // Simulate form submission
+            setTimeout(() => {
+                alert('Thank you for your message! We will get back to you within 2 hours.');
+                this.reset();
+                submitBtn.innerHTML = originalText;
+                submitBtn.disabled = false;
+            }, 2000);
+        });
+
+        // Get URL parameters for pre-filled form
+        document.addEventListener('DOMContentLoaded', function() {
+            const urlParams = new URLSearchParams(window.location.search);
+            const vehicle = urlParams.get('vehicle');
+            const product = urlParams.get('product');
+            
+            if (vehicle) {
+                const messageTextarea = document.querySelector('.form-textarea');
+                messageTextarea.value = `I'm interested in importing the following vehicle: ${vehicle}\n\n`;
+            }
+            
+            if (product) {
+                const messageTextarea = document.querySelector('.form-textarea');
+                messageTextarea.value = `I'm interested in the following product: ${product}\n\n`;
+            }
+        });
+
+        // Map function
+        function openMap() {
+            alert('Opening directions to our location in Google Maps...');
+            // In a real implementation, this would open actual maps
+            // window.open('https://maps.google.com/?q=45+mwasumina+Itawa+Ndola+Zambia', '_blank');
+        }
+
+        // Smooth scrolling
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                }
+            });
+        });
+
+        // Navbar background on scroll
+        window.addEventListener('scroll', () => {
+            const header = document.querySelector('header');
+            if (window.scrollY > 100) {
+                header.style.background = 'rgba(255, 255, 255, 0.95)';
+                header.style.backdropFilter = 'blur(10px)';
+            } else {
+                header.style.background = 'var(--white)';
+                header.style.backdropFilter = 'none';
+            }
+        });
+
+        // Form validation enhancement
+        const contactForm = document.getElementById('contactForm');
+        const formInputs = contactForm.querySelectorAll('input, textarea, select');
+
+        formInputs.forEach(input => {
+            input.addEventListener('blur', function() {
+                validateField(this);
+            });
+
+            input.addEventListener('focus', function() {
+                clearValidation(this);
+            });
+        });
+
+        function validateField(field) {
+            clearValidation(field);
+            
+            if (field.hasAttribute('required') && !field.value.trim()) {
+                showError(field, 'This field is required');
+                return false;
+            }
+            
+            if (field.type === 'email' && field.value) {
+                const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+                if (!emailRegex.test(field.value)) {
+                    showError(field, 'Please enter a valid email address');
+                    return false;
+                }
+            }
+            
+            if (field.type === 'tel' && field.value) {
+                const phoneRegex = /^[\+]?[0-9\s\-\(\)]+$/;
+                if (!phoneRegex.test(field.value)) {
+                    showError(field, 'Please enter a valid phone number');
+                    return false;
+                }
+            }
+            
+            return true;
+        }
+
+        function showError(field, message) {
+            field.style.borderColor = '#e74c3c';
+            
+            let errorElement = field.parentNode.querySelector('.error-message');
+            if (!errorElement) {
+                errorElement = document.createElement('div');
+                errorElement.className = 'error-message';
+                errorElement.style.color = '#e74c3c';
+                errorElement.style.fontSize = '0.875rem';
+                errorElement.style.marginTop = '0.25rem';
+                field.parentNode.appendChild(errorElement);
+            }
+            
+            errorElement.textContent = message;
+        }
+
+        function clearValidation(field) {
+            field.style.borderColor = '';
+            
+            const errorElement = field.parentNode.querySelector('.error-message');
+            if (errorElement) {
+                errorElement.remove();
+            }
+        }
+    </script>
 </body>
 </html>

@@ -3,108 +3,342 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>LumiMinds Zambia - Services</title>
+    <title>Our Services - LumiMinds Zambia</title>
     <link rel="icon" type="image/x-icon" href="logo.png">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <link rel="stylesheet" href="styles.css">
     <style>
-        /* Service Category Tabs */
-        .service-categories {
-            display: flex;
-            justify-content: center;
-            flex-wrap: wrap;
-            gap: 1rem;
-            margin: 3rem 0;
+        /* Global Styles */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
         }
-        
-        .category-tab {
-            padding: 1rem 2rem;
-            background: var(--white);
-            border: 2px solid var(--primary);
-            border-radius: 50px;
-            color: var(--primary);
-            font-weight: 600;
+
+        :root {
+            --primary: #3f88c5;
+            --primary-light: #e3f2fd;
+            --primary-dark: #1E3324;
+            --secondary: #D4AF37;
+            --text-dark: #1A1A1A;
+            --text-light: #666666;
+            --bg-light: #F8F9FA;
+            --bg-lighter: #FCFCFC;
+            --border: #E5E5E5;
+            --white: #FFFFFF;
+            --shadow: 0 4px 20px rgba(0,0,0,0.08);
+            --shadow-lg: 0 10px 40px rgba(0,0,0,0.12);
+        }
+
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+            line-height: 1.6;
+            color: var(--text-dark);
+            background-color: var(--white);
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        .btn {
+            padding: 0.75rem 1.5rem;
+            border-radius: 8px;
+            text-decoration: none;
+            font-weight: 500;
+            transition: all 0.3s;
+            border: none;
             cursor: pointer;
-            transition: all 0.3s ease;
-            display: flex;
+            display: inline-flex;
             align-items: center;
             gap: 0.5rem;
-            box-shadow: var(--shadow);
         }
-        
-        .category-tab:hover {
-            background: var(--primary-light);
-            transform: translateY(-2px);
-        }
-        
-        .category-tab.active {
+
+        .btn-primary {
             background: var(--primary);
             color: var(--white);
         }
-        
-        .category-tab i {
-            font-size: 1.2rem;
+
+        .btn-primary:hover {
+            background: var(--primary-dark);
+            transform: translateY(-2px);
+            box-shadow: var(--shadow);
         }
-        
-        /* Service Category Content */
-        .service-category-content {
-            display: none;
-            animation: fadeIn 0.5s ease;
+
+        .btn-outline {
+            border: 2px solid var(--primary);
+            color: var(--primary);
+            background: transparent;
         }
-        
-        .service-category-content.active {
-            display: block;
+
+        .btn-outline:hover {
+            background: var(--primary);
+            color: var(--white);
         }
-        
-        @keyframes fadeIn {
-            from { opacity: 0; transform: translateY(20px); }
-            to { opacity: 1; transform: translateY(0); }
-        }
-        
-        .category-header {
+
+        .section-title {
             text-align: center;
-            margin-bottom: 3rem;
-        }
-        
-        .category-title {
             font-size: 2.5rem;
             font-weight: 600;
             margin-bottom: 1rem;
+        }
+
+        .section-subtitle {
+            text-align: center;
+            color: var(--text-light);
+            margin-bottom: 3rem;
+            font-size: 1.125rem;
+        }
+
+        /* Header Styles */
+        header {
+            background: var(--white);
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 1000;
+        }
+
+        .nav-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1rem 0;
+        }
+
+        .logo {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--primary);
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .logo-image {
+            height: 40px;
+            width: 40px;
+        }
+
+        .nav-links {
+            display: flex;
+            list-style: none;
+            gap: 2rem;
+        }
+
+        .nav-links a {
+            text-decoration: none;
+            color: var(--text-light);
+            font-weight: 400;
+            transition: color 0.3s;
+            position: relative;
+        }
+
+        .nav-links a:hover,
+        .nav-links a.active {
+            color: var(--primary);
+            font-weight: 500;
+        }
+
+        .nav-links a.active::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            width: 100%;
+            height: 2px;
+            background: var(--primary);
+        }
+
+        .mobile-menu-btn {
+            display: none;
+            background: none;
+            border: none;
+            font-size: 1.5rem;
+            color: var(--primary);
+            cursor: pointer;
+        }
+
+        /* Mobile Menu */
+        .mobile-menu {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: var(--white);
+            z-index: 2000;
+            transform: translateX(-100%);
+            transition: transform 0.3s ease;
+        }
+
+        .mobile-menu.active {
+            transform: translateX(0);
+        }
+
+        .mobile-menu-header {
+            padding: 1rem;
+            border-bottom: 1px solid var(--border);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .mobile-menu-close {
+            background: none;
+            border: none;
+            font-size: 1.5rem;
+            cursor: pointer;
+        }
+
+        .mobile-nav-links {
+            list-style: none;
+            padding: 2rem;
+        }
+
+        .mobile-nav-links li {
+            margin-bottom: 1rem;
+        }
+
+        .mobile-nav-links a {
+            text-decoration: none;
+            color: var(--text-dark);
+            font-size: 1.125rem;
+            display: block;
+            padding: 0.5rem 0;
+        }
+
+        /* Page Header */
+        .page-header {
+            padding: 140px 0 60px;
+            background: linear-gradient(135deg, var(--primary-light) 0%, #e3f2fd 100%);
+            color: var(--text-dark);
+            text-align: center;
+        }
+
+        .page-header h1 {
+            font-size: 3rem;
+            font-weight: 700;
+            margin-bottom: 1rem;
+        }
+
+        .page-header p {
+            font-size: 1.2rem;
+            opacity: 0.9;
+        }
+
+        /* Services Categories */
+        .services-categories {
+            padding: 40px 0;
+            background: var(--bg-light);
+            border-bottom: 1px solid var(--border);
+        }
+
+        .category-tabs {
+            display: flex;
+            justify-content: center;
+            gap: 1rem;
+            flex-wrap: wrap;
+        }
+
+        .category-tab {
+            padding: 0.75rem 2rem;
+            background: var(--white);
+            border: 2px solid var(--border);
+            border-radius: 8px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .category-tab:hover {
+            border-color: var(--primary);
             color: var(--primary);
         }
-        
-        .category-description {
-            font-size: 1.2rem;
+
+        .category-tab.active {
+            background: var(--primary);
+            color: var(--white);
+            border-color: var(--primary);
+        }
+
+        /* Services Section */
+        .services-section {
+            display: none;
+            padding: 80px 0;
+            animation: fadeIn 0.5s ease;
+        }
+
+        .services-section.active {
+            display: block;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+        .service-category-card {
+            background: var(--white);
+            border-radius: 12px;
+            padding: 2rem;
+            margin-bottom: 3rem;
+            box-shadow: var(--shadow);
+        }
+
+        .service-category-header {
+            text-align: center;
+            margin-bottom: 2rem;
+            padding-bottom: 1.5rem;
+            border-bottom: 2px solid var(--bg-light);
+        }
+
+        .service-category-icon {
+            width: 80px;
+            height: 80px;
+            background: rgba(63, 136, 197, 0.1);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 1.5rem;
+            color: var(--primary);
+            font-size: 2rem;
+        }
+
+        .service-category-description {
             color: var(--text-light);
             max-width: 600px;
             margin: 0 auto;
         }
-        
-        /* Service Grid */
-        .services-grid {
+
+        .service-subcategories {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
-            gap: 2rem;
-            margin-bottom: 4rem;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 1.5rem;
+            margin-bottom: 2rem;
         }
-        
+
         .service-card {
-            background: var(--white);
-            padding: 2rem;
-            border-radius: 12px;
-            box-shadow: var(--shadow);
-            border-left: 4px solid var(--primary);
+            background: var(--bg-lighter);
+            padding: 1.5rem;
+            border-radius: 8px;
+            border-left: 3px solid var(--primary);
             transition: transform 0.3s ease;
         }
-        
+
         .service-card:hover {
             transform: translateY(-5px);
+            box-shadow: var(--shadow);
         }
-        
+
         .service-icon {
             width: 60px;
             height: 60px;
-            background: rgba(45, 74, 50, 0.1);
+            background: rgba(63, 136, 197, 0.1);
             border-radius: 12px;
             display: flex;
             align-items: center;
@@ -113,52 +347,226 @@
             color: var(--primary);
             font-size: 1.5rem;
         }
-        
+
         .service-card h3 {
-            font-size: 1.5rem;
+            font-size: 1.25rem;
+            margin-bottom: 0.75rem;
+        }
+
+        .service-card p {
+            color: var(--text-light);
             margin-bottom: 1rem;
         }
-        
+
         .service-features {
             list-style: none;
-            margin: 1.5rem 0;
+            margin: 1rem 0;
         }
-        
+
         .service-features li {
             display: flex;
             align-items: center;
             gap: 0.5rem;
             margin-bottom: 0.5rem;
+            font-size: 0.9rem;
         }
-        
+
         .service-features i {
             color: var(--primary);
         }
-        
-        .service-time {
+
+        /* Process Timeline */
+        .process-timeline {
+            padding: 80px 0;
+            background: var(--bg-light);
+        }
+
+        .timeline {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .timeline-item {
+            display: flex;
+            align-items: flex-start;
+            gap: 2rem;
+            margin-bottom: 3rem;
+            position: relative;
+        }
+
+        .timeline-item:not(:last-child)::after {
+            content: '';
+            position: absolute;
+            left: 25px;
+            top: 60px;
+            bottom: -3rem;
+            width: 2px;
+            background: var(--border);
+        }
+
+        .timeline-number {
+            width: 50px;
+            height: 50px;
+            background: var(--primary);
+            color: var(--white);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 700;
+            flex-shrink: 0;
+        }
+
+        .timeline-content h3 {
+            font-size: 1.25rem;
+            margin-bottom: 0.5rem;
+        }
+
+        /* CTA Section */
+        .cta {
+            padding: 80px 0;
+            background: var(--white);
+            color: var(--text-dark);
+            text-align: center;
+        }
+
+        .cta h2 {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+        }
+
+        .cta p {
+            font-size: 1.125rem;
+            margin-bottom: 2rem;
+            opacity: 0.9;
+        }
+
+        .cta-buttons {
+            display: flex;
+            gap: 1rem;
+            justify-content: center;
+        }
+
+        /* Footer */
+        footer {
+            background: var(--text-dark);
+            color: var(--white);
+            padding: 3rem 0;
+        }
+
+        .footer-content {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+        }
+
+        .footer-section h3 {
+            margin-bottom: 1rem;
             display: flex;
             align-items: center;
             gap: 0.5rem;
-            color: var(--text-light);
-            font-size: 0.875rem;
         }
-        
+
+        .footer-links {
+            list-style: none;
+        }
+
+        .footer-links li {
+            margin-bottom: 0.5rem;
+        }
+
+        .footer-links a {
+            color: #ccc;
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+
+        .footer-links a:hover {
+            color: var(--white);
+        }
+
+        .social-links {
+            display: flex;
+            gap: 1rem;
+            margin-top: 1rem;
+        }
+
+        .social-links a {
+            width: 40px;
+            height: 40px;
+            background: rgba(255,255,255,0.1);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--white);
+            text-decoration: none;
+            transition: background 0.3s;
+        }
+
+        .social-links a:hover {
+            background: var(--primary);
+        }
+
+        .copyright {
+            text-align: center;
+            margin-top: 3rem;
+            padding-top: 2rem;
+            border-top: 1px solid #444;
+            color: #ccc;
+        }
+
         /* Responsive Design */
         @media (max-width: 768px) {
-            .service-categories {
+            .nav-links {
+                display: none;
+            }
+
+            .mobile-menu-btn {
+                display: block;
+            }
+
+            .page-header h1 {
+                font-size: 2.5rem;
+            }
+
+            .category-tabs {
                 flex-direction: column;
                 align-items: center;
             }
-            
+
             .category-tab {
                 width: 100%;
                 max-width: 300px;
-                justify-content: center;
+                text-align: center;
             }
-            
-            .services-grid {
+
+            .service-subcategories {
                 grid-template-columns: 1fr;
             }
+
+            .timeline-item {
+                flex-direction: column;
+                gap: 1rem;
+            }
+
+            .timeline-item:not(:last-child)::after {
+                left: 25px;
+                top: 50px;
+                bottom: -2rem;
+            }
+
+            .cta-buttons {
+                flex-direction: column;
+            }
+
+            .section-title {
+                font-size: 2rem;
+            }
+        }
+
+        .text-center {
+            text-align: center;
         }
     </style>
 </head>
@@ -172,10 +580,11 @@
                     LumiMinds
                 </a>
                 
+                
                 <ul class="nav-links">
                     <li><a href="index.html">Home</a></li>
-                    <li><a href="services.html" class="active">Services</a></li>
-                    <li><a href="vehicles.html">Vehicles</a></li>
+                    <li><a href="services.html"class="active">Services</a></li>
+                    <li><a href="work.html" >Our Works</a></li>
                     <li><a href="about.html">About</a></li>
                     <li><a href="contact.html">Contact</a></li>
                 </ul>
@@ -202,6 +611,7 @@
             <li><a href="index.html">Home</a></li>
             <li><a href="services.html" class="active">Services</a></li>
             <li><a href="vehicles.html">Vehicles</a></li>
+            <li><a href="gadgets.html">Gadgets</a></li>
             <li><a href="about.html">About</a></li>
             <li><a href="contact.html">Contact</a></li>
         </ul>
@@ -210,219 +620,141 @@
     <!-- Page Header -->
     <section class="page-header">
         <div class="container">
-            <h1>Our Services</h1>
-            <p>Explore our comprehensive range of solutions tailored to your specific needs</p>
+            <h1>Our Comprehensive Services</h1>
+            <p>Expert solutions in product sourcing and IT support tailored to your business needs</p>
         </div>
     </section>
 
-    <!-- Service Categories Navigation -->
-    <section class="service-categories-section">
+    <!-- Services Categories -->
+    <section class="services-categories">
         <div class="container">
-            <div class="service-categories">
-                <div class="category-tab active" data-category="vehicles">
-                    <i class="fas fa-car"></i>
-                    Vehicles
-                </div>
-                <div class="category-tab" data-category="gadgets">
-                    <i class="fas fa-mobile-alt"></i>
-                    Gadgets
-                </div>
-                <div class="category-tab" data-category="it-support">
-                    <i class="fas fa-headset"></i>
-                    IT Support
-                </div>
-                <div class="category-tab" data-category="web-development">
-                    <i class="fas fa-code"></i>
-                    Web Development
-                </div>
-                <div class="category-tab" data-category="mobile-apps">
-                    <i class="fas fa-mobile"></i>
-                    Mobile Apps
-                </div>
+            <div class="category-tabs">
+                <button class="category-tab active" data-category="product-sourcing">Product Sourcing</button>
+                <button class="category-tab" data-category="it-support">IT Support</button>
             </div>
         </div>
     </section>
 
-    <!-- Vehicles Services -->
-    <section class="service-category-content active" id="vehicles">
+    <!-- Product Sourcing Services -->
+    <section class="services-section active" id="product-sourcing">
         <div class="container">
-            <div class="category-header">
-                <h2 class="category-title">Vehicle Import Services</h2>
-                <p class="category-description">Complete vehicle import solutions from sourcing to delivery with our comprehensive service packages</p>
-            </div>
+            <h2 class="section-title">Product Sourcing</h2>
+            <p class="section-subtitle">Reliable sourcing solutions for vehicles and gadgets</p>
             
             <div class="services-grid">
-                <div class="service-card" id="sourcing">
-                    <div class="service-icon">
-                        <i class="fas fa-search"></i>
+                <!-- Vehicle Import Services -->
+                <div class="service-category-card">
+                    <div class="service-category-header">
+                        <div class="service-category-icon">
+                            <i class="fas fa-car"></i>
+                        </div>
+                        <h3>Vehicle Import Solutions</h3>
+                        <p class="service-category-description">Complete end-to-end vehicle importing services</p>
                     </div>
-                    <h3>Vehicle Sourcing</h3>
-                    <p>We find the perfect vehicle that matches your specifications, budget, and requirements from our global network of trusted suppliers.</p>
-                    <ul class="service-features">
-                        <li><i class="fas fa-check"></i> Global market access</li>
-                        <li><i class="fas fa-check"></i> Price negotiation</li>
-                        <li><i class="fas fa-check"></i> Vehicle history reports</li>
-                        <li><i class="fas fa-check"></i> Multiple options presented</li>
-                    </ul>
-                    <div class="service-time">
-                        <i class="fas fa-clock"></i>
-                        <span>2-5 business days</span>
+                    
+                    <div class="service-subcategories">
+                        <div class="service-card" id="sourcing">
+                            <div class="service-icon">
+                                <i class="fas fa-search"></i>
+                            </div>
+                            <h3>Vehicle Sourcing</h3>
+                            <p>We find the perfect vehicle that matches your specifications, budget, and requirements from our global network.</p>
+                            <ul class="service-features">
+                                <li><i class="fas fa-check"></i> Global market access</li>
+                                <li><i class="fas fa-check"></i> Price negotiation</li>
+                                <li><i class="fas fa-check"></i> Vehicle history reports</li>
+                            </ul>
+                        </div>
+
+                        <div class="service-card" id="inspection">
+                            <div class="service-icon">
+                                <i class="fas fa-check-circle"></i>
+                            </div>
+                            <h3>Quality Inspection</h3>
+                            <p>Comprehensive 150-point inspection conducted by certified mechanics.</p>
+                            <ul class="service-features">
+                                <li><i class="fas fa-check"></i> Mechanical inspection</li>
+                                <li><i class="fas fa-check"></i> Electrical systems check</li>
+                                <li><i class="fas fa-check"></i> Test drive evaluation</li>
+                            </ul>
+                        </div>
+
+                        <div class="service-card" id="shipping">
+                            <div class="service-icon">
+                                <i class="fas fa-shipping-fast"></i>
+                            </div>
+                            <h3>Shipping & Logistics</h3>
+                            <p>Professional handling of all shipping arrangements and international logistics.</p>
+                            <ul class="service-features">
+                                <li><i class="fas fa-check"></i> Container shipping</li>
+                                <li><i class="fas fa-check"></i> RORO (Roll-on/Roll-off)</li>
+                                <li><i class="fas fa-check"></i> Insurance coverage</li>
+                            </ul>
+                        </div>
+                    </div>
+                    
+                    <div class="text-center">
+                        <button class="btn btn-outline" onclick="location.href='vehicles.html'">
+                            View Vehicle Gallery
+                        </button>
                     </div>
                 </div>
 
-                <div class="service-card" id="inspection">
-                    <div class="service-icon">
-                        <i class="fas fa-check-circle"></i>
+                <!-- Gadget Import Services -->
+                <div class="service-category-card">
+                    <div class="service-category-header">
+                        <div class="service-category-icon">
+                            <i class="fas fa-mobile-alt"></i>
+                        </div>
+                        <h3>Gadget Import Solutions</h3>
+                        <p class="service-category-description">Premium electronics and gadget sourcing</p>
                     </div>
-                    <h3>Quality Inspection</h3>
-                    <p>Comprehensive 150-point inspection conducted by certified mechanics to ensure vehicle quality and condition.</p>
-                    <ul class="service-features">
-                        <li><i class="fas fa-check"></i> Mechanical inspection</li>
-                        <li><i class="fas fa-check"></i> Electrical systems check</li>
-                        <li><i class="fas fa-check"></i> Body and paint assessment</li>
-                        <li><i class="fas fa-check"></i> Test drive evaluation</li>
-                    </ul>
-                    <div class="service-time">
-                        <i class="fas fa-clock"></i>
-                        <span>1-2 business days</span>
-                    </div>
-                </div>
+                    
+                    <div class="service-subcategories">
+                        <div class="service-card">
+                            <div class="service-icon">
+                                <i class="fas fa-laptop"></i>
+                            </div>
+                            <h3>Electronics Sourcing</h3>
+                            <p>Source high-quality laptops, smartphones, tablets, and other electronics from global markets.</p>
+                            <ul class="service-features">
+                                <li><i class="fas fa-check"></i> Latest models available</li>
+                                <li><i class="fas fa-check"></i> Competitive pricing</li>
+                                <li><i class="fas fa-check"></i> Warranty included</li>
+                            </ul>
+                        </div>
 
-                <div class="service-card" id="shipping">
-                    <div class="service-icon">
-                        <i class="fas fa-shipping-fast"></i>
-                    </div>
-                    <h3>Shipping & Logistics</h3>
-                    <p>Professional handling of all shipping arrangements, documentation, and international logistics.</p>
-                    <ul class="service-features">
-                        <li><i class="fas fa-check"></i> Container shipping</li>
-                        <li><i class="fas fa-check"></i> RORO (Roll-on/Roll-off)</li>
-                        <li><i class="fas fa-check"></i> Insurance coverage</li>
-                        <li><i class="fas fa-check"></i> Real-time tracking</li>
-                    </ul>
-                    <div class="service-time">
-                        <i class="fas fa-clock"></i>
-                        <span>3-6 weeks transit</span>
-                    </div>
-                </div>
+                        <div class="service-card">
+                            <div class="service-icon">
+                                <i class="fas fa-headphones"></i>
+                            </div>
+                            <h3>Audio & Entertainment</h3>
+                            <p>Premium audio equipment, gaming consoles, and home entertainment systems.</p>
+                            <ul class="service-features">
+                                <li><i class="fas fa-check"></i> High-end audio equipment</li>
+                                <li><i class="fas fa-check"></i> Gaming consoles & accessories</li>
+                                <li><i class="fas fa-check"></i> Home theater systems</li>
+                            </ul>
+                        </div>
 
-                <div class="service-card" id="customs">
-                    <div class="service-icon">
-                        <i class="fas fa-file-contract"></i>
+                        <div class="service-card">
+                            <div class="service-icon">
+                                <i class="fas fa-camera"></i>
+                            </div>
+                            <h3>Photography & Videography</h3>
+                            <p>Professional cameras, lenses, and photography equipment from leading brands.</p>
+                            <ul class="service-features">
+                                <li><i class="fas fa-check"></i> DSLR & mirrorless cameras</li>
+                                <li><i class="fas fa-check"></i> Professional lenses</li>
+                                <li><i class="fas fa-check"></i> Studio equipment</li>
+                            </ul>
+                        </div>
                     </div>
-                    <h3>Customs Clearance</h3>
-                    <p>Expert handling of all customs documentation, duties, taxes, and regulatory compliance requirements.</p>
-                    <ul class="service-features">
-                        <li><i class="fas fa-check"></i> Import duty calculation</li>
-                        <li><i class="fas fa-check"></i> Tax documentation</li>
-                        <li><i class="fas fa-check"></i> Regulatory compliance</li>
-                        <li><i class="fas fa-check"></i> Fast clearance processing</li>
-                    </ul>
-                    <div class="service-time">
-                        <i class="fas fa-clock"></i>
-                        <span>3-7 business days</span>
-                    </div>
-                </div>
-
-                <div class="service-card" id="delivery">
-                    <div class="service-icon">
-                        <i class="fas fa-truck"></i>
-                    </div>
-                    <h3>Final Delivery</h3>
-                    <p>Safe and secure delivery of your vehicle to your specified location with comprehensive handover process.</p>
-                    <ul class="service-features">
-                        <li><i class="fas fa-check"></i> Door-to-door delivery</li>
-                        <li><i class="fas fa-check"></i> Final inspection</li>
-                        <li><i class="fas fa-check"></i> Documentation handover</li>
-                        <li><i class="fas fa-check"></i> Operating instructions</li>
-                    </ul>
-                    <div class="service-time">
-                        <i class="fas fa-clock"></i>
-                        <span>1-3 business days</span>
-                    </div>
-                </div>
-
-                <div class="service-card" id="aftercare">
-                    <div class="service-icon">
-                        <i class="fas fa-headset"></i>
-                    </div>
-                    <h3>Aftercare Support</h3>
-                    <p>Ongoing support and assistance to ensure your complete satisfaction with our services.</p>
-                    <ul class="service-features">
-                        <li><i class="fas fa-check"></i> 3-month support period</li>
-                        <li><i class="fas fa-check"></i> Service recommendations</li>
-                        <li><i class="fas fa-check"></i> Spare parts sourcing</li>
-                        <li><i class="fas fa-check"></i> Maintenance guidance</li>
-                    </ul>
-                    <div class="service-time">
-                        <i class="fas fa-clock"></i>
-                        <span>Ongoing support</span>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Gadgets Services -->
-    <section class="service-category-content" id="gadgets">
-        <div class="container">
-            <div class="category-header">
-                <h2 class="category-title">Gadgets & Electronics</h2>
-                <p class="category-description">Import and sourcing of the latest technology gadgets and electronics from global markets</p>
-            </div>
-            
-            <div class="services-grid">
-                <div class="service-card">
-                    <div class="service-icon">
-                        <i class="fas fa-mobile-alt"></i>
-                    </div>
-                    <h3>Smartphone Import</h3>
-                    <p>Source the latest smartphones and mobile devices from global markets at competitive prices.</p>
-                    <ul class="service-features">
-                        <li><i class="fas fa-check"></i> Latest models</li>
-                        <li><i class="fas fa-check"></i> Warranty coverage</li>
-                        <li><i class="fas fa-check"></i> Quality verification</li>
-                        <li><i class="fas fa-check"></i> Competitive pricing</li>
-                    </ul>
-                    <div class="service-time">
-                        <i class="fas fa-clock"></i>
-                        <span>2-4 weeks</span>
-                    </div>
-                </div>
-
-                <div class="service-card">
-                    <div class="service-icon">
-                        <i class="fas fa-laptop"></i>
-                    </div>
-                    <h3>Laptops & Computers</h3>
-                    <p>Import high-performance laptops, desktops, and computer accessories for personal and business use.</p>
-                    <ul class="service-features">
-                        <li><i class="fas fa-check"></i> Business-grade systems</li>
-                        <li><i class="fas fa-check"></i> Gaming computers</li>
-                        <li><i class="fas fa-check"></i> Custom configurations</li>
-                        <li><i class="fas fa-check"></i> Peripherals sourcing</li>
-                    </ul>
-                    <div class="service-time">
-                        <i class="fas fa-clock"></i>
-                        <span>3-5 weeks</span>
-                    </div>
-                </div>
-
-                <div class="service-card">
-                    <div class="service-icon">
-                        <i class="fas fa-tablet-alt"></i>
-                    </div>
-                    <h3>Tablets & Accessories</h3>
-                    <p>Source tablets, e-readers, and related accessories from international markets.</p>
-                    <ul class="service-features">
-                        <li><i class="fas fa-check"></i> Various brands & models</li>
-                        <li><i class="fas fa-check"></i> Protective cases</li>
-                        <li><i class="fas fa-check"></i> Styluses & keyboards</li>
-                        <li><i class="fas fa-check"></i> Screen protectors</li>
-                    </ul>
-                    <div class="service-time">
-                        <i class="fas fa-clock"></i>
-                        <span>2-4 weeks</span>
+                    
+                    <div class="text-center">
+                        <button class="btn btn-outline" onclick="location.href='gadgets.html'">
+                            View Gadget Gallery
+                        </button>
                     </div>
                 </div>
             </div>
@@ -430,197 +762,111 @@
     </section>
 
     <!-- IT Support Services -->
-    <section class="service-category-content" id="it-support">
+    <section class="services-section" id="it-support">
         <div class="container">
-            <div class="category-header">
-                <h2 class="category-title">IT Support Services</h2>
-                <p class="category-description">Comprehensive IT infrastructure and technical support services for businesses</p>
-            </div>
+            <h2 class="section-title">IT Support Services</h2>
+            <p class="section-subtitle">Professional IT solutions for your business growth</p>
             
             <div class="services-grid">
-                <div class="service-card">
-                    <div class="service-icon">
-                        <i class="fas fa-network-wired"></i>
+                <div class="service-category-card">
+                    <div class="service-category-header">
+                        <div class="service-category-icon">
+                            <i class="fas fa-code"></i>
+                        </div>
+                        <h3>Web Development & Maintenance</h3>
+                        <p class="service-category-description">Complete web solutions from development to ongoing support</p>
                     </div>
-                    <h3>Network Setup & Management</h3>
-                    <p>Design, implement, and maintain robust network infrastructure for businesses of all sizes.</p>
-                    <ul class="service-features">
-                        <li><i class="fas fa-check"></i> Network design</li>
-                        <li><i class="fas fa-check"></i> Installation & configuration</li>
-                        <li><i class="fas fa-check"></i> Security implementation</li>
-                        <li><i class="fas fa-check"></i> Ongoing maintenance</li>
-                    </ul>
-                    <div class="service-time">
-                        <i class="fas fa-clock"></i>
-                        <span>Ongoing support</span>
+                    
+                    <div class="service-subcategories">
+                        <div class="service-card" id="web-dev">
+                            <div class="service-icon">
+                                <i class="fas fa-laptop-code"></i>
+                            </div>
+                            <h3>Custom Web Development</h3>
+                            <p>Tailored website development using modern technologies and best practices.</p>
+                            <ul class="service-features">
+                                <li><i class="fas fa-check"></i> Responsive design</li>
+                                <li><i class="fas fa-check"></i> E-commerce solutions</li>
+                                <li><i class="fas fa-check"></i> CMS integration</li>
+                            </ul>
+                        </div>
+
+                        <div class="service-card">
+                            <div class="service-icon">
+                                <i class="fas fa-cogs"></i>
+                            </div>
+                            <h3>Website Maintenance</h3>
+                            <p>Regular updates, security patches, and performance optimization for your website.</p>
+                            <ul class="service-features">
+                                <li><i class="fas fa-check"></i> Regular updates</li>
+                                <li><i class="fas fa-check"></i> Security monitoring</li>
+                                <li><i class="fas fa-check"></i> Backup solutions</li>
+                            </ul>
+                        </div>
+
+                        <div class="service-card">
+                            <div class="service-icon">
+                                <i class="fas fa-chart-line"></i>
+                            </div>
+                            <h3>Performance Optimization</h3>
+                            <p>Improve your website speed, SEO, and user experience for better conversion rates.</p>
+                            <ul class="service-features">
+                                <li><i class="fas fa-check"></i> SEO optimization</li>
+                                <li><i class="fas fa-check"></i> Speed optimization</li>
+                                <li><i class="fas fa-check"></i> Analytics integration</li>
+                            </ul>
+                        </div>
                     </div>
                 </div>
 
-                <div class="service-card">
-                    <div class="service-icon">
-                        <i class="fas fa-server"></i>
+                <div class="service-category-card">
+                    <div class="service-category-header">
+                        <div class="service-category-icon">
+                            <i class="fas fa-lightbulb"></i>
+                        </div>
+                        <h3>IT Consultation</h3>
+                        <p class="service-category-description">Expert guidance for your technology needs</p>
                     </div>
-                    <h3>Server Management</h3>
-                    <p>Setup, configuration, and maintenance of server infrastructure for optimal performance.</p>
-                    <ul class="service-features">
-                        <li><i class="fas fa-check"></i> Server installation</li>
-                        <li><i class="fas fa-check"></i> Performance optimization</li>
-                        <li><i class="fas fa-check"></i> Security hardening</li>
-                        <li><i class="fas fa-check"></i> Backup solutions</li>
-                    </ul>
-                    <div class="service-time">
-                        <i class="fas fa-clock"></i>
-                        <span>Ongoing support</span>
-                    </div>
-                </div>
+                    
+                    <div class="service-subcategories">
+                        <div class="service-card" id="consultation">
+                            <div class="service-icon">
+                                <i class="fas fa-business-time"></i>
+                            </div>
+                            <h3>Business Technology Strategy</h3>
+                            <p>Develop a comprehensive technology roadmap aligned with your business goals.</p>
+                            <ul class="service-features">
+                                <li><i class="fas fa-check"></i> Digital transformation</li>
+                                <li><i class="fas fa-check"></i> Technology assessment</li>
+                                <li><i class="fas fa-check"></i> Implementation planning</li>
+                            </ul>
+                        </div>
 
-                <div class="service-card">
-                    <div class="service-icon">
-                        <i class="fas fa-shield-alt"></i>
-                    </div>
-                    <h3>Cybersecurity Solutions</h3>
-                    <p>Protect your business from cyber threats with comprehensive security solutions and monitoring.</p>
-                    <ul class="service-features">
-                        <li><i class="fas fa-check"></i> Threat assessment</li>
-                        <li><i class="fas fa-check"></i> Security implementation</li>
-                        <li><i class="fas fa-check"></i> 24/7 monitoring</li>
-                        <li><i class="fas fa-check"></i> Incident response</li>
-                    </ul>
-                    <div class="service-time">
-                        <i class="fas fa-clock"></i>
-                        <span>Ongoing support</span>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
+                        <div class="service-card">
+                            <div class="service-icon">
+                                <i class="fas fa-shield-alt"></i>
+                            </div>
+                            <h3>Cybersecurity Consultation</h3>
+                            <p>Protect your business from digital threats with comprehensive security solutions.</p>
+                            <ul class="service-features">
+                                <li><i class="fas fa-check"></i> Security audits</li>
+                                <li><i class="fas fa-check"></i> Risk assessment</li>
+                                <li><i class="fas fa-check"></i> Compliance guidance</li>
+                            </ul>
+                        </div>
 
-    <!-- Web Development Services -->
-    <section class="service-category-content" id="web-development">
-        <div class="container">
-            <div class="category-header">
-                <h2 class="category-title">Web Development</h2>
-                <p class="category-description">Custom web solutions to establish and grow your online presence</p>
-            </div>
-            
-            <div class="services-grid">
-                <div class="service-card">
-                    <div class="service-icon">
-                        <i class="fas fa-code"></i>
-                    </div>
-                    <h3>Custom Website Development</h3>
-                    <p>Build responsive, user-friendly websites tailored to your business needs and brand identity.</p>
-                    <ul class="service-features">
-                        <li><i class="fas fa-check"></i> Responsive design</li>
-                        <li><i class="fas fa-check"></i> SEO optimization</li>
-                        <li><i class="fas fa-check"></i> Content management</li>
-                        <li><i class="fas fa-check"></i> E-commerce integration</li>
-                    </ul>
-                    <div class="service-time">
-                        <i class="fas fa-clock"></i>
-                        <span>4-8 weeks</span>
-                    </div>
-                </div>
-
-                <div class="service-card">
-                    <div class="service-icon">
-                        <i class="fas fa-shopping-cart"></i>
-                    </div>
-                    <h3>E-commerce Solutions</h3>
-                    <p>Develop robust online stores with secure payment processing and inventory management.</p>
-                    <ul class="service-features">
-                        <li><i class="fas fa-check"></i> Payment integration</li>
-                        <li><i class="fas fa-check"></i> Inventory management</li>
-                        <li><i class="fas fa-check"></i> Order processing</li>
-                        <li><i class="fas fa-check"></i> Customer accounts</li>
-                    </ul>
-                    <div class="service-time">
-                        <i class="fas fa-clock"></i>
-                        <span>6-10 weeks</span>
-                    </div>
-                </div>
-
-                <div class="service-card">
-                    <div class="service-icon">
-                        <i class="fas fa-tools"></i>
-                    </div>
-                    <h3>Website Maintenance</h3>
-                    <p>Keep your website running smoothly with regular updates, security patches, and performance optimization.</p>
-                    <ul class="service-features">
-                        <li><i class="fas fa-check"></i> Regular updates</li>
-                        <li><i class="fas fa-check"></i> Security monitoring</li>
-                        <li><i class="fas fa-check"></i> Performance optimization</li>
-                        <li><i class="fas fa-check"></i> Content updates</li>
-                    </ul>
-                    <div class="service-time">
-                        <i class="fas fa-clock"></i>
-                        <span>Ongoing support</span>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Mobile App Development Services -->
-    <section class="service-category-content" id="mobile-apps">
-        <div class="container">
-            <div class="category-header">
-                <h2 class="category-title">Mobile App Development</h2>
-                <p class="category-description">Create engaging mobile applications for iOS and Android platforms</p>
-            </div>
-            
-            <div class="services-grid">
-                <div class="service-card">
-                    <div class="service-icon">
-                        <i class="fab fa-apple"></i>
-                    </div>
-                    <h3>iOS App Development</h3>
-                    <p>Design and develop native iOS applications for iPhones and iPads with seamless user experience.</p>
-                    <ul class="service-features">
-                        <li><i class="fas fa-check"></i> Native development</li>
-                        <li><i class="fas fa-check"></i> App Store submission</li>
-                        <li><i class="fas fa-check"></i> UI/UX design</li>
-                        <li><i class="fas fa-check"></i> Performance optimization</li>
-                    </ul>
-                    <div class="service-time">
-                        <i class="fas fa-clock"></i>
-                        <span>8-16 weeks</span>
-                    </div>
-                </div>
-
-                <div class="service-card">
-                    <div class="service-icon">
-                        <i class="fab fa-android"></i>
-                    </div>
-                    <h3>Android App Development</h3>
-                    <p>Build powerful Android applications compatible with a wide range of devices and screen sizes.</p>
-                    <ul class="service-features">
-                        <li><i class="fas fa-check"></i> Native development</li>
-                        <li><i class="fas fa-check"></i> Google Play submission</li>
-                        <li><i class="fas fa-check"></i> Device compatibility</li>
-                        <li><i class="fas fa-check"></i> Material design</li>
-                    </ul>
-                    <div class="service-time">
-                        <i class="fas fa-clock"></i>
-                        <span>8-16 weeks</span>
-                    </div>
-                </div>
-
-                <div class="service-card">
-                    <div class="service-icon">
-                        <i class="fas fa-sync-alt"></i>
-                    </div>
-                    <h3>Cross-Platform Development</h3>
-                    <p>Develop applications that work seamlessly across both iOS and Android platforms with shared codebase.</p>
-                    <ul class="service-features">
-                        <li><i class="fas fa-check"></i> Single codebase</li>
-                        <li><i class="fas fa-check"></i> Faster development</li>
-                        <li><i class="fas fa-check"></i> Consistent experience</li>
-                        <li><i class="fas fa-check"></i> Cost-effective</li>
-                    </ul>
-                    <div class="service-time">
-                        <i class="fas fa-clock"></i>
-                        <span>6-12 weeks</span>
+                        <div class="service-card">
+                            <div class="service-icon">
+                                <i class="fas fa-network-wired"></i>
+                            </div>
+                            <h3>Infrastructure Planning</h3>
+                            <p>Design and implement robust IT infrastructure for your business operations.</p>
+                            <ul class="service-features">
+                                <li><i class="fas fa-check"></i> Network design</li>
+                                <li><i class="fas fa-check"></i> Cloud solutions</li>
+                                <li><i class="fas fa-check"></i> System integration</li>
+                            </ul>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -630,50 +876,43 @@
     <!-- Process Timeline -->
     <section class="process-timeline">
         <div class="container">
-            <h2 class="section-title">Our Process</h2>
-            <p class="section-subtitle">Simple, transparent, and efficient - from consultation to delivery</p>
+            <h2 class="section-title">Our Service Process</h2>
+            <p class="section-subtitle">Simple, transparent, and efficient workflow</p>
             
             <div class="timeline">
                 <div class="timeline-item">
                     <div class="timeline-number">1</div>
                     <div class="timeline-content">
-                        <h3>Consultation & Requirements</h3>
-                        <p>We discuss your specific needs, budget, and timeline to understand your requirements</p>
+                        <h3>Initial Consultation</h3>
+                        <p>We discuss your requirements, budget, and objectives to understand your needs</p>
                     </div>
                 </div>
                 <div class="timeline-item">
                     <div class="timeline-number">2</div>
                     <div class="timeline-content">
-                        <h3>Solution Design & Planning</h3>
-                        <p>We design the optimal solution and create a detailed project plan with timelines</p>
+                        <h3>Solution Design</h3>
+                        <p>We create a customized solution plan based on your specific requirements</p>
                     </div>
                 </div>
                 <div class="timeline-item">
                     <div class="timeline-number">3</div>
                     <div class="timeline-content">
-                        <h3>Implementation & Development</h3>
-                        <p>Our team executes the plan with regular updates and quality assurance checks</p>
+                        <h3>Implementation</h3>
+                        <p>Our experts execute the plan with precision and attention to detail</p>
                     </div>
                 </div>
                 <div class="timeline-item">
                     <div class="timeline-number">4</div>
                     <div class="timeline-content">
-                        <h3>Testing & Quality Assurance</h3>
-                        <p>Rigorous testing ensures everything works perfectly before delivery</p>
+                        <h3>Quality Assurance</h3>
+                        <p>Thorough testing and quality checks to ensure excellence</p>
                     </div>
                 </div>
                 <div class="timeline-item">
                     <div class="timeline-number">5</div>
                     <div class="timeline-content">
-                        <h3>Delivery & Deployment</h3>
-                        <p>We deliver the final product and assist with deployment and setup</p>
-                    </div>
-                </div>
-                <div class="timeline-item">
-                    <div class="timeline-number">6</div>
-                    <div class="timeline-content">
-                        <h3>Support & Maintenance</h3>
-                        <p>Ongoing support ensures your solution continues to perform optimally</p>
+                        <h3>Delivery & Support</h3>
+                        <p>Final delivery followed by ongoing support and maintenance</p>
                     </div>
                 </div>
             </div>
@@ -684,11 +923,11 @@
     <section class="cta">
         <div class="container">
             <div class="cta-content">
-                <h2>Ready to Get Started?</h2>
-                <p>Contact us today for a free consultation and detailed quote</p>
+                <h2>Need Professional Assistance?</h2>
+                <p>Contact us today for a free consultation on any of our services</p>
                 <div class="cta-buttons">
-                    <button class="btn btn-primary btn-large" onclick="location.href='contact.html'">Get Free Consultation</button>
-                    <button class="btn btn-outline btn-large" onclick="location.href='tel:+260969820643'">
+                    <button class="btn btn-outline btn-large" onclick="location.href='contact.html'">Get Free Consultation</button>
+                    <button class="btn btn-primary btn-large" onclick="location.href='tel:+260969820643'">
                         <i class="fas fa-phone"></i> Call Us Now
                     </button>
                 </div>
@@ -702,10 +941,10 @@
             <div class="footer-content">
                 <div class="footer-section">
                     <h3>
-                        <i class="fas fa-car-side"></i>
-                        Lumiminds
+                        <i class="fas fa-lightbulb"></i>
+                        LumiMinds
                     </h3>
-                    <p>Your trusted partner for premium vehicle import solutions. We bring global automotive excellence to your doorstep with complete transparency and professional service.</p>
+                    <p>Your trusted partner for comprehensive business solutions including product sourcing and IT services.</p>
                     <div class="social-links">
                         <a href="#"><i class="fab fa-facebook"></i></a>
                         <a href="#"><i class="fab fa-twitter"></i></a>
@@ -721,21 +960,21 @@
                         <li><a href="index.html">Home</a></li>
                         <li><a href="services.html">Services</a></li>
                         <li><a href="vehicles.html">Vehicles</a></li>
+                        <li><a href="gadgets.html">Gadgets</a></li>
                         <li><a href="about.html">About Us</a></li>
                         <li><a href="contact.html">Contact</a></li>
-                        <li><a href="faq.html">FAQ</a></li>
                     </ul>
                 </div>
                 
                 <div class="footer-section">
                     <h3>Our Services</h3>
                     <ul class="footer-links">
-                        <li><a href="services.html#sourcing">Vehicle Sourcing</a></li>
-                        <li><a href="services.html#inspection">Quality Inspection</a></li>
-                        <li><a href="services.html#shipping">Shipping & Logistics</a></li>
-                        <li><a href="services.html#customs">Customs Clearance</a></li>
-                        <li><a href="services.html#delivery">Final Delivery</a></li>
-                        <li><a href="services.html#aftercare">Aftercare Support</a></li>
+                        <li><a href="services.html#product-sourcing">Product Sourcing</a></li>
+                        <li><a href="services.html#it-support">IT Support</a></li>
+                        <li><a href="vehicles.html">Vehicle Import</a></li>
+                        <li><a href="gadgets.html">Gadget Import</a></li>
+                        <li><a href="services.html#web-dev">Web Development</a></li>
+                        <li><a href="services.html#consultation">IT Consultation</a></li>
                     </ul>
                 </div>
                 
@@ -751,54 +990,96 @@
             </div>
             
             <div class="copyright">
-                <p>&copy; 2025 Lumiminds Vehicle Import Solutions. All rights reserved. | <a href="privacy.html">Privacy Policy</a> | <a href="terms.html">Terms of Service</a></p>
+                <p>&copy; 2025 LumiMinds Solutions. All rights reserved.</p>
             </div>
         </div>
     </footer>
 
     <script>
-        // Service Category Tabs Functionality
+        // Mobile Menu Toggle
+        const mobileMenuBtn = document.querySelector('.mobile-menu-btn');
+        const mobileMenu = document.querySelector('.mobile-menu');
+        const mobileMenuClose = document.querySelector('.mobile-menu-close');
+        const mobileNavLinks = document.querySelectorAll('.mobile-nav-links a');
+
+        mobileMenuBtn.addEventListener('click', () => {
+            mobileMenu.classList.add('active');
+            document.body.style.overflow = 'hidden';
+        });
+
+        mobileMenuClose.addEventListener('click', () => {
+            mobileMenu.classList.remove('active');
+            document.body.style.overflow = 'auto';
+        });
+
+        mobileNavLinks.forEach(link => {
+            link.addEventListener('click', () => {
+                mobileMenu.classList.remove('active');
+                document.body.style.overflow = 'auto';
+            });
+        });
+
+        // Category tabs functionality
         document.addEventListener('DOMContentLoaded', function() {
-            const categoryTabs = document.querySelectorAll('.category-tab');
-            const categoryContents = document.querySelectorAll('.service-category-content');
+            const tabs = document.querySelectorAll('.category-tab');
+            const contents = document.querySelectorAll('.services-section');
             
-            // Function to show a specific category
-            function showCategory(categoryId) {
-                // Hide all category contents
-                categoryContents.forEach(content => {
-                    content.classList.remove('active');
-                });
-                
-                // Remove active class from all tabs
-                categoryTabs.forEach(tab => {
-                    tab.classList.remove('active');
-                });
-                
-                // Show selected category content
-                const selectedContent = document.getElementById(categoryId);
-                if (selectedContent) {
-                    selectedContent.classList.add('active');
-                }
-                
-                // Add active class to clicked tab
-                const selectedTab = document.querySelector(`.category-tab[data-category="${categoryId}"]`);
-                if (selectedTab) {
-                    selectedTab.classList.add('active');
-                }
-            }
-            
-            // Add click event listeners to tabs
-            categoryTabs.forEach(tab => {
+            tabs.forEach(tab => {
                 tab.addEventListener('click', function() {
-                    const categoryId = this.getAttribute('data-category');
-                    showCategory(categoryId);
+                    const category = this.dataset.category;
+                    
+                    // Update active tab
+                    tabs.forEach(t => t.classList.remove('active'));
+                    this.classList.add('active');
+                    
+                    // Show selected content
+                    contents.forEach(content => {
+                        content.classList.remove('active');
+                        if (content.id === category) {
+                            content.classList.add('active');
+                        }
+                    });
                 });
             });
-            
-            // Show vehicles category by default
-            showCategory('vehicles');
+        });
+
+        // Smooth scrolling
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                }
+            });
+        });
+
+        // Form submission handling
+        document.addEventListener('DOMContentLoaded', function() {
+            const forms = document.querySelectorAll('form');
+            forms.forEach(form => {
+                form.addEventListener('submit', function(e) {
+                    e.preventDefault();
+                    
+                    const submitBtn = this.querySelector('button[type="submit"]');
+                    if (submitBtn) {
+                        const originalText = submitBtn.innerHTML;
+                        submitBtn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Sending...';
+                        submitBtn.disabled = true;
+                        
+                        setTimeout(() => {
+                            alert('Thank you for your inquiry! We will get back to you soon.');
+                            this.reset();
+                            submitBtn.innerHTML = originalText;
+                            submitBtn.disabled = false;
+                        }, 2000);
+                    }
+                });
+            });
         });
     </script>
-    <script src="script.js"></script>
 </body>
 </html>
