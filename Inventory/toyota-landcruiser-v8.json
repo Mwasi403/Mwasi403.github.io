@@ -1,0 +1,102 @@
+{
+  "id": "VEH001",
+  "title": "Toyota Land Cruiser V8",
+  "category": "vehicle",
+  "description": "2023 Toyota Land Cruiser V8 in excellent condition. Full service history, low mileage, and all features working perfectly. Perfect for both city driving and off-road adventures.",
+  
+  "price": 85000,
+  "currency": "USD",
+  "discount": 0,
+  
+  "brand": "Toyota",
+  "model": "Land Cruiser V8 2023",
+  "year": 2023,
+  "color": "White",
+  "condition": "Used - Excellent",
+  "mileage": 12500,
+  "fuelType": "Petrol",
+  "transmission": "Automatic",
+  "driveType": "4WD",
+  
+  "quantity": 2,
+  "status": "in-stock",
+  "location": "Ndola Warehouse",
+  
+  "specs": [
+    "5.7L V8 Engine",
+    "8-Speed Automatic",
+    "4WD System",
+    "Leather Interior",
+    "Sunroof",
+    "Navigation System",
+    "Rear Camera",
+    "Bluetooth Connectivity",
+    "Heated Seats",
+    "Third Row Seating"
+  ],
+  
+  "features": [
+    "Keyless Entry",
+    "Push Button Start",
+    "Climate Control",
+    "Power Windows",
+    "Power Seats",
+    "Premium Sound System",
+    "LED Headlights",
+    "Alloy Wheels",
+    "Towing Package",
+    "Safety Features Package"
+  ],
+  
+  "images": [
+    "images/vehicles/toyota-landcruiser-1.jpg",
+    "images/vehicles/toyota-landcruiser-2.jpg",
+    "images/vehicles/toyota-landcruiser-3.jpg",
+    "images/vehicles/toyota-landcruiser-4.jpg",
+    "images/vehicles/toyota-landcruiser-5.jpg"
+  ],
+  
+  "details": [
+    {
+      "label": "Engine",
+      "value": "5.7L V8"
+    },
+    {
+      "label": "Horsepower",
+      "value": "381 HP"
+    },
+    {
+      "label": "Fuel Economy",
+      "value": "13 MPG City / 18 MPG Highway"
+    },
+    {
+      "label": "Seating Capacity",
+      "value": "8 Passengers"
+    },
+    {
+      "label": "Warranty",
+      "value": "6 Months"
+    },
+    {
+      "label": "Import Date",
+      "value": "December 2023"
+    },
+    {
+      "label": "VIN",
+      "value": "JTMHY7AJXM4012345"
+    }
+  ],
+  
+  "includedItems": [
+    "All Original Keys",
+    "Service Manual",
+    "Tool Kit",
+    "Spare Tire",
+    "Floor Mats"
+  ],
+  
+  "notes": "Vehicle is available for viewing and test drive. Financing options available.",
+  
+  "addedDate": "2024-01-10",
+  "updatedDate": "2024-01-10"
+}
