@@ -1,0 +1,23 @@
+{
+  "id": 1,
+  "category": "gadget",
+  "title": "Corporate Laptop & Smartphone Procurement",
+  "description": "Supplied 50 high-performance laptops and 100 smartphones for a corporate client's digital transformation project. All equipment came with valid warranties and corporate support packages.",
+  "images": [
+    "https://images.unsplash.com/photo-1498049794561-7780e7231661?ixlib=rb-4.0.3&auto=format&fit=crop&w=1000&q=80",
+    "https://images.unsplash.com/photo-1512941937669-90a1b58e7e9c?ixlib=rb-4.0.3&auto=format&fit=crop&w=1000&q=80",
+    "https://images.unsplash.com/photo-1581094794329-c8112a89af12?ixlib=rb-4.0.3&auto=format&fit=crop&w=1000&q=80"
+  ],
+  "details": [
+    { "label": "Client", "value": "Tech Solutions Zambia" },
+    { "label": "Quantity", "value": "150 Units Total" },
+    { "label": "Delivery Time", "value": "3 Weeks" },
+    { "label": "Savings", "value": "25% vs Local Market" },
+    { "label": "Warranty", "value": "2 Years Comprehensive" },
+    { "label": "Support", "value": "24/7 Technical Support" }
+  ],
+  "testimonial": {
+    "quote": "Significant cost savings and all equipment arrived in perfect condition with valid warranties. The bulk procurement process was handled professionally.",
+    "author": "Raymond Mukosha"
+  }
+}

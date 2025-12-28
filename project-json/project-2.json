@@ -1,0 +1,23 @@
+{
+  "id": 2,
+  "category": "gadget",
+  "title": "Professional Studio Equipment Package",
+  "description": "Supplied complete photography studio equipment for a professional photography business. Package included cameras, lenses, lighting equipment, backdrops, and editing workstations.",
+  "images": [
+    "https://images.unsplash.com/photo-1511707171634-5f897ff02aa9?ixlib=rb-4.0.3&auto=format&fit=crop&w=1000&q=80",
+    "https://images.unsplash.com/photo-1516035069371-29a1b244cc32?ixlib=rb-4.0.3&auto=format&fit=crop&w=1000&q=80",
+    "https://images.unsplash.com/photo-1554048612-b6a482bc67e5?ixlib=rb-4.0.3&auto=format&fit=crop&w=1000&q=80"
+  ],
+  "details": [
+    { "label": "Client", "value": "Capture Moments Studio" },
+    { "label": "Items", "value": "25+ Equipment Pieces" },
+    { "label": "Delivery", "value": "Express 1 Week" },
+    { "label": "Savings", "value": "30% vs Local Retail" },
+    { "label": "Brands", "value": "Canon, Nikon, Profoto" },
+    { "label": "Training", "value": "Included Setup & Training" }
+  ],
+  "testimonial": {
+    "quote": "High-quality equipment at unbeatable prices. My studio is now fully equipped thanks to LumiMinds. The setup assistance was invaluable.",
+    "author": "Raymond Mukosha"
+  }
+}
