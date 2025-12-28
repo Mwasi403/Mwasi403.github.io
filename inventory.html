@@ -1,0 +1,1393 @@
+[file name]: inventory.html
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Inventory - LumiMinds Zambia</title>
+    <link rel="icon" type="image/x-icon" href="logo.png">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        /* Global Styles */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --primary: #3f88c5;
+            --primary-light: #e3f2fd;
+            --primary-dark: #1E3324;
+            --secondary: #D4AF37;
+            --text-dark: #1A1A1A;
+            --text-light: #666666;
+            --bg-light: #F8F9FA;
+            --bg-lighter: #FCFCFC;
+            --border: #E5E5E5;
+            --white: #FFFFFF;
+            --shadow: 0 4px 20px rgba(0,0,0,0.08);
+            --shadow-lg: 0 10px 40px rgba(0,0,0,0.12);
+            --modal-overlay: rgba(0, 0, 0, 0.92);
+        }
+
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+            line-height: 1.6;
+            color: var(--text-dark);
+            background-color: var(--white);
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        .btn {
+            padding: 0.75rem 1.5rem;
+            border-radius: 8px;
+            text-decoration: none;
+            font-weight: 500;
+            transition: all 0.3s;
+            border: none;
+            cursor: pointer;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .btn-primary {
+            background: var(--primary);
+            color: var(--white);
+        }
+
+        .btn-primary:hover {
+            background: var(--primary-dark);
+            transform: translateY(-2px);
+            box-shadow: var(--shadow);
+        }
+
+        .btn-outline {
+            border: 2px solid var(--primary);
+            color: var(--primary);
+            background: transparent;
+        }
+
+        .btn-outline:hover {
+            background: var(--primary);
+            color: var(--white);
+        }
+
+        .btn-success {
+            background: #27ae60;
+            color: var(--white);
+        }
+
+        .btn-success:hover {
+            background: #219653;
+            transform: translateY(-2px);
+            box-shadow: var(--shadow);
+        }
+
+        .section-title {
+            text-align: center;
+            font-size: 2.5rem;
+            font-weight: 600;
+            margin-bottom: 1rem;
+        }
+
+        .section-subtitle {
+            text-align: center;
+            color: var(--text-light);
+            margin-bottom: 3rem;
+            font-size: 1.125rem;
+        }
+
+        /* Header Styles */
+        header {
+            background: var(--white);
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 1000;
+        }
+
+        .nav-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1rem 0;
+        }
+
+        .logo {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--primary);
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .logo-image {
+            height: 40px;
+            width: 40px;
+        }
+
+        .nav-links {
+            display: flex;
+            list-style: none;
+            gap: 2rem;
+        }
+
+        .nav-links a {
+            text-decoration: none;
+            color: var(--text-light);
+            font-weight: 400;
+            transition: color 0.3s;
+            position: relative;
+        }
+
+        .nav-links a:hover,
+        .nav-links a.active {
+            color: var(--primary);
+            font-weight: 500;
+        }
+
+        .nav-links a.active::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            width: 100%;
+            height: 2px;
+            background: var(--primary);
+        }
+
+        .mobile-menu-btn {
+            display: none;
+            background: none;
+            border: none;
+            font-size: 1.5rem;
+            color: var(--primary);
+            cursor: pointer;
+        }
+
+        /* Mobile Menu */
+        .mobile-menu {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: var(--white);
+            z-index: 2000;
+            transform: translateX(-100%);
+            transition: transform 0.3s ease;
+        }
+
+        .mobile-menu.active {
+            transform: translateX(0);
+        }
+
+        .mobile-menu-header {
+            padding: 1rem;
+            border-bottom: 1px solid var(--border);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .mobile-menu-close {
+            background: none;
+            border: none;
+            font-size: 1.5rem;
+            cursor: pointer;
+        }
+
+        .mobile-nav-links {
+            list-style: none;
+            padding: 2rem;
+        }
+
+        .mobile-nav-links li {
+            margin-bottom: 1rem;
+        }
+
+        .mobile-nav-links a {
+            text-decoration: none;
+            color: var(--text-dark);
+            font-size: 1.125rem;
+            display: block;
+            padding: 0.5rem 0;
+        }
+
+        /* Page Header */
+        .page-header {
+            padding: 140px 0 60px;
+            background: linear-gradient(135deg, var(--primary-light) 0%, #e3f2fd 100%);
+            color: var(--text-dark);
+            text-align: center;
+        }
+
+        .page-header h1 {
+            font-size: 3rem;
+            font-weight: 700;
+            margin-bottom: 1rem;
+        }
+
+        .page-header p {
+            font-size: 1.2rem;
+            opacity: 0.9;
+        }
+
+        /* Inventory Categories */
+        .inventory-categories {
+            padding: 40px 0;
+            background: var(--bg-light);
+        }
+
+        .category-filters {
+            display: flex;
+            gap: 1rem;
+            flex-wrap: wrap;
+            justify-content: center;
+        }
+
+        .filter-btn {
+            padding: 0.75rem 1.5rem;
+            background: var(--white);
+            border: 2px solid var(--border);
+            border-radius: 8px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .filter-btn:hover {
+            border-color: var(--primary);
+            color: var(--primary);
+        }
+
+        .filter-btn.active {
+            background: var(--primary);
+            color: var(--white);
+            border-color: var(--primary);
+        }
+
+        /* Inventory Grid */
+        .inventory-grid-section {
+            padding: 80px 0;
+        }
+
+        .inventory-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+            gap: 20px;
+        }
+
+        .inventory-item {
+            position: relative;
+            border-radius: 12px;
+            overflow: hidden;
+            cursor: pointer;
+            box-shadow: var(--shadow);
+            transition: all 0.3s ease;
+            background: var(--white);
+        }
+
+        .inventory-item:hover {
+            transform: translateY(-5px);
+            box-shadow: var(--shadow-lg);
+        }
+
+        .inventory-image-container {
+            position: relative;
+            height: 200px;
+            overflow: hidden;
+        }
+
+        .inventory-image {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.5s ease;
+        }
+
+        .inventory-item:hover .inventory-image {
+            transform: scale(1.05);
+        }
+
+        .inventory-status {
+            position: absolute;
+            top: 15px;
+            left: 15px;
+            padding: 0.4rem 0.8rem;
+            border-radius: 20px;
+            font-size: 0.75rem;
+            font-weight: 600;
+            z-index: 2;
+        }
+
+        .status-in-stock {
+            background: #27ae60;
+            color: var(--white);
+        }
+
+        .status-low-stock {
+            background: #f39c12;
+            color: var(--white);
+        }
+
+        .status-out-of-stock {
+            background: #e74c3c;
+            color: var(--white);
+        }
+
+        .category-badge {
+            position: absolute;
+            top: 15px;
+            right: 15px;
+            background: var(--secondary);
+            color: var(--white);
+            padding: 0.4rem 0.8rem;
+            border-radius: 20px;
+            font-size: 0.75rem;
+            font-weight: 600;
+            z-index: 2;
+        }
+
+        .category-badge.vehicle {
+            background: var(--primary);
+        }
+
+        .category-badge.gadget {
+            background: #8e44ad;
+        }
+
+        .category-badge.electronics {
+            background: #16a085;
+        }
+
+        .category-badge.parts {
+            background: #d35400;
+        }
+
+        .inventory-info {
+            padding: 1.5rem;
+        }
+
+        .inventory-title {
+            font-size: 1.25rem;
+            font-weight: 600;
+            margin-bottom: 0.5rem;
+            color: var(--text-dark);
+        }
+
+        .inventory-price {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--primary);
+            margin-bottom: 0.5rem;
+        }
+
+        .inventory-specs {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+            margin: 1rem 0;
+        }
+
+        .spec-item {
+            background: var(--bg-light);
+            padding: 0.4rem 0.8rem;
+            border-radius: 15px;
+            font-size: 0.8rem;
+            color: var(--text-light);
+        }
+
+        .inventory-actions {
+            display: flex;
+            gap: 0.5rem;
+            margin-top: 1rem;
+        }
+
+        .action-btn {
+            flex: 1;
+            padding: 0.5rem;
+            font-size: 0.875rem;
+            text-align: center;
+        }
+
+        /* Modal/Lightbox Styles */
+        .modal-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: var(--modal-overlay);
+            z-index: 3000;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            opacity: 0;
+            visibility: hidden;
+            transition: all 0.3s ease;
+            padding: 20px;
+        }
+
+        .modal-overlay.active {
+            opacity: 1;
+            visibility: visible;
+        }
+
+        .modal {
+            background: var(--white);
+            border-radius: 12px;
+            width: 90%;
+            max-width: 1200px;
+            max-height: 90vh;
+            overflow-y: auto;
+            transform: translateY(30px);
+            transition: transform 0.4s ease;
+            position: relative;
+        }
+
+        .modal-overlay.active .modal {
+            transform: translateY(0);
+        }
+
+        .modal-close {
+            position: absolute;
+            top: 1rem;
+            right: 1rem;
+            background: var(--white);
+            border: none;
+            width: 45px;
+            height: 45px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.25rem;
+            color: var(--text-dark);
+            cursor: pointer;
+            z-index: 10;
+            box-shadow: var(--shadow);
+            transition: all 0.3s ease;
+        }
+
+        .modal-close:hover {
+            background: var(--primary);
+            color: var(--white);
+        }
+
+        .modal-content {
+            padding: 2.5rem;
+        }
+
+        .modal-header {
+            margin-bottom: 2rem;
+            padding-bottom: 1.5rem;
+            border-bottom: 2px solid var(--bg-light);
+        }
+
+        .modal-category {
+            font-size: 0.875rem;
+            color: var(--primary);
+            font-weight: 600;
+            margin-bottom: 0.5rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .modal-header h2 {
+            font-size: 2rem;
+            margin-bottom: 0.5rem;
+            line-height: 1.3;
+        }
+
+        .modal-price {
+            font-size: 2.5rem;
+            font-weight: 700;
+            color: var(--primary);
+            margin-bottom: 1rem;
+        }
+
+        .modal-description {
+            color: var(--text-light);
+            line-height: 1.6;
+            margin-bottom: 2rem;
+            font-size: 1.1rem;
+        }
+
+        /* Inventory Gallery */
+        .inventory-gallery {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 1rem;
+            margin-bottom: 2rem;
+        }
+
+        .gallery-image {
+            width: 100%;
+            height: 200px;
+            object-fit: cover;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: transform 0.3s ease;
+        }
+
+        .gallery-image:hover {
+            transform: scale(1.03);
+        }
+
+        .inventory-details-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 1.5rem;
+            margin-bottom: 2.5rem;
+        }
+
+        .detail-item {
+            background: var(--bg-light);
+            padding: 1.2rem;
+            border-radius: 8px;
+            border-left: 3px solid var(--primary);
+        }
+
+        .detail-label {
+            font-size: 0.8rem;
+            color: var(--text-light);
+            margin-bottom: 0.25rem;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            font-weight: 600;
+        }
+
+        .detail-value {
+            font-weight: 600;
+            font-size: 1rem;
+        }
+
+        .modal-actions {
+            display: flex;
+            gap: 1rem;
+            margin-top: 2rem;
+            flex-wrap: wrap;
+        }
+
+        .modal-action-btn {
+            flex: 1;
+            min-width: 200px;
+        }
+
+        /* CTA Section */
+        .cta {
+            padding: 80px 0;
+            background: linear-gradient(135deg, var(--primary) 0%, var(--primary-dark) 100%);
+            color: var(--white);
+            text-align: center;
+        }
+
+        .cta h2 {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+        }
+
+        .cta p {
+            font-size: 1.125rem;
+            margin-bottom: 2rem;
+            opacity: 0.9;
+        }
+
+        .cta-buttons {
+            display: flex;
+            gap: 1rem;
+            justify-content: center;
+        }
+
+        /* Footer */
+        footer {
+            background: var(--text-dark);
+            color: var(--white);
+            padding: 3rem 0;
+        }
+
+        .footer-content {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+        }
+
+        .footer-section h3 {
+            margin-bottom: 1rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .footer-links {
+            list-style: none;
+        }
+
+        .footer-links li {
+            margin-bottom: 0.5rem;
+        }
+
+        .footer-links a {
+            color: #ccc;
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+
+        .footer-links a:hover {
+            color: var(--white);
+        }
+
+        .social-links {
+            display: flex;
+            gap: 1rem;
+            margin-top: 1rem;
+        }
+
+        .social-links a {
+            width: 40px;
+            height: 40px;
+            background: rgba(255,255,255,0.1);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--white);
+            text-decoration: none;
+            transition: background 0.3s;
+        }
+
+        .social-links a:hover {
+            background: var(--primary);
+        }
+
+        .copyright {
+            text-align: center;
+            margin-top: 3rem;
+            padding-top: 2rem;
+            border-top: 1px solid #444;
+            color: #ccc;
+        }
+
+        /* Loading State */
+        .loading {
+            text-align: center;
+            padding: 4rem;
+            color: var(--text-light);
+        }
+
+        .loading-spinner {
+            border: 4px solid var(--bg-light);
+            border-top: 4px solid var(--primary);
+            border-radius: 50%;
+            width: 50px;
+            height: 50px;
+            animation: spin 1s linear infinite;
+            margin: 0 auto 1rem;
+        }
+
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+
+        .error-message {
+            text-align: center;
+            padding: 4rem;
+            color: #e74c3c;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .nav-links {
+                display: none;
+            }
+
+            .mobile-menu-btn {
+                display: block;
+            }
+
+            .page-header h1 {
+                font-size: 2.5rem;
+            }
+
+            .category-filters {
+                flex-direction: column;
+                align-items: center;
+            }
+
+            .filter-btn {
+                width: 100%;
+                max-width: 300px;
+                justify-content: center;
+            }
+
+            .inventory-grid {
+                grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+                gap: 15px;
+            }
+
+            .modal-content {
+                padding: 1.5rem;
+            }
+
+            .modal-header h2 {
+                font-size: 1.5rem;
+            }
+
+            .modal-price {
+                font-size: 2rem;
+            }
+
+            .inventory-gallery {
+                grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+            }
+
+            .gallery-image {
+                height: 150px;
+            }
+
+            .inventory-details-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .modal-actions {
+                flex-direction: column;
+            }
+
+            .modal-action-btn {
+                min-width: 100%;
+            }
+
+            .cta-buttons {
+                flex-direction: column;
+            }
+
+            .section-title {
+                font-size: 2rem;
+            }
+        }
+
+        .text-center {
+            text-align: center;
+        }
+
+        .btn-large {
+            padding: 1rem 2rem;
+            font-size: 1rem;
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header>
+        <div class="container">
+            <nav class="nav-container">
+                <a href="index.html" class="logo">
+                    <img src="logo1.png" alt="Lumiminds Logo" class="logo-image">
+                    LumiMinds
+                </a>
+                
+                <ul class="nav-links">
+                    <li><a href="index.html">Home</a></li>
+                    <li><a href="services.html">Services</a></li>
+                    <li><a href="work.html">Our Works</a></li>
+                    <li><a href="inventory.html" class="active">Inventory</a></li>
+                    <li><a href="about.html">About</a></li>
+                    <li><a href="contact.html">Contact</a></li>
+                </ul>
+                
+                <button class="mobile-menu-btn">
+                    <i class="fas fa-bars"></i>
+                </button>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Mobile Menu -->
+    <div class="mobile-menu">
+        <div class="mobile-menu-header">
+            <div class="logo">
+                <img src="logo1.png" alt="Lumiminds Logo" class="logo-image">
+                LumiMinds
+            </div>
+            <button class="mobile-menu-close">
+                <i class="fas fa-times"></i>
+            </button>
+        </div>
+        <ul class="mobile-nav-links">
+            <li><a href="index.html">Home</a></li>
+            <li><a href="services.html">Services</a></li>
+            <li><a href="work.html">Our Works</a></li>
+            <li><a href="inventory.html" class="active">Inventory</a></li>
+            <li><a href="about.html">About</a></li>
+            <li><a href="contact.html">Contact</a></li>
+        </ul>
+    </div>
+
+    <!-- Page Header -->
+    <section class="page-header">
+        <div class="container">
+            <h1>Current Inventory</h1>
+            <p>Browse our available stock of vehicles, gadgets, and electronics ready for immediate purchase</p>
+        </div>
+    </section>
+
+    <!-- Inventory Categories -->
+    <section class="inventory-categories">
+        <div class="container">
+            <div class="category-filters">
+                <button class="filter-btn active" data-filter="all">
+                    <i class="fas fa-th"></i> All Items
+                </button>
+                <button class="filter-btn" data-filter="vehicle">
+                    <i class="fas fa-car"></i> Vehicles
+                </button>
+                <button class="filter-btn" data-filter="gadget">
+                    <i class="fas fa-mobile-alt"></i> Gadgets
+                </button>
+                <button class="filter-btn" data-filter="electronics">
+                    <i class="fas fa-laptop"></i> Electronics
+                </button>
+                <button class="filter-btn" data-filter="parts">
+                    <i class="fas fa-cogs"></i> Parts & Accessories
+                </button>
+            </div>
+        </div>
+    </section>
+
+    <!-- Inventory Grid -->
+    <section class="inventory-grid-section">
+        <div class="container">
+            <div id="inventoryContainer" class="inventory-grid">
+                <!-- Inventory items will be loaded here dynamically -->
+                <div class="loading">
+                    <div class="loading-spinner"></div>
+                    <p>Loading inventory items...</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Modal/Lightbox -->
+    <div class="modal-overlay" id="modalOverlay">
+        <div class="modal" id="modal">
+            <button class="modal-close" id="modalClose">
+                <i class="fas fa-times"></i>
+            </button>
+            <div class="modal-content" id="modalContent">
+                <!-- Modal content will be dynamically generated here -->
+            </div>
+        </div>
+    </div>
+
+    <!-- CTA Section -->
+    <section class="cta">
+        <div class="container">
+            <div class="cta-content">
+                <h2>Interested in Any Item?</h2>
+                <p>Contact us today for pricing, availability, and purchase inquiries</p>
+                <div class="cta-buttons">
+                    <button class="btn btn-outline btn-large" onclick="location.href='contact.html'">
+                        <i class="fas fa-envelope"></i> Send Inquiry
+                    </button>
+                    <button class="btn btn-primary btn-large" onclick="location.href='tel:+260969820643'">
+                        <i class="fas fa-phone"></i> Call for Pricing
+                    </button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h3>
+                        <i class="fas fa-lightbulb"></i>
+                        LumiMinds
+                    </h3>
+                    <p>Your trusted partner for comprehensive business solutions including product sourcing and IT services.</p>
+                    <div class="social-links">
+                        <a href="#"><i class="fab fa-facebook"></i></a>
+                        <a href="#"><i class="fab fa-twitter"></i></a>
+                        <a href="#"><i class="fab fa-instagram"></i></a>
+                        <a href="#"><i class="fab fa-linkedin"></i></a>
+                        <a href="#"><i class="fab fa-whatsapp"></i></a>
+                    </div>
+                </div>
+                
+                <div class="footer-section">
+                    <h3>Quick Links</h3>
+                    <ul class="footer-links">
+                        <li><a href="index.html">Home</a></li>
+                        <li><a href="services.html">Services</a></li>
+                        <li><a href="work.html">Our Works</a></li>
+                        <li><a href="inventory.html">Inventory</a></li>
+                        <li><a href="about.html">About Us</a></li>
+                        <li><a href="contact.html">Contact</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-section">
+                    <h3>Our Services</h3>
+                    <ul class="footer-links">
+                        <li><a href="services.html#product-sourcing">Product Sourcing</a></li>
+                        <li><a href="services.html#it-support">IT Support</a></li>
+                        <li><a href="vehicles.html">Vehicle Import</a></li>
+                        <li><a href="gadgets.html">Gadget Import</a></li>
+                        <li><a href="services.html#web-dev">Web Development</a></li>
+                        <li><a href="services.html#consultation">IT Consultation</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-section">
+                    <h3>Contact Info</h3>
+                    <ul class="footer-links">
+                        <li><i class="fas fa-map-marker-alt"></i> 45 mwasumina Itawa, Ndola, Zambia</li>
+                        <li><i class="fas fa-envelope"></i> lumimindszambia@gmail.com</li>
+                        <li><i class="fas fa-phone"></i> +260 969 820 643</li>
+                        <li><i class="fas fa-clock"></i> Mon-Fri: 8AM-6PM, Sat: 9AM-1PM</li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="copyright">
+                <p>&copy; 2025 LumiMinds Solutions. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Mobile Menu Toggle
+        const mobileMenuBtn = document.querySelector('.mobile-menu-btn');
+        const mobileMenu = document.querySelector('.mobile-menu');
+        const mobileMenuClose = document.querySelector('.mobile-menu-close');
+        const mobileNavLinks = document.querySelectorAll('.mobile-nav-links a');
+
+        mobileMenuBtn.addEventListener('click', () => {
+            mobileMenu.classList.add('active');
+            document.body.style.overflow = 'hidden';
+        });
+
+        mobileMenuClose.addEventListener('click', () => {
+            mobileMenu.classList.remove('active');
+            document.body.style.overflow = 'auto';
+        });
+
+        mobileNavLinks.forEach(link => {
+            link.addEventListener('click', () => {
+                mobileMenu.classList.remove('active');
+                document.body.style.overflow = 'auto';
+            });
+        });
+
+        // Category data
+        const categoryData = {
+            vehicle: { icon: "fas fa-car", label: "Vehicle", colorClass: "vehicle" },
+            gadget: { icon: "fas fa-mobile-alt", label: "Gadget", colorClass: "gadget" },
+            electronics: { icon: "fas fa-laptop", label: "Electronics", colorClass: "electronics" },
+            parts: { icon: "fas fa-cogs", label: "Parts", colorClass: "parts" }
+        };
+
+        // Modal elements
+        const modalOverlay = document.getElementById('modalOverlay');
+        const modal = document.getElementById('modal');
+        const modalClose = document.getElementById('modalClose');
+        const modalContent = document.getElementById('modalContent');
+
+        let inventoryIndex = [];
+        let filteredInventory = [];
+
+        // Initialize the page
+        document.addEventListener('DOMContentLoaded', function() {
+            loadInventoryItems();
+            setupFilterButtons();
+            setupModalEvents();
+        });
+
+        // Load inventory items - CORRECTED PATH for your folder structure
+        async function loadInventoryItems() {
+            const container = document.getElementById('inventoryContainer');
+            
+            try {
+                // CORRECTED: Using your Inventory folder path
+                const response = await fetch('Inventory/inventory-index.json');
+                if (!response.ok) {
+                    throw new Error(`HTTP error! status: ${response.status}`);
+                }
+                const data = await response.json();
+                inventoryIndex = data.items || [];
+                renderInventoryItems('all');
+            } catch (error) {
+                console.error('Error loading inventory items:', error);
+                container.innerHTML = `
+                    <div class="error-message">
+                        <i class="fas fa-exclamation-triangle fa-3x" style="color: #e74c3c; margin-bottom: 1rem;"></i>
+                        <h3>Unable to Load Inventory Items</h3>
+                        <p>Please check your internet connection and try again.</p>
+                        <button class="btn btn-outline" onclick="loadInventoryItems()">
+                            <i class="fas fa-redo"></i> Retry
+                        </button>
+                    </div>
+                `;
+            }
+        }
+
+        // Load individual inventory item data - CORRECTED PATH for your folder structure
+        async function loadInventoryItemData(filename) {
+            try {
+                // CORRECTED: Using your Inventory folder path
+                const response = await fetch(`Inventory/${filename}`);
+                if (!response.ok) {
+                    throw new Error(`HTTP error! status: ${response.status}`);
+                }
+                return await response.json();
+            } catch (error) {
+                console.error('Error loading inventory item data:', error);
+                return null;
+            }
+        }
+
+        // Function to load image with error handling
+        function createImageElement(src, alt, className) {
+            const img = new Image();
+            img.src = src;
+            img.alt = alt;
+            if (className) img.className = className;
+            
+            // Add error handler
+            img.onerror = function() {
+                this.src = 'https://images.unsplash.com/photo-1558494949-ef010cbdcc31?ixlib=rb-4.0.3&auto=format&fit=crop&w=1000&q=80';
+                this.alt = 'Image not available';
+            };
+            
+            return img;
+        }
+
+        // Get status badge class based on inventory quantity
+        function getStatusClass(quantity) {
+            if (quantity >= 10) return 'status-in-stock';
+            if (quantity > 0 && quantity < 10) return 'status-low-stock';
+            return 'status-out-of-stock';
+        }
+
+        // Get status text based on inventory quantity
+        function getStatusText(quantity) {
+            if (quantity >= 10) return 'In Stock';
+            if (quantity > 0 && quantity < 10) return 'Low Stock';
+            return 'Out of Stock';
+        }
+
+        // Render inventory items to the grid
+        function renderInventoryItems(filter) {
+            const container = document.getElementById('inventoryContainer');
+            
+            if (inventoryIndex.length === 0) {
+                container.innerHTML = `
+                    <div class="loading">
+                        <div class="loading-spinner"></div>
+                        <p>Loading inventory items...</p>
+                    </div>
+                `;
+                return;
+            }
+            
+            container.innerHTML = '';
+            
+            // Filter by category
+            filteredInventory = filter === 'all' 
+                ? [...inventoryIndex] 
+                : inventoryIndex.filter(item => item.category === filter);
+            
+            if (filteredInventory.length === 0) {
+                container.innerHTML = `
+                    <div class="error-message">
+                        <i class="fas fa-search fa-3x" style="color: var(--text-light); margin-bottom: 1rem;"></i>
+                        <h3>No Items Found</h3>
+                        <p>No items match the selected category.</p>
+                    </div>
+                `;
+                return;
+            }
+            
+            filteredInventory.forEach((item, index) => {
+                const categoryInfo = categoryData[item.category];
+                const statusClass = getStatusClass(item.quantity || 0);
+                const statusText = getStatusText(item.quantity || 0);
+                
+                const inventoryElement = document.createElement('div');
+                inventoryElement.className = 'inventory-item';
+                inventoryElement.setAttribute('data-category', item.category);
+                inventoryElement.setAttribute('data-index', index);
+                inventoryElement.setAttribute('data-filename', item.filename);
+                
+                inventoryElement.innerHTML = `
+                    <div class="inventory-image-container">
+                        <img src="${item.previewImage}" alt="${item.title}" class="inventory-image" onerror="this.src='https://images.unsplash.com/photo-1558494949-ef010cbdcc31?ixlib=rb-4.0.3&auto=format&fit=crop&w=1000&q=80'">
+                        <div class="inventory-status ${statusClass}">${statusText}</div>
+                        <div class="category-badge ${categoryInfo.colorClass}">
+                            <i class="${categoryInfo.icon}"></i> ${categoryInfo.label}
+                        </div>
+                    </div>
+                    <div class="inventory-info">
+                        <h3 class="inventory-title">${item.title}</h3>
+                        <div class="inventory-price">$${item.price?.toLocaleString() || 'Contact for Price'}</div>
+                        <p style="color: var(--text-light); font-size: 0.875rem; margin-bottom: 0.5rem;">${item.brand || ''} ${item.model ? `- ${item.model}` : ''}</p>
+                        ${item.specs && item.specs.length > 0 ? `
+                            <div class="inventory-specs">
+                                ${item.specs.slice(0, 3).map(spec => `<span class="spec-item">${spec}</span>`).join('')}
+                            </div>
+                        ` : ''}
+                        <div class="inventory-actions">
+                            <button class="btn btn-outline action-btn" onclick="event.stopPropagation(); openModal(${index})">
+                                <i class="fas fa-eye"></i> View Details
+                            </button>
+                            ${(item.quantity || 0) > 0 ? `
+                                <button class="btn btn-success action-btn" onclick="event.stopPropagation(); inquiryItem('${item.title}')">
+                                    <i class="fas fa-shopping-cart"></i> Inquire
+                                </button>
+                            ` : `
+                                <button class="btn btn-outline action-btn" onclick="event.stopPropagation(); contactForRestock('${item.title}')">
+                                    <i class="fas fa-bell"></i> Notify Me
+                                </button>
+                            `}
+                        </div>
+                    </div>
+                `;
+                
+                inventoryElement.addEventListener('click', () => openModal(index));
+                container.appendChild(inventoryElement);
+            });
+        }
+
+        // Setup filter buttons
+        function setupFilterButtons() {
+            const filterButtons = document.querySelectorAll('.filter-btn');
+            
+            filterButtons.forEach(button => {
+                button.addEventListener('click', function() {
+                    const filter = this.dataset.filter;
+                    
+                    // Update active button
+                    filterButtons.forEach(btn => btn.classList.remove('active'));
+                    this.classList.add('active');
+                    
+                    // Render filtered items
+                    renderInventoryItems(filter);
+                });
+            });
+        }
+
+        // Setup modal events
+        function setupModalEvents() {
+            // Close modal
+            modalClose.addEventListener('click', closeModal);
+            modalOverlay.addEventListener('click', (e) => {
+                if (e.target === modalOverlay) closeModal();
+            });
+            
+            // Keyboard navigation
+            document.addEventListener('keydown', (e) => {
+                if (!modalOverlay.classList.contains('active')) return;
+                if (e.key === 'Escape') closeModal();
+            });
+        }
+
+        // Open modal with item details
+        async function openModal(index) {
+            const itemRef = filteredInventory[index];
+            
+            // Show loading state
+            modalContent.innerHTML = `
+                <div style="text-align: center; padding: 4rem;">
+                    <div class="loading-spinner" style="margin: 0 auto 1rem;"></div>
+                    <p>Loading item details...</p>
+                </div>
+            `;
+            
+            document.body.style.overflow = 'hidden';
+            modalOverlay.classList.add('active');
+            
+            // Load the item data
+            const item = await loadInventoryItemData(itemRef.filename);
+            
+            if (!item) {
+                modalContent.innerHTML = `
+                    <div style="text-align: center; padding: 4rem;">
+                        <i class="fas fa-exclamation-triangle fa-3x" style="color: var(--secondary); margin-bottom: 1rem;"></i>
+                        <h3>Error Loading Item</h3>
+                        <p>Unable to load item data. Please try again.</p>
+                        <button class="btn btn-outline" onclick="closeModal()">
+                            <i class="fas fa-times"></i> Close
+                        </button>
+                    </div>
+                `;
+                return;
+            }
+            
+            const categoryInfo = categoryData[item.category];
+            const statusClass = getStatusClass(item.quantity || 0);
+            const statusText = getStatusText(item.quantity || 0);
+            
+            // Generate gallery images HTML
+            let galleryHTML = '';
+            if (item.images && item.images.length > 0) {
+                galleryHTML = item.images.map((image, imgIndex) => 
+                    `<img src="${image}" alt="Item Image ${imgIndex + 1}" class="gallery-image" onclick="viewFullImage('${image}')" onerror="this.src='https://images.unsplash.com/photo-1558494949-ef010cbdcc31?ixlib=rb-4.0.3&auto=format&fit=crop&w=1000&q=80'">`
+                ).join('');
+            } else {
+                galleryHTML = `<p>No additional images available for this item.</p>`;
+            }
+            
+            // Generate details HTML
+            let detailsHTML = '';
+            if (item.details && item.details.length > 0) {
+                detailsHTML = item.details.map(detail => `
+                    <div class="detail-item">
+                        <div class="detail-label">${detail.label}</div>
+                        <div class="detail-value">${detail.value}</div>
+                    </div>
+                `).join('');
+            }
+            
+            // Generate specs HTML
+            let specsHTML = '';
+            if (item.specs && item.specs.length > 0) {
+                specsHTML = item.specs.map(spec => `<span class="spec-item">${spec}</span>`).join('');
+            }
+            
+            // Set modal content
+            modalContent.innerHTML = `
+                <div class="modal-header">
+                    <div class="modal-category">
+                        <i class="${categoryInfo.icon}"></i> ${categoryInfo.label}
+                    </div>
+                    <h2>${item.title}</h2>
+                    <div class="modal-price">$${item.price?.toLocaleString() || 'Contact for Price'}</div>
+                    <div class="inventory-status ${statusClass}" style="display: inline-block;">${statusText}</div>
+                    ${item.quantity > 0 ? `<span style="margin-left: 1rem; color: var(--text-light);">(${item.quantity} units available)</span>` : ''}
+                </div>
+                
+                ${item.brand || item.model ? `
+                    <div style="margin-bottom: 1rem;">
+                        ${item.brand ? `<strong>Brand:</strong> ${item.brand} ` : ''}
+                        ${item.model ? `<strong>Model:</strong> ${item.model}` : ''}
+                    </div>
+                ` : ''}
+                
+                ${item.description ? `<p class="modal-description">${item.description}</p>` : ''}
+                
+                ${specsHTML ? `
+                    <h3 style="margin-bottom: 1rem; color: var(--text-dark);">Specifications</h3>
+                    <div class="inventory-specs" style="margin-bottom: 2rem;">
+                        ${specsHTML}
+                    </div>
+                ` : ''}
+                
+                <h3 style="margin-bottom: 1rem; color: var(--text-dark);">Gallery</h3>
+                <div class="inventory-gallery">
+                    ${galleryHTML}
+                </div>
+                
+                ${detailsHTML ? `
+                    <h3 style="margin-bottom: 1rem; color: var(--text-dark);">Detailed Information</h3>
+                    <div class="inventory-details-grid">
+                        ${detailsHTML}
+                    </div>
+                ` : ''}
+                
+                <div class="modal-actions">
+                    ${item.quantity > 0 ? `
+                        <button class="btn btn-success modal-action-btn" onclick="inquiryItem('${item.title}')">
+                            <i class="fas fa-shopping-cart"></i> Purchase Inquiry
+                        </button>
+                    ` : `
+                        <button class="btn btn-outline modal-action-btn" onclick="contactForRestock('${item.title}')">
+                            <i class="fas fa-bell"></i> Notify When Available
+                        </button>
+                    `}
+                    <button class="btn btn-primary modal-action-btn" onclick="location.href='contact.html?item=${encodeURIComponent(item.title)}'">
+                        <i class="fas fa-envelope"></i> Contact for More Info
+                    </button>
+                    <button class="btn btn-outline modal-action-btn" onclick="closeModal()">
+                        <i class="fas fa-times"></i> Close
+                    </button>
+                </div>
+            `;
+        }
+
+        // View full image in modal
+        function viewFullImage(imageUrl) {
+            modalContent.innerHTML = `
+                <div style="text-align: center; padding: 2rem;">
+                    <img src="${imageUrl}" alt="Full Size Image" style="max-width: 100%; max-height: 70vh; border-radius: 8px; margin-bottom: 1rem;" 
+                         onerror="this.src='https://images.unsplash.com/photo-1558494949-ef010cbdcc31?ixlib=rb-4.0.3&auto=format&fit=crop&w=1000&q=80'">
+                    <button class="btn btn-outline" onclick="openModal(${filteredInventory.findIndex(item => item.filename === modalContent.getAttribute('data-filename'))})">
+                        <i class="fas fa-arrow-left"></i> Back to Item Details
+                    </button>
+                </div>
+            `;
+        }
+
+        // Close modal
+        function closeModal() {
+            document.body.style.overflow = 'auto';
+            modalOverlay.classList.remove('active');
+        }
+
+        // Inquiry about an item
+        function inquiryItem(itemTitle) {
+            closeModal();
+            location.href = `contact.html?item=${encodeURIComponent(itemTitle)}&type=inquiry`;
+        }
+
+        // Contact for restock notification
+        function contactForRestock(itemTitle) {
+            closeModal();
+            location.href = `contact.html?item=${encodeURIComponent(itemTitle)}&type=restock`;
+        }
+
+        // Smooth scrolling
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                }
+            });
+        });
+
+        // Navbar background on scroll
+        window.addEventListener('scroll', () => {
+            const header = document.querySelector('header');
+            if (window.scrollY > 100) {
+                header.style.background = 'rgba(255, 255, 255, 0.95)';
+                header.style.backdropFilter = 'blur(10px)';
+            } else {
+                header.style.background = 'var(--white)';
+                header.style.backdropFilter = 'none';
+            }
+        });
+    </script>
+</body>
+</html>
