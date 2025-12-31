@@ -4,12 +4,12 @@
   "items": [
     {
       "id": "1",
-      "title": "Toyota Land Cruiser V8",
+      "title": " LEXUS IS250",
       "category": "vehicle",
-      "previewImage": "images/vehicles/toyota-landcruiser-main.jpg",
+      "previewImage": "main/images/cars/lexusis2501/1.jpeg1.jpg",
       "price": 85000,
       "brand": "Toyota",
-      "model": "Land Cruiser V8 2023",
+      "model": " LEXUS IS250",
       "quantity": 2,
       "status": "in-stock",
       "filename": "toyota-landcruiser-v8.json",
