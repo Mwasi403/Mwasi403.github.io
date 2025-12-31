@@ -49,11 +49,14 @@
   ],
   
   "images": [
-    "images/vehicles/toyota-landcruiser-1.jpg",
-    "images/vehicles/toyota-landcruiser-2.jpg",
-    "images/vehicles/toyota-landcruiser-3.jpg",
-    "images/vehicles/toyota-landcruiser-4.jpg",
-    "images/vehicles/toyota-landcruiser-5.jpg"
+    "main/images/cars/lexusis2501/1.jpeg1.jpg",
+    "main/images/cars/lexusis2501/2.jpeg1.jpg",
+    "main/images/cars/lexusis2501/3.jpeg1.jpg",
+    "main/images/cars/lexusis2501/4.jpeg1.jpg",
+    "main/images/cars/lexusis2501/5.jpeg1.jpg",
+    "main/images/cars/lexusis2501/6.jpeg1.jpg",
+    "main/images/cars/lexusis2501/7.jpeg1.jpg",
+    "main/images/cars/lexusis2501/8.jpeg1.jpg"
   ],
   
   "details": [
