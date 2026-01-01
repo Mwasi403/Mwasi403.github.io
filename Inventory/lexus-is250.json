@@ -1,0 +1,83 @@
+{
+  "id": "1",
+  "title": "LEXUS IS250",
+  "category": "vehicle",
+  "description": "Premium Lexus IS250 sedan in excellent condition. Luxury features, smooth ride, and premium interior.",
+  
+  "price": 175000,
+  "currency": "ZMW",
+  
+  "brand": "Lexus",
+  "model": "IS250",
+  "year": 2015,
+  "color": "White",
+  "condition": "Used - Excellent",
+  "mileage": 75000,
+  "fuelType": "Petrol",
+  "transmission": "Automatic",
+  "driveType": "Rear Wheel Drive",
+  
+  "quantity": 0,
+  "status": "SOLD",
+  "location": "Ndola Warehouse",
+  
+  "specs": [
+    "2.5L V6 Engine",
+    "6-Speed Automatic",
+    "Leather Interior",
+    "Sunroof",
+    "Navigation System",
+    "Rear Camera",
+    "Bluetooth",
+    "Heated Seats"
+  ],
+  
+  "features": [
+    "Keyless Entry",
+    "Push Button Start",
+    "Climate Control",
+    "Power Windows",
+    "Power Seats",
+    "Premium Sound System",
+    "LED Headlights",
+    "Alloy Wheels"
+  ],
+  
+  "images": [
+    "Inventory/images/cars/lexusis250/1.jpeg",
+    "Inventory/images/cars/lexusis250/2.jpeg",
+    "Inventory/images/cars/lexusis250/3.jpeg",
+    "Inventory/images/cars/lexusis250/4.jpeg"
+  ],
+  
+  "details": [
+    {
+      "label": "Engine",
+      "value": "2.5L V6"
+    },
+    {
+      "label": "Horsepower",
+      "value": "204 HP"
+    },
+    {
+      "label": "Fuel Economy",
+      "value": "9.8 L/100km"
+    },
+    {
+      "label": "Seating Capacity",
+      "value": "5 Passengers"
+    }
+  ],
+  
+  "includedItems": [
+    "All Keys",
+    "Service Manual",
+    "Tool Kit",
+    "Spare Tire"
+  ],
+  
+  "notes": "This vehicle has been SOLD. Contact us for similar available models.",
+  
+  "addedDate": "2025-12-10",
+  "updatedDate": "2025-12-10"
+}
