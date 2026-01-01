@@ -49,14 +49,15 @@
   ],
   
   "images": [
-    "main/images/cars/lexusis2501/1.jpeg1.jpg",
-    "main/images/cars/lexusis2501/2.jpeg1.jpg",
-    "main/images/cars/lexusis2501/3.jpeg1.jpg",
-    "main/images/cars/lexusis2501/4.jpeg1.jpg",
-    "main/images/cars/lexusis2501/5.jpeg1.jpg",
-    "main/images/cars/lexusis2501/6.jpeg1.jpg",
-    "main/images/cars/lexusis2501/7.jpeg1.jpg",
-    "main/images/cars/lexusis2501/8.jpeg1.jpg"
+    "images/cars/lexusis250/1.jpeg",
+    "images/cars/lexusis250/2.jpeg",
+    "images/cars/lexusis250/3.jpeg",
+    "images/cars/lexusis250/4.jpeg",
+    "images/cars/lexusis250/5.jpeg",
+    "images/cars/lexusis250/6.jpeg",
+    "images/cars/lexusis250/7.jpeg",
+    "images/cars/lexusis250/8.jpeg"
+
   ],
   
   "details": [
