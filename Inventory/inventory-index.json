@@ -6,14 +6,14 @@
       "id": "1",
       "title": " LEXUS IS250",
       "category": "vehicle",
-      "previewImage": "https://github.com/Mwasi403/Mwasi403.github.io/blob/main/images/cars/lexusis2501/1.jpeg",
+      "previewImage": "images/cars/lexusis250/1.jpeg",
       "price": 85000,
       "brand": "Toyota",
       "model": " LEXUS IS250",
-      "quantity": 2,
-      "status": "in-stock",
+      "quantity": 0,
+      "status": "SOLD",
       "filename": "toyota-landcruiser-v8.json",
-      "addedDate": "2024-01-10"
+      "addedDate": "2025-12-10"
     }
   ]
 }
