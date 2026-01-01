@@ -1147,7 +1147,7 @@
                     </div>
                     <div class="inventory-info">
                         <h3 class="inventory-title">${item.title}</h3>
-                        <div class="inventory-price">$${item.price?.toLocaleString() || 'Contact for Price'}</div>
+                        <div class="inventory-price">K${item.price?.toLocaleString() || 'Contact for Price'}</div>
                         <p style="color: var(--text-light); font-size: 0.875rem; margin-bottom: 0.5rem;">${item.brand || ''} ${item.model ? `- ${item.model}` : ''}</p>
                         ${item.specs && item.specs.length > 0 ? `
                             <div class="inventory-specs">
@@ -1279,7 +1279,7 @@
                         <i class="${categoryInfo.icon}"></i> ${categoryInfo.label}
                     </div>
                     <h2>${item.title}</h2>
-                    <div class="modal-price">$${item.price?.toLocaleString() || 'Contact for Price'}</div>
+                    <div class="modal-price">K${item.price?.toLocaleString() || 'Contact for Price'}</div>
                     <div class="inventory-status ${statusClass}" style="display: inline-block;">${statusText}</div>
                     ${item.quantity > 0 ? `<span style="margin-left: 1rem; color: var(--text-light);">(${item.quantity} units available)</span>` : ''}
                 </div>
