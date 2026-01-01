@@ -1021,12 +1021,11 @@
             setupModalEvents();
         });
 
-        // Load inventory items - CORRECTED PATH for your folder structure
+        // Load inventory items
         async function loadInventoryItems() {
             const container = document.getElementById('inventoryContainer');
             
             try {
-                // CORRECTED: Using your Inventory folder path
                 const response = await fetch('Inventory/inventory-index.json');
                 if (!response.ok) {
                     throw new Error(`HTTP error! status: ${response.status}`);
@@ -1049,10 +1048,9 @@
             }
         }
 
-        // Load individual inventory item data - CORRECTED PATH for your folder structure
+        // Load individual inventory item data
         async function loadInventoryItemData(filename) {
             try {
-                // CORRECTED: Using your Inventory folder path
                 const response = await fetch(`Inventory/${filename}`);
                 if (!response.ok) {
                     throw new Error(`HTTP error! status: ${response.status}`);
@@ -1064,20 +1062,12 @@
             }
         }
 
-        // Function to load image with error handling
-        function createImageElement(src, alt, className) {
-            const img = new Image();
-            img.src = src;
-            img.alt = alt;
-            if (className) img.className = className;
+        // Format price with K for Kwacha
+        function formatPrice(price) {
+            if (!price && price !== 0) return 'Contact for Price';
             
-            // Add error handler
-            img.onerror = function() {
-                this.src = "images/cars/lexusis250/1.jpeg";
-                this.alt = 'Image not available';
-            };
-            
-            return img;
+            // Format with thousand separators and add K
+            return 'K ' + price.toLocaleString('en-US');
         }
 
         // Get status badge class based on inventory quantity
@@ -1130,6 +1120,7 @@
                 const categoryInfo = categoryData[item.category];
                 const statusClass = getStatusClass(item.quantity || 0);
                 const statusText = getStatusText(item.quantity || 0);
+                const formattedPrice = formatPrice(item.price);
                 
                 const inventoryElement = document.createElement('div');
                 inventoryElement.className = 'inventory-item';
@@ -1139,7 +1130,7 @@
                 
                 inventoryElement.innerHTML = `
                     <div class="inventory-image-container">
-                        <img src="${item.previewImage}" alt="${item.title}" class="inventory-image" onerror="this.src='https://images.unsplash.com/photo-1558494949-ef010cbdcc31?ixlib=rb-4.0.3&auto=format&fit=crop&w=1000&q=80'">
+                        <img src="${item.previewImage}" alt="${item.title}" class="inventory-image">
                         <div class="inventory-status ${statusClass}">${statusText}</div>
                         <div class="category-badge ${categoryInfo.colorClass}">
                             <i class="${categoryInfo.icon}"></i> ${categoryInfo.label}
@@ -1147,7 +1138,7 @@
                     </div>
                     <div class="inventory-info">
                         <h3 class="inventory-title">${item.title}</h3>
-                        <div class="inventory-price">K${item.price?.toLocaleString() || 'Contact for Price'}</div>
+                        <div class="inventory-price">${formattedPrice}</div>
                         <p style="color: var(--text-light); font-size: 0.875rem; margin-bottom: 0.5rem;">${item.brand || ''} ${item.model ? `- ${item.model}` : ''}</p>
                         ${item.specs && item.specs.length > 0 ? `
                             <div class="inventory-specs">
@@ -1244,12 +1235,13 @@
             const categoryInfo = categoryData[item.category];
             const statusClass = getStatusClass(item.quantity || 0);
             const statusText = getStatusText(item.quantity || 0);
+            const formattedPrice = formatPrice(item.price);
             
             // Generate gallery images HTML
             let galleryHTML = '';
             if (item.images && item.images.length > 0) {
                 galleryHTML = item.images.map((image, imgIndex) => 
-                    `<img src="${image}" alt="Item Image ${imgIndex + 1}" class="gallery-image" onclick="viewFullImage('${image}')" onerror="this.src='https://images.unsplash.com/photo-1558494949-ef010cbdcc31?ixlib=rb-4.0.3&auto=format&fit=crop&w=1000&q=80'">`
+                    `<img src="${image}" alt="Item Image ${imgIndex + 1}" class="gallery-image" onclick="viewFullImage('${image}')">`
                 ).join('');
             } else {
                 galleryHTML = `<p>No additional images available for this item.</p>`;
@@ -1279,7 +1271,7 @@
                         <i class="${categoryInfo.icon}"></i> ${categoryInfo.label}
                     </div>
                     <h2>${item.title}</h2>
-                    <div class="modal-price">K${item.price?.toLocaleString() || 'Contact for Price'}</div>
+                    <div class="modal-price">${formattedPrice}</div>
                     <div class="inventory-status ${statusClass}" style="display: inline-block;">${statusText}</div>
                     ${item.quantity > 0 ? `<span style="margin-left: 1rem; color: var(--text-light);">(${item.quantity} units available)</span>` : ''}
                 </div>
@@ -1336,8 +1328,7 @@
         function viewFullImage(imageUrl) {
             modalContent.innerHTML = `
                 <div style="text-align: center; padding: 2rem;">
-                    <img src="${imageUrl}" alt="Full Size Image" style="max-width: 100%; max-height: 70vh; border-radius: 8px; margin-bottom: 1rem;" 
-                         onerror="this.src='https://images.unsplash.com/photo-1558494949-ef010cbdcc31?ixlib=rb-4.0.3&auto=format&fit=crop&w=1000&q=80'">
+                    <img src="${imageUrl}" alt="Full Size Image" style="max-width: 100%; max-height: 70vh; border-radius: 8px; margin-bottom: 1rem;">
                     <button class="btn btn-outline" onclick="openModal(${filteredInventory.findIndex(item => item.filename === modalContent.getAttribute('data-filename'))})">
                         <i class="fas fa-arrow-left"></i> Back to Item Details
                     </button>
