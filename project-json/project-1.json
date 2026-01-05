@@ -8,11 +8,11 @@
   ],
   "details": [
     { "label": "Client", "value": "Tech Solutions Zambia" },
-    { "label": "Quantity", "value": "150 Units Total" },
+    { "label": "Color", "value": "150 Units Total" },
     { "label": "Delivery Time", "value": "3 Weeks" },
-    { "label": "Savings", "value": "25% vs Local Market" },
-    { "label": "Warranty", "value": "2 Years Comprehensive" },
-    { "label": "Support", "value": "24/7 Technical Support" }
+    { "label": "Source Country", "value": "25% vs Local Market" },
+    { "label": "Mileage", "value": "2 Years Comprehensive" },
+    { "label": "Total Cost", "value": "24/7 Technical Support" }
   ],
   "testimonial": {
     "quote": "Significant cost savings and all equipment arrived in perfect condition with valid warranties. The bulk procurement process was handled professionally.",
