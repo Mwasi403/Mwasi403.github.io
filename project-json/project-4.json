@@ -1,23 +1,21 @@
 {
-  "id": 4,
+  "id": 2,
   "category": "vehicle",
-  "title": "Fleet of 5 Toyota Hilux for Construction",
-  "description": "Imported a fleet of 5 Toyota Hilux double cabs for a construction company's site operations. All vehicles were customized with off-road packages and safety features.",
+  "title": "HARRIER 2015 DELIVERED",
+  "description": "Step into a new standard of elegance and performance with the 2015 Toyota Harrier, where innovation meets sophistication. Crafted with premium detail and powered by advanced technology, the Harrier is not just an SUV,  it's a statement of style and comfort.",
   "images": [
-    "https://images.unsplash.com/photo-1580273916550-e323be2ae537?ixlib=rb-4.0.3&auto=format&fit=crop&w=1000&q=80",
-    "https://images.unsplash.com/photo-1507136566006-cfc505b114fc?ixlib=rb-4.0.3&auto=format&fit=crop&w=1000&q=80",
-    "https://images.unsplash.com/photo-1533473359331-0135ef1b58bf?ixlib=rb-4.0.3&auto=format&fit=crop&w=1000&q=80"
+    "project-json/images/cars/harrier-2015/1.jpg"
   ],
   "details": [
-    { "label": "Client", "value": "BuildRight Construction" },
-    { "label": "Quantity", "value": "5 Vehicles" },
-    { "label": "Timeline", "value": "5 Weeks" },
-    { "label": "Cost Saving", "value": "$15,000 Total" },
-    { "label": "Customization", "value": "Off-road Package Added" },
-    { "label": "Status", "value": "Operational on Sites" }
+    { "label": "Client", "value": "Tech Solutions Zambia" },
+    { "label": "Color", "value": "Black" },
+    { "label": "Delivery Time", "value": "2 Months" },
+    { "label": "Source Country", "value": "Japan" },
+    { "label": "Mileage", "value": "40 Kilometers" },
+    { "label": "Total Cost", "value": "K230, 000" }
   ],
   "testimonial": {
-    "quote": "All vehicles were delivered on time and have been performing excellently on our construction sites. The customization options were perfect for our needs.",
-    "author": "Lewis Tembo"
+    "quote": "Significant cost savings and all equipment arrived in perfect condition with valid warranties. The bulk procurement process was handled professionally.",
+    "author": "Raymond Mukosha"
   }
 }
