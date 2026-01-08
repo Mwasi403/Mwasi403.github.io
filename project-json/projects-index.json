@@ -42,6 +42,35 @@
       "title": "HONDAFIT DELIVERED",
       "previewImage": "project-json/images/cars/hondafit-four/1.jpg"
     }
+        },
+        {
+      "id": 7,
+      "filename": "project-3.json",
+      "category": "vehicle",
+      "title": "Volkswagen Jetta Delivered to Mr MUTAZI",
+      "previewImage": "project-json/images/cars/Volkswagen-Jetta/1.jpg"
+    },
+        {
+      "id": 8,
+      "filename": "project-1.json",
+      "category": "vehicle",
+      "title": "ALLION 2013 DELIVERED TO MR CACIAUS",
+      "previewImage": "project-json/images/cars/allion-2013/1.jpg"
+    },
+        {
+      "id": 9,
+      "filename": "project-2.json",
+      "category": "vehicle",
+      "title": "TOYOTA CAMRY DELIVERED TO MR MALATA",
+      "previewImage": "project-json/images/cars/toyota-camry/1.jpg"
+    },
+        {
+      "id": 10,
+      "filename": "project-3.json",
+      "category": "vehicle",
+      "title": "HONDAFIT DELIVERED",
+      "previewImage": "project-json/images/cars/hondafit/1.jpg"
+    }
 
   ]
 }
