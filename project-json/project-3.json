@@ -1,23 +1,21 @@
 {
-  "id": 5,
-  "category": "it",
-  "title": "Network Infrastructure Setup",
-  "description": "Designed and implemented a complete network infrastructure for a new office building in Ndola. Included server setup, wireless access points, security systems, and VoIP telephony.",
+  "id": 3,
+  "category": "vehicle",
+  "title": "Volkswagen Jetta Delivered to Mr MUTAZI",
+  "description": "Precision Meets PerformanceSleek, sporty, and smart — the Volkswagen Jetta Jetta delivers refined German engineering with everyday practicality. Enjoy turbocharged power, premium comfort, and advanced tech in a sedan built to impress.",
   "images": [
-    "https://images.unsplash.com/photo-1552664730-d307ca884978?ixlib=rb-4.0.3&auto=format&fit=crop&w=1000&q=80",
-    "https://images.unsplash.com/photo-1558494949-ef010cbdcc31?ixlib=rb-4.0.3&auto=format&fit=crop&w=1000&q=80",
-    "https://images.unsplash.com/photo-1629654291660-3c98113a0438?ixlib=rb-4.0.3&auto=format&fit=crop&w=1000&q=80"
+    "project-json/images/cars/Volkswagen-Jetta/1.jpg"
   ],
   "details": [
-    { "label": "Client", "value": "Prime Consulting Ltd." },
-    { "label": "Timeline", "value": "2 Weeks" },
-    { "label": "Users", "value": "75 Workstations" },
-    { "label": "Uptime", "value": "99.9% Guaranteed" },
-    { "label": "Security", "value": "Enterprise Firewall" },
-    { "label": "Support", "value": "24/7 Monitoring" }
+    { "label": "Client", "value": "Mr Mutazi" },
+    { "label": "Color", "value": "White" },
+    { "label": "Delivery Time", "value": "3 months" },
+    { "label": "Source Country", "value": "UK" },
+    { "label": "Mileage", "value": "36 Kilometers" },
+    { "label": "Total Cost", "value": "" }
   ],
   "testimonial": {
-    "quote": "Reliable network infrastructure that has supported our operations seamlessly for over a year. The setup was completed ahead of schedule.",
-    "author": "Mwasimba Juma"
+    "quote": "Significant cost savings and all equipment arrived in perfect condition with valid warranties. The bulk procurement process was handled professionally.",
+    "author": "Raymond Mukosha"
   }
 }
