@@ -6,6 +6,20 @@
       "category": "vehicle",
       "title": "NISSAN DUALIS DELIVERED TO MS MUNDIA",
       "previewImage": "project-json/images/cars/nissan-dualis/1.jpg"
+    },
+        {
+      "id": 2,
+      "filename": "project-2.json",
+      "category": "vehicle",
+      "title": "HARRIER 2015 DELIVERED",
+      "previewImage": "project-json/images/cars/2015-Harrier/1.jpg"
+    },
+        {
+      "id": 3,
+      "filename": "project-3.json",
+      "category": "vehicle",
+      "title": "Volkswagen Jetta Delivered to Mr MUTAZI",
+      "previewImage": "project-json/images/cars/Volkswagen-Jetta/1.jpg"
     }
 
   ]
