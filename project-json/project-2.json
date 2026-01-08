@@ -1,23 +1,21 @@
 {
   "id": 2,
-  "category": "gadget",
-  "title": "Professional Studio Equipment Package",
-  "description": "Supplied complete photography studio equipment for a professional photography business. Package included cameras, lenses, lighting equipment, backdrops, and editing workstations.",
+  "category": "vehicle",
+  "title": "HARRIER 2015 DELIVERED",
+  "description": "Step into a new standard of elegance and performance with the 2015 Toyota Harrier, where innovation meets sophistication. Crafted with premium detail and powered by advanced technology, the Harrier is not just an SUV,  it's a statement of style and comfort.",
   "images": [
-    "https://images.unsplash.com/photo-1511707171634-5f897ff02aa9?ixlib=rb-4.0.3&auto=format&fit=crop&w=1000&q=80",
-    "https://images.unsplash.com/photo-1516035069371-29a1b244cc32?ixlib=rb-4.0.3&auto=format&fit=crop&w=1000&q=80",
-    "https://images.unsplash.com/photo-1554048612-b6a482bc67e5?ixlib=rb-4.0.3&auto=format&fit=crop&w=1000&q=80"
+    "project-json/images/cars//1.jpg"
   ],
   "details": [
-    { "label": "Client", "value": "Capture Moments Studio" },
-    { "label": "Items", "value": "25+ Equipment Pieces" },
-    { "label": "Delivery", "value": "Express 1 Week" },
-    { "label": "Savings", "value": "30% vs Local Retail" },
-    { "label": "Brands", "value": "Canon, Nikon, Profoto" },
-    { "label": "Training", "value": "Included Setup & Training" }
+    { "label": "Client", "value": "Tech Solutions Zambia" },
+    { "label": "Color", "value": "Black" },
+    { "label": "Delivery Time", "value": "2 Months" },
+    { "label": "Source Country", "value": "Japan" },
+    { "label": "Mileage", "value": "40 Kilometers" },
+    { "label": "Total Cost", "value": "K230, 000" }
   ],
   "testimonial": {
-    "quote": "High-quality equipment at unbeatable prices. My studio is now fully equipped thanks to LumiMinds. The setup assistance was invaluable.",
+    "quote": "Significant cost savings and all equipment arrived in perfect condition with valid warranties. The bulk procurement process was handled professionally.",
     "author": "Raymond Mukosha"
   }
 }
