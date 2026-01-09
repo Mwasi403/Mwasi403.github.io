@@ -7,12 +7,13 @@
     "project-json/images/cars/Volkswagen-Jetta/1.jpg"
   ],
   "details": [
-    { "label": "Client", "value": "Mr Mutazi" },
+    { "label": "Client", "value": "MUNALOBWE HAMUKALE" },
     { "label": "Color", "value": "White" },
-    { "label": "Delivery Time", "value": "3 months" },
-    { "label": "Source Country", "value": "UK" },
-    { "label": "Mileage", "value": "36 Kilometers" },
-    { "label": "Total Cost", "value": "" }
+    { "label": "Delivery Time", "value": "8 Weeks" },
+    { "label": "Source Country", "value": "singapore" },
+    { "label": "Total Cost", "value": "K165, 000" },
+    { "label": "Delivery Year", "value": "2023" },
+    { "label": "Delivery Address", "value": "Kabwe" }
   ],
   "testimonial": {
     "quote": "Significant cost savings and all equipment arrived in perfect condition with valid warranties. The bulk procurement process was handled professionally.",
