@@ -7,12 +7,13 @@
     "project-json/images/cars/harrier-2015/1.jpg"
   ],
   "details": [
-    { "label": "Client", "value": "Tech Solutions Zambia" },
+    { "label": "Client", "value": "MUNALOBWE HAMUKALE" },
     { "label": "Color", "value": "Black" },
-    { "label": "Delivery Time", "value": "2 Months" },
+    { "label": "Delivery Time", "value": "6 Weeks" },
     { "label": "Source Country", "value": "Japan" },
-    { "label": "Mileage", "value": "40 Kilometers" },
-    { "label": "Total Cost", "value": "K230, 000" }
+    { "label": "Total Cost", "value": "K380, 000" },
+    { "label": "Delivery Year", "value": "2024" },
+    { "label": "Delivery Address", "value": "Lusaka" }
   ],
   "testimonial": {
     "quote": "Significant cost savings and all equipment arrived in perfect condition with valid warranties. The bulk procurement process was handled professionally.",
