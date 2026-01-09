@@ -12,7 +12,8 @@
     { "label": "Delivery Time", "value": "7 Weeks" },
     { "label": "Source Country", "value": "Japan" },
     { "label": "Total Cost", "value": "K170,000" },
-    { "label": "Delivery Year", "value": "2024" }
+    { "label": "Delivery Year", "value": "2024" },
+    { "label": "Delivery Address", "value": "Ndola" }
   ],
   "testimonial": {
     "quote": "Significant cost savings and all equipment arrived in perfect condition with valid warranties. The bulk procurement process was handled professionally.",
