@@ -7,12 +7,12 @@
     "project-json/images/cars/nissan-dualis/1.jpg"
   ],
   "details": [
-    { "label": "Client", "value": "Tech Solutions Zambia" },
-    { "label": "Color", "value": "150 Units Total" },
-    { "label": "Delivery Time", "value": "3 Weeks" },
-    { "label": "Source Country", "value": "25% vs Local Market" },
-    { "label": "Mileage", "value": "2 Years Comprehensive" },
-    { "label": "Total Cost", "value": "24/7 Technical Support" }
+    { "label": "Client", "value": "MS Mundia" },
+    { "label": "Color", "value": "Black" },
+    { "label": "Delivery Time", "value": "7 Weeks" },
+    { "label": "Source Country", "value": "Japan" },
+    { "label": "Total Cost", "value": "K170,000" },
+    { "label": "Delivery Year", "value": "2024" }
   ],
   "testimonial": {
     "quote": "Significant cost savings and all equipment arrived in perfect condition with valid warranties. The bulk procurement process was handled professionally.",
