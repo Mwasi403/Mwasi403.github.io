@@ -1,18 +1,19 @@
 {
   "id": 5,
   "category": "vehicle",
-  "title": "HARRIER 2015 DELIVERED",
-  "description": "Step into a new standard of elegance and performance with the 2015 Toyota Harrier, where innovation meets sophistication. Crafted with premium detail and powered by advanced technology, the Harrier is not just an SUV,  it's a statement of style and comfort.",
+  "title": "TOYOTA CAMRY DELIVERED TO MR MALATA",
+  "description": "Refined Power. Timeless Style – The Toyota Camry The Toyota Camry delivers a perfect balance of performance, comfort, and reliability. With bold design, advanced safety features, and smooth driving dynamics, it’s a sedan that exceeds expectations.",
   "images": [
     "project-json/images/cars/harrier-2015/1.jpg"
   ],
   "details": [
-    { "label": "Client", "value": "Tech Solutions Zambia" },
-    { "label": "Color", "value": "Black" },
-    { "label": "Delivery Time", "value": "2 Months" },
-    { "label": "Source Country", "value": "Japan" },
-    { "label": "Mileage", "value": "40 Kilometers" },
-    { "label": "Total Cost", "value": "K230, 000" }
+    { "label": "Client", "value": "MR MALATA" },
+    { "label": "Color", "value": "White" },
+    { "label": "Delivery Time", "value": "6 Weeks" },
+    { "label": "Source Country", "value": "Singapore" },
+    { "label": "Total Cost", "value": "K1800, 000" },
+    { "label": "Delivery Year", "value": "2025" },
+    { "label": "Delivery Address", "value": "Ndola" }
   ],
   "testimonial": {
     "quote": "Significant cost savings and all equipment arrived in perfect condition with valid warranties. The bulk procurement process was handled professionally.",
