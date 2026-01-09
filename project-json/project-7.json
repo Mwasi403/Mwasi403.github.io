@@ -2,18 +2,18 @@
 {
   "id": 7,
   "category": "vehicle",
-  "title": "HONDAFIT DELIVERED TO MR NKODIO DANIEL",
-  "description": "Step into a new standard of elegance and performance with the 2015 Toyota Harrier, where innovation meets sophistication. Crafted with premium detail and powered by advanced technology, the Harrier is not just an SUV,  it's a statement of style and comfort.",
+  "title": "HONDA FIT DELIVERED MR CHONGO",
+  "description": "Moments like these remind us that at LumiMinds, it’s not just about cars, it’s about beginnings, dreams, and trust.",
   "images": [
     "project-json/images/cars/harrier-2015/1.jpg"
   ],
   "details": [
-    { "label": "Client", "value": "MR MALATA" },
-    { "label": "Color", "value": "White" },
-    { "label": "Delivery Time", "value": "6 Weeks" },
-    { "label": "Source Country", "value": "Singapore" },
-    { "label": "Total Cost", "value": "K180, 000" },
-    { "label": "Delivery Year", "value": "2025" },
+    { "label": "Client", "value": "MR CHONGO" },
+    { "label": "Color", "value": "Black" },
+    { "label": "Delivery Time", "value": "8 Weeks" },
+    { "label": "Source Country", "value": "Japan" },
+    { "label": "Total Cost", "value": "K108, 000" },
+    { "label": "Delivery Year", "value": "2024" },
     { "label": "Delivery Address", "value": "Ndola" }
   ],
   "testimonial": {
