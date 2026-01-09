@@ -775,7 +775,7 @@
                 <ul class="nav-links">
                     <li><a href="index.html">Home</a></li>
                     <li><a href="services.html">Services</a></li>
-                    <li><a href="work.html"class="active">Our Works</a></li>
+                    <li><a href="work.html" class="active">Our Works</a></li>
                     <li><a href="inventory.html">Inventory</a></li>
                     <li><a href="about.html">About</a></li>
                     <li><a href="contact.html">Contact</a></li>
@@ -1009,7 +1009,6 @@
                     return b.id - a.id; // Descending order (highest ID first)
                 });
                 
-                console.log('Loaded projects (sorted by highest ID first):', projectsIndex);
                 renderProjects('all');
             } catch (error) {
                 console.error('Error loading projects:', error);
@@ -1094,7 +1093,6 @@
                 projectElement.setAttribute('data-category', project.category);
                 projectElement.setAttribute('data-index', index);
                 projectElement.setAttribute('data-filename', project.filename);
-                projectElement.setAttribute('data-id', project.id);
                 
                 const img = createImageElement(project.previewImage, project.title, 'project-image');
                 
@@ -1105,14 +1103,6 @@
                 badge.className = `category-badge ${categoryInfo.colorClass}`;
                 badge.textContent = categoryInfo.label;
                 projectElement.appendChild(badge);
-                
-                // Create ID badge to show order (optional)
-                const idBadge = document.createElement('div');
-                idBadge.className = 'category-badge';
-                idBadge.style.top = '45px'; // Position below category badge
-                idBadge.style.backgroundColor = '#8e44ad';
-                idBadge.textContent = `ID: ${project.id}`;
-                projectElement.appendChild(idBadge);
                 
                 // Create overlay
                 const overlay = document.createElement('div');
@@ -1228,16 +1218,6 @@
                 detailsHTML = `<p>No detailed information available for this project.</p>`;
             }
             
-            // Add project ID to details if available
-            if (projectRef.id) {
-                detailsHTML += `
-                    <div class="detail-item" style="background: var(--primary-light); border-left-color: var(--secondary);">
-                        <div class="detail-label">Project ID</div>
-                        <div class="detail-value">#${projectRef.id}</div>
-                    </div>
-                `;
-            }
-            
             // Generate testimonial HTML
             let testimonialHTML = '';
             if (project.testimonial && project.testimonial.quote) {
@@ -1334,6 +1314,4 @@
         });
     </script>
 </body>
-
 </html>
-
