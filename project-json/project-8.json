@@ -1,1 +1,21 @@
-
+{
+  "id": 6,
+  "category": "vehicle",
+  "title": "HONDAFIT DELIVERED TO MR NKODIO DANIEL",
+  "description": "Step into a new standard of elegance and performance with the 2015 Toyota Harrier, where innovation meets sophistication. Crafted with premium detail and powered by advanced technology, the Harrier is not just an SUV,  it's a statement of style and comfort.",
+  "images": [
+    "project-json/images/cars/harrier-2015/1.jpg"
+  ],
+  "details": [
+    { "label": "Client", "value": "Tech Solutions Zambia" },
+    { "label": "Color", "value": "Black" },
+    { "label": "Delivery Time", "value": "2 Months" },
+    { "label": "Source Country", "value": "Japan" },
+    { "label": "Mileage", "value": "40 Kilometers" },
+    { "label": "Total Cost", "value": "K230, 000" }
+  ],
+  "testimonial": {
+    "quote": "Significant cost savings and all equipment arrived in perfect condition with valid warranties. The bulk procurement process was handled professionally.",
+    "author": "Raymond Mukosha"
+  }
+}
