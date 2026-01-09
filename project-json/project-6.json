@@ -2,7 +2,7 @@
   "id": 6,
   "category": "vehicle",
   "title": "HONDAFIT DELIVERED TO MR KHONDIWA DANNY ",
-  "description": "Step into a new standard of elegance and performance with the 2015 Toyota Harrier, where innovation meets sophistication. Crafted with premium detail and powered by advanced technology, the Harrier is not just an SUV,  it's a statement of style and comfort.",
+  "description": "We’ve just delivered a Honda Fit to one of our valued clients — their fourth vehicle with us! 🙌🏽",
   "images": [
     "project-json/images/cars/hondafit/1.jpg"
   ],
@@ -11,8 +11,9 @@
     { "label": "Color", "value": "Blue" },
     { "label": "Delivery Time", "value": "8 weeks" },
     { "label": "Source Country", "value": "Japan" },
-    { "label": "M", "value": "40 Kilometers" },
-    { "label": "Total Cost", "value": "K230, 000" }
+    { "label": "Total Cost", "value": "K110, 000" },
+    { "label": "Delivery Year", "value": "2025" },
+    { "label": "Delivery Address", "value": "Ndola" }
   ],
   "testimonial": {
     "quote": "Significant cost savings and all equipment arrived in perfect condition with valid warranties. The bulk procurement process was handled professionally.",
