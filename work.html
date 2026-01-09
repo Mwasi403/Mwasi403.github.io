@@ -993,18 +993,23 @@
             setupModalEvents();
         });
 
-        // Load projects from index file - CORRECTED PATH
+        // Load projects from index file
         async function loadProjects() {
             const container = document.getElementById('projectsContainer');
             
             try {
-                // CORRECTED: Changed from 'project json\\projects-index.json' to 'project-json/projects-index.json'
                 const response = await fetch('project-json/projects-index.json');
                 if (!response.ok) {
                     throw new Error(`HTTP error! status: ${response.status}`);
                 }
                 const data = await response.json();
-                projectsIndex = data.projects;
+                
+                // Sort projects by ID in descending order (highest ID first)
+                projectsIndex = data.projects.sort((a, b) => {
+                    return b.id - a.id; // Descending order (highest ID first)
+                });
+                
+                console.log('Loaded projects (sorted by highest ID first):', projectsIndex);
                 renderProjects('all');
             } catch (error) {
                 console.error('Error loading projects:', error);
@@ -1021,10 +1026,9 @@
             }
         }
 
-        // Load individual project data - CORRECTED PATH
+        // Load individual project data
         async function loadProjectData(filename) {
             try {
-                // CORRECTED: Added the folder path before the filename
                 const response = await fetch(`project-json/${filename}`);
                 if (!response.ok) {
                     throw new Error(`HTTP error! status: ${response.status}`);
@@ -1090,6 +1094,7 @@
                 projectElement.setAttribute('data-category', project.category);
                 projectElement.setAttribute('data-index', index);
                 projectElement.setAttribute('data-filename', project.filename);
+                projectElement.setAttribute('data-id', project.id);
                 
                 const img = createImageElement(project.previewImage, project.title, 'project-image');
                 
@@ -1100,6 +1105,14 @@
                 badge.className = `category-badge ${categoryInfo.colorClass}`;
                 badge.textContent = categoryInfo.label;
                 projectElement.appendChild(badge);
+                
+                // Create ID badge to show order (optional)
+                const idBadge = document.createElement('div');
+                idBadge.className = 'category-badge';
+                idBadge.style.top = '45px'; // Position below category badge
+                idBadge.style.backgroundColor = '#8e44ad';
+                idBadge.textContent = `ID: ${project.id}`;
+                projectElement.appendChild(idBadge);
                 
                 // Create overlay
                 const overlay = document.createElement('div');
@@ -1215,6 +1228,16 @@
                 detailsHTML = `<p>No detailed information available for this project.</p>`;
             }
             
+            // Add project ID to details if available
+            if (projectRef.id) {
+                detailsHTML += `
+                    <div class="detail-item" style="background: var(--primary-light); border-left-color: var(--secondary);">
+                        <div class="detail-label">Project ID</div>
+                        <div class="detail-value">#${projectRef.id}</div>
+                    </div>
+                `;
+            }
+            
             // Generate testimonial HTML
             let testimonialHTML = '';
             if (project.testimonial && project.testimonial.quote) {
@@ -1313,3 +1336,4 @@
 </body>
 
 </html>
+
