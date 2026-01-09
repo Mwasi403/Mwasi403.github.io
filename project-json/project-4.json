@@ -2,17 +2,18 @@
   "id": 4,
   "category": "vehicle",
   "title": "HARRIER 2015 DELIVERED",
-  "description": "Step into a new standard of elegance and performance with the 2015 Toyota Harrier, where innovation meets sophistication. Crafted with premium detail and powered by advanced technology, the Harrier is not just an SUV,  it's a statement of style and comfort.",
+  "description": "‎Elegance in Motion – The Toyota Allion Stylish, reliable, and efficient — the Toyota Allion is the perfect blend of comfort and performance. With a sleek design, spacious interior, and fuel-saving technology, it’s built for drivers who value both class and convenience.",
   "images": [
     "project-json/images/cars/harrier-2015/1.jpg"
   ],
   "details": [
-    { "label": "Client", "value": "Tech Solutions Zambia" },
-    { "label": "Color", "value": "Black" },
-    { "label": "Delivery Time", "value": "2 Months" },
+    { "label": "Client", "value": "MR CACIAUS" },
+    { "label": "Color", "value": "Silver" },
+    { "label": "Delivery Time", "value": "8 Weeks" },
     { "label": "Source Country", "value": "Japan" },
-    { "label": "Mileage", "value": "40 Kilometers" },
-    { "label": "Total Cost", "value": "K230, 000" }
+    { "label": "Total Cost", "value": "K180, 000" },
+    { "label": "Delivery Year", "value": "2023" },
+    { "label": "Delivery Address", "value": "Ndola" }
   ],
   "testimonial": {
     "quote": "Significant cost savings and all equipment arrived in perfect condition with valid warranties. The bulk procurement process was handled professionally.",
