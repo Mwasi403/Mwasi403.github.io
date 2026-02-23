@@ -30,6 +30,10 @@
             --white: #FFFFFF;
             --shadow: 0 4px 20px rgba(0,0,0,0.08);
             --shadow-lg: 0 10px 40px rgba(0,0,0,0.12);
+            --success: #28a745;
+            --danger: #dc3545;
+            --warning: #ffc107;
+            --info: #17a2b8;
         }
 
         body {
@@ -94,7 +98,7 @@
             font-size: 1.125rem;
         }
 
-        /* Header Styles - Copied from LumiMinds */
+        /* Header Styles */
         header {
             background: var(--white);
             box-shadow: 0 2px 10px rgba(0,0,0,0.1);
@@ -124,6 +128,7 @@
         .logo-image {
             height: 40px;
             width: 40px;
+            object-fit: contain;
         }
 
         .nav-links {
@@ -250,7 +255,7 @@
         .tracking-form {
             display: flex;
             gap: 10px;
-            margin-bottom: 30px;
+            margin-bottom: 20px;
         }
 
         .tracking-form input {
@@ -259,12 +264,17 @@
             border: 2px solid var(--border);
             border-radius: 8px;
             font-size: 16px;
-            transition: border-color 0.3s;
+            transition: all 0.3s;
         }
 
         .tracking-form input:focus {
             outline: none;
             border-color: var(--primary);
+            box-shadow: 0 0 0 3px rgba(63, 136, 197, 0.1);
+        }
+
+        .tracking-form input.error {
+            border-color: var(--danger);
         }
 
         .tracking-form button {
@@ -296,17 +306,47 @@
 
         .tracking-example {
             text-align: center;
-            margin-bottom: 30px;
-            padding: 15px;
+            margin-bottom: 25px;
+            padding: 12px;
             background: var(--bg-light);
             border-radius: 8px;
             color: var(--text-light);
             font-size: 0.9rem;
+            border-left: 4px solid var(--primary);
         }
 
         .tracking-example i {
             color: var(--primary);
             margin-right: 5px;
+        }
+
+        .quick-tips {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+            justify-content: center;
+            margin-top: 15px;
+        }
+
+        .tip-badge {
+            background: var(--white);
+            border: 1px solid var(--border);
+            padding: 6px 12px;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            color: var(--text-light);
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+
+        .tip-badge:hover {
+            background: var(--primary);
+            color: var(--white);
+            border-color: var(--primary);
+        }
+
+        .tip-badge i {
+            margin-right: 4px;
         }
 
         .loading {
@@ -330,23 +370,41 @@
         }
 
         .error {
-            background: #fee;
-            color: #c33;
+            background: #fff3f3;
+            color: var(--danger);
             padding: 20px;
             border-radius: 8px;
             text-align: center;
             margin-bottom: 20px;
-            border-left: 4px solid #c33;
+            border-left: 4px solid var(--danger);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+        }
+
+        .error i {
+            font-size: 24px;
+        }
+
+        .error.debug-info {
+            background: #f8f9fa;
+            color: var(--text-dark);
+            border-left-color: var(--info);
+            font-size: 0.9rem;
+            text-align: left;
+            flex-direction: column;
         }
 
         .hidden {
-            display: none;
+            display: none !important;
         }
 
         .order-details {
             animation: slideIn 0.5s ease;
             border-top: 2px solid var(--border);
             padding-top: 30px;
+            margin-top: 20px;
         }
 
         @keyframes slideIn {
@@ -367,6 +425,8 @@
             margin-bottom: 30px;
             padding-bottom: 20px;
             border-bottom: 2px solid var(--border);
+            flex-wrap: wrap;
+            gap: 15px;
         }
 
         .order-header h2 {
@@ -388,6 +448,7 @@
             border-radius: 20px;
             font-weight: 600;
             font-size: 14px;
+            letter-spacing: 0.5px;
         }
 
         .info-grid {
@@ -401,6 +462,12 @@
             background: var(--bg-light);
             padding: 20px;
             border-radius: 8px;
+            transition: transform 0.2s;
+        }
+
+        .info-item:hover {
+            transform: translateY(-2px);
+            box-shadow: var(--shadow);
         }
 
         .info-item .label {
@@ -408,6 +475,11 @@
             color: var(--text-light);
             font-size: 14px;
             margin-bottom: 8px;
+        }
+
+        .info-item .label i {
+            margin-right: 5px;
+            color: var(--primary);
         }
 
         .info-item .value {
@@ -423,13 +495,34 @@
             border-radius: 20px;
             font-weight: 600;
             font-size: 14px;
+            text-transform: capitalize;
         }
 
-        .status-badge.processing { background: #fff3cd; color: #856404; }
-        .status-badge.shipped { background: #cce5ff; color: var(--primary-dark); }
-        .status-badge.in-transit { background: #d4edda; color: #155724; }
-        .status-badge.out-for-delivery { background: #d1ecf1; color: #0c5460; }
-        .status-badge.delivered { background: #d4edda; color: #155724; }
+        .status-badge.processing { 
+            background: #fff3cd; 
+            color: #856404; 
+            border-left: 4px solid #ffc107;
+        }
+        .status-badge.shipped { 
+            background: #cce5ff; 
+            color: #004085; 
+            border-left: 4px solid #007bff;
+        }
+        .status-badge.in-transit { 
+            background: #d1ecf1; 
+            color: #0c5460; 
+            border-left: 4px solid #17a2b8;
+        }
+        .status-badge.out-for-delivery { 
+            background: #d4edda; 
+            color: #155724; 
+            border-left: 4px solid #28a745;
+        }
+        .status-badge.delivered { 
+            background: #d4edda; 
+            color: #155724; 
+            border-left: 4px solid #28a745;
+        }
 
         .description {
             background: var(--bg-light);
@@ -456,6 +549,10 @@
             line-height: 1.6;
         }
 
+        .timeline {
+            margin-top: 20px;
+        }
+
         .timeline h3 {
             color: var(--text-dark);
             margin-bottom: 20px;
@@ -477,7 +574,7 @@
             border-radius: 8px;
             margin-bottom: 10px;
             position: relative;
-            transition: transform 0.3s ease;
+            transition: all 0.3s ease;
         }
 
         .timeline-item:hover {
@@ -490,6 +587,7 @@
         }
 
         .timeline-item.latest {
+            background: linear-gradient(to right, var(--bg-light), #fff);
             border-left: 4px solid var(--secondary);
         }
 
@@ -503,6 +601,12 @@
             justify-content: center;
             color: var(--primary);
             border: 2px solid var(--primary);
+            flex-shrink: 0;
+        }
+
+        .timeline-item.latest .timeline-icon {
+            background: var(--primary);
+            color: var(--white);
         }
 
         .timeline-content {
@@ -533,7 +637,62 @@
             font-size: 10px;
         }
 
-        /* Footer Styles - Copied from LumiMinds */
+        .connection-status {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            padding: 8px 16px;
+            background: var(--white);
+            border-radius: 30px;
+            box-shadow: var(--shadow);
+            font-size: 12px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            z-index: 1000;
+        }
+
+        .status-dot {
+            width: 8px;
+            height: 8px;
+            border-radius: 50%;
+            display: inline-block;
+        }
+
+        .status-dot.connected {
+            background: var(--success);
+            box-shadow: 0 0 0 2px rgba(40, 167, 69, 0.2);
+        }
+
+        .status-dot.disconnected {
+            background: var(--danger);
+            box-shadow: 0 0 0 2px rgba(220, 53, 69, 0.2);
+        }
+
+        .status-dot.checking {
+            background: var(--warning);
+            box-shadow: 0 0 0 2px rgba(255, 193, 7, 0.2);
+        }
+
+        .track-another {
+            text-align: center;
+            margin-top: 20px;
+        }
+
+        .track-another button {
+            background: none;
+            border: none;
+            color: var(--primary);
+            cursor: pointer;
+            font-size: 14px;
+            text-decoration: underline;
+        }
+
+        .track-another button:hover {
+            color: var(--primary-dark);
+        }
+
+        /* Footer Styles */
         footer {
             background: var(--text-dark);
             color: var(--white);
@@ -638,16 +797,40 @@
             .section-title {
                 font-size: 2rem;
             }
+
+            .quick-tips {
+                flex-direction: column;
+                align-items: center;
+            }
+
+            .connection-status {
+                bottom: 10px;
+                right: 10px;
+                font-size: 10px;
+                padding: 6px 12px;
+            }
+        }
+
+        /* Print Styles */
+        @media print {
+            header, footer, .tracking-form, .tracking-example, .track-another, .connection-status {
+                display: none;
+            }
+
+            .tracking-card {
+                box-shadow: none;
+                padding: 0;
+            }
         }
     </style>
 </head>
 <body>
-    <!-- Header - Copied from LumiMinds -->
+    <!-- Header -->
     <header>
         <div class="container">
             <nav class="nav-container">
                 <a href="index.html" class="logo">
-                    <img src="logo1.png" alt="Lumiminds Logo" class="logo-image">
+                    <img src="logo1.png" alt="Lumiminds Logo" class="logo-image" onerror="this.src='https://via.placeholder.com/40x40?text=LM'">
                     LumiMinds
                 </a>
                 
@@ -671,7 +854,7 @@
     <div class="mobile-menu">
         <div class="mobile-menu-header">
             <div class="logo">
-                <img src="logo1.png" alt="Lumiminds Logo" class="logo-image">
+                <img src="logo1.png" alt="Lumiminds Logo" class="logo-image" onerror="this.src='https://via.placeholder.com/40x40?text=LM'">
                 LumiMinds
             </div>
             <button class="mobile-menu-close">
@@ -691,7 +874,7 @@
     <!-- Tracking Hero Section -->
     <section class="tracking-hero">
         <div class="container">
-            <h1><i class="fas fa-search"></i> Track Your Order</h1>
+            <h1><i class="fas fa-search-location"></i> Track Your Order</h1>
             <p>Enter your tracking number to check the real-time status of your order</p>
         </div>
     </section>
@@ -704,29 +887,49 @@
                     <input 
                         type="text" 
                         id="trackingNumber" 
-                        placeholder="Enter tracking number (e.g., TRK-2312-ABC123)"
+                        placeholder="Enter tracking number (e.g., TRK-2402-ABC123)"
                         autocomplete="off"
+                        spellcheck="false"
                     >
                     <button id="trackButton">
-                        <i class="fas fa-search"></i> Track
+                        <i class="fas fa-search"></i> Track Order
                     </button>
                 </div>
 
                 <div class="tracking-example">
                     <i class="fas fa-info-circle"></i>
-                    Example: TRK-2402-XYZ789
+                    <strong>Example:</strong> TRK-2402-ABC123
+                    <div class="quick-tips">
+                        <span class="tip-badge" onclick="document.getElementById('trackingNumber').value='TRK-2402-ABC123'">
+                            <i class="fas fa-box"></i> Sample 1
+                        </span>
+                        <span class="tip-badge" onclick="document.getElementById('trackingNumber').value='TRK-2402-XYZ789'">
+                            <i class="fas fa-box"></i> Sample 2
+                        </span>
+                        <span class="tip-badge" onclick="document.getElementById('trackingNumber').value='TRK-2402-DEF456'">
+                            <i class="fas fa-box"></i> Sample 3
+                        </span>
+                    </div>
                 </div>
 
                 <div id="loading" class="loading hidden">
                     <div class="spinner"></div>
-                    <p>Fetching order details...</p>
+                    <p><i class="fas fa-hourglass-half"></i> Fetching order details...</p>
                 </div>
 
-                <div id="error" class="error hidden"></div>
+                <div id="error" class="error hidden">
+                    <i class="fas fa-exclamation-circle"></i>
+                    <span id="errorMessage"></span>
+                </div>
+
+                <div id="debugInfo" class="error debug-info hidden">
+                    <i class="fas fa-bug"></i>
+                    <div id="debugContent"></div>
+                </div>
 
                 <div id="orderDetails" class="order-details hidden">
                     <div class="order-header">
-                        <h2><i class="fas fa-box"></i> Order Information</h2>
+                        <h2><i class="fas fa-box-open"></i> Order Information</h2>
                         <span class="tracking-number" id="displayTrackingNumber"></span>
                     </div>
                     
@@ -736,7 +939,7 @@
                             <span class="value" id="customerName"></span>
                         </div>
                         <div class="info-item">
-                            <span class="label"><i class="fas fa-truck"></i> Status</span>
+                            <span class="label"><i class="fas fa-truck"></i> Current Status</span>
                             <span class="status-badge" id="status"></span>
                         </div>
                         <div class="info-item">
@@ -754,12 +957,24 @@
                         <h3><i class="fas fa-history"></i> Tracking History</h3>
                         <div id="timelineContainer"></div>
                     </div>
+
+                    <div class="track-another">
+                        <button onclick="resetTracking()">
+                            <i class="fas fa-redo"></i> Track Another Order
+                        </button>
+                    </div>
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- Footer - Copied from LumiMinds -->
+    <!-- Connection Status Indicator -->
+    <div class="connection-status" id="connectionStatus">
+        <span class="status-dot" id="connectionDot"></span>
+        <span id="connectionText">Checking connection...</span>
+    </div>
+
+    <!-- Footer -->
     <footer>
         <div class="container">
             <div class="footer-content">
@@ -820,35 +1035,59 @@
     </footer>
 
     <script>
-        // Firebase Configuration - REPLACE WITH YOUR OWN CONFIG
+        // Firebase Configuration
         const firebaseConfig = {
-            apiKey: "YOUR_API_KEY",
-            authDomain: "YOUR_AUTH_DOMAIN",
-            projectId: "YOUR_PROJECT_ID",
-            storageBucket: "YOUR_STORAGE_BUCKET",
-            messagingSenderId: "YOUR_MESSAGING_SENDER_ID",
-            appId: "YOUR_APP_ID"
+            apiKey: "AIzaSyC0YfJMqB8JUmY56Z8jhK2nGXhLOjG7-5M",
+            authDomain: "lumi-track.firebaseapp.com",
+            projectId: "lumi-track",
+            storageBucket: "lumi-track.firebasestorage.app",
+            messagingSenderId: "191561749174",
+            appId: "1:191561749174:web:03aafb8fd6f37052b0cc17"
         };
 
         // Initialize Firebase
         firebase.initializeApp(firebaseConfig);
         const db = firebase.firestore();
 
-        // Mobile Menu Toggle - Copied from LumiMinds
+        // DOM Elements
+        const trackButton = document.getElementById('trackButton');
+        const trackingInput = document.getElementById('trackingNumber');
+        const loadingDiv = document.getElementById('loading');
+        const errorDiv = document.getElementById('error');
+        const errorMessage = document.getElementById('errorMessage');
+        const debugInfo = document.getElementById('debugInfo');
+        const debugContent = document.getElementById('debugContent');
+        const orderDetailsDiv = document.getElementById('orderDetails');
+        const timelineContainer = document.getElementById('timelineContainer');
+        const connectionDot = document.getElementById('connectionDot');
+        const connectionText = document.getElementById('connectionText');
+
+        // Display elements
+        const displayTrackingNumber = document.getElementById('displayTrackingNumber');
+        const customerName = document.getElementById('customerName');
+        const statusElement = document.getElementById('status');
+        const lastUpdate = document.getElementById('lastUpdate');
+        const description = document.getElementById('description');
+
+        // Mobile Menu Toggle
         const mobileMenuBtn = document.querySelector('.mobile-menu-btn');
         const mobileMenu = document.querySelector('.mobile-menu');
         const mobileMenuClose = document.querySelector('.mobile-menu-close');
         const mobileNavLinks = document.querySelectorAll('.mobile-nav-links a');
 
-        mobileMenuBtn.addEventListener('click', () => {
-            mobileMenu.classList.add('active');
-            document.body.style.overflow = 'hidden';
-        });
+        if (mobileMenuBtn) {
+            mobileMenuBtn.addEventListener('click', () => {
+                mobileMenu.classList.add('active');
+                document.body.style.overflow = 'hidden';
+            });
+        }
 
-        mobileMenuClose.addEventListener('click', () => {
-            mobileMenu.classList.remove('active');
-            document.body.style.overflow = 'auto';
-        });
+        if (mobileMenuClose) {
+            mobileMenuClose.addEventListener('click', () => {
+                mobileMenu.classList.remove('active');
+                document.body.style.overflow = 'auto';
+            });
+        }
 
         mobileNavLinks.forEach(link => {
             link.addEventListener('click', () => {
@@ -869,20 +1108,49 @@
             }
         });
 
-        // DOM Elements for Tracking
-        const trackButton = document.getElementById('trackButton');
-        const trackingInput = document.getElementById('trackingNumber');
-        const loadingDiv = document.getElementById('loading');
-        const errorDiv = document.getElementById('error');
-        const orderDetailsDiv = document.getElementById('orderDetails');
-        const timelineContainer = document.getElementById('timelineContainer');
+        // Test Firebase Connection
+        async function testFirebaseConnection() {
+            connectionDot.className = 'status-dot checking';
+            connectionText.textContent = 'Checking connection...';
+            
+            try {
+                const testQuery = await db.collection('orders').limit(1).get();
+                connectionDot.className = 'status-dot connected';
+                connectionText.textContent = 'Connected to tracking system';
+                console.log('✅ Firebase connected successfully');
+                
+                // Log sample tracking number if exists
+                if (!testQuery.empty) {
+                    const sample = testQuery.docs[0].data();
+                    console.log('📋 Sample tracking number:', sample.trackingNumber);
+                }
+            } catch (error) {
+                connectionDot.className = 'status-dot disconnected';
+                connectionText.textContent = 'Connection failed';
+                console.error('❌ Firebase connection error:', error);
+            }
+        }
 
-        // Display elements
-        const displayTrackingNumber = document.getElementById('displayTrackingNumber');
-        const customerName = document.getElementById('customerName');
-        const statusElement = document.getElementById('status');
-        const lastUpdate = document.getElementById('lastUpdate');
-        const description = document.getElementById('description');
+        // Show debug information
+        function showDebugInfo(title, error) {
+            debugContent.innerHTML = `
+                <strong>${title}:</strong><br>
+                ${error.message || error}<br>
+                <small style="color: #666; margin-top: 10px; display: block;">
+                    Check browser console for more details (F12)
+                </small>
+            `;
+            debugInfo.classList.remove('hidden');
+        }
+
+        // Reset tracking form
+        function resetTracking() {
+            trackingInput.value = '';
+            orderDetailsDiv.classList.add('hidden');
+            errorDiv.classList.add('hidden');
+            debugInfo.classList.add('hidden');
+            trackingInput.focus();
+        }
 
         // Add enter key support
         trackingInput.addEventListener('keypress', (e) => {
@@ -895,8 +1163,22 @@
         async function trackOrder() {
             const trackingNumber = trackingInput.value.trim();
             
+            // Clear previous errors
+            errorDiv.classList.add('hidden');
+            debugInfo.classList.add('hidden');
+            trackingInput.classList.remove('error');
+            
             if (!trackingNumber) {
                 showError('Please enter a tracking number');
+                trackingInput.classList.add('error');
+                return;
+            }
+
+            // Updated regex to match Flutter app format: TRK-YYMM-ABC123
+            const trackingRegex = /^TRK-\d{4}-[A-Z]{3}\d{3}$/;
+            if (!trackingRegex.test(trackingNumber)) {
+                showError('Invalid tracking number format. Example: TRK-2402-ABC123');
+                trackingInput.classList.add('error');
                 return;
             }
 
@@ -907,6 +1189,8 @@
             orderDetailsDiv.classList.add('hidden');
 
             try {
+                console.log('🔍 Searching for tracking number:', trackingNumber);
+                
                 // Query Firestore for the order
                 const ordersRef = db.collection('orders');
                 const querySnapshot = await ordersRef
@@ -914,25 +1198,48 @@
                     .limit(1)
                     .get();
 
+                console.log('📊 Query results:', querySnapshot.size, 'orders found');
+
                 if (querySnapshot.empty) {
-                    showError('No order found with this tracking number');
+                    showError(`No order found with tracking number: ${trackingNumber}`);
                     return;
                 }
 
                 // Get the order data
                 const orderDoc = querySnapshot.docs[0];
                 const orderData = orderDoc.data();
+                
+                console.log('✅ Order found:', orderData);
 
                 // Display order details
                 displayOrderDetails(orderData);
                 
             } catch (error) {
-                console.error('Error tracking order:', error);
+                console.error('❌ Error tracking order:', error);
                 showError('An error occurred while tracking your order. Please try again.');
+                showDebugInfo('Tracking Error', error);
             } finally {
                 loadingDiv.classList.add('hidden');
                 trackButton.disabled = false;
             }
+        }
+
+        // Parse Firestore timestamp safely
+        function parseFirestoreTimestamp(timestamp) {
+            if (!timestamp) return null;
+            
+            // Handle Firestore Timestamp object
+            if (timestamp && typeof timestamp === 'object') {
+                if (timestamp.toDate && typeof timestamp.toDate === 'function') {
+                    return timestamp.toDate();
+                }
+                // Handle if it's a Firestore timestamp with seconds and nanoseconds
+                if (timestamp.seconds) {
+                    return new Date(timestamp.seconds * 1000);
+                }
+            }
+            // Handle Date object or string
+            return new Date(timestamp);
         }
 
         // Display order details
@@ -948,47 +1255,99 @@
             statusElement.className = `status-badge ${status.toLowerCase().replace(' ', '-')}`;
             
             // Last update
-            const lastUpdateDate = orderData.lastUpdate ? orderData.lastUpdate.toDate() : new Date();
-            lastUpdate.textContent = formatDate(lastUpdateDate);
+            let lastUpdateDate = 'No date';
+            if (orderData.lastUpdate) {
+                const date = parseFirestoreTimestamp(orderData.lastUpdate);
+                if (date && !isNaN(date.getTime())) {
+                    lastUpdateDate = formatDate(date);
+                }
+            } else if (orderData.createdAt) {
+                const date = parseFirestoreTimestamp(orderData.createdAt);
+                if (date && !isNaN(date.getTime())) {
+                    lastUpdateDate = formatDate(date);
+                }
+            }
+            lastUpdate.textContent = lastUpdateDate;
 
             // Display timeline
-            displayTimeline(orderData.updates || []);
+            displayTimeline(orderData.updates || [], orderData.createdAt);
 
             // Show order details
             orderDetailsDiv.classList.remove('hidden');
+            
+            // Scroll to order details smoothly
+            orderDetailsDiv.scrollIntoView({ behavior: 'smooth', block: 'start' });
         }
 
         // Display timeline
-        function displayTimeline(updates) {
-            if (!updates || updates.length === 0) {
+        function displayTimeline(updates, createdAt) {
+            if ((!updates || updates.length === 0) && !createdAt) {
                 timelineContainer.innerHTML = '<p style="text-align: center; color: #999; padding: 20px;"><i class="fas fa-info-circle"></i> No tracking updates available</p>';
                 return;
             }
 
-            // Sort updates by timestamp (newest first)
-            const sortedUpdates = [...updates].sort((a, b) => {
-                const timeA = a.timestamp ? a.timestamp.toDate() : new Date(0);
-                const timeB = b.timestamp ? b.timestamp.toDate() : new Date(0);
-                return timeB - timeA;
-            });
+            // Prepare all events
+            let events = [];
+            
+            // Add updates from the array
+            if (updates && updates.length > 0) {
+                updates.forEach(update => {
+                    events.push({
+                        status: update.status || 'Status Update',
+                        note: update.note || 'Status updated',
+                        timestamp: parseFirestoreTimestamp(update.timestamp)
+                    });
+                });
+            }
+            
+            // Add creation event if not in updates
+            if (createdAt) {
+                const hasOrderCreated = events.some(e => 
+                    e.status && e.status.toLowerCase().includes('order created')
+                );
+                
+                if (!hasOrderCreated) {
+                    const creationDate = parseFirestoreTimestamp(createdAt);
+                    if (creationDate) {
+                        events.push({
+                            status: 'Order Created',
+                            note: 'Order has been created',
+                            timestamp: creationDate
+                        });
+                    }
+                }
+            }
+
+            // Filter out events with invalid timestamps
+            events = events.filter(e => e.timestamp && !isNaN(e.timestamp.getTime()));
+
+            // Sort events by timestamp (newest first)
+            events.sort((a, b) => b.timestamp - a.timestamp);
+
+            if (events.length === 0) {
+                timelineContainer.innerHTML = '<p style="text-align: center; color: #999; padding: 20px;"><i class="fas fa-info-circle"></i> No tracking updates available</p>';
+                return;
+            }
 
             let timelineHtml = '';
 
-            sortedUpdates.forEach((update, index) => {
+            events.forEach((event, index) => {
                 const isLatest = index === 0;
-                const updateDate = update.timestamp ? update.timestamp.toDate() : new Date();
-                const status = update.status || 'Status Update';
-                const note = update.note || 'Status updated';
+                const status = event.status || 'Status Update';
+                const note = event.note || 'Status updated';
+                
+                // Get appropriate icon for status
+                const icon = getStatusIcon(status);
                 
                 timelineHtml += `
                     <div class="timeline-item ${isLatest ? 'latest' : ''}">
                         <div class="timeline-icon">
-                            <i class="fas ${getStatusIcon(status)}"></i>
+                            <i class="fas ${icon}"></i>
                         </div>
                         <div class="timeline-content">
                             <h4>${status}</h4>
                             <p>${note}</p>
-                            <span class="time"><i class="far fa-clock"></i> ${formatDate(updateDate)}</span>
+                            <span class="time"><i class="far fa-clock"></i> ${formatDate(event.timestamp)}</span>
                         </div>
                     </div>
                 `;
@@ -999,44 +1358,83 @@
 
         // Get icon for status
         function getStatusIcon(status) {
+            const statusLower = status.toLowerCase();
             const icons = {
-                'Processing': 'fa-clock',
-                'Shipped': 'fa-truck',
-                'In Transit': 'fa-route',
-                'Out for Delivery': 'fa-truck',
-                'Delivered': 'fa-check-circle'
+                'order created': 'fa-clipboard-check',
+                'processing': 'fa-clock',
+                'shipped': 'fa-truck',
+                'in transit': 'fa-route',
+                'out for delivery': 'fa-truck',
+                'delivered': 'fa-check-circle'
             };
-            return icons[status] || 'fa-circle';
+            
+            // Find matching icon
+            for (const [key, icon] of Object.entries(icons)) {
+                if (statusLower.includes(key)) {
+                    return icon;
+                }
+            }
+            return 'fa-circle';
         }
 
         // Format date
         function formatDate(date) {
             if (!date) return 'No date';
             
-            const options = {
-                year: 'numeric',
-                month: 'short',
-                day: 'numeric',
-                hour: '2-digit',
-                minute: '2-digit'
-            };
-            
-            return new Date(date).toLocaleDateString('en-US', options);
+            try {
+                const d = new Date(date);
+                if (isNaN(d.getTime())) return 'Invalid date';
+                
+                const options = {
+                    year: 'numeric',
+                    month: 'short',
+                    day: 'numeric',
+                    hour: '2-digit',
+                    minute: '2-digit',
+                    hour12: true
+                };
+                
+                return d.toLocaleDateString('en-US', options);
+            } catch (e) {
+                console.error('Date formatting error:', e);
+                return 'Invalid date';
+            }
         }
 
         // Show error message
         function showError(message) {
-            errorDiv.textContent = message;
+            errorMessage.textContent = message;
             errorDiv.classList.remove('hidden');
             
             // Auto hide after 5 seconds
             setTimeout(() => {
-                errorDiv.classList.add('hidden');
+                if (errorDiv.classList.contains('hidden') === false) {
+                    errorDiv.classList.add('hidden');
+                }
             }, 5000);
         }
 
         // Attach click event to button
         trackButton.addEventListener('click', trackOrder);
+
+        // Test connection on page load
+        document.addEventListener('DOMContentLoaded', () => {
+            testFirebaseConnection();
+            
+            // Auto-focus input
+            trackingInput.focus();
+            
+            // Check for tracking number in URL
+            const urlParams = new URLSearchParams(window.location.search);
+            const trackingParam = urlParams.get('tracking');
+            if (trackingParam) {
+                trackingInput.value = trackingParam;
+                trackOrder();
+            }
+        });
+
+        // Check connection status periodically
+        setInterval(testFirebaseConnection, 30000);
     </script>
 </body>
 </html>
