@@ -98,7 +98,7 @@
             font-size: 1.125rem;
         }
 
-        /* Header Styles */
+        /* Header Styles - Copied from LumiMinds */
         header {
             background: var(--white);
             box-shadow: 0 2px 10px rgba(0,0,0,0.1);
@@ -451,16 +451,68 @@
             letter-spacing: 0.5px;
         }
 
+        /* Progress Section */
+        .progress-section {
+            background: var(--white);
+            padding: 20px;
+            border-radius: 12px;
+            margin-bottom: 20px;
+            box-shadow: var(--shadow);
+        }
+
+        .progress-header {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 10px;
+            color: var(--text-light);
+            font-size: 14px;
+        }
+
+        .progress {
+            height: 10px;
+            background: var(--bg-light);
+            border-radius: 5px;
+            overflow: hidden;
+        }
+
+        .progress-bar {
+            height: 100%;
+            background: var(--primary);
+            border-radius: 5px;
+            transition: width 0.3s ease;
+        }
+
+        /* Info Cards */
+        .info-card {
+            background: var(--white);
+            padding: 20px;
+            border-radius: 12px;
+            margin-bottom: 20px;
+            box-shadow: var(--shadow);
+        }
+
+        .info-card h3 {
+            margin-bottom: 15px;
+            font-size: 18px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            color: var(--primary);
+        }
+
+        .info-card h3 i {
+            color: var(--primary);
+        }
+
         .info-grid {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
             gap: 20px;
-            margin-bottom: 30px;
         }
 
         .info-item {
+            padding: 10px;
             background: var(--bg-light);
-            padding: 20px;
             border-radius: 8px;
             transition: transform 0.2s;
         }
@@ -473,8 +525,8 @@
         .info-item .label {
             display: block;
             color: var(--text-light);
-            font-size: 14px;
-            margin-bottom: 8px;
+            font-size: 12px;
+            margin-bottom: 5px;
         }
 
         .info-item .label i {
@@ -484,11 +536,27 @@
 
         .info-item .value {
             display: block;
-            font-size: 18px;
+            font-size: 16px;
             font-weight: 600;
             color: var(--text-dark);
+            word-break: break-word;
         }
 
+        /* Description Box */
+        .description-box {
+            background: var(--bg-light);
+            padding: 15px;
+            border-radius: 8px;
+            margin-top: 15px;
+        }
+
+        .description-box p {
+            color: var(--text-dark);
+            line-height: 1.6;
+            margin-top: 5px;
+        }
+
+        /* Status Badge */
         .status-badge {
             display: inline-block;
             padding: 8px 16px;
@@ -524,31 +592,7 @@
             border-left: 4px solid #28a745;
         }
 
-        .description {
-            background: var(--bg-light);
-            padding: 20px;
-            border-radius: 8px;
-            margin-bottom: 30px;
-        }
-
-        .description h3 {
-            color: var(--text-dark);
-            margin-bottom: 10px;
-            font-size: 18px;
-            display: flex;
-            align-items: center;
-            gap: 8px;
-        }
-
-        .description h3 i {
-            color: var(--primary);
-        }
-
-        .description p {
-            color: var(--text-light);
-            line-height: 1.6;
-        }
-
+        /* Timeline */
         .timeline {
             margin-top: 20px;
         }
@@ -570,16 +614,17 @@
             display: flex;
             gap: 20px;
             padding: 20px;
-            background: var(--bg-light);
-            border-radius: 8px;
+            background: var(--white);
+            border-radius: 12px;
             margin-bottom: 10px;
             position: relative;
             transition: all 0.3s ease;
+            box-shadow: var(--shadow);
         }
 
         .timeline-item:hover {
             transform: translateX(5px);
-            box-shadow: var(--shadow);
+            box-shadow: var(--shadow-lg);
         }
 
         .timeline-item:last-child {
@@ -587,7 +632,7 @@
         }
 
         .timeline-item.latest {
-            background: linear-gradient(to right, var(--bg-light), #fff);
+            background: linear-gradient(to right, var(--white), var(--bg-light));
             border-left: 4px solid var(--secondary);
         }
 
@@ -625,6 +670,15 @@
             margin-bottom: 5px;
         }
 
+        .timeline-content .location {
+            color: var(--primary);
+            font-size: 13px;
+            margin-bottom: 5px;
+            display: flex;
+            align-items: center;
+            gap: 4px;
+        }
+
         .timeline-content .time {
             color: #999;
             font-size: 12px;
@@ -637,6 +691,20 @@
             font-size: 10px;
         }
 
+        /* Text Colors */
+        .text-success {
+            color: var(--success);
+        }
+
+        .text-warning {
+            color: var(--warning);
+        }
+
+        .text-danger {
+            color: var(--danger);
+        }
+
+        /* Connection Status */
         .connection-status {
             position: fixed;
             bottom: 20px;
@@ -922,42 +990,116 @@
                     <span id="errorMessage"></span>
                 </div>
 
-                <div id="debugInfo" class="error debug-info hidden">
-                    <i class="fas fa-bug"></i>
-                    <div id="debugContent"></div>
-                </div>
-
+                <!-- Enhanced Order Details Section -->
                 <div id="orderDetails" class="order-details hidden">
                     <div class="order-header">
                         <h2><i class="fas fa-box-open"></i> Order Information</h2>
                         <span class="tracking-number" id="displayTrackingNumber"></span>
                     </div>
                     
-                    <div class="info-grid">
-                        <div class="info-item">
-                            <span class="label"><i class="fas fa-user"></i> Customer</span>
-                            <span class="value" id="customerName"></span>
+                    <!-- Progress Bar -->
+                    <div class="progress-section">
+                        <div class="progress-header">
+                            <span><i class="fas fa-chart-line"></i> Delivery Progress</span>
+                            <span id="progressPercentage">0%</span>
                         </div>
-                        <div class="info-item">
-                            <span class="label"><i class="fas fa-truck"></i> Current Status</span>
-                            <span class="status-badge" id="status"></span>
-                        </div>
-                        <div class="info-item">
-                            <span class="label"><i class="fas fa-clock"></i> Last Updated</span>
-                            <span class="value" id="lastUpdate"></span>
+                        <div class="progress">
+                            <div id="progressBar" class="progress-bar" 
+                                 style="width: 0%;" 
+                                 role="progressbar" 
+                                 aria-valuenow="0" 
+                                 aria-valuemin="0" 
+                                 aria-valuemax="100"></div>
                         </div>
                     </div>
-
-                    <div class="description">
-                        <h3><i class="fas fa-file-alt"></i> Order Description</h3>
-                        <p id="description"></p>
+                    
+                    <!-- Customer Details -->
+                    <div class="info-card">
+                        <h3><i class="fas fa-user"></i> Customer Details</h3>
+                        <div class="info-grid">
+                            <div class="info-item">
+                                <span class="label"><i class="fas fa-user"></i> Name</span>
+                                <span class="value" id="customerName"></span>
+                            </div>
+                            <div class="info-item">
+                                <span class="label"><i class="fas fa-phone"></i> Phone</span>
+                                <span class="value" id="customerPhone"></span>
+                            </div>
+                            <div class="info-item">
+                                <span class="label"><i class="fas fa-envelope"></i> Email</span>
+                                <span class="value" id="customerEmail"></span>
+                            </div>
+                            <div class="info-item">
+                                <span class="label"><i class="fas fa-map-marker-alt"></i> Delivery Location</span>
+                                <span class="value" id="customerLocation"></span>
+                            </div>
+                        </div>
                     </div>
-
+                    
+                    <!-- Order Details -->
+                    <div class="info-card">
+                        <h3><i class="fas fa-shopping-bag"></i> Order Details</h3>
+                        <div class="info-grid">
+                            <div class="info-item">
+                                <span class="label"><i class="fas fa-box"></i> Item Name</span>
+                                <span class="value" id="itemName"></span>
+                            </div>
+                            <div class="info-item">
+                                <span class="label"><i class="fas fa-globe"></i> Origin Country</span>
+                                <span class="value" id="originCountry"></span>
+                            </div>
+                            <div class="info-item">
+                                <span class="label"><i class="fas fa-flag"></i> Destination Country</span>
+                                <span class="value" id="destinationCountry"></span>
+                            </div>
+                            <div class="info-item">
+                                <span class="label"><i class="fas fa-calendar-alt"></i> Order Date</span>
+                                <span class="value" id="orderDate"></span>
+                            </div>
+                            <div class="info-item">
+                                <span class="label"><i class="fas fa-calendar-check"></i> Expected Delivery</span>
+                                <span class="value" id="expectedDelivery"></span>
+                            </div>
+                            <div class="info-item">
+                                <span class="label"><i class="fas fa-money-bill"></i> Order Value</span>
+                                <span class="value" id="orderValue"></span>
+                            </div>
+                        </div>
+                        <div class="description-box">
+                            <span class="label"><i class="fas fa-align-left"></i> Description</span>
+                            <p id="itemDescription"></p>
+                        </div>
+                    </div>
+                    
+                    <!-- Current Progress -->
+                    <div class="info-card">
+                        <h3><i class="fas fa-truck"></i> Current Progress</h3>
+                        <div class="info-grid">
+                            <div class="info-item">
+                                <span class="label"><i class="fas fa-info-circle"></i> Current Status</span>
+                                <span class="status-badge" id="currentStatus"></span>
+                            </div>
+                            <div class="info-item">
+                                <span class="label"><i class="fas fa-map-pin"></i> Current Location</span>
+                                <span class="value" id="currentLocation"></span>
+                            </div>
+                            <div class="info-item">
+                                <span class="label"><i class="fas fa-clock"></i> Last Update</span>
+                                <span class="value" id="lastUpdateTime"></span>
+                            </div>
+                            <div class="info-item">
+                                <span class="label"><i class="fas fa-hourglass-half"></i> Days Remaining</span>
+                                <span class="value" id="daysRemaining"></span>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Tracking Timeline -->
                     <div class="timeline">
                         <h3><i class="fas fa-history"></i> Tracking History</h3>
                         <div id="timelineContainer"></div>
                     </div>
-
+                    
                     <div class="track-another">
                         <button onclick="resetTracking()">
                             <i class="fas fa-redo"></i> Track Another Order
@@ -998,8 +1140,8 @@
                     <ul class="footer-links">
                         <li><a href="index.html">Home</a></li>
                         <li><a href="services.html">Services</a></li>
-                        <li><a href="vehicles.html">Vehicles</a></li>
-                        <li><a href="gadgets.html">Gadgets</a></li>
+                        <li><a href="work.html">Our Works</a></li>
+                        <li><a href="inventory.html">Inventory</a></li>
                         <li><a href="about.html">About Us</a></li>
                         <li><a href="contact.html">Contact</a></li>
                     </ul>
@@ -1010,8 +1152,6 @@
                     <ul class="footer-links">
                         <li><a href="services.html#product-sourcing">Product Sourcing</a></li>
                         <li><a href="services.html#it-support">IT Support</a></li>
-                        <li><a href="vehicles.html">Vehicle Import</a></li>
-                        <li><a href="gadgets.html">Gadget Import</a></li>
                         <li><a href="services.html#web-dev">Web Development</a></li>
                         <li><a href="services.html#consultation">IT Consultation</a></li>
                     </ul>
@@ -1055,19 +1195,36 @@
         const loadingDiv = document.getElementById('loading');
         const errorDiv = document.getElementById('error');
         const errorMessage = document.getElementById('errorMessage');
-        const debugInfo = document.getElementById('debugInfo');
-        const debugContent = document.getElementById('debugContent');
         const orderDetailsDiv = document.getElementById('orderDetails');
         const timelineContainer = document.getElementById('timelineContainer');
         const connectionDot = document.getElementById('connectionDot');
         const connectionText = document.getElementById('connectionText');
-
+        
         // Display elements
         const displayTrackingNumber = document.getElementById('displayTrackingNumber');
+        
+        // Customer Details
         const customerName = document.getElementById('customerName');
-        const statusElement = document.getElementById('status');
-        const lastUpdate = document.getElementById('lastUpdate');
-        const description = document.getElementById('description');
+        const customerPhone = document.getElementById('customerPhone');
+        const customerEmail = document.getElementById('customerEmail');
+        const customerLocation = document.getElementById('customerLocation');
+        
+        // Order Details
+        const itemName = document.getElementById('itemName');
+        const itemDescription = document.getElementById('itemDescription');
+        const originCountry = document.getElementById('originCountry');
+        const destinationCountry = document.getElementById('destinationCountry');
+        const orderDate = document.getElementById('orderDate');
+        const expectedDelivery = document.getElementById('expectedDelivery');
+        const orderValue = document.getElementById('orderValue');
+        
+        // Progress Details
+        const currentStatus = document.getElementById('currentStatus');
+        const currentLocation = document.getElementById('currentLocation');
+        const lastUpdateTime = document.getElementById('lastUpdateTime');
+        const daysRemaining = document.getElementById('daysRemaining');
+        const progressPercentage = document.getElementById('progressPercentage');
+        const progressBar = document.getElementById('progressBar');
 
         // Mobile Menu Toggle
         const mobileMenuBtn = document.querySelector('.mobile-menu-btn');
@@ -1118,12 +1275,6 @@
                 connectionDot.className = 'status-dot connected';
                 connectionText.textContent = 'Connected to tracking system';
                 console.log('✅ Firebase connected successfully');
-                
-                // Log sample tracking number if exists
-                if (!testQuery.empty) {
-                    const sample = testQuery.docs[0].data();
-                    console.log('📋 Sample tracking number:', sample.trackingNumber);
-                }
             } catch (error) {
                 connectionDot.className = 'status-dot disconnected';
                 connectionText.textContent = 'Connection failed';
@@ -1131,25 +1282,319 @@
             }
         }
 
-        // Show debug information
-        function showDebugInfo(title, error) {
-            debugContent.innerHTML = `
-                <strong>${title}:</strong><br>
-                ${error.message || error}<br>
-                <small style="color: #666; margin-top: 10px; display: block;">
-                    Check browser console for more details (F12)
-                </small>
-            `;
-            debugInfo.classList.remove('hidden');
+        // Parse Firestore timestamp
+        function parseTimestamp(timestamp) {
+            if (!timestamp) return null;
+            if (timestamp.toDate && typeof timestamp.toDate === 'function') {
+                return timestamp.toDate();
+            }
+            if (timestamp.seconds) {
+                return new Date(timestamp.seconds * 1000);
+            }
+            return new Date(timestamp);
         }
 
-        // Reset tracking form
+        // Format date
+        function formatDate(date, includeTime = true) {
+            if (!date) return 'No date';
+            try {
+                const d = new Date(date);
+                if (isNaN(d.getTime())) return 'Invalid date';
+                
+                if (includeTime) {
+                    return d.toLocaleDateString('en-US', {
+                        year: 'numeric',
+                        month: 'short',
+                        day: 'numeric',
+                        hour: '2-digit',
+                        minute: '2-digit',
+                        hour12: true
+                    });
+                } else {
+                    return d.toLocaleDateString('en-US', {
+                        year: 'numeric',
+                        month: 'short',
+                        day: 'numeric'
+                    });
+                }
+            } catch (e) {
+                return 'Invalid date';
+            }
+        }
+
+        // Calculate days remaining
+        function calculateDaysRemaining(expectedDate) {
+            if (!expectedDate) return 'N/A';
+            const today = new Date();
+            today.setHours(0, 0, 0, 0);
+            
+            const expected = new Date(expectedDate);
+            expected.setHours(0, 0, 0, 0);
+            
+            const diffTime = expected - today;
+            const diffDays = Math.ceil(diffTime / (1000 * 60 * 60 * 24));
+            
+            if (diffDays < 0) return 'Overdue';
+            if (diffDays === 0) return 'Today';
+            if (diffDays === 1) return 'Tomorrow';
+            return `${diffDays} days`;
+        }
+
+        // Calculate progress percentage
+        function calculateProgress(orderDate, expectedDate) {
+            if (!orderDate || !expectedDate) return 0;
+            
+            const start = new Date(orderDate).getTime();
+            const end = new Date(expectedDate).getTime();
+            const now = new Date().getTime();
+            
+            if (now >= end) return 100;
+            if (now <= start) return 0;
+            
+            const total = end - start;
+            const elapsed = now - start;
+            return Math.min(100, Math.round((elapsed / total) * 100));
+        }
+
+        // Get latest location from updates
+        function getLatestLocation(updates) {
+            if (!updates || updates.length === 0) return 'Not available';
+            const latest = updates[0];
+            return latest.location || 'Location not specified';
+        }
+
+        // Get status icon
+        function getStatusIcon(status) {
+            const statusLower = status.toLowerCase();
+            if (statusLower.includes('created')) return 'fa-clipboard-check';
+            if (statusLower.includes('process')) return 'fa-clock';
+            if (statusLower.includes('ship')) return 'fa-truck';
+            if (statusLower.includes('transit')) return 'fa-route';
+            if (statusLower.includes('delivery')) return 'fa-truck';
+            if (statusLower.includes('delivered')) return 'fa-check-circle';
+            return 'fa-circle';
+        }
+
+        // Display timeline
+        function displayTimeline(updates, createdAt) {
+            let events = [];
+            
+            // Add updates
+            if (updates && updates.length > 0) {
+                updates.forEach(update => {
+                    const timestamp = parseTimestamp(update.timestamp);
+                    if (timestamp) {
+                        events.push({
+                            status: update.status || 'Status Update',
+                            note: update.note || 'Status updated',
+                            location: update.location,
+                            timestamp: timestamp
+                        });
+                    }
+                });
+            }
+            
+            // Add creation event if not present
+            if (createdAt) {
+                const hasCreation = events.some(e => 
+                    e.status.toLowerCase().includes('created')
+                );
+                if (!hasCreation) {
+                    const creationDate = parseTimestamp(createdAt);
+                    if (creationDate) {
+                        events.push({
+                            status: 'Order Created',
+                            note: 'Order has been created',
+                            location: 'Order processing center',
+                            timestamp: creationDate
+                        });
+                    }
+                }
+            }
+
+            // Sort by timestamp (newest first)
+            events.sort((a, b) => b.timestamp - a.timestamp);
+
+            if (events.length === 0) {
+                timelineContainer.innerHTML = '<p style="text-align: center; color: #999; padding: 20px;"><i class="fas fa-info-circle"></i> No tracking updates available</p>';
+                return;
+            }
+
+            let timelineHtml = '';
+            events.forEach((event, index) => {
+                const isLatest = index === 0;
+                const icon = getStatusIcon(event.status);
+                
+                timelineHtml += `
+                    <div class="timeline-item ${isLatest ? 'latest' : ''}">
+                        <div class="timeline-icon">
+                            <i class="fas ${icon}"></i>
+                        </div>
+                        <div class="timeline-content">
+                            <h4>${event.status}</h4>
+                            <p>${event.note}</p>
+                            ${event.location ? `
+                                <div class="location">
+                                    <i class="fas fa-map-marker-alt"></i> ${event.location}
+                                </div>
+                            ` : ''}
+                            <div class="time">
+                                <i class="far fa-clock"></i> ${formatDate(event.timestamp)}
+                            </div>
+                        </div>
+                    </div>
+                `;
+            });
+
+            timelineContainer.innerHTML = timelineHtml;
+        }
+
+        // Display order details
+        function displayOrderDetails(orderData) {
+            // Tracking Number
+            displayTrackingNumber.textContent = orderData.trackingNumber || 'N/A';
+            
+            // Customer Details
+            customerName.textContent = orderData.customerName || 'N/A';
+            customerPhone.textContent = orderData.customerPhone || 'N/A';
+            customerEmail.textContent = orderData.customerEmail || 'N/A';
+            customerLocation.textContent = orderData.customerLocation || 'N/A';
+            
+            // Order Details
+            itemName.textContent = orderData.itemName || 'N/A';
+            itemDescription.textContent = orderData.itemDescription || 'No description available';
+            originCountry.textContent = orderData.originCountry || 'N/A';
+            destinationCountry.textContent = orderData.destinationCountry || 'N/A';
+            
+            // Dates
+            const orderDateObj = parseTimestamp(orderData.orderDate);
+            const expectedDateObj = parseTimestamp(orderData.expectedDeliveryDate);
+            
+            orderDate.textContent = orderDateObj ? formatDate(orderDateObj, false) : 'N/A';
+            expectedDelivery.textContent = expectedDateObj ? formatDate(expectedDateObj, false) : 'N/A';
+            
+            // Order Value
+            if (orderData.orderValue && orderData.currency) {
+                orderValue.textContent = `${orderData.currency} ${Number(orderData.orderValue).toFixed(2)}`;
+            } else {
+                orderValue.textContent = 'Not specified';
+            }
+            
+            // Current Status
+            const status = orderData.status || 'Processing';
+            currentStatus.textContent = status;
+            currentStatus.className = `status-badge ${status.toLowerCase().replace(' ', '-')}`;
+            
+            // Latest Location
+            const latestLocation = getLatestLocation(orderData.updates);
+            currentLocation.innerHTML = `<i class="fas fa-map-marker-alt"></i> ${latestLocation}`;
+            
+            // Last Update
+            let lastUpdateDate = 'No date';
+            if (orderData.lastUpdate) {
+                const date = parseTimestamp(orderData.lastUpdate);
+                if (date) lastUpdateDate = formatDate(date);
+            }
+            lastUpdateTime.innerHTML = `<i class="far fa-clock"></i> ${lastUpdateDate}`;
+            
+            // Days Remaining
+            if (expectedDateObj) {
+                const daysRemainingText = calculateDaysRemaining(expectedDateObj);
+                daysRemaining.textContent = daysRemainingText;
+                
+                // Add color class
+                daysRemaining.className = 'value';
+                if (daysRemainingText === 'Overdue') {
+                    daysRemaining.className += ' text-danger';
+                } else if (daysRemainingText.includes('days') && parseInt(daysRemainingText) < 3) {
+                    daysRemaining.className += ' text-warning';
+                } else if (daysRemainingText !== 'N/A') {
+                    daysRemaining.className += ' text-success';
+                }
+            }
+            
+            // Progress
+            if (orderDateObj && expectedDateObj) {
+                const progress = calculateProgress(orderDateObj, expectedDateObj);
+                progressPercentage.textContent = `${progress}%`;
+                progressBar.style.width = `${progress}%`;
+                progressBar.setAttribute('aria-valuenow', progress);
+            }
+
+            displayTimeline(orderData.updates || [], orderData.orderDate);
+            orderDetailsDiv.classList.remove('hidden');
+            orderDetailsDiv.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        }
+
+        // Show error
+        function showError(message) {
+            errorMessage.textContent = message;
+            errorDiv.classList.remove('hidden');
+            setTimeout(() => {
+                if (!errorDiv.classList.contains('hidden')) {
+                    errorDiv.classList.add('hidden');
+                }
+            }, 5000);
+        }
+
+        // Reset tracking
         function resetTracking() {
             trackingInput.value = '';
             orderDetailsDiv.classList.add('hidden');
             errorDiv.classList.add('hidden');
-            debugInfo.classList.add('hidden');
             trackingInput.focus();
+        }
+
+        // Track order
+        async function trackOrder() {
+            let trackingNumber = trackingInput.value.trim().toUpperCase();
+            
+            errorDiv.classList.add('hidden');
+            trackingInput.classList.remove('error');
+            
+            if (!trackingNumber) {
+                showError('Please enter a tracking number');
+                trackingInput.classList.add('error');
+                return;
+            }
+
+            // Validate format: TRK-YYMM-ABC123
+            const trackingRegex = /^TRK-\d{4}-[A-Z]{3}\d{3}$/;
+            if (!trackingRegex.test(trackingNumber)) {
+                showError('Invalid format. Use: TRK-2402-ABC123');
+                trackingInput.classList.add('error');
+                return;
+            }
+
+            trackButton.disabled = true;
+            loadingDiv.classList.remove('hidden');
+            errorDiv.classList.add('hidden');
+            orderDetailsDiv.classList.add('hidden');
+
+            try {
+                console.log('🔍 Searching for:', trackingNumber);
+                
+                const querySnapshot = await db.collection('orders')
+                    .where('trackingNumber', '==', trackingNumber)
+                    .limit(1)
+                    .get();
+
+                if (querySnapshot.empty) {
+                    showError(`No order found with tracking number: ${trackingNumber}`);
+                    return;
+                }
+
+                const orderData = querySnapshot.docs[0].data();
+                console.log('✅ Order found:', orderData);
+                displayOrderDetails(orderData);
+                
+            } catch (error) {
+                console.error('❌ Error:', error);
+                showError('An error occurred. Please try again.');
+            } finally {
+                loadingDiv.classList.add('hidden');
+                trackButton.disabled = false;
+            }
         }
 
         // Add enter key support
@@ -1159,269 +1604,12 @@
             }
         });
 
-        // Track order function
-        async function trackOrder() {
-            const trackingNumber = trackingInput.value.trim();
-            
-            // Clear previous errors
-            errorDiv.classList.add('hidden');
-            debugInfo.classList.add('hidden');
-            trackingInput.classList.remove('error');
-            
-            if (!trackingNumber) {
-                showError('Please enter a tracking number');
-                trackingInput.classList.add('error');
-                return;
-            }
-
-            // Updated regex to match Flutter app format: TRK-YYMM-ABC123
-            const trackingRegex = /^TRK-\d{4}-[A-Z]{3}\d{3}$/;
-            if (!trackingRegex.test(trackingNumber)) {
-                showError('Invalid tracking number format. Example: TRK-2402-ABC123');
-                trackingInput.classList.add('error');
-                return;
-            }
-
-            // Disable button and show loading
-            trackButton.disabled = true;
-            loadingDiv.classList.remove('hidden');
-            errorDiv.classList.add('hidden');
-            orderDetailsDiv.classList.add('hidden');
-
-            try {
-                console.log('🔍 Searching for tracking number:', trackingNumber);
-                
-                // Query Firestore for the order
-                const ordersRef = db.collection('orders');
-                const querySnapshot = await ordersRef
-                    .where('trackingNumber', '==', trackingNumber)
-                    .limit(1)
-                    .get();
-
-                console.log('📊 Query results:', querySnapshot.size, 'orders found');
-
-                if (querySnapshot.empty) {
-                    showError(`No order found with tracking number: ${trackingNumber}`);
-                    return;
-                }
-
-                // Get the order data
-                const orderDoc = querySnapshot.docs[0];
-                const orderData = orderDoc.data();
-                
-                console.log('✅ Order found:', orderData);
-
-                // Display order details
-                displayOrderDetails(orderData);
-                
-            } catch (error) {
-                console.error('❌ Error tracking order:', error);
-                showError('An error occurred while tracking your order. Please try again.');
-                showDebugInfo('Tracking Error', error);
-            } finally {
-                loadingDiv.classList.add('hidden');
-                trackButton.disabled = false;
-            }
-        }
-
-        // Parse Firestore timestamp safely
-        function parseFirestoreTimestamp(timestamp) {
-            if (!timestamp) return null;
-            
-            // Handle Firestore Timestamp object
-            if (timestamp && typeof timestamp === 'object') {
-                if (timestamp.toDate && typeof timestamp.toDate === 'function') {
-                    return timestamp.toDate();
-                }
-                // Handle if it's a Firestore timestamp with seconds and nanoseconds
-                if (timestamp.seconds) {
-                    return new Date(timestamp.seconds * 1000);
-                }
-            }
-            // Handle Date object or string
-            return new Date(timestamp);
-        }
-
-        // Display order details
-        function displayOrderDetails(orderData) {
-            // Basic order info
-            displayTrackingNumber.textContent = orderData.trackingNumber || 'N/A';
-            customerName.textContent = orderData.customerName || 'N/A';
-            description.textContent = orderData.description || 'No description available';
-            
-            // Status with appropriate class
-            const status = orderData.status || 'Processing';
-            statusElement.textContent = status;
-            statusElement.className = `status-badge ${status.toLowerCase().replace(' ', '-')}`;
-            
-            // Last update
-            let lastUpdateDate = 'No date';
-            if (orderData.lastUpdate) {
-                const date = parseFirestoreTimestamp(orderData.lastUpdate);
-                if (date && !isNaN(date.getTime())) {
-                    lastUpdateDate = formatDate(date);
-                }
-            } else if (orderData.createdAt) {
-                const date = parseFirestoreTimestamp(orderData.createdAt);
-                if (date && !isNaN(date.getTime())) {
-                    lastUpdateDate = formatDate(date);
-                }
-            }
-            lastUpdate.textContent = lastUpdateDate;
-
-            // Display timeline
-            displayTimeline(orderData.updates || [], orderData.createdAt);
-
-            // Show order details
-            orderDetailsDiv.classList.remove('hidden');
-            
-            // Scroll to order details smoothly
-            orderDetailsDiv.scrollIntoView({ behavior: 'smooth', block: 'start' });
-        }
-
-        // Display timeline
-        function displayTimeline(updates, createdAt) {
-            if ((!updates || updates.length === 0) && !createdAt) {
-                timelineContainer.innerHTML = '<p style="text-align: center; color: #999; padding: 20px;"><i class="fas fa-info-circle"></i> No tracking updates available</p>';
-                return;
-            }
-
-            // Prepare all events
-            let events = [];
-            
-            // Add updates from the array
-            if (updates && updates.length > 0) {
-                updates.forEach(update => {
-                    events.push({
-                        status: update.status || 'Status Update',
-                        note: update.note || 'Status updated',
-                        timestamp: parseFirestoreTimestamp(update.timestamp)
-                    });
-                });
-            }
-            
-            // Add creation event if not in updates
-            if (createdAt) {
-                const hasOrderCreated = events.some(e => 
-                    e.status && e.status.toLowerCase().includes('order created')
-                );
-                
-                if (!hasOrderCreated) {
-                    const creationDate = parseFirestoreTimestamp(createdAt);
-                    if (creationDate) {
-                        events.push({
-                            status: 'Order Created',
-                            note: 'Order has been created',
-                            timestamp: creationDate
-                        });
-                    }
-                }
-            }
-
-            // Filter out events with invalid timestamps
-            events = events.filter(e => e.timestamp && !isNaN(e.timestamp.getTime()));
-
-            // Sort events by timestamp (newest first)
-            events.sort((a, b) => b.timestamp - a.timestamp);
-
-            if (events.length === 0) {
-                timelineContainer.innerHTML = '<p style="text-align: center; color: #999; padding: 20px;"><i class="fas fa-info-circle"></i> No tracking updates available</p>';
-                return;
-            }
-
-            let timelineHtml = '';
-
-            events.forEach((event, index) => {
-                const isLatest = index === 0;
-                const status = event.status || 'Status Update';
-                const note = event.note || 'Status updated';
-                
-                // Get appropriate icon for status
-                const icon = getStatusIcon(status);
-                
-                timelineHtml += `
-                    <div class="timeline-item ${isLatest ? 'latest' : ''}">
-                        <div class="timeline-icon">
-                            <i class="fas ${icon}"></i>
-                        </div>
-                        <div class="timeline-content">
-                            <h4>${status}</h4>
-                            <p>${note}</p>
-                            <span class="time"><i class="far fa-clock"></i> ${formatDate(event.timestamp)}</span>
-                        </div>
-                    </div>
-                `;
-            });
-
-            timelineContainer.innerHTML = timelineHtml;
-        }
-
-        // Get icon for status
-        function getStatusIcon(status) {
-            const statusLower = status.toLowerCase();
-            const icons = {
-                'order created': 'fa-clipboard-check',
-                'processing': 'fa-clock',
-                'shipped': 'fa-truck',
-                'in transit': 'fa-route',
-                'out for delivery': 'fa-truck',
-                'delivered': 'fa-check-circle'
-            };
-            
-            // Find matching icon
-            for (const [key, icon] of Object.entries(icons)) {
-                if (statusLower.includes(key)) {
-                    return icon;
-                }
-            }
-            return 'fa-circle';
-        }
-
-        // Format date
-        function formatDate(date) {
-            if (!date) return 'No date';
-            
-            try {
-                const d = new Date(date);
-                if (isNaN(d.getTime())) return 'Invalid date';
-                
-                const options = {
-                    year: 'numeric',
-                    month: 'short',
-                    day: 'numeric',
-                    hour: '2-digit',
-                    minute: '2-digit',
-                    hour12: true
-                };
-                
-                return d.toLocaleDateString('en-US', options);
-            } catch (e) {
-                console.error('Date formatting error:', e);
-                return 'Invalid date';
-            }
-        }
-
-        // Show error message
-        function showError(message) {
-            errorMessage.textContent = message;
-            errorDiv.classList.remove('hidden');
-            
-            // Auto hide after 5 seconds
-            setTimeout(() => {
-                if (errorDiv.classList.contains('hidden') === false) {
-                    errorDiv.classList.add('hidden');
-                }
-            }, 5000);
-        }
-
-        // Attach click event to button
+        // Event listeners
         trackButton.addEventListener('click', trackOrder);
 
-        // Test connection on page load
+        // Initialize
         document.addEventListener('DOMContentLoaded', () => {
             testFirebaseConnection();
-            
-            // Auto-focus input
             trackingInput.focus();
             
             // Check for tracking number in URL
@@ -1433,7 +1621,7 @@
             }
         });
 
-        // Check connection status periodically
+        // Periodic connection check
         setInterval(testFirebaseConnection, 30000);
     </script>
 </body>
