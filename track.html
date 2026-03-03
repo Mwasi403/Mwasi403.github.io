@@ -6,11 +6,8 @@
     <title>Track Your Order - LumiMinds Zambia</title>
     <link rel="icon" type="image/x-icon" href="logo.png">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <!-- Firebase SDK -->
-    <script src="https://www.gstatic.com/firebasejs/9.6.1/firebase-app-compat.js"></script>
-    <script src="https://www.gstatic.com/firebasejs/9.6.1/firebase-firestore-compat.js"></script>
     <style>
-        /* Global Styles - Copied from LumiMinds */
+        /* ===== complete styles (identical to original track.html) ===== */
         * {
             margin: 0;
             padding: 0;
@@ -98,7 +95,7 @@
             font-size: 1.125rem;
         }
 
-        /* Header Styles - Copied from LumiMinds */
+        /* Header Styles */
         header {
             background: var(--white);
             box-shadow: 0 2px 10px rgba(0,0,0,0.1);
@@ -292,7 +289,7 @@
             gap: 8px;
         }
 
-        .tracking-form button:hover {
+        .tracking-form button:hover:not(:disabled) {
             background: var(--primary-dark);
             transform: translateY(-2px);
             box-shadow: var(--shadow);
@@ -387,15 +384,6 @@
             font-size: 24px;
         }
 
-        .error.debug-info {
-            background: #f8f9fa;
-            color: var(--text-dark);
-            border-left-color: var(--info);
-            font-size: 0.9rem;
-            text-align: left;
-            flex-direction: column;
-        }
-
         .hidden {
             display: none !important;
         }
@@ -449,37 +437,6 @@
             font-weight: 600;
             font-size: 14px;
             letter-spacing: 0.5px;
-        }
-
-        /* Progress Section */
-        .progress-section {
-            background: var(--white);
-            padding: 20px;
-            border-radius: 12px;
-            margin-bottom: 20px;
-            box-shadow: var(--shadow);
-        }
-
-        .progress-header {
-            display: flex;
-            justify-content: space-between;
-            margin-bottom: 10px;
-            color: var(--text-light);
-            font-size: 14px;
-        }
-
-        .progress {
-            height: 10px;
-            background: var(--bg-light);
-            border-radius: 5px;
-            overflow: hidden;
-        }
-
-        .progress-bar {
-            height: 100%;
-            background: var(--primary);
-            border-radius: 5px;
-            transition: width 0.3s ease;
         }
 
         /* Info Cards */
@@ -704,8 +661,8 @@
             color: var(--danger);
         }
 
-        /* Connection Status */
-        .connection-status {
+        /* System Status */
+        .system-status {
             position: fixed;
             bottom: 20px;
             right: 20px;
@@ -871,7 +828,7 @@
                 align-items: center;
             }
 
-            .connection-status {
+            .system-status {
                 bottom: 10px;
                 right: 10px;
                 font-size: 10px;
@@ -881,7 +838,7 @@
 
         /* Print Styles */
         @media print {
-            header, footer, .tracking-form, .tracking-example, .track-another, .connection-status {
+            header, footer, .tracking-form, .tracking-example, .track-another, .system-status {
                 display: none;
             }
 
@@ -891,14 +848,18 @@
             }
         }
     </style>
+    <!-- Firebase SDKs -->
+    <script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-app-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore-compat.js"></script>
 </head>
 <body>
-    <!-- Header -->
+    <!-- Header (identical to index.html) -->
     <header>
         <div class="container">
             <nav class="nav-container">
                 <a href="index.html" class="logo">
-                    <img src="logo1.png" alt="Lumiminds Logo" class="logo-image" onerror="this.src='https://via.placeholder.com/40x40?text=LM'">
+                    <img src="logo1.png" alt="Lumiminds Logo" class="logo-image" 
+                         onerror="this.src='data:image/svg+xml,%3Csvg xmlns=\'http://www.w3.org/2000/svg\' width=\'40\' height=\'40\' viewBox=\'0 0 40 40\'%3E%3Crect width=\'40\' height=\'40\' fill=\'%233f88c5\'/%3E%3Ctext x=\'8\' y=\'25\' fill=\'white\' font-size=\'20\'%3ELM%3C/text%3E%3C/svg%3E'">
                     LumiMinds
                 </a>
                 
@@ -907,7 +868,7 @@
                     <li><a href="services.html">Services</a></li>
                     <li><a href="work.html">Our Works</a></li>
                     <li><a href="inventory.html">Inventory</a></li>
-                    <li><a href="track.html"class="active">Track</a></li>
+                    <li><a href="track.html" class="active">Track</a></li>
                     <li><a href="about.html">About</a></li>
                     <li><a href="contact.html">Contact</a></li>
                 </ul>
@@ -919,11 +880,12 @@
         </div>
     </header>
 
-    <!-- Mobile Menu -->
+    <!-- Mobile Menu (identical to index.html) -->
     <div class="mobile-menu">
         <div class="mobile-menu-header">
             <div class="logo">
-                <img src="logo1.png" alt="Lumiminds Logo" class="logo-image" onerror="this.src='https://via.placeholder.com/40x40?text=LM'">
+                <img src="logo1.png" alt="Lumiminds Logo" class="logo-image" 
+                     onerror="this.src='data:image/svg+xml,%3Csvg xmlns=\'http://www.w3.org/2000/svg\' width=\'40\' height=\'40\' viewBox=\'0 0 40 40\'%3E%3Crect width=\'40\' height=\'40\' fill=\'%233f88c5\'/%3E%3Ctext x=\'8\' y=\'25\' fill=\'white\' font-size=\'20\'%3ELM%3C/text%3E%3C/svg%3E'">
                 LumiMinds
             </div>
             <button class="mobile-menu-close">
@@ -935,31 +897,31 @@
             <li><a href="services.html">Services</a></li>
             <li><a href="work.html">Our Works</a></li>
             <li><a href="inventory.html">Inventory</a></li>
-            <li><a href="track.html"class="active">Track</a></li>
+            <li><a href="track.html" class="active">Track</a></li>
             <li><a href="about.html">About</a></li>
             <li><a href="contact.html">Contact</a></li>
         </ul>
     </div>
 
-    <!-- Tracking Hero Section -->
+    <!-- Tracking Hero Section (specific to track.html) -->
     <section class="tracking-hero">
         <div class="container">
             <h1><i class="fas fa-search-location"></i> Track Your Order</h1>
-            <p>Enter your tracking number to check the real-time status of your order</p>
+            <p>Enter your tracking number to check the status of your order</p>
         </div>
     </section>
 
-    <!-- Tracking Main Section -->
+    <!-- Tracking Main Section (WITH FIREBASE INTEGRATION) -->
     <section class="tracking-main">
         <div class="container">
             <div class="tracking-card">
+                <!-- Tracking Form -->
                 <div class="tracking-form">
                     <input 
                         type="text" 
                         id="trackingNumber" 
                         placeholder="Enter tracking number (e.g., TRK-2402-ABC123)"
-                        autocomplete="off"
-                        spellcheck="false"
+                        value=""
                     >
                     <button id="trackButton">
                         <i class="fas fa-search"></i> Track Order
@@ -968,51 +930,30 @@
 
                 <div class="tracking-example">
                     <i class="fas fa-info-circle"></i>
-                    <strong>Example:</strong> TRK-2402-ABC123
-                    <div class="quick-tips">
-                        <span class="tip-badge" onclick="document.getElementById('trackingNumber').value='TRK-2402-ABC123'">
-                            <i class="fas fa-box"></i> Sample 1
-                        </span>
-                        <span class="tip-badge" onclick="document.getElementById('trackingNumber').value='TRK-2402-XYZ789'">
-                            <i class="fas fa-box"></i> Sample 2
-                        </span>
-                        <span class="tip-badge" onclick="document.getElementById('trackingNumber').value='TRK-2402-DEF456'">
-                            <i class="fas fa-box"></i> Sample 3
-                        </span>
-                    </div>
+                    <strong>Example:</strong> TRK-2402-ABC123 · Enter a tracking number to see real data
                 </div>
 
+                <div class="quick-tips" id="quickTips">
+                    <!-- Will be populated with recent tracking numbers -->
+                </div>
+
+                <!-- Loading Indicator -->
                 <div id="loading" class="loading hidden">
                     <div class="spinner"></div>
                     <p><i class="fas fa-hourglass-half"></i> Fetching order details...</p>
                 </div>
 
+                <!-- Error Message -->
                 <div id="error" class="error hidden">
                     <i class="fas fa-exclamation-circle"></i>
                     <span id="errorMessage"></span>
                 </div>
 
-                <!-- Enhanced Order Details Section -->
+                <!-- Order Details Section -->
                 <div id="orderDetails" class="order-details hidden">
                     <div class="order-header">
                         <h2><i class="fas fa-box-open"></i> Order Information</h2>
                         <span class="tracking-number" id="displayTrackingNumber"></span>
-                    </div>
-                    
-                    <!-- Progress Bar -->
-                    <div class="progress-section">
-                        <div class="progress-header">
-                            <span><i class="fas fa-chart-line"></i> Delivery Progress</span>
-                            <span id="progressPercentage">0%</span>
-                        </div>
-                        <div class="progress">
-                            <div id="progressBar" class="progress-bar" 
-                                 style="width: 0%;" 
-                                 role="progressbar" 
-                                 aria-valuenow="0" 
-                                 aria-valuemin="0" 
-                                 aria-valuemax="100"></div>
-                        </div>
                     </div>
                     
                     <!-- Customer Details -->
@@ -1021,19 +962,19 @@
                         <div class="info-grid">
                             <div class="info-item">
                                 <span class="label"><i class="fas fa-user"></i> Name</span>
-                                <span class="value" id="customerName"></span>
+                                <span class="value" id="customerName">-</span>
                             </div>
                             <div class="info-item">
                                 <span class="label"><i class="fas fa-phone"></i> Phone</span>
-                                <span class="value" id="customerPhone"></span>
+                                <span class="value" id="customerPhone">-</span>
                             </div>
                             <div class="info-item">
                                 <span class="label"><i class="fas fa-envelope"></i> Email</span>
-                                <span class="value" id="customerEmail"></span>
+                                <span class="value" id="customerEmail">-</span>
                             </div>
                             <div class="info-item">
                                 <span class="label"><i class="fas fa-map-marker-alt"></i> Delivery Location</span>
-                                <span class="value" id="customerLocation"></span>
+                                <span class="value" id="customerLocation">-</span>
                             </div>
                         </div>
                     </div>
@@ -1044,32 +985,32 @@
                         <div class="info-grid">
                             <div class="info-item">
                                 <span class="label"><i class="fas fa-box"></i> Item Name</span>
-                                <span class="value" id="itemName"></span>
+                                <span class="value" id="itemName">-</span>
                             </div>
                             <div class="info-item">
                                 <span class="label"><i class="fas fa-globe"></i> Origin Country</span>
-                                <span class="value" id="originCountry"></span>
+                                <span class="value" id="originCountry">-</span>
                             </div>
                             <div class="info-item">
                                 <span class="label"><i class="fas fa-flag"></i> Destination Country</span>
-                                <span class="value" id="destinationCountry"></span>
+                                <span class="value" id="destinationCountry">-</span>
                             </div>
                             <div class="info-item">
                                 <span class="label"><i class="fas fa-calendar-alt"></i> Order Date</span>
-                                <span class="value" id="orderDate"></span>
+                                <span class="value" id="orderDate">-</span>
                             </div>
                             <div class="info-item">
                                 <span class="label"><i class="fas fa-calendar-check"></i> Expected Delivery</span>
-                                <span class="value" id="expectedDelivery"></span>
+                                <span class="value" id="expectedDelivery">-</span>
                             </div>
                             <div class="info-item">
                                 <span class="label"><i class="fas fa-money-bill"></i> Order Value</span>
-                                <span class="value" id="orderValue"></span>
+                                <span class="value" id="orderValue">-</span>
                             </div>
                         </div>
                         <div class="description-box">
                             <span class="label"><i class="fas fa-align-left"></i> Description</span>
-                            <p id="itemDescription"></p>
+                            <p id="itemDescription">-</p>
                         </div>
                     </div>
                     
@@ -1079,19 +1020,19 @@
                         <div class="info-grid">
                             <div class="info-item">
                                 <span class="label"><i class="fas fa-info-circle"></i> Current Status</span>
-                                <span class="status-badge" id="currentStatus"></span>
+                                <span class="status-badge" id="currentStatus">-</span>
                             </div>
                             <div class="info-item">
                                 <span class="label"><i class="fas fa-map-pin"></i> Current Location</span>
-                                <span class="value" id="currentLocation"></span>
+                                <span class="value" id="currentLocation"><i class="fas fa-map-marker-alt"></i> -</span>
                             </div>
                             <div class="info-item">
                                 <span class="label"><i class="fas fa-clock"></i> Last Update</span>
-                                <span class="value" id="lastUpdateTime"></span>
+                                <span class="value" id="lastUpdateTime"><i class="far fa-clock"></i> -</span>
                             </div>
                             <div class="info-item">
                                 <span class="label"><i class="fas fa-hourglass-half"></i> Days Remaining</span>
-                                <span class="value" id="daysRemaining"></span>
+                                <span class="value" id="daysRemaining">-</span>
                             </div>
                         </div>
                     </div>
@@ -1112,13 +1053,13 @@
         </div>
     </section>
 
-    <!-- Connection Status Indicator -->
-    <div class="connection-status" id="connectionStatus">
-        <span class="status-dot" id="connectionDot"></span>
-        <span id="connectionText">Checking connection...</span>
+    <!-- System Status Indicator (specific to track.html) -->
+    <div class="system-status" id="systemStatus">
+        <span class="status-dot checking" id="statusDot"></span>
+        <span id="statusText">Checking connection...</span>
     </div>
 
-    <!-- Footer -->
+    <!-- Footer (identical to index.html) -->
     <footer>
         <div class="container">
             <div class="footer-content">
@@ -1129,11 +1070,9 @@
                     </h3>
                     <p>Your trusted partner for comprehensive business solutions including product sourcing and IT services.</p>
                     <div class="social-links">
-                        <a href="#"><i class="fab fa-facebook"></i></a>
-                        <a href="#"><i class="fab fa-twitter"></i></a>
-                        <a href="#"><i class="fab fa-instagram"></i></a>
-                        <a href="#"><i class="fab fa-linkedin"></i></a>
-                        <a href="#"><i class="fab fa-whatsapp"></i></a>
+                        <a href="https://web.facebook.com/lumimindszambia"><i class="fab fa-facebook"></i></a>           
+                        <a href="https://www.linkedin.com/company/lumiminds-zambia/"><i class="fab fa-linkedin"></i></a>
+                        <a href="https://wa.me/message/MMD4VAX5ZEAGB1"><i class="fab fa-whatsapp"></i></a>
                     </div>
                 </div>
                 
@@ -1154,6 +1093,7 @@
                     <ul class="footer-links">
                         <li><a href="services.html#product-sourcing">Product Sourcing</a></li>
                         <li><a href="services.html#it-support">IT Support</a></li>
+                        <li><a href="work.html">Vehicle and Gadget Import</a></li>
                         <li><a href="services.html#web-dev">Web Development</a></li>
                         <li><a href="services.html#consultation">IT Consultation</a></li>
                     </ul>
@@ -1184,7 +1124,7 @@
             projectId: "lumi-track",
             storageBucket: "lumi-track.firebasestorage.app",
             messagingSenderId: "191561749174",
-            appId: "1:191561749174:web:03aafb8fd6f37052b0cc17"
+            appId: "1:191561749174:web:d7f40c32816b24e9b0cc17"
         };
 
         // Initialize Firebase
@@ -1192,43 +1132,25 @@
         const db = firebase.firestore();
 
         // DOM Elements
-        const trackButton = document.getElementById('trackButton');
         const trackingInput = document.getElementById('trackingNumber');
+        const trackButton = document.getElementById('trackButton');
         const loadingDiv = document.getElementById('loading');
         const errorDiv = document.getElementById('error');
         const errorMessage = document.getElementById('errorMessage');
         const orderDetailsDiv = document.getElementById('orderDetails');
-        const timelineContainer = document.getElementById('timelineContainer');
-        const connectionDot = document.getElementById('connectionDot');
-        const connectionText = document.getElementById('connectionText');
-        
-        // Display elements
-        const displayTrackingNumber = document.getElementById('displayTrackingNumber');
-        
-        // Customer Details
-        const customerName = document.getElementById('customerName');
-        const customerPhone = document.getElementById('customerPhone');
-        const customerEmail = document.getElementById('customerEmail');
-        const customerLocation = document.getElementById('customerLocation');
-        
-        // Order Details
-        const itemName = document.getElementById('itemName');
-        const itemDescription = document.getElementById('itemDescription');
-        const originCountry = document.getElementById('originCountry');
-        const destinationCountry = document.getElementById('destinationCountry');
-        const orderDate = document.getElementById('orderDate');
-        const expectedDelivery = document.getElementById('expectedDelivery');
-        const orderValue = document.getElementById('orderValue');
-        
-        // Progress Details
-        const currentStatus = document.getElementById('currentStatus');
-        const currentLocation = document.getElementById('currentLocation');
-        const lastUpdateTime = document.getElementById('lastUpdateTime');
-        const daysRemaining = document.getElementById('daysRemaining');
-        const progressPercentage = document.getElementById('progressPercentage');
-        const progressBar = document.getElementById('progressBar');
+        const quickTips = document.getElementById('quickTips');
+        const statusDot = document.getElementById('statusDot');
+        const statusText = document.getElementById('statusText');
 
-        // Mobile Menu Toggle
+        // Image fallback
+        document.querySelectorAll('img').forEach(img => {
+            img.onerror = function() {
+                this.onerror = null;
+                this.src = 'data:image/svg+xml,%3Csvg xmlns=\'http://www.w3.org/2000/svg\' width=\'40\' height=\'40\' viewBox=\'0 0 40 40\'%3E%3Crect width=\'40\' height=\'40\' fill=\'%233f88c5\'/%3E%3Ctext x=\'8\' y=\'25\' fill=\'white\' font-size=\'20\'%3ELM%3C/text%3E%3C/svg%3E';
+            };
+        });
+
+        // Mobile Menu (copied from index.html)
         const mobileMenuBtn = document.querySelector('.mobile-menu-btn');
         const mobileMenu = document.querySelector('.mobile-menu');
         const mobileMenuClose = document.querySelector('.mobile-menu-close');
@@ -1240,14 +1162,12 @@
                 document.body.style.overflow = 'hidden';
             });
         }
-
         if (mobileMenuClose) {
             mobileMenuClose.addEventListener('click', () => {
                 mobileMenu.classList.remove('active');
                 document.body.style.overflow = 'auto';
             });
         }
-
         mobileNavLinks.forEach(link => {
             link.addEventListener('click', () => {
                 mobileMenu.classList.remove('active');
@@ -1255,7 +1175,7 @@
             });
         });
 
-        // Navbar Background on Scroll
+        // Navbar scroll effect (copied from index.html)
         window.addEventListener('scroll', () => {
             const header = document.querySelector('header');
             if (window.scrollY > 100) {
@@ -1267,276 +1187,252 @@
             }
         });
 
-        // Test Firebase Connection
-        async function testFirebaseConnection() {
-            connectionDot.className = 'status-dot checking';
-            connectionText.textContent = 'Checking connection...';
-            
+        // Check Firebase Connection
+        async function checkConnection() {
             try {
-                const testQuery = await db.collection('orders').limit(1).get();
-                connectionDot.className = 'status-dot connected';
-                connectionText.textContent = 'Connected to tracking system';
-                console.log('✅ Firebase connected successfully');
+                statusDot.className = 'status-dot checking';
+                statusText.textContent = 'Checking connection...';
+                
+                await db.collection('orders').limit(1).get();
+                
+                statusDot.className = 'status-dot connected';
+                statusText.textContent = 'Connected to server';
             } catch (error) {
-                connectionDot.className = 'status-dot disconnected';
-                connectionText.textContent = 'Connection failed';
-                console.error('❌ Firebase connection error:', error);
+                statusDot.className = 'status-dot disconnected';
+                statusText.textContent = 'Connection error';
+                console.error('Firebase connection error:', error);
             }
         }
 
-        // Parse Firestore timestamp
-        function parseTimestamp(timestamp) {
-            if (!timestamp) return null;
-            if (timestamp.toDate && typeof timestamp.toDate === 'function') {
-                return timestamp.toDate();
+        // Load recent tracking numbers for quick tips
+        async function loadRecentTrackings() {
+            try {
+                const snapshot = await db.collection('orders')
+                    .orderBy('updatedAt', 'desc')
+                    .limit(5)
+                    .get();
+
+                if (!snapshot.empty) {
+                    quickTips.innerHTML = '';
+                    snapshot.forEach(doc => {
+                        const data = doc.data();
+                        const tip = document.createElement('span');
+                        tip.className = 'tip-badge';
+                        tip.innerHTML = `<i class="fas fa-hashtag"></i>${data.trackingNumber}`;
+                        tip.onclick = () => {
+                            trackingInput.value = data.trackingNumber;
+                            trackOrder();
+                        };
+                        quickTips.appendChild(tip);
+                    });
+                }
+            } catch (error) {
+                console.error('Error loading recent trackings:', error);
             }
-            if (timestamp.seconds) {
-                return new Date(timestamp.seconds * 1000);
-            }
-            return new Date(timestamp);
         }
 
         // Format date
-        function formatDate(date, includeTime = true) {
-            if (!date) return 'No date';
+        function formatDate(dateString) {
+            if (!dateString) return '-';
             try {
-                const d = new Date(date);
-                if (isNaN(d.getTime())) return 'Invalid date';
-                
-                if (includeTime) {
-                    return d.toLocaleDateString('en-US', {
-                        year: 'numeric',
-                        month: 'short',
-                        day: 'numeric',
-                        hour: '2-digit',
-                        minute: '2-digit',
-                        hour12: true
-                    });
-                } else {
-                    return d.toLocaleDateString('en-US', {
-                        year: 'numeric',
-                        month: 'short',
-                        day: 'numeric'
-                    });
-                }
-            } catch (e) {
-                return 'Invalid date';
+                const date = new Date(dateString);
+                return date.toLocaleDateString('en-US', {
+                    year: 'numeric',
+                    month: 'short',
+                    day: 'numeric'
+                });
+            } catch {
+                return dateString;
+            }
+        }
+
+        // Format datetime
+        function formatDateTime(dateString) {
+            if (!dateString) return '-';
+            try {
+                const date = new Date(dateString);
+                return date.toLocaleString('en-US', {
+                    year: 'numeric',
+                    month: 'short',
+                    day: 'numeric',
+                    hour: '2-digit',
+                    minute: '2-digit'
+                });
+            } catch {
+                return dateString;
             }
         }
 
         // Calculate days remaining
         function calculateDaysRemaining(expectedDate) {
-            if (!expectedDate) return 'N/A';
-            const today = new Date();
-            today.setHours(0, 0, 0, 0);
-            
-            const expected = new Date(expectedDate);
-            expected.setHours(0, 0, 0, 0);
-            
-            const diffTime = expected - today;
-            const diffDays = Math.ceil(diffTime / (1000 * 60 * 60 * 24));
-            
-            if (diffDays < 0) return 'Overdue';
-            if (diffDays === 0) return 'Today';
-            if (diffDays === 1) return 'Tomorrow';
-            return `${diffDays} days`;
+            if (!expectedDate) return '-';
+            try {
+                const today = new Date();
+                const expected = new Date(expectedDate);
+                const diffTime = expected - today;
+                const diffDays = Math.ceil(diffTime / (1000 * 60 * 60 * 24));
+                
+                if (diffDays < 0) return 'Overdue';
+                if (diffDays === 0) return 'Today';
+                return diffDays + ' days';
+            } catch {
+                return '-';
+            }
         }
 
-        // Calculate progress percentage
-        function calculateProgress(orderDate, expectedDate) {
-            if (!orderDate || !expectedDate) return 0;
-            
-            const start = new Date(orderDate).getTime();
-            const end = new Date(expectedDate).getTime();
-            const now = new Date().getTime();
-            
-            if (now >= end) return 100;
-            if (now <= start) return 0;
-            
-            const total = end - start;
-            const elapsed = now - start;
-            return Math.min(100, Math.round((elapsed / total) * 100));
-        }
-
-        // Get latest location from updates
-        function getLatestLocation(updates) {
-            if (!updates || updates.length === 0) return 'Not available';
-            const latest = updates[0];
-            return latest.location || 'Location not specified';
+        // Get status badge class
+        function getStatusBadgeClass(status) {
+            if (!status) return '';
+            const statusLower = status.toLowerCase();
+            if (statusLower.includes('processing')) return 'processing';
+            if (statusLower.includes('shipped')) return 'shipped';
+            if (statusLower.includes('transit')) return 'in-transit';
+            if (statusLower.includes('out') || statusLower.includes('delivery')) return 'out-for-delivery';
+            if (statusLower.includes('delivered')) return 'delivered';
+            return '';
         }
 
         // Get status icon
         function getStatusIcon(status) {
+            if (!status) return 'fa-circle';
             const statusLower = status.toLowerCase();
-            if (statusLower.includes('created')) return 'fa-clipboard-check';
-            if (statusLower.includes('process')) return 'fa-clock';
-            if (statusLower.includes('ship')) return 'fa-truck';
-            if (statusLower.includes('transit')) return 'fa-route';
-            if (statusLower.includes('delivery')) return 'fa-truck';
+            if (statusLower.includes('processing')) return 'fa-clock';
+            if (statusLower.includes('shipped')) return 'fa-ship';
+            if (statusLower.includes('transit')) return 'fa-truck';
+            if (statusLower.includes('out') || statusLower.includes('delivery')) return 'fa-truck-fast';
             if (statusLower.includes('delivered')) return 'fa-check-circle';
             return 'fa-circle';
         }
 
-        // Display timeline
-        function displayTimeline(updates, createdAt) {
-            let events = [];
+        // Update order details in UI
+        function updateOrderDetails(data) {
+            // Customer details
+            document.getElementById('customerName').textContent = data.customer?.name || '-';
+            document.getElementById('customerPhone').textContent = data.customer?.phone || '-';
+            document.getElementById('customerEmail').textContent = data.customer?.email || '-';
+            document.getElementById('customerLocation').textContent = data.customer?.location || '-';
+
+            // Order details
+            document.getElementById('itemName').textContent = data.order?.itemName || '-';
+            document.getElementById('originCountry').textContent = data.order?.originCountry || '-';
+            document.getElementById('destinationCountry').textContent = data.order?.destinationCountry || '-';
+            document.getElementById('orderDate').textContent = formatDate(data.order?.orderDate);
+            document.getElementById('expectedDelivery').textContent = formatDate(data.order?.expectedDelivery);
+            document.getElementById('orderValue').textContent = 
+                data.order?.value ? `${data.order?.currency || 'ZMW'} ${data.order.value.toFixed(2)}` : '-';
+            document.getElementById('itemDescription').textContent = data.order?.description || '-';
+
+            // Tracking info
+            const status = data.tracking?.currentStatus || '-';
+            const statusBadge = document.getElementById('currentStatus');
+            statusBadge.textContent = status;
+            statusBadge.className = `status-badge ${getStatusBadgeClass(status)}`;
+
+            document.getElementById('currentLocation').innerHTML = 
+                `<i class="fas fa-map-marker-alt"></i> ${data.tracking?.currentLocation || '-'}`;
+            document.getElementById('lastUpdateTime').innerHTML = 
+                `<i class="far fa-clock"></i> ${formatDateTime(data.tracking?.lastUpdate)}`;
             
-            // Add updates
-            if (updates && updates.length > 0) {
-                updates.forEach(update => {
-                    const timestamp = parseTimestamp(update.timestamp);
-                    if (timestamp) {
-                        events.push({
-                            status: update.status || 'Status Update',
-                            note: update.note || 'Status updated',
-                            location: update.location,
-                            timestamp: timestamp
-                        });
-                    }
-                });
-            }
-            
-            // Add creation event if not present
-            if (createdAt) {
-                const hasCreation = events.some(e => 
-                    e.status.toLowerCase().includes('created')
+            const daysRemaining = calculateDaysRemaining(data.order?.expectedDelivery);
+            const daysRemainingEl = document.getElementById('daysRemaining');
+            daysRemainingEl.textContent = daysRemaining;
+            daysRemainingEl.className = daysRemaining === 'Overdue' ? 'value text-danger' : 
+                                         daysRemaining === 'Today' ? 'value text-warning' : 'value';
+
+            // Timeline
+            const timelineContainer = document.getElementById('timelineContainer');
+            timelineContainer.innerHTML = '';
+
+            if (data.timeline && data.timeline.length > 0) {
+                // Sort by timestamp (newest first)
+                const sortedTimeline = [...data.timeline].sort((a, b) => 
+                    new Date(b.timestamp) - new Date(a.timestamp)
                 );
-                if (!hasCreation) {
-                    const creationDate = parseTimestamp(createdAt);
-                    if (creationDate) {
-                        events.push({
-                            status: 'Order Created',
-                            note: 'Order has been created',
-                            location: 'Order processing center',
-                            timestamp: creationDate
-                        });
-                    }
-                }
+
+                sortedTimeline.forEach((entry, index) => {
+                    const timelineItem = document.createElement('div');
+                    timelineItem.className = `timeline-item ${index === 0 ? 'latest' : ''}`;
+                    
+                    timelineItem.innerHTML = `
+                        <div class="timeline-icon"><i class="fas ${getStatusIcon(entry.status)}"></i></div>
+                        <div class="timeline-content">
+                            <h4>${entry.status || 'Unknown'}</h4>
+                            <p>${entry.description || ''}</p>
+                            <div class="location"><i class="fas fa-map-marker-alt"></i> ${entry.location || 'Unknown'}</div>
+                            <div class="time"><i class="far fa-clock"></i> ${formatDateTime(entry.timestamp)}</div>
+                        </div>
+                    `;
+                    
+                    timelineContainer.appendChild(timelineItem);
+                });
+            } else {
+                timelineContainer.innerHTML = '<p class="text-center">No tracking history available</p>';
             }
+        }
 
-            // Sort by timestamp (newest first)
-            events.sort((a, b) => b.timestamp - a.timestamp);
+        // Increment view count (background function - not visible to user)
+        async function incrementViewCount(orderId, currentViews) {
+            try {
+                await db.collection('orders').doc(orderId).update({
+                    'tracking.views': (currentViews || 0) + 1
+                });
+                console.log('View count updated in background'); // Optional: for debugging
+            } catch (error) {
+                console.error('Error incrementing view count:', error);
+                // Silently fail - don't show error to user
+            }
+        }
 
-            if (events.length === 0) {
-                timelineContainer.innerHTML = '<p style="text-align: center; color: #999; padding: 20px;"><i class="fas fa-info-circle"></i> No tracking updates available</p>';
+        // Track order function
+        async function trackOrder() {
+            const trackingNumber = trackingInput.value.trim();
+            
+            if (!trackingNumber) {
+                showError('Please enter a tracking number');
                 return;
             }
 
-            let timelineHtml = '';
-            events.forEach((event, index) => {
-                const isLatest = index === 0;
-                const icon = getStatusIcon(event.status);
-                
-                timelineHtml += `
-                    <div class="timeline-item ${isLatest ? 'latest' : ''}">
-                        <div class="timeline-icon">
-                            <i class="fas ${icon}"></i>
-                        </div>
-                        <div class="timeline-content">
-                            <h4>${event.status}</h4>
-                            <p>${event.note}</p>
-                            ${event.location ? `
-                                <div class="location">
-                                    <i class="fas fa-map-marker-alt"></i> ${event.location}
-                                </div>
-                            ` : ''}
-                            <div class="time">
-                                <i class="far fa-clock"></i> ${formatDate(event.timestamp)}
-                            </div>
-                        </div>
-                    </div>
-                `;
-            });
+            // Hide any previous results/errors
+            orderDetailsDiv.classList.add('hidden');
+            errorDiv.classList.add('hidden');
+            loadingDiv.classList.remove('hidden');
+            trackButton.disabled = true;
 
-            timelineContainer.innerHTML = timelineHtml;
-        }
+            try {
+                // Query Firestore for the order
+                const snapshot = await db.collection('orders')
+                    .where('trackingNumber', '==', trackingNumber)
+                    .limit(1)
+                    .get();
 
-        // Display order details
-        function displayOrderDetails(orderData) {
-            // Tracking Number
-            displayTrackingNumber.textContent = orderData.trackingNumber || 'N/A';
-            
-            // Customer Details
-            customerName.textContent = orderData.customerName || 'N/A';
-            customerPhone.textContent = orderData.customerPhone || 'N/A';
-            customerEmail.textContent = orderData.customerEmail || 'N/A';
-            customerLocation.textContent = orderData.customerLocation || 'N/A';
-            
-            // Order Details
-            itemName.textContent = orderData.itemName || 'N/A';
-            itemDescription.textContent = orderData.itemDescription || 'No description available';
-            originCountry.textContent = orderData.originCountry || 'N/A';
-            destinationCountry.textContent = orderData.destinationCountry || 'N/A';
-            
-            // Dates
-            const orderDateObj = parseTimestamp(orderData.orderDate);
-            const expectedDateObj = parseTimestamp(orderData.expectedDeliveryDate);
-            
-            orderDate.textContent = orderDateObj ? formatDate(orderDateObj, false) : 'N/A';
-            expectedDelivery.textContent = expectedDateObj ? formatDate(expectedDateObj, false) : 'N/A';
-            
-            // Order Value
-            if (orderData.orderValue && orderData.currency) {
-                orderValue.textContent = `${orderData.currency} ${Number(orderData.orderValue).toFixed(2)}`;
-            } else {
-                orderValue.textContent = 'Not specified';
-            }
-            
-            // Current Status
-            const status = orderData.status || 'Processing';
-            currentStatus.textContent = status;
-            currentStatus.className = `status-badge ${status.toLowerCase().replace(' ', '-')}`;
-            
-            // Latest Location
-            const latestLocation = getLatestLocation(orderData.updates);
-            currentLocation.innerHTML = `<i class="fas fa-map-marker-alt"></i> ${latestLocation}`;
-            
-            // Last Update
-            let lastUpdateDate = 'No date';
-            if (orderData.lastUpdate) {
-                const date = parseTimestamp(orderData.lastUpdate);
-                if (date) lastUpdateDate = formatDate(date);
-            }
-            lastUpdateTime.innerHTML = `<i class="far fa-clock"></i> ${lastUpdateDate}`;
-            
-            // Days Remaining
-            if (expectedDateObj) {
-                const daysRemainingText = calculateDaysRemaining(expectedDateObj);
-                daysRemaining.textContent = daysRemainingText;
-                
-                // Add color class
-                daysRemaining.className = 'value';
-                if (daysRemainingText === 'Overdue') {
-                    daysRemaining.className += ' text-danger';
-                } else if (daysRemainingText.includes('days') && parseInt(daysRemainingText) < 3) {
-                    daysRemaining.className += ' text-warning';
-                } else if (daysRemainingText !== 'N/A') {
-                    daysRemaining.className += ' text-success';
+                if (snapshot.empty) {
+                    throw new Error('Tracking number not found');
                 }
-            }
-            
-            // Progress
-            if (orderDateObj && expectedDateObj) {
-                const progress = calculateProgress(orderDateObj, expectedDateObj);
-                progressPercentage.textContent = `${progress}%`;
-                progressBar.style.width = `${progress}%`;
-                progressBar.setAttribute('aria-valuenow', progress);
-            }
 
-            displayTimeline(orderData.updates || [], orderData.orderDate);
-            orderDetailsDiv.classList.remove('hidden');
-            orderDetailsDiv.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                const doc = snapshot.docs[0];
+                const data = doc.data();
+
+                // Update view count in background (fire and forget - don't await)
+                incrementViewCount(doc.id, data.tracking?.views);
+
+                // Update UI
+                document.getElementById('displayTrackingNumber').textContent = trackingNumber;
+                updateOrderDetails(data);
+
+                // Show order details
+                orderDetailsDiv.classList.remove('hidden');
+            } catch (error) {
+                showError(error.message);
+            } finally {
+                loadingDiv.classList.add('hidden');
+                trackButton.disabled = false;
+            }
         }
 
-        // Show error
+        // Show error message
         function showError(message) {
             errorMessage.textContent = message;
             errorDiv.classList.remove('hidden');
-            setTimeout(() => {
-                if (!errorDiv.classList.contains('hidden')) {
-                    errorDiv.classList.add('hidden');
-                }
-            }, 5000);
         }
 
         // Reset tracking
@@ -1547,84 +1443,28 @@
             trackingInput.focus();
         }
 
-        // Track order
-        async function trackOrder() {
-            let trackingNumber = trackingInput.value.trim().toUpperCase();
-            
-            errorDiv.classList.add('hidden');
-            trackingInput.classList.remove('error');
-            
-            if (!trackingNumber) {
-                showError('Please enter a tracking number');
-                trackingInput.classList.add('error');
-                return;
-            }
-
-            // Validate format: TRK-YYMM-ABC123
-            const trackingRegex = /^TRK-\d{4}-[A-Z]{3}\d{3}$/;
-            if (!trackingRegex.test(trackingNumber)) {
-                showError('Invalid format. Use: TRK-2402-ABC123');
-                trackingInput.classList.add('error');
-                return;
-            }
-
-            trackButton.disabled = true;
-            loadingDiv.classList.remove('hidden');
-            errorDiv.classList.add('hidden');
-            orderDetailsDiv.classList.add('hidden');
-
-            try {
-                console.log('🔍 Searching for:', trackingNumber);
-                
-                const querySnapshot = await db.collection('orders')
-                    .where('trackingNumber', '==', trackingNumber)
-                    .limit(1)
-                    .get();
-
-                if (querySnapshot.empty) {
-                    showError(`No order found with tracking number: ${trackingNumber}`);
-                    return;
-                }
-
-                const orderData = querySnapshot.docs[0].data();
-                console.log('✅ Order found:', orderData);
-                displayOrderDetails(orderData);
-                
-            } catch (error) {
-                console.error('❌ Error:', error);
-                showError('An error occurred. Please try again.');
-            } finally {
-                loadingDiv.classList.add('hidden');
-                trackButton.disabled = false;
-            }
-        }
-
-        // Add enter key support
+        // Event listeners
+        trackButton.addEventListener('click', trackOrder);
         trackingInput.addEventListener('keypress', (e) => {
             if (e.key === 'Enter') {
                 trackOrder();
             }
         });
 
-        // Event listeners
-        trackButton.addEventListener('click', trackOrder);
-
-        // Initialize
-        document.addEventListener('DOMContentLoaded', () => {
-            testFirebaseConnection();
-            trackingInput.focus();
-            
-            // Check for tracking number in URL
+        // Check URL for tracking number parameter
+        function checkUrlForTracking() {
             const urlParams = new URLSearchParams(window.location.search);
             const trackingParam = urlParams.get('tracking');
             if (trackingParam) {
                 trackingInput.value = trackingParam;
                 trackOrder();
             }
-        });
+        }
 
-        // Periodic connection check
-        setInterval(testFirebaseConnection, 30000);
+        // Initialize
+        checkConnection();
+        loadRecentTrackings();
+        checkUrlForTracking();
     </script>
 </body>
 </html>
