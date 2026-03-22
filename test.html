@@ -1,0 +1,563 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>PrimeNet Payment Test</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800&display=swap" rel="stylesheet">
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    :root {
+      --primary: #00bcd4;
+      --primary-dark: #0097a7;
+      --dark: #0f172a;
+      --gray-100: #f1f5f9;
+      --gray-200: #e2e8f0;
+      --gray-400: #94a3b8;
+      --success: #16a34a;
+      --error: #dc2626;
+      --radius: 1rem;
+    }
+    body {
+      font-family: 'Inter', sans-serif;
+      background: var(--gray-100);
+      color: var(--dark);
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 1.5rem;
+    }
+
+    .card {
+      background: white;
+      border-radius: 1.5rem;
+      padding: 2.5rem;
+      width: 100%;
+      max-width: 460px;
+      box-shadow: 0 20px 60px rgba(0,0,0,0.08);
+    }
+
+    .logo {
+      display: flex; align-items: center; gap: 10px;
+      margin-bottom: 2rem;
+    }
+    .logo-dot {
+      width: 36px; height: 36px; border-radius: 10px;
+      background: var(--primary);
+      display: flex; align-items: center; justify-content: center;
+      color: white; font-weight: 800; font-size: 1rem;
+    }
+    .logo-text { font-size: 1rem; font-weight: 700; color: var(--dark); }
+    .logo-sub  { font-size: 0.72rem; color: var(--gray-400); }
+
+    h1 { font-size: 1.4rem; font-weight: 800; margin-bottom: 0.3rem; }
+    .subtitle { font-size: 0.85rem; color: var(--gray-400); margin-bottom: 1.8rem; }
+
+    .form-group { margin-bottom: 1rem; }
+    label {
+      display: block; font-size: 0.75rem; font-weight: 700;
+      text-transform: uppercase; letter-spacing: 0.5px;
+      color: var(--dark); margin-bottom: 5px;
+    }
+    label .req { color: var(--error); }
+    input, select {
+      width: 100%; padding: 0.8rem 1rem;
+      border: 1.5px solid var(--gray-200); border-radius: 0.75rem;
+      font-family: 'Inter', sans-serif; font-size: 0.92rem;
+      color: var(--dark); outline: none; transition: 0.2s;
+      background: white;
+    }
+    input:focus, select:focus {
+      border-color: var(--primary);
+      box-shadow: 0 0 0 3px rgba(0,188,212,0.1);
+    }
+    input.error { border-color: var(--error); }
+    .hint { font-size: 0.72rem; color: var(--gray-400); margin-top: 4px; }
+
+    /* Payment tabs */
+    .tabs { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; margin-bottom: 1.2rem; }
+    .tab {
+      padding: 0.75rem; border: 1.5px solid var(--gray-200);
+      border-radius: 0.75rem; cursor: pointer; text-align: center;
+      font-size: 0.82rem; font-weight: 600; color: var(--gray-400);
+      transition: 0.2s; background: white; font-family: 'Inter', sans-serif;
+    }
+    .tab:hover { border-color: var(--primary); }
+    .tab.active { border-color: var(--primary); background: rgba(0,188,212,0.05); color: var(--primary); }
+    .tab i { display: block; font-size: 1.2rem; margin-bottom: 4px; }
+
+    .panel { display: none; }
+    .panel.active { display: block; }
+
+    /* Operator buttons */
+    .operators { display: grid; grid-template-columns: repeat(3,1fr); gap: 8px; margin-bottom: 1rem; }
+    .op-btn {
+      padding: 0.6rem 0.3rem; border: 1.5px solid var(--gray-200);
+      border-radius: 0.75rem; cursor: pointer; text-align: center;
+      font-size: 0.72rem; font-weight: 700; transition: 0.2s;
+      background: white; font-family: 'Inter', sans-serif; color: var(--dark);
+    }
+    .op-btn:hover { border-color: var(--primary); }
+    .op-btn.active { border-color: var(--primary); background: rgba(0,188,212,0.05); }
+    .op-dot {
+      width: 28px; height: 28px; border-radius: 50%;
+      margin: 0 auto 4px; display: flex; align-items: center;
+      justify-content: center; font-size: 0.75rem; font-weight: 800; color: white;
+    }
+
+    /* Pay button */
+    .pay-btn {
+      width: 100%; padding: 1rem; background: var(--primary); color: white;
+      border: none; border-radius: 100px; font-size: 1rem; font-weight: 700;
+      cursor: pointer; transition: 0.3s; font-family: 'Inter', sans-serif;
+      display: flex; align-items: center; justify-content: center; gap: 8px;
+      margin-top: 1.5rem;
+    }
+    .pay-btn:hover:not(:disabled) { background: var(--primary-dark); transform: translateY(-2px); box-shadow: 0 8px 25px rgba(0,188,212,0.3); }
+    .pay-btn:disabled { opacity: 0.5; cursor: not-allowed; transform: none; }
+    .pay-btn .spinner {
+      width: 18px; height: 18px; border: 2px solid rgba(255,255,255,0.4);
+      border-top-color: white; border-radius: 50%;
+      animation: spin 0.8s linear infinite; display: none;
+    }
+    .pay-btn.loading .btn-text { display: none; }
+    .pay-btn.loading .spinner { display: block; }
+
+    /* Config section */
+    .config-toggle {
+      display: flex; align-items: center; gap: 6px;
+      font-size: 0.78rem; color: var(--gray-400); cursor: pointer;
+      margin-bottom: 1rem; background: none; border: none;
+      font-family: 'Inter', sans-serif; padding: 0;
+    }
+    .config-toggle:hover { color: var(--primary); }
+    .config-panel {
+      background: var(--gray-100); border-radius: 0.75rem;
+      padding: 1rem; margin-bottom: 1.2rem; display: none;
+    }
+    .config-panel.show { display: block; }
+    .config-panel .form-group { margin-bottom: 0.7rem; }
+    .config-panel .form-group:last-child { margin-bottom: 0; }
+    .config-panel input { background: white; font-size: 0.82rem; padding: 0.6rem 0.85rem; }
+
+    /* Result box */
+    .result {
+      margin-top: 1.2rem; border-radius: 0.75rem;
+      padding: 1rem 1.2rem; font-size: 0.82rem; display: none;
+      line-height: 1.6;
+    }
+    .result.show { display: block; }
+    .result.success { background: #dcfce7; color: #14532d; border: 1px solid #86efac; }
+    .result.error   { background: #fee2e2; color: #7f1d1d; border: 1px solid #fca5a5; }
+    .result.info    { background: #e0f2fe; color: #0c4a6e; border: 1px solid #7dd3fc; }
+    .result.pending { background: #fff7ed; color: #7c2d12; border: 1px solid #fdba74; }
+    .result-title { font-weight: 700; margin-bottom: 4px; display: flex; align-items: center; gap: 6px; }
+    .result pre {
+      margin-top: 8px; background: rgba(0,0,0,0.06);
+      border-radius: 0.5rem; padding: 0.6rem 0.8rem;
+      font-size: 0.75rem; overflow-x: auto; white-space: pre-wrap; word-break: break-all;
+    }
+
+    /* Poll status */
+    .poll-bar {
+      height: 4px; background: var(--gray-200); border-radius: 100px;
+      margin-top: 8px; overflow: hidden; display: none;
+    }
+    .poll-bar.show { display: block; }
+    .poll-fill {
+      height: 100%; background: var(--primary); border-radius: 100px;
+      width: 0%; transition: width 5s linear;
+    }
+
+    .divider {
+      border: none; border-top: 1px solid var(--gray-200);
+      margin: 1.5rem 0;
+    }
+
+    @keyframes spin { to { transform: rotate(360deg); } }
+  </style>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+</head>
+<body>
+
+<div class="card">
+
+  <div class="logo">
+    <div class="logo-dot">P</div>
+    <div>
+      <div class="logo-text">PrimeNet Test</div>
+      <div class="logo-sub">Payment Gateway v2.2</div>
+    </div>
+  </div>
+
+  <h1>Test Payment</h1>
+  <p class="subtitle">Enter an amount and pay to test the PrimeNet integration.</p>
+
+  <!-- CONFIG TOGGLE -->
+  <button class="config-toggle" onclick="toggleConfig()">
+    <i class="fa-solid fa-gear"></i> API Credentials
+    <i class="fa-solid fa-chevron-down" id="configChevron" style="font-size:0.65rem"></i>
+  </button>
+  <div class="config-panel" id="configPanel">
+    <div class="form-group">
+      <label>Base URL</label>
+      <input type="text" id="cfgBaseUrl" value="http://test.primenetpay.com:8000" placeholder="http://test.primenetpay.com:8000">
+    </div>
+    <div class="form-group">
+      <label>Username</label>
+      <input type="text" id="cfgUsername" placeholder="Your PrimeNet username">
+    </div>
+    <div class="form-group">
+      <label>Password / API Key</label>
+      <input type="password" id="cfgPassword" placeholder="Your PrimeNet password">
+    </div>
+  </div>
+
+  <hr class="divider">
+
+  <!-- AMOUNT -->
+  <div class="form-group">
+    <label>Amount <span class="req">*</span></label>
+    <input type="number" id="amount" placeholder="e.g. 10" min="1" step="0.01">
+  </div>
+
+  <!-- PAYER PHONE -->
+  <div class="form-group">
+    <label>Your Phone Number <span class="req">*</span></label>
+    <input type="tel" id="phone" placeholder="260XXXXXXXXX" maxlength="12">
+    <div class="hint">Format: 260XXXXXXXXX — this is the number that will be charged</div>
+  </div>
+
+  <hr class="divider">
+
+  <!-- PAYMENT METHOD TABS -->
+  <div class="tabs">
+    <button class="tab active" id="tab-mobile" onclick="switchTab('mobile')">
+      <i class="fa-solid fa-mobile-screen"></i>Mobile Money
+    </button>
+    <button class="tab" id="tab-card" onclick="switchTab('card')">
+      <i class="fa-solid fa-credit-card"></i>Card (Redirect)
+    </button>
+  </div>
+
+  <!-- MOBILE PANEL -->
+  <div class="panel active" id="panel-mobile">
+    <div class="form-group">
+      <label>Operator</label>
+      <div class="operators">
+        <button class="op-btn active" id="op-airtel" onclick="selectOp('airtel')">
+          <div class="op-dot" style="background:#e00000">A</div> Airtel
+        </button>
+        <button class="op-btn" id="op-mtn" onclick="selectOp('mtn')">
+          <div class="op-dot" style="background:#f5c400;color:#333">M</div> MTN
+        </button>
+        <button class="op-btn" id="op-zamtel" onclick="selectOp('zamtel')">
+          <div class="op-dot" style="background:#00853f">Z</div> Zamtel
+        </button>
+      </div>
+    </div>
+    <div class="form-group">
+      <label>Currency</label>
+      <select id="mmCurrency">
+        <option value="ZMW">ZMW – Zambian Kwacha</option>
+      </select>
+      <div class="hint">Mobile money only accepts ZMW</div>
+    </div>
+  </div>
+
+  <!-- CARD PANEL -->
+  <div class="panel" id="panel-card">
+    <div class="form-group">
+      <label>Currency</label>
+      <select id="cardCurrency">
+        <option value="ZMW">ZMW – Zambian Kwacha</option>
+        <option value="USD">USD – US Dollar</option>
+      </select>
+    </div>
+    <div class="form-group">
+      <label>Client Identifier</label>
+      <input type="text" id="clientId" placeholder="Your PrimeNet client identifier">
+      <div class="hint">Provided by PrimeNet during onboarding</div>
+    </div>
+    <div style="background:#fff7ed;border:1px solid #fed7aa;border-radius:0.75rem;padding:0.75rem 1rem;font-size:0.78rem;color:#92400e;margin-top:0.5rem;">
+      <i class="fa-solid fa-circle-info"></i>
+      Card payments redirect you to the PrimeNet hosted checkout page.
+    </div>
+  </div>
+
+  <!-- PAY BUTTON -->
+  <button class="pay-btn" id="payBtn" onclick="handlePay()">
+    <span class="btn-text"><i class="fa-solid fa-lock"></i> &nbsp;Pay Now</span>
+    <div class="spinner"></div>
+  </button>
+
+  <!-- POLL PROGRESS BAR -->
+  <div class="poll-bar" id="pollBar"><div class="poll-fill" id="pollFill"></div></div>
+
+  <!-- RESULT -->
+  <div class="result" id="result">
+    <div class="result-title" id="resultTitle"></div>
+    <div id="resultMsg"></div>
+    <pre id="resultPre" style="display:none"></pre>
+  </div>
+
+</div>
+
+<script>
+  let activeTab = 'mobile';
+  let activeOp  = 'airtel';
+
+  /* ── UI TOGGLES ── */
+  window.toggleConfig = () => {
+    document.getElementById('configPanel').classList.toggle('show');
+    const ch = document.getElementById('configChevron');
+    ch.style.transform = document.getElementById('configPanel').classList.contains('show') ? 'rotate(180deg)' : '';
+  };
+
+  window.switchTab = tab => {
+    activeTab = tab;
+    ['mobile','card'].forEach(t => {
+      document.getElementById(`tab-${t}`).classList.toggle('active', t === tab);
+      document.getElementById(`panel-${t}`).classList.toggle('active', t === tab);
+    });
+    clearResult();
+  };
+
+  window.selectOp = op => {
+    activeOp = op;
+    ['airtel','mtn','zamtel'].forEach(o =>
+      document.getElementById(`op-${o}`).classList.toggle('active', o === op)
+    );
+  };
+
+  /* ── HELPERS ── */
+  function genRef() {
+    return `TEST-${Date.now()}-${Math.random().toString(36).slice(2,6).toUpperCase()}`;
+  }
+
+  function getConfig() {
+    return {
+      baseUrl:  (document.getElementById('cfgBaseUrl').value  || 'http://test.primenetpay.com:8000').trim(),
+      username: (document.getElementById('cfgUsername').value || '').trim(),
+      password: (document.getElementById('cfgPassword').value || '').trim(),
+    };
+  }
+
+  function showResult(type, title, msg, raw = null) {
+    const box = document.getElementById('result');
+    box.className = `result show ${type}`;
+    document.getElementById('resultTitle').innerHTML = title;
+    document.getElementById('resultMsg').textContent = msg;
+    const pre = document.getElementById('resultPre');
+    if (raw) { pre.textContent = JSON.stringify(raw, null, 2); pre.style.display = 'block'; }
+    else pre.style.display = 'none';
+  }
+
+  function clearResult() {
+    const box = document.getElementById('result');
+    box.className = 'result';
+  }
+
+  function setLoading(on) {
+    const btn = document.getElementById('payBtn');
+    btn.disabled = on;
+    btn.classList.toggle('loading', on);
+  }
+
+  function delay(ms) { return new Promise(r => setTimeout(r, ms)); }
+
+  /* ── VALIDATION ── */
+  function validate() {
+    const amount = document.getElementById('amount').value;
+    const phone  = document.getElementById('phone').value.trim();
+    if (!amount || Number(amount) <= 0) {
+      document.getElementById('amount').classList.add('error');
+      showResult('error', '⚠️ Validation Error', 'Please enter a valid amount.');
+      return false;
+    }
+    document.getElementById('amount').classList.remove('error');
+    if (!/^260\d{9}$/.test(phone)) {
+      document.getElementById('phone').classList.add('error');
+      showResult('error', '⚠️ Validation Error', 'Enter a valid phone number in format 260XXXXXXXXX.');
+      return false;
+    }
+    document.getElementById('phone').classList.remove('error');
+    return true;
+  }
+
+  /* ── POLL STATUS ── */
+  async function pollStatus(externalRef, cfg) {
+    const MAX   = 24;
+    const EVERY = 5000;
+    const bar   = document.getElementById('pollBar');
+    const fill  = document.getElementById('pollFill');
+    bar.classList.add('show');
+
+    for (let i = 0; i < MAX; i++) {
+      fill.style.width = '0%';
+      setTimeout(() => { fill.style.width = '100%'; }, 50);
+      await delay(EVERY);
+      fill.style.transition = 'none';
+      fill.style.width = '0%';
+      setTimeout(() => { fill.style.transition = 'width 5s linear'; }, 50);
+
+      try {
+        const credentials = btoa(`${cfg.username}:${cfg.password}`);
+        const resp = await fetch(
+          `${cfg.baseUrl}/api/v2/transaction/status/${externalRef}`,
+          { headers: { 'Authorization': `Basic ${credentials}` } }
+        );
+
+        if (resp.status === 404) {
+          showResult('info',
+            `<i class="fa-solid fa-clock"></i> Waiting… (${i+1}/${MAX})`,
+            'Transaction not yet processed. Keep waiting or approve the USSD prompt on your phone.'
+          );
+          continue;
+        }
+
+        const data = await resp.json();
+        bar.classList.remove('show');
+
+        if (data.final_status === 300) {
+          showResult('success',
+            '<i class="fa-solid fa-circle-check"></i> Payment Successful!',
+            `Transaction completed. Reference: ${externalRef}`, data
+          );
+        } else if (data.final_status === 301) {
+          showResult('error',
+            '<i class="fa-solid fa-circle-xmark"></i> Payment Failed',
+            data.status_message || 'Transaction was declined.', data
+          );
+        } else if (data.final_status === 302) {
+          showResult('info',
+            `<i class="fa-solid fa-clock"></i> In Progress… (${i+1}/${MAX})`,
+            'Transaction is still processing. Waiting…'
+          );
+          continue;
+        } else {
+          showResult('pending',
+            '<i class="fa-solid fa-triangle-exclamation"></i> Unknown Status',
+            `Status code: ${data.final_status}`, data
+          );
+        }
+        return;
+
+      } catch (e) {
+        showResult('info',
+          `<i class="fa-solid fa-clock"></i> Polling… (${i+1}/${MAX})`,
+          `Could not reach status endpoint: ${e.message}`
+        );
+      }
+    }
+
+    bar.classList.remove('show');
+    showResult('pending',
+      '<i class="fa-solid fa-triangle-exclamation"></i> Timeout',
+      `No confirmation received after 2 minutes. Reference: ${externalRef}. Check your mobile money balance or contact PrimeNet.`
+    );
+  }
+
+  /* ── MAIN PAY HANDLER ── */
+  window.handlePay = async () => {
+    clearResult();
+    if (!validate()) return;
+
+    const cfg        = getConfig();
+    const amount     = document.getElementById('amount').value;
+    const phone      = document.getElementById('phone').value.trim();
+    const externalRef = genRef();
+
+    if (!cfg.username || !cfg.password) {
+      showResult('error', '⚠️ Missing Credentials', 'Please open API Credentials above and enter your username and password.');
+      return;
+    }
+
+    setLoading(true);
+
+    try {
+      if (activeTab === 'mobile') {
+        /* ── MOBILE MONEY COLLECTION ── */
+        const currency   = document.getElementById('mmCurrency').value;
+        const credentials = btoa(`${cfg.username}:${cfg.password}`);
+
+        showResult('info',
+          '<i class="fa-solid fa-paper-plane"></i> Sending request…',
+          `Calling PrimeNet collect endpoint. Reference: ${externalRef}`
+        );
+
+        const resp = await fetch(`${cfg.baseUrl}/api/v2/transaction/collect`, {
+          method: 'POST',
+          headers: {
+            'Content-Type':  'application/json',
+            'Authorization': `Basic ${credentials}`,
+          },
+          body: JSON.stringify({
+            payer_number:       phone,
+            external_reference: externalRef,
+            payment_narration:  `Test payment ${externalRef}`,
+            currency,
+            amount:             String(amount),
+            account_number:     'TEST',
+          }),
+        });
+
+        setLoading(false);
+
+        if (resp.status === 202) {
+          showResult('info',
+            '<i class="fa-solid fa-mobile-screen"></i> Approve on your phone',
+            `Request accepted! Approve the USSD prompt on ${phone}. Polling for status every 5 seconds…`
+          );
+          pollStatus(externalRef, cfg);
+
+        } else if (resp.status === 400) {
+          const body = await resp.json().catch(() => ({}));
+          showResult('error', '⚠️ Bad Request (400)', body.message || 'Invalid request parameters.', body);
+
+        } else if (resp.status === 401) {
+          showResult('error', '🔒 Unauthorized (401)', 'Wrong username or password. Check your credentials.');
+
+        } else if (resp.status === 500) {
+          showResult('error', '💥 Server Error (500)', 'PrimeNet server error. Try again shortly.');
+
+        } else {
+          const text = await resp.text().catch(() => '');
+          showResult('error', `Unexpected status: ${resp.status}`, text || 'No response body.');
+        }
+
+      } else {
+        /* ── CARD — redirect to PrimeNet checkout page ── */
+        const currency = document.getElementById('cardCurrency').value;
+        const clientId = document.getElementById('clientId').value.trim();
+        setLoading(false);
+
+        if (!clientId) {
+          showResult('error', '⚠️ Missing Client ID', 'Enter your Client Identifier in the Card panel above.');
+          return;
+        }
+
+        const url = `https://checkout.primenetpay.com/payment-checkout/${clientId}/${amount}/${externalRef}/card/${currency}`;
+        showResult('info',
+          '<i class="fa-solid fa-arrow-up-right-from-square"></i> Redirecting…',
+          `Opening PrimeNet card checkout page. Reference: ${externalRef}`
+        );
+        setTimeout(() => { window.open(url, '_blank'); }, 800);
+      }
+
+    } catch (e) {
+      setLoading(false);
+      if (e.message.includes('Failed to fetch') || e.message.includes('NetworkError')) {
+        showResult('error',
+          '🌐 Network / Mixed Content Error',
+          `Could not reach: ${cfg.baseUrl}\n\nIf your site is on HTTPS and the API URL is HTTP, the browser will block it. Open this file locally (file://) or ask PrimeNet for an HTTPS test URL.`
+        );
+      } else {
+        showResult('error', '⚠️ Error', e.message);
+      }
+    }
+  };
+</script>
+</body>
+</html>
