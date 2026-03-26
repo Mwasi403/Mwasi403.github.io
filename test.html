@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Test</title>
+<title>PrimeNet Pay</title>
 <style>
   * { box-sizing: border-box; margin: 0; padding: 0; }
 
@@ -92,18 +92,15 @@
   }
 
   button.pay:hover { background: #333; }
-  button.pay:disabled { background: #999; cursor: not-allowed; }
 
   .msg {
     margin-top: 14px;
     font-size: 0.82rem;
     text-align: center;
-    color: #555;
     min-height: 18px;
   }
 
   .msg.error { color: #c00; }
-  .msg.ok    { color: #080; }
 </style>
 </head>
 <body>
@@ -122,14 +119,13 @@
     <button class="method" id="btn-card" onclick="selectMethod('card')">Card</button>
   </div>
 
-  <button class="pay" id="pay" onclick="pay()">Pay Now</button>
+  <button class="pay" onclick="pay()">Pay Now</button>
   <div class="msg" id="msg"></div>
 </div>
 
 <script>
-  const API_KEY = 'gQrXmWH8n4GUMqhVSSOFeKEje2MheETYR064Bsf94i2FRwPvLNtMcLuu1NIDzx5i';
-  const BASE    = 'https://api.primenetpay.com:9001';
-  let method    = 'mobile';
+  const CLIENT_ID = 'gQrXmWH8n4GUMqhVSSOFeKEje2MheETYR064Bsf94i2FRwPvLNtMcLuu1NIDzx5i';
+  let method = 'mobile';
 
   function selectMethod(m) {
     method = m;
@@ -147,51 +143,18 @@
     return 'TXN-' + Date.now() + '-' + Math.random().toString(36).slice(2,6).toUpperCase();
   }
 
-  async function pay() {
+  function pay() {
     const phone  = document.getElementById('phone').value.trim();
     const amount = parseFloat(document.getElementById('amount').value);
 
     if (!/^260\d{9}$/.test(phone)) return setMsg('Enter a valid number (260XXXXXXXXX)', 'error');
     if (isNaN(amount) || amount < 1) return setMsg('Enter a valid amount (min K1.00)', 'error');
 
-    const id  = genRef();
-    const btn = document.getElementById('pay');
-    btn.disabled = true;
-    btn.textContent = 'Processing…';
-    setMsg('');
+    const id   = genRef();
+    const type = method === 'card' ? 'card' : 'mobile money';
+    const url  = `https://checkout.primenetpay.com/payment-checkout/${CLIENT_ID}/${amount}/${id}/${type}/ZMW`;
 
-    if (method === 'card') {
-      window.open(`https://checkout.primenetpay.com/payment-checkout/${API_KEY}/${amount}/${id}/card/ZMW`, '_blank');
-      btn.disabled = false;
-      btn.textContent = 'Pay Now';
-      return;
-    }
-
-    try {
-      const res = await fetch(`${BASE}/api/v2/transaction/collect`, {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json', 'X-Authorization': API_KEY },
-        body: JSON.stringify({
-          payer_number: phone,
-          external_reference: id,
-          payment_narration: 'Payment',
-          currency: 'ZMW',
-          amount: amount.toFixed(2)
-        })
-      });
-
-      if (res.status === 202) {
-        setMsg('Request sent — check your phone to approve.', 'ok');
-      } else {
-        const d = await res.json().catch(() => ({}));
-        setMsg(d.message || 'Something went wrong. Try again.', 'error');
-      }
-    } catch {
-      setMsg('Network error. Check your connection.', 'error');
-    }
-
-    btn.disabled = false;
-    btn.textContent = 'Pay Now';
+    window.location.href = url;
   }
 </script>
 </body>
