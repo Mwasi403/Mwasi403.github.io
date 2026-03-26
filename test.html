@@ -92,7 +92,11 @@
 </div>
 
 <script>
-const CLIENT_ID = "YOUR_CLIENT_ID"; // ⚠️ test only
+const CLIENT_ID = "gQrXmWH8n4GUMqhVSSOFeKEje2MheETYR064Bsf94i2FRwPvLNtMcLuu1NIDzx5i";
+
+// ✅ TEST ENV URL (VERY IMPORTANT)
+const BASE_URL = "http://test.primenetpay.com:8000/payment-checkout";
+
 let method = "mobile";
 
 function setMethod(m) {
@@ -123,23 +127,17 @@ function pay() {
 
   const external_id = generateRef();
 
-  // 🔥 IMPORTANT: test both formats if one fails
-  let type;
-  if (method === "card") {
-    type = "card";
-  } else {
-    type = "mobile%20money"; // try "mobile-money" if this fails
-  }
+  // ⚠️ Try alternative if needed: "mobile-money"
+  let type = method === "card" ? "card" : "mobile%20money";
 
-  const url = `https://checkout.primenetpay.com/payment-checkout/${CLIENT_ID}/${amount}/${external_id}/${type}/ZMW`;
+  const url = `${BASE_URL}/${CLIENT_ID}/${amount}/${external_id}/${type}/ZMW`;
 
-  console.log("Redirecting to:", url);
+  console.log("FINAL URL:", url);
 
-  setMsg("Redirecting to payment...");
+  setMsg("Opening payment page...");
 
-  setTimeout(() => {
-    window.location.href = url;
-  }, 800);
+  // ✅ OPEN IN NEW TAB (avoids HTTPS blocking issue)
+  window.open(url, "_blank");
 }
 </script>
 
