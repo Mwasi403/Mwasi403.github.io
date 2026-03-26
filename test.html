@@ -3,120 +3,88 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>PrimeNet Pay</title>
-<style>
-  * { box-sizing: border-box; margin: 0; padding: 0; }
+<title>PrimeNet Pay (Test)</title>
 
+<style>
   body {
-    font-family: system-ui, sans-serif;
+    font-family: system-ui;
     background: #f5f5f5;
-    min-height: 100vh;
     display: flex;
     align-items: center;
     justify-content: center;
-    padding: 16px;
+    height: 100vh;
   }
 
   .card {
     background: #fff;
+    padding: 30px;
     border-radius: 12px;
-    padding: 32px;
-    width: 100%;
-    max-width: 380px;
-    box-shadow: 0 2px 12px rgba(0,0,0,0.08);
+    width: 350px;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.08);
   }
 
   h2 {
-    font-size: 1.2rem;
-    font-weight: 600;
-    margin-bottom: 24px;
-    color: #111;
-  }
-
-  label {
-    display: block;
-    font-size: 0.8rem;
-    color: #555;
-    margin-bottom: 6px;
+    margin-bottom: 20px;
   }
 
   input {
     width: 100%;
-    border: 1px solid #ddd;
+    padding: 12px;
+    margin-bottom: 15px;
     border-radius: 8px;
-    padding: 11px 14px;
-    font-size: 0.95rem;
-    outline: none;
-    margin-bottom: 16px;
-    transition: border-color 0.2s;
+    border: 1px solid #ddd;
   }
-
-  input:focus { border-color: #333; }
 
   .methods {
     display: flex;
-    gap: 8px;
-    margin-bottom: 24px;
+    gap: 10px;
+    margin-bottom: 20px;
   }
 
-  .method {
+  .methods button {
     flex: 1;
     padding: 10px;
-    border: 1px solid #ddd;
     border-radius: 8px;
-    background: #fff;
-    font-size: 0.85rem;
+    border: 1px solid #ddd;
     cursor: pointer;
-    text-align: center;
-    transition: all 0.15s;
-    color: #555;
+    background: #fff;
   }
 
-  .method.active {
-    border-color: #111;
+  .methods button.active {
     background: #111;
     color: #fff;
   }
 
   button.pay {
     width: 100%;
-    padding: 13px;
-    background: #111;
-    color: #fff;
+    padding: 12px;
     border: none;
+    background: #111;
+    color: white;
     border-radius: 8px;
-    font-size: 1rem;
-    font-weight: 600;
     cursor: pointer;
-    transition: background 0.2s;
   }
-
-  button.pay:hover { background: #333; }
 
   .msg {
-    margin-top: 14px;
-    font-size: 0.82rem;
+    margin-top: 10px;
     text-align: center;
-    min-height: 18px;
+    font-size: 0.85rem;
+    color: #555;
   }
-
-  .msg.error { color: #c00; }
 </style>
 </head>
+
 <body>
 
 <div class="card">
-  <h2>PrimeNet Pay</h2>
+  <h2>PrimeNet Pay (Test)</h2>
 
-  <label>Mobile Number</label>
-  <input type="tel" id="phone" placeholder="260XXXXXXXXX" maxlength="15">
-
-  <label>Amount (ZMW)</label>
-  <input type="number" id="amount" placeholder="0.00" min="1" step="0.01">
+  <input id="phone" placeholder="260XXXXXXXXX">
+  <input id="amount" type="number" placeholder="Amount (ZMW)">
 
   <div class="methods">
-    <button class="method active" id="btn-mobile" onclick="selectMethod('mobile')">Mobile Money</button>
-    <button class="method" id="btn-card" onclick="selectMethod('card')">Card</button>
+    <button id="mobileBtn" class="active" onclick="setMethod('mobile')">Mobile</button>
+    <button id="cardBtn" onclick="setMethod('card')">Card</button>
   </div>
 
   <button class="pay" onclick="pay()">Pay Now</button>
@@ -124,38 +92,56 @@
 </div>
 
 <script>
-  const CLIENT_ID = 'gQrXmWH8n4GUMqhVSSOFeKEje2MheETYR064Bsf94i2FRwPvLNtMcLuu1NIDzx5i';
-  let method = 'mobile';
+const CLIENT_ID = "YOUR_CLIENT_ID"; // ⚠️ test only
+let method = "mobile";
 
-  function selectMethod(m) {
-    method = m;
-    document.getElementById('btn-mobile').className = 'method' + (m === 'mobile' ? ' active' : '');
-    document.getElementById('btn-card').className   = 'method' + (m === 'card'   ? ' active' : '');
+function setMethod(m) {
+  method = m;
+  document.getElementById("mobileBtn").classList.toggle("active", m === "mobile");
+  document.getElementById("cardBtn").classList.toggle("active", m === "card");
+}
+
+function setMsg(text) {
+  document.getElementById("msg").innerText = text;
+}
+
+function generateRef() {
+  return "TEST-" + Date.now();
+}
+
+function pay() {
+  const phone  = document.getElementById("phone").value.trim();
+  const amount = document.getElementById("amount").value;
+
+  if (!/^260\d{9}$/.test(phone)) {
+    return setMsg("Enter valid number (260XXXXXXXXX)");
   }
 
-  function setMsg(text, type) {
-    const el = document.getElementById('msg');
-    el.textContent = text;
-    el.className = 'msg ' + (type || '');
+  if (!amount || amount < 1) {
+    return setMsg("Enter valid amount");
   }
 
-  function genRef() {
-    return 'TXN-' + Date.now() + '-' + Math.random().toString(36).slice(2,6).toUpperCase();
+  const external_id = generateRef();
+
+  // 🔥 IMPORTANT: test both formats if one fails
+  let type;
+  if (method === "card") {
+    type = "card";
+  } else {
+    type = "mobile%20money"; // try "mobile-money" if this fails
   }
 
-  function pay() {
-    const phone  = document.getElementById('phone').value.trim();
-    const amount = parseFloat(document.getElementById('amount').value);
+  const url = `https://checkout.primenetpay.com/payment-checkout/${CLIENT_ID}/${amount}/${external_id}/${type}/ZMW`;
 
-    if (!/^260\d{9}$/.test(phone)) return setMsg('Enter a valid number (260XXXXXXXXX)', 'error');
-    if (isNaN(amount) || amount < 1) return setMsg('Enter a valid amount (min K1.00)', 'error');
+  console.log("Redirecting to:", url);
 
-    const id   = genRef();
-    const type = method === 'card' ? 'card' : 'mobile money';
-    const url  = `https://checkout.primenetpay.com/payment-checkout/${CLIENT_ID}/${amount}/${id}/${type}/ZMW`;
+  setMsg("Redirecting to payment...");
 
+  setTimeout(() => {
     window.location.href = url;
-  }
+  }, 800);
+}
 </script>
+
 </body>
 </html>
