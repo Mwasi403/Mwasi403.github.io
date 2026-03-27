@@ -4,7 +4,6 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>PrimeNet Pay (Test)</title>
-
 <style>
   body {
     font-family: system-ui;
@@ -14,7 +13,6 @@
     justify-content: center;
     height: 100vh;
   }
-
   .card {
     background: #fff;
     padding: 30px;
@@ -22,25 +20,22 @@
     width: 350px;
     box-shadow: 0 4px 15px rgba(0,0,0,0.08);
   }
-
   h2 {
     margin-bottom: 20px;
   }
-
   input {
     width: 100%;
     padding: 12px;
     margin-bottom: 15px;
     border-radius: 8px;
     border: 1px solid #ddd;
+    box-sizing: border-box;
   }
-
   .methods {
     display: flex;
     gap: 10px;
     margin-bottom: 20px;
   }
-
   .methods button {
     flex: 1;
     padding: 10px;
@@ -49,12 +44,10 @@
     cursor: pointer;
     background: #fff;
   }
-
   .methods button.active {
     background: #111;
     color: #fff;
   }
-
   button.pay {
     width: 100%;
     padding: 12px;
@@ -64,7 +57,6 @@
     border-radius: 8px;
     cursor: pointer;
   }
-
   .msg {
     margin-top: 10px;
     text-align: center;
@@ -73,31 +65,22 @@
   }
 </style>
 </head>
-
 <body>
-
 <div class="card">
   <h2>PrimeNet Pay (Test)</h2>
-
-  <!-- ✅ 10-digit local number -->
-  <input id="phone" placeholder="097XXXXXXX" maxlength="10">
-
+  <!-- 9 digits after +260, e.g. 97XXXXXXX -->
+  <input id="phone" placeholder="97XXXXXXX" maxlength="9">
   <input id="amount" type="number" placeholder="Amount (ZMW)">
-
   <div class="methods">
     <button id="mobileBtn" class="active" onclick="setMethod('mobile')">Mobile</button>
     <button id="cardBtn" onclick="setMethod('card')">Card</button>
   </div>
-
   <button class="pay" onclick="pay()">Pay Now</button>
   <div class="msg" id="msg"></div>
 </div>
-
 <script>
 const CLIENT_ID = "gQrXmWH8n4GUMqhVSSOFeKEje2MheETYR064Bsf94i2FRwPvLNtMcLuu1NIDzx5i";
-
-// ⚠️ Test checkout URL
-const BASE_URL = "http://test.primenetpay.com:8000/payment-checkout";
+const BASE_URL  = "http://test.primenetpay.com:8000/payment-checkout";
 
 let method = "mobile";
 
@@ -116,40 +99,32 @@ function generateRef() {
 }
 
 function pay() {
-  const phoneInput = document.getElementById("phone").value.trim();
+  const phoneInput  = document.getElementById("phone").value.trim();
   const amountInput = document.getElementById("amount").value;
 
-  // ✅ Validate 10-digit number starting with 0
-  if (!/^0\d{9}$/.test(phoneInput)) {
-    return setMsg("Enter valid number (e.g. 097XXXXXXX)");
+  // Accept 9 digits (97XXXXXXX) or full 10-digit local (097XXXXXXX)
+  let digits = phoneInput;
+  if (/^0\d{9}$/.test(phoneInput)) digits = phoneInput.slice(1);
+  if (!/^\d{9}$/.test(digits)) {
+    return setMsg("Enter valid number e.g. 97XXXXXXX");
   }
 
-  if (!amountInput || amountInput < 1) {
-    return setMsg("Enter valid amount");
+  if (!amountInput || parseFloat(amountInput) < 1) {
+    return setMsg("Enter a valid amount");
   }
-
-  // ✅ Convert to international format
-  const phone = "26" + phoneInput;
 
   const external_id = generateRef();
+  const amount      = parseFloat(amountInput).toFixed(2);
 
-  // ✅ Use safe payment type
-  let type = method === "card" ? "card" : "mobile-money";
-
-  // ✅ Format amount
-  const amount = parseFloat(amountInput).toFixed(2);
+  // "mobile money" with a space, exactly as the checkout docs specify
+  const type = method === "card" ? "card" : "mobile money";
 
   const url = `${BASE_URL}/${CLIENT_ID}/${amount}/${external_id}/${type}/ZMW`;
 
-  console.log("FINAL URL:", url);
-  console.log("PHONE:", phone);
-
+  console.log("Checkout URL:", url);
   setMsg("Redirecting to payment page...");
-
-  // ✅ Open checkout page
   window.open(url, "_blank");
 }
 </script>
-
 </body>
 </html>
