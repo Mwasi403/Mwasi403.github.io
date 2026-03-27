@@ -79,7 +79,7 @@
 <div class="card">
   <h2>PrimeNet Pay (Test)</h2>
 
-  <input id="phone" placeholder="260XXXXXXXXX">
+  <input id="phone" placeholder="0XXXXXXXXX">
   <input id="amount" type="number" placeholder="Amount (ZMW)">
 
   <div class="methods">
@@ -117,8 +117,8 @@ function pay() {
   const phone  = document.getElementById("phone").value.trim();
   const amount = document.getElementById("amount").value;
 
-  if (!/^260\d{9}$/.test(phone)) {
-    return setMsg("Enter valid number (260XXXXXXXXX)");
+  if (!/^0\d{9}$/.test(phone)) {
+    return setMsg("Enter valid number (0XXXXXXXXX)");
   }
 
   if (!amount || amount < 1) {
