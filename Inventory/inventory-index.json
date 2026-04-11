@@ -14,6 +14,20 @@
       "status": "SOLD",
       "filename": "lexus-is250.json",
       "addedDate": "2025-12-10"
+    },
+
+        {
+      "id": "2",
+      "title": "2010 Toyota Mark X",
+      "category": "vehicle",
+      "previewImage": "Inventory/images/cars/2010 Toyota Mark X/1.jpeg",
+      "price": 185000,
+      "brand": "Mark X",
+      "model": "2010",
+      "quantity": 1,
+      "status": "AVAILABLE",
+      "filename": "MARK-X-2010.json",
+      "addedDate": "2025-12-10"
     }
   ]
 }
