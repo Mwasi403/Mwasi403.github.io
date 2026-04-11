@@ -1,1 +1,87 @@
+{
+  "id": "2",
+  "title": " 2010 Toyota Mark X",
+  "category": "vehicle",
+  "description": "A perfect blend of luxury, performance, and sporty customization — built to stand out.",
+  
+  "price": 185000,
+  "currency": "ZMW",
+  
+  "brand": "Mark X",
+  "model": "2010/3",
+  "year": 2010,
+  "color": "White",
+  "condition": "Used - Excellent",
+  "mileage": 82000,
+  "fuelType": "Petrol",
+  "transmission": "Automatic",
+  "driveType": "Rear Wheel Drive",
+  
+  "quantity": 1,
+  "status": "SOLD",
+  "location": "Ndola Warehouse",
+  
+  "specs": [
+    "2.5L V6 Engine",
+    "6-Speed Automatic",
+    "Leather Interior",
+    "Sunroof",
+    "Navigation System",
+    "Rear Camera",
+    "Bluetooth",
+    "Heated Seats"
+  ],
+  
+  "features": [
+    "Keyless Entry",
+    "Push Button Start",
+    "Climate Control",
+    "Power Windows",
+    "Power Seats",
+    "Premium Sound System",
+    "LED Headlights",
+    "Alloy Wheels"
+  ],
+  
+  "images": [
+    "Inventory/images/cars/2010 Toyota Mark X/1.jpeg",
+    "Inventory/images/cars/2010 Toyota Mark X/2.jpeg",
+    "Inventory/images/cars/2010 Toyota Mark X/3.jpeg",
+    "Inventory/images/cars/2010 Toyota Mark X/4.jpeg",
+    "Inventory/images/cars/2010 Toyota Mark X/5.jpeg",
+    "Inventory/images/cars/2010 Toyota Mark X/6.jpeg",
+    "Inventory/images/cars/2010 Toyota Mark X/7.jpeg"
 
+  ],
+  
+  "details": [
+    {
+      "label": "Engine",
+      "value": "2.5L V6"
+    },
+    {
+      "label": "Horsepower",
+      "value": "204 HP"
+    },
+    {
+      "label": "Fuel Economy",
+      "value": "9.8 L/100km"
+    },
+    {
+      "label": "Seating Capacity",
+      "value": "5 Passengers"
+    }
+  ],
+  
+  "includedItems": [
+    "All Keys",
+    "Service Manual",
+    "Tool Kit",
+    "Spare Tire"
+  ],
+  
+  "notes": "Available and ready for new owner ",
+  
+  "addedDate": "2026-04-11",
+  "updatedDate": "2026-04-11"
+}
