@@ -444,6 +444,30 @@
             margin-left: 10px;
         }
 
+        /* Copy button — minimal, sits next to the tracking number badge */
+        .copy-tracking-btn {
+            background: none;
+            border: 1px solid var(--border);
+            color: var(--text-light);
+            padding: 5px 12px;
+            border-radius: 20px;
+            font-size: 12px;
+            cursor: pointer;
+            display: inline-flex;
+            align-items: center;
+            gap: 5px;
+            transition: all 0.2s;
+            margin-left: 6px;
+        }
+        .copy-tracking-btn:hover {
+            border-color: var(--primary);
+            color: var(--primary);
+        }
+        .copy-tracking-btn.copied {
+            border-color: var(--success);
+            color: var(--success);
+        }
+
         /* Info Cards */
         .info-card {
             background: var(--white);
@@ -896,8 +920,6 @@
                     <button id="trackButton"><i class="fas fa-search"></i> Track Order</button>
                 </div>
 
-              
-
                 <div id="loading" class="loading hidden">
                     <div class="spinner"></div>
                     <p><i class="fas fa-hourglass-half"></i> Fetching order details...</p>
@@ -913,6 +935,9 @@
                         <h2><i class="fas fa-box-open"></i> Order Information</h2>
                         <div>
                             <span class="tracking-number" id="displayTrackingNumber"></span>
+                            <button class="copy-tracking-btn" id="copyBtn" onclick="copyTracking()">
+                                <i class="fas fa-copy"></i> Copy
+                            </button>
                             <span id="completedBadge" class="tracking-number completed-badge hidden"><i class="fas fa-check-circle"></i> COMPLETED</span>
                         </div>
                     </div>
@@ -1025,7 +1050,7 @@
     </footer>
 
     <script>
-        // Firebase Config
+        // ── Firebase ──────────────────────────────────────────────────────────
         const firebaseConfig = {
             apiKey: "AIzaSyC0YfJMqB8JUmY56Z8jhK2nGXhLOjG7-5M",
             authDomain: "lumi-track.firebaseapp.com",
@@ -1037,30 +1062,42 @@
         firebase.initializeApp(firebaseConfig);
         const db = firebase.firestore();
 
-        // DOM Elements
-        const trackingInput = document.getElementById('trackingNumber');
-        const trackButton = document.getElementById('trackButton');
-        const loadingDiv = document.getElementById('loading');
-        const errorDiv = document.getElementById('error');
-        const errorMessage = document.getElementById('errorMessage');
-        const orderDetailsDiv = document.getElementById('orderDetails');
-        const quickTips = document.getElementById('quickTips');
-        const statusDot = document.getElementById('statusDot');
-        const statusText = document.getElementById('statusText');
+        // ── Supabase ──────────────────────────────────────────────────────────
+        const SB_URL = 'https://ckcpstucwliaaxezmgty.supabase.co/rest/v1';
+        const SB_KEY = 'sb_publishable_N2KORXORW3PuNUPSjhdHFw_kcJmpshS';
+        const sbHeaders = {
+            'apikey': SB_KEY,
+            'Authorization': `Bearer ${SB_KEY}`,
+            'Content-Type': 'application/json'
+        };
 
-        // Image fallback
+        // ── DOM ───────────────────────────────────────────────────────────────
+        const trackingInput   = document.getElementById('trackingNumber');
+        const trackButton     = document.getElementById('trackButton');
+        const loadingDiv      = document.getElementById('loading');
+        const errorDiv        = document.getElementById('error');
+        const errorMessage    = document.getElementById('errorMessage');
+        const orderDetailsDiv = document.getElementById('orderDetails');
+        const statusDot       = document.getElementById('statusDot');
+        const statusText      = document.getElementById('statusText');
+
+        // image fallback
         document.querySelectorAll('img').forEach(img => {
-            img.onerror = function() { this.onerror = null; this.src = 'data:image/svg+xml,%3Csvg xmlns=\'http://www.w3.org/2000/svg\' width=\'40\' height=\'40\' viewBox=\'0 0 40 40\'%3E%3Crect width=\'40\' height=\'40\' fill=\'%233f88c5\'/%3E%3Ctext x=\'8\' y=\'25\' fill=\'white\' font-size=\'20\'%3ELM%3C/text%3E%3C/svg%3E'; };
+            img.onerror = function() {
+                this.onerror = null;
+                this.src = 'data:image/svg+xml,%3Csvg xmlns=\'http://www.w3.org/2000/svg\' width=\'40\' height=\'40\' viewBox=\'0 0 40 40\'%3E%3Crect width=\'40\' height=\'40\' fill=\'%233f88c5\'/%3E%3Ctext x=\'8\' y=\'25\' fill=\'white\' font-size=\'20\'%3ELM%3C/text%3E%3C/svg%3E';
+            };
         });
 
-        // Mobile menu
-        const mobileMenuBtn = document.querySelector('.mobile-menu-btn');
-        const mobileMenu = document.querySelector('.mobile-menu');
+        // mobile menu
+        const mobileMenuBtn   = document.querySelector('.mobile-menu-btn');
+        const mobileMenu      = document.querySelector('.mobile-menu');
         const mobileMenuClose = document.querySelector('.mobile-menu-close');
-        const mobileNavLinks = document.querySelectorAll('.mobile-nav-links a');
-        if (mobileMenuBtn) mobileMenuBtn.addEventListener('click', () => { mobileMenu.classList.add('active'); document.body.style.overflow = 'hidden'; });
+        if (mobileMenuBtn)   mobileMenuBtn.addEventListener('click',  () => { mobileMenu.classList.add('active');    document.body.style.overflow = 'hidden'; });
         if (mobileMenuClose) mobileMenuClose.addEventListener('click', () => { mobileMenu.classList.remove('active'); document.body.style.overflow = 'auto'; });
-        mobileNavLinks.forEach(link => link.addEventListener('click', () => { mobileMenu.classList.remove('active'); document.body.style.overflow = 'auto'; }));
+        document.querySelectorAll('.mobile-nav-links a').forEach(link =>
+            link.addEventListener('click', () => { mobileMenu.classList.remove('active'); document.body.style.overflow = 'auto'; })
+        );
 
         window.addEventListener('scroll', () => {
             const header = document.querySelector('header');
@@ -1068,7 +1105,7 @@
             else { header.style.background = 'var(--white)'; header.style.backdropFilter = 'none'; }
         });
 
-        // Check connection
+        // ── Connection check ──────────────────────────────────────────────────
         async function checkConnection() {
             try {
                 statusDot.className = 'status-dot checking';
@@ -1076,139 +1113,189 @@
                 await db.collection('orders').limit(1).get();
                 statusDot.className = 'status-dot connected';
                 statusText.textContent = 'Connected to server';
-            } catch (error) {
+            } catch (e) {
                 statusDot.className = 'status-dot disconnected';
                 statusText.textContent = 'Connection error';
-                console.error(error);
             }
         }
 
-        // Load recent tracking numbers
-        async function loadRecentTrackings() {
+        // ── Helpers ───────────────────────────────────────────────────────────
+        function formatDate(s) {
+            if (!s) return '-';
+            try { return new Date(s).toLocaleDateString('en-US', { year:'numeric', month:'short', day:'numeric' }); }
+            catch(e) { return s; }
+        }
+        function formatDateTime(s) {
+            if (!s) return '-';
+            try { return new Date(s).toLocaleString('en-US', { year:'numeric', month:'short', day:'numeric', hour:'2-digit', minute:'2-digit' }); }
+            catch(e) { return s; }
+        }
+        function calculateDaysRemaining(d) {
+            if (!d) return '-';
             try {
-                const snapshot = await db.collection('orders').orderBy('updatedAt', 'desc').limit(5).get();
-                if (!snapshot.empty) {
-                    quickTips.innerHTML = '';
-                    snapshot.forEach(doc => {
-                        const data = doc.data();
-                        const tip = document.createElement('span');
-                        tip.className = 'tip-badge';
-                        tip.innerHTML = `<i class="fas fa-hashtag"></i>${data.trackingNumber}`;
-                        tip.onclick = () => { trackingInput.value = data.trackingNumber; trackOrder(); };
-                        quickTips.appendChild(tip);
-                    });
-                }
-            } catch (error) { console.error(error); }
-        }
-
-        function formatDate(dateString) {
-            if (!dateString) return '-';
-            try { return new Date(dateString).toLocaleDateString('en-US', { year:'numeric', month:'short', day:'numeric' }); }
-            catch(e) { return dateString; }
-        }
-        function formatDateTime(dateString) {
-            if (!dateString) return '-';
-            try { return new Date(dateString).toLocaleString('en-US', { year:'numeric', month:'short', day:'numeric', hour:'2-digit', minute:'2-digit' }); }
-            catch(e) { return dateString; }
-        }
-        function calculateDaysRemaining(expectedDate) {
-            if (!expectedDate) return '-';
-            try {
-                const today = new Date(), expected = new Date(expectedDate);
-                const diffDays = Math.ceil((expected - today) / (1000*60*60*24));
-                if (diffDays < 0) return 'Overdue';
-                if (diffDays === 0) return 'Today';
-                return diffDays + ' days';
+                const diff = Math.ceil((new Date(d) - new Date()) / 86400000);
+                if (diff < 0) return 'Overdue';
+                if (diff === 0) return 'Today';
+                return diff + ' days';
             } catch(e) { return '-'; }
         }
         function getStatusBadgeClass(status) {
             if (!status) return '';
             const s = status.toLowerCase();
-            if (s.includes('processing')) return 'processing';
-            if (s.includes('shipped')) return 'shipped';
-            if (s.includes('transit')) return 'in-transit';
+            if (s.includes('processing'))             return 'processing';
+            if (s.includes('shipped'))                return 'shipped';
+            if (s.includes('transit'))                return 'in-transit';
             if (s.includes('out') || s.includes('delivery')) return 'out-for-delivery';
-            if (s.includes('delivered')) return 'delivered';
-            if (s.includes('completed')) return 'completed';
+            if (s.includes('delivered'))              return 'delivered';
+            if (s.includes('completed'))              return 'completed';
             return '';
         }
         function getStatusIcon(status) {
             if (!status) return 'fa-circle';
             const s = status.toLowerCase();
-            if (s.includes('processing')) return 'fa-clock';
-            if (s.includes('shipped')) return 'fa-ship';
-            if (s.includes('transit')) return 'fa-truck';
-            if (s.includes('out')) return 'fa-truck-fast';
+            if (s.includes('processing'))   return 'fa-clock';
+            if (s.includes('shipped'))      return 'fa-ship';
+            if (s.includes('transit'))      return 'fa-truck';
+            if (s.includes('out'))          return 'fa-truck-fast';
             if (s.includes('delivered') || s.includes('completed')) return 'fa-check-circle';
             return 'fa-circle';
         }
-
         function showLightbox(imageUrl) {
             const lb = document.createElement('div');
             lb.className = 'lightbox';
             lb.innerHTML = `<span class="close-lightbox">&times;</span><img src="${imageUrl}" alt="Order Image">`;
             document.body.appendChild(lb);
-            lb.onclick = (e) => { if (e.target === lb) lb.remove(); };
+            lb.onclick = e => { if (e.target === lb) lb.remove(); };
             lb.querySelector('.close-lightbox').onclick = () => lb.remove();
         }
 
+        // ── Supabase search ───────────────────────────────────────────────────
+        async function searchSupabase(trackingNumber) {
+            const res = await fetch(
+                `${SB_URL}/orders?select=*,order_timeline(*)&tracking_number=eq.${encodeURIComponent(trackingNumber)}`,
+                { headers: sbHeaders }
+            );
+            if (!res.ok) return null;
+            const rows = await res.json();
+            if (!rows.length) return null;
+
+            const row = rows[0];
+            const timelineRows = (row.order_timeline || [])
+                .sort((a, b) => new Date(a.timestamp) - new Date(b.timestamp));
+
+            // Map flat Supabase columns → nested structure the renderer expects
+            return {
+                _source: 'supabase',
+                _id: row.id,
+                trackingNumber: row.tracking_number,
+                customer: {
+                    name:     row.customer_name,
+                    phone:    row.customer_phone,
+                    email:    row.customer_email,
+                    location: row.customer_location,
+                },
+                order: {
+                    itemName:           row.item_name,
+                    description:        row.item_description,
+                    originCountry:      row.origin_country,
+                    destinationCountry: row.destination_country,
+                    orderDate:          row.order_date,
+                    expectedDelivery:   row.expected_delivery,
+                    value:              row.order_value,
+                    currency:           row.currency || 'ZMW',
+                },
+                tracking: {
+                    currentStatus:   row.current_status,
+                    currentLocation: row.current_location,
+                    lastUpdate:      row.last_update,
+                    views:           row.views || 0,
+                },
+                timeline: timelineRows.map(t => ({
+                    status:      t.status,
+                    description: t.description,
+                    location:    t.location,
+                    timestamp:   t.timestamp,
+                })),
+                imageUrls:   row.image_urls || [],
+                isCompleted: row.is_completed || false,
+            };
+        }
+
+        // ── Firebase search ───────────────────────────────────────────────────
+        async function searchFirebase(trackingNumber) {
+            const snap = await db.collection('orders')
+                .where('trackingNumber', '==', trackingNumber)
+                .limit(1).get();
+            if (snap.empty) return null;
+            const doc = snap.docs[0];
+            return { ...doc.data(), _source: 'firebase', _id: doc.id };
+        }
+
+        // ── Increment views ───────────────────────────────────────────────────
+        async function incrementViewCount(source, id, currentViews) {
+            try {
+                if (source === 'firebase') {
+                    await db.collection('orders').doc(id).update({ 'tracking.views': (currentViews || 0) + 1 });
+                } else {
+                    await fetch(`${SB_URL}/orders?id=eq.${id}`, {
+                        method: 'PATCH',
+                        headers: { ...sbHeaders, 'Prefer': 'return=minimal' },
+                        body: JSON.stringify({ views: (currentViews || 0) + 1 }),
+                    });
+                }
+            } catch(e) {}
+        }
+
+        // ── Render order details ──────────────────────────────────────────────
         function updateOrderDetails(data) {
-            // Customer
-            document.getElementById('customerName').textContent = data.customer?.name || '-';
-            document.getElementById('customerPhone').textContent = data.customer?.phone || '-';
-            document.getElementById('customerEmail').textContent = data.customer?.email || '-';
+            document.getElementById('customerName').textContent     = data.customer?.name     || '-';
+            document.getElementById('customerPhone').textContent    = data.customer?.phone    || '-';
+            document.getElementById('customerEmail').textContent    = data.customer?.email    || '-';
             document.getElementById('customerLocation').textContent = data.customer?.location || '-';
-            // Order
-            document.getElementById('itemName').textContent = data.order?.itemName || '-';
-            document.getElementById('originCountry').textContent = data.order?.originCountry || '-';
+
+            document.getElementById('itemName').textContent           = data.order?.itemName           || '-';
+            document.getElementById('originCountry').textContent      = data.order?.originCountry      || '-';
             document.getElementById('destinationCountry').textContent = data.order?.destinationCountry || '-';
-            document.getElementById('orderDate').textContent = formatDate(data.order?.orderDate);
-            document.getElementById('expectedDelivery').textContent = formatDate(data.order?.expectedDelivery);
-            document.getElementById('orderValue').textContent = data.order?.value ? `${data.order?.currency || 'ZMW'} ${data.order.value.toFixed(2)}` : '-';
-            document.getElementById('itemDescription').textContent = data.order?.description || '-';
-            // Tracking
+            document.getElementById('orderDate').textContent          = formatDate(data.order?.orderDate);
+            document.getElementById('expectedDelivery').textContent   = formatDate(data.order?.expectedDelivery);
+            document.getElementById('orderValue').textContent         = data.order?.value
+                ? `${data.order?.currency || 'ZMW'} ${Number(data.order.value).toFixed(2)}` : '-';
+            document.getElementById('itemDescription').textContent    = data.order?.description || '-';
+
             const status = data.tracking?.currentStatus || '-';
             const statusBadge = document.getElementById('currentStatus');
             statusBadge.textContent = status;
-            statusBadge.className = `status-badge ${getStatusBadgeClass(status)}`;
-            document.getElementById('currentLocation').innerHTML = `<i class="fas fa-map-marker-alt"></i> ${data.tracking?.currentLocation || '-'}`;
-            document.getElementById('lastUpdateTime').innerHTML = `<i class="far fa-clock"></i> ${formatDateTime(data.tracking?.lastUpdate)}`;
-            const daysRemaining = calculateDaysRemaining(data.order?.expectedDelivery);
-            const daysEl = document.getElementById('daysRemaining');
-            daysEl.textContent = daysRemaining;
-            daysEl.className = daysRemaining === 'Overdue' ? 'value text-danger' : (daysRemaining === 'Today' ? 'value text-warning' : 'value');
-            
+            statusBadge.className   = `status-badge ${getStatusBadgeClass(status)}`;
+
+            document.getElementById('currentLocation').innerHTML  = `<i class="fas fa-map-marker-alt"></i> ${data.tracking?.currentLocation || '-'}`;
+            document.getElementById('lastUpdateTime').innerHTML   = `<i class="far fa-clock"></i> ${formatDateTime(data.tracking?.lastUpdate)}`;
+
+            const dr   = calculateDaysRemaining(data.order?.expectedDelivery);
+            const drEl = document.getElementById('daysRemaining');
+            drEl.textContent = dr;
+            drEl.className   = dr === 'Overdue' ? 'value text-danger' : (dr === 'Today' ? 'value text-warning' : 'value');
+
             // Completed badge
-            const completedBadge = document.getElementById('completedBadge');
-            if (data.isCompleted === true) {
-                completedBadge.classList.remove('hidden');
-            } else {
-                completedBadge.classList.add('hidden');
-            }
+            document.getElementById('completedBadge').classList.toggle('hidden', !data.isCompleted);
 
             // Images
-            const imageUrls = data.imageUrls || [];
+            const imageUrls    = data.imageUrls || [];
             const imagesSection = document.getElementById('imagesSection');
             const imageCarousel = document.getElementById('imageCarousel');
-            if (imageUrls.length > 0) {
-                imagesSection.classList.remove('hidden');
-                imageCarousel.innerHTML = '';
-                imageUrls.forEach(url => {
-                    const img = document.createElement('img');
-                    img.src = url;
-                    img.alt = 'Order Image';
-                    img.onclick = () => showLightbox(url);
-                    imageCarousel.appendChild(img);
-                });
-            } else {
-                imagesSection.classList.add('hidden');
-            }
+            imagesSection.classList.toggle('hidden', imageUrls.length === 0);
+            imageCarousel.innerHTML = '';
+            imageUrls.forEach(url => {
+                const img = document.createElement('img');
+                img.src = url; img.alt = 'Order Image';
+                img.onclick = () => showLightbox(url);
+                imageCarousel.appendChild(img);
+            });
 
             // Timeline
             const timelineContainer = document.getElementById('timelineContainer');
             timelineContainer.innerHTML = '';
             if (data.timeline && data.timeline.length > 0) {
-                const sorted = [...data.timeline].sort((a,b) => new Date(b.timestamp) - new Date(a.timestamp));
+                const sorted = [...data.timeline].sort((a, b) => new Date(b.timestamp) - new Date(a.timestamp));
                 sorted.forEach((entry, idx) => {
                     const item = document.createElement('div');
                     item.className = `timeline-item ${idx === 0 ? 'latest' : ''}`;
@@ -1219,8 +1306,7 @@
                             <p>${entry.description || ''}</p>
                             <div class="location"><i class="fas fa-map-marker-alt"></i> ${entry.location || 'Unknown'}</div>
                             <div class="time"><i class="far fa-clock"></i> ${formatDateTime(entry.timestamp)}</div>
-                        </div>
-                    `;
+                        </div>`;
                     timelineContainer.appendChild(item);
                 });
             } else {
@@ -1228,26 +1314,49 @@
             }
         }
 
-        async function incrementViewCount(orderId, currentViews) {
-            try {
-                await db.collection('orders').doc(orderId).update({ 'tracking.views': (currentViews || 0) + 1 });
-            } catch(e) { console.error(e); }
+        // ── Copy tracking number ──────────────────────────────────────────────
+        function copyTracking() {
+            const tn  = document.getElementById('displayTrackingNumber').textContent;
+            const btn = document.getElementById('copyBtn');
+            navigator.clipboard.writeText(tn).then(() => {
+                btn.classList.add('copied');
+                btn.innerHTML = '<i class="fas fa-check"></i> Copied!';
+                setTimeout(() => {
+                    btn.classList.remove('copied');
+                    btn.innerHTML = '<i class="fas fa-copy"></i> Copy';
+                }, 2000);
+            });
         }
 
+        // ── Main track function ───────────────────────────────────────────────
         async function trackOrder() {
-            const trackingNumber = trackingInput.value.trim();
+            // Normalise: trim whitespace and uppercase so TRK-2402-abc123 works
+            const trackingNumber = trackingInput.value.trim().toUpperCase();
             if (!trackingNumber) { showError('Please enter a tracking number'); return; }
+
             orderDetailsDiv.classList.add('hidden');
             errorDiv.classList.add('hidden');
             loadingDiv.classList.remove('hidden');
             trackButton.disabled = true;
+
             try {
-                const snapshot = await db.collection('orders').where('trackingNumber', '==', trackingNumber).limit(1).get();
-                if (snapshot.empty) throw new Error('Tracking number not found');
-                const doc = snapshot.docs[0];
-                const data = doc.data();
-                incrementViewCount(doc.id, data.tracking?.views);
-                document.getElementById('displayTrackingNumber').textContent = trackingNumber;
+                // Search both backends in parallel
+                const [fbResult, sbResult] = await Promise.allSettled([
+                    searchFirebase(trackingNumber),
+                    searchSupabase(trackingNumber),
+                ]);
+
+                // Prefer Supabase (new orders); fall back to Firebase (legacy)
+                const data =
+                    (sbResult.status === 'fulfilled' && sbResult.value) ? sbResult.value :
+                    (fbResult.status === 'fulfilled' && fbResult.value) ? fbResult.value :
+                    null;
+
+                if (!data) throw new Error('Order not found. Please check your tracking number and try again.');
+
+                incrementViewCount(data._source, data._id, data.tracking?.views);
+
+                document.getElementById('displayTrackingNumber').textContent = data.trackingNumber || '-';
                 updateOrderDetails(data);
                 orderDetailsDiv.classList.remove('hidden');
             } catch (error) {
@@ -1269,17 +1378,15 @@
             trackingInput.focus();
         }
 
+        // ── Event listeners ───────────────────────────────────────────────────
         trackButton.addEventListener('click', trackOrder);
-        trackingInput.addEventListener('keypress', (e) => { if (e.key === 'Enter') trackOrder(); });
-        function checkUrlForTracking() {
-            const urlParams = new URLSearchParams(window.location.search);
-            const trackingParam = urlParams.get('tracking');
-            if (trackingParam) { trackingInput.value = trackingParam; trackOrder(); }
-        }
+        trackingInput.addEventListener('keypress', e => { if (e.key === 'Enter') trackOrder(); });
+
+        // Auto-track from URL: track.html?tracking=TRK-2402-ABC123
+        const urlParam = new URLSearchParams(window.location.search).get('tracking');
+        if (urlParam) { trackingInput.value = urlParam.toUpperCase(); trackOrder(); }
 
         checkConnection();
-        loadRecentTrackings();
-        checkUrlForTracking();
     </script>
 </body>
 </html>
