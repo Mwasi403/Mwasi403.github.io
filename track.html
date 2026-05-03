@@ -240,10 +240,18 @@
         @media (max-width: 640px) {
             .nav-links { display: none; }
             .mobile-menu-btn { display: block; }
-            .search-wrap { flex-direction: column; }
-            #trackButton { width: 100%; justify-content: center; }
             .hero { padding: 48px 20px 40px; }
-            .status-hero-meta { flex-direction: row; align-items: center; }
+            .search-wrap { flex-direction: column; gap: 8px; }
+            #trackingNumber { padding: 15px 16px 15px 44px; font-size: 16px; }
+            #trackButton {
+                width: 100%;
+                justify-content: center;
+                padding: 15px 24px;
+                font-size: 15px;
+                border-radius: 10px;
+            }
+            .status-hero { flex-wrap: wrap; gap: 14px; }
+            .status-hero-meta { flex-direction: row; align-items: center; flex-wrap: wrap; }
         }
         @media print {
             nav, .hero .search-wrap, .reset-wrap, .status-indicator, footer { display: none; }
@@ -300,7 +308,7 @@
         <div class="search-wrap">
             <div class="search-input-wrap">
                 <i class="fas fa-hashtag"></i>
-                <input type="text" id="trackingNumber" placeholder="e.g. TRK-2402-ABC123" autocomplete="off" spellcheck="false">
+                <input type="text" id="trackingNumber" placeholder=" Enter your tracking number" autocomplete="off" spellcheck="false">
             </div>
             <button id="trackButton"><i class="fas fa-search"></i> Track</button>
         </div>
