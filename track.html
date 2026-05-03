@@ -3,898 +3,264 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Track Your Order - LumiMinds Zambia</title>
+    <title>Track Your Order — LumiMinds</title>
     <link rel="icon" type="image/x-icon" href="logo.png">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
-        /* ===== complete styles ===== */
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
+        *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
 
         :root {
-            --primary: #3f88c5;
-            --primary-light: #e3f2fd;
-            --primary-dark: #1E3324;
-            --secondary: #D4AF37;
-            --text-dark: #1A1A1A;
-            --text-light: #666666;
-            --bg-light: #F8F9FA;
-            --bg-lighter: #FCFCFC;
-            --border: #E5E5E5;
-            --white: #FFFFFF;
-            --shadow: 0 4px 20px rgba(0,0,0,0.08);
-            --shadow-lg: 0 10px 40px rgba(0,0,0,0.12);
-            --success: #28a745;
-            --danger: #dc3545;
-            --warning: #ffc107;
-            --info: #17a2b8;
+            --primary:      #3f88c5;
+            --primary-dark: #2d6fa8;
+            --gold:         #D4AF37;
+            --dark:         #111827;
+            --muted:        #6B7280;
+            --light:        #9CA3AF;
+            --bg:           #F9FAFB;
+            --white:        #ffffff;
+            --border:       #E5E7EB;
+            --success:      #16a34a;
+            --danger:       #dc2626;
+            --warning:      #d97706;
+            --radius:       14px;
+            --shadow-sm:    0 1px 3px rgba(0,0,0,.06), 0 1px 2px rgba(0,0,0,.04);
+            --shadow:       0 4px 16px rgba(0,0,0,.07);
         }
 
         body {
             font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
-            line-height: 1.6;
-            color: var(--text-dark);
-            background-color: var(--bg-light);
+            background: var(--bg); color: var(--dark);
+            line-height: 1.6; min-height: 100vh;
         }
 
-        .container {
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 0 20px;
-        }
-
-        .btn {
-            padding: 0.75rem 1.5rem;
-            border-radius: 8px;
-            text-decoration: none;
-            font-weight: 500;
-            transition: all 0.3s;
-            border: none;
-            cursor: pointer;
-            display: inline-flex;
-            align-items: center;
-            gap: 0.5rem;
-        }
-
-        .btn-primary {
-            background: var(--primary);
-            color: var(--white);
-        }
-
-        .btn-primary:hover {
-            background: var(--primary-dark);
-            transform: translateY(-2px);
-            box-shadow: var(--shadow);
-        }
-
-        .btn-outline {
-            border: 2px solid var(--primary);
-            color: var(--primary);
-            background: transparent;
-        }
-
-        .btn-outline:hover {
-            background: var(--primary);
-            color: var(--white);
-        }
-
-        .section-title {
-            text-align: center;
-            font-size: 2.5rem;
-            font-weight: 600;
-            margin-bottom: 1rem;
-        }
-
-        .section-subtitle {
-            text-align: center;
-            color: var(--text-light);
-            margin-bottom: 3rem;
-            font-size: 1.125rem;
-        }
-
-        /* Header Styles */
-        header {
-            background: var(--white);
-            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
-            position: fixed;
-            width: 100%;
-            top: 0;
-            z-index: 1000;
-        }
-
-        .nav-container {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            padding: 1rem 0;
-        }
-
-        .logo {
-            font-size: 1.5rem;
-            font-weight: 700;
-            color: var(--primary);
-            text-decoration: none;
-            display: flex;
-            align-items: center;
-            gap: 0.5rem;
-        }
-
-        .logo-image {
-            height: 40px;
-            width: 40px;
-            object-fit: contain;
-        }
-
-        .nav-links {
-            display: flex;
-            list-style: none;
-            gap: 2rem;
-        }
-
-        .nav-links a {
-            text-decoration: none;
-            color: var(--text-light);
-            font-weight: 400;
-            transition: color 0.3s;
-            position: relative;
-        }
-
-        .nav-links a:hover,
-        .nav-links a.active {
-            color: var(--primary);
-            font-weight: 500;
-        }
-
-        .nav-links a.active::after {
-            content: '';
-            position: absolute;
-            bottom: -5px;
-            left: 0;
-            width: 100%;
-            height: 2px;
-            background: var(--primary);
-        }
-
-        .mobile-menu-btn {
-            display: none;
-            background: none;
-            border: none;
-            font-size: 1.5rem;
-            color: var(--primary);
-            cursor: pointer;
-        }
-
-        /* Mobile Menu */
-        .mobile-menu {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: var(--white);
-            z-index: 2000;
-            transform: translateX(-100%);
-            transition: transform 0.3s ease;
-        }
-
-        .mobile-menu.active {
-            transform: translateX(0);
-        }
-
-        .mobile-menu-header {
-            padding: 1rem;
+        /* ── Nav ──────────────────────────────────────────────────────────── */
+        nav {
+            position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+            background: rgba(255,255,255,.92);
+            backdrop-filter: blur(12px);
             border-bottom: 1px solid var(--border);
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
+            height: 64px; display: flex; align-items: center;
         }
-
-        .mobile-menu-close {
-            background: none;
-            border: none;
-            font-size: 1.5rem;
-            cursor: pointer;
+        .nav-inner {
+            max-width: 1100px; margin: 0 auto; width: 100%;
+            padding: 0 24px;
+            display: flex; align-items: center; justify-content: space-between;
         }
-
-        .mobile-nav-links {
-            list-style: none;
-            padding: 2rem;
+        .nav-logo {
+            display: flex; align-items: center; gap: 10px; text-decoration: none;
         }
+        .nav-logo img { height: 32px; width: 32px; object-fit: contain; }
+        .nav-logo span { font-size: 17px; font-weight: 700; color: var(--primary); letter-spacing: -.3px; }
+        .nav-links { display: flex; gap: 28px; list-style: none; }
+        .nav-links a { font-size: 14px; font-weight: 500; color: var(--muted); text-decoration: none; transition: color .2s; }
+        .nav-links a:hover, .nav-links a.active { color: var(--primary); }
+        .mobile-menu-btn { display: none; background: none; border: none; font-size: 20px; color: var(--dark); cursor: pointer; }
 
-        .mobile-nav-links li {
-            margin-bottom: 1rem;
+        .mobile-menu {
+            position: fixed; inset: 0; background: var(--white);
+            z-index: 200; transform: translateX(-100%); transition: transform .3s ease;
         }
-
+        .mobile-menu.open { transform: translateX(0); }
+        .mobile-menu-header {
+            height: 64px; display: flex; align-items: center;
+            justify-content: space-between; padding: 0 24px;
+            border-bottom: 1px solid var(--border);
+        }
+        .mobile-menu-close { background: none; border: none; font-size: 20px; color: var(--dark); cursor: pointer; }
+        .mobile-nav-links { list-style: none; padding: 16px; }
         .mobile-nav-links a {
-            text-decoration: none;
-            color: var(--text-dark);
-            font-size: 1.125rem;
-            display: block;
-            padding: 0.5rem 0;
-        }
-
-        /* Tracking Page Specific Styles */
-        .tracking-hero {
-            padding: 120px 0 60px;
-            background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
-            text-align: center;
-        }
-
-        .tracking-hero h1 {
-            font-size: 2.5rem;
-            color: var(--primary);
-            margin-bottom: 1rem;
-        }
-
-        .tracking-hero p {
-            color: var(--text-light);
-            font-size: 1.125rem;
-            max-width: 600px;
-            margin: 0 auto;
-        }
-
-        .tracking-main {
-            padding: 40px 0 80px;
-        }
-
-        .tracking-card {
-            background: var(--white);
-            border-radius: 12px;
-            box-shadow: var(--shadow-lg);
-            padding: 40px;
-            max-width: 900px;
-            margin: 0 auto;
-        }
-
-        .tracking-form {
-            display: flex;
-            gap: 10px;
-            margin-bottom: 20px;
-        }
-
-        .tracking-form input {
-            flex: 1;
-            padding: 15px 20px;
-            border: 2px solid var(--border);
-            border-radius: 8px;
-            font-size: 16px;
-            transition: all 0.3s;
-        }
-
-        .tracking-form input:focus {
-            outline: none;
-            border-color: var(--primary);
-            box-shadow: 0 0 0 3px rgba(63, 136, 197, 0.1);
-        }
-
-        .tracking-form input.error {
-            border-color: var(--danger);
-        }
-
-        .tracking-form button {
-            padding: 15px 30px;
-            background: var(--primary);
-            color: var(--white);
-            border: none;
-            border-radius: 8px;
-            font-size: 16px;
-            font-weight: 600;
-            cursor: pointer;
-            transition: all 0.3s;
-            display: flex;
-            align-items: center;
-            gap: 8px;
-        }
-
-        .tracking-form button:hover:not(:disabled) {
-            background: var(--primary-dark);
-            transform: translateY(-2px);
-            box-shadow: var(--shadow);
-        }
-
-        .tracking-form button:disabled {
-            opacity: 0.7;
-            cursor: not-allowed;
-            transform: none;
-        }
-
-        .tracking-example {
-            text-align: center;
-            margin-bottom: 25px;
-            padding: 12px;
-            background: var(--bg-light);
-            border-radius: 8px;
-            color: var(--text-light);
-            font-size: 0.9rem;
-            border-left: 4px solid var(--primary);
-        }
-
-        .tracking-example i {
-            color: var(--primary);
-            margin-right: 5px;
-        }
-
-        .quick-tips {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 10px;
-            justify-content: center;
-            margin-top: 15px;
-        }
-
-        .tip-badge {
-            background: var(--white);
-            border: 1px solid var(--border);
-            padding: 6px 12px;
-            border-radius: 20px;
-            font-size: 0.8rem;
-            color: var(--text-light);
-            cursor: pointer;
-            transition: all 0.2s;
-        }
-
-        .tip-badge:hover {
-            background: var(--primary);
-            color: var(--white);
-            border-color: var(--primary);
-        }
-
-        .tip-badge i {
-            margin-right: 4px;
-        }
-
-        .loading {
-            text-align: center;
-            padding: 40px;
-        }
-
-        .spinner {
-            border: 4px solid var(--bg-light);
-            border-top: 4px solid var(--primary);
-            border-radius: 50%;
-            width: 50px;
-            height: 50px;
-            animation: spin 1s linear infinite;
-            margin: 0 auto 20px;
-        }
-
-        @keyframes spin {
-            0% { transform: rotate(0deg); }
-            100% { transform: rotate(360deg); }
-        }
-
-        .error {
-            background: #fff3f3;
-            color: var(--danger);
-            padding: 20px;
-            border-radius: 8px;
-            text-align: center;
-            margin-bottom: 20px;
-            border-left: 4px solid var(--danger);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            gap: 10px;
-        }
-
-        .error i {
-            font-size: 24px;
-        }
-
-        .hidden {
-            display: none !important;
-        }
-
-        .order-details {
-            animation: slideIn 0.5s ease;
-            border-top: 2px solid var(--border);
-            padding-top: 30px;
-            margin-top: 20px;
-        }
-
-        @keyframes slideIn {
-            from {
-                opacity: 0;
-                transform: translateY(20px);
-            }
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
-        }
-
-        .order-header {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            margin-bottom: 30px;
-            padding-bottom: 20px;
-            border-bottom: 2px solid var(--border);
-            flex-wrap: wrap;
-            gap: 15px;
-        }
-
-        .order-header h2 {
-            color: var(--text-dark);
-            font-size: 24px;
-            display: flex;
-            align-items: center;
-            gap: 10px;
-        }
-
-        .order-header h2 i {
-            color: var(--primary);
-        }
-
-        .tracking-number {
-            background: var(--primary);
-            color: var(--white);
-            padding: 8px 16px;
-            border-radius: 20px;
-            font-weight: 600;
-            font-size: 14px;
-            letter-spacing: 0.5px;
-        }
-
-        .completed-badge {
-            background: var(--success);
-            margin-left: 10px;
-        }
-
-        /* Copy button — minimal, sits next to the tracking number badge */
-        .copy-tracking-btn {
-            background: none;
-            border: 1px solid var(--border);
-            color: var(--text-light);
-            padding: 5px 12px;
-            border-radius: 20px;
-            font-size: 12px;
-            cursor: pointer;
-            display: inline-flex;
-            align-items: center;
-            gap: 5px;
-            transition: all 0.2s;
-            margin-left: 6px;
-        }
-        .copy-tracking-btn:hover {
-            border-color: var(--primary);
-            color: var(--primary);
-        }
-        .copy-tracking-btn.copied {
-            border-color: var(--success);
-            color: var(--success);
-        }
-
-        /* Info Cards */
-        .info-card {
-            background: var(--white);
-            padding: 20px;
-            border-radius: 12px;
-            margin-bottom: 20px;
-            box-shadow: var(--shadow);
-        }
-
-        .info-card h3 {
-            margin-bottom: 15px;
-            font-size: 18px;
-            display: flex;
-            align-items: center;
-            gap: 8px;
-            color: var(--primary);
-        }
-
-        .info-card h3 i {
-            color: var(--primary);
-        }
-
-        .info-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-            gap: 20px;
-        }
-
-        .info-item {
-            padding: 10px;
-            background: var(--bg-light);
-            border-radius: 8px;
-            transition: transform 0.2s;
-        }
-
-        .info-item:hover {
-            transform: translateY(-2px);
-            box-shadow: var(--shadow);
-        }
-
-        .info-item .label {
-            display: block;
-            color: var(--text-light);
-            font-size: 12px;
-            margin-bottom: 5px;
-        }
-
-        .info-item .label i {
-            margin-right: 5px;
-            color: var(--primary);
-        }
-
-        .info-item .value {
-            display: block;
-            font-size: 16px;
-            font-weight: 600;
-            color: var(--text-dark);
-            word-break: break-word;
-        }
-
-        /* Description Box */
-        .description-box {
-            background: var(--bg-light);
-            padding: 15px;
-            border-radius: 8px;
-            margin-top: 15px;
-        }
-
-        .description-box p {
-            color: var(--text-dark);
-            line-height: 1.6;
-            margin-top: 5px;
-        }
-
-        /* Status Badge */
-        .status-badge {
-            display: inline-block;
-            padding: 8px 16px;
-            border-radius: 20px;
-            font-weight: 600;
-            font-size: 14px;
-            text-transform: capitalize;
-        }
-
-        .status-badge.processing { 
-            background: #fff3cd; 
-            color: #856404; 
-            border-left: 4px solid #ffc107;
-        }
-        .status-badge.shipped { 
-            background: #cce5ff; 
-            color: #004085; 
-            border-left: 4px solid #007bff;
-        }
-        .status-badge.in-transit { 
-            background: #d1ecf1; 
-            color: #0c5460; 
-            border-left: 4px solid #17a2b8;
-        }
-        .status-badge.out-for-delivery { 
-            background: #d4edda; 
-            color: #155724; 
-            border-left: 4px solid #28a745;
-        }
-        .status-badge.delivered { 
-            background: #d4edda; 
-            color: #155724; 
-            border-left: 4px solid #28a745;
-        }
-        .status-badge.completed {
-            background: #d4edda;
-            color: #155724;
-            border-left: 4px solid #28a745;
-        }
-
-        /* Image Carousel */
-        .image-carousel {
-            display: flex;
-            overflow-x: auto;
-            gap: 16px;
-            padding: 16px 0;
-            scroll-snap-type: x mandatory;
-        }
-
-        .image-carousel img {
-            width: 280px;
-            height: 280px;
-            object-fit: cover;
-            border-radius: 12px;
-            scroll-snap-align: start;
-            box-shadow: var(--shadow);
-            cursor: pointer;
-            transition: transform 0.3s;
-        }
-
-        .image-carousel img:hover {
-            transform: scale(1.02);
-        }
-
-        /* Lightbox */
-        .lightbox {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: rgba(0,0,0,0.9);
-            z-index: 2000;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            cursor: pointer;
-        }
-
-        .lightbox img {
-            max-width: 90%;
-            max-height: 90%;
-            object-fit: contain;
-        }
-
-        .lightbox .close-lightbox {
-            position: absolute;
-            top: 20px;
-            right: 30px;
-            color: white;
-            font-size: 30px;
-            cursor: pointer;
-        }
-
-        /* Timeline */
-        .timeline {
-            margin-top: 20px;
-        }
-
-        .timeline h3 {
-            color: var(--text-dark);
-            margin-bottom: 20px;
-            font-size: 18px;
-            display: flex;
-            align-items: center;
-            gap: 8px;
-        }
-
-        .timeline h3 i {
-            color: var(--primary);
-        }
-
-        .timeline-item {
-            display: flex;
-            gap: 20px;
-            padding: 20px;
-            background: var(--white);
-            border-radius: 12px;
-            margin-bottom: 10px;
-            position: relative;
-            transition: all 0.3s ease;
-            box-shadow: var(--shadow);
-        }
-
-        .timeline-item:hover {
-            transform: translateX(5px);
-            box-shadow: var(--shadow-lg);
-        }
-
-        .timeline-item:last-child {
-            margin-bottom: 0;
-        }
-
-        .timeline-item.latest {
-            background: linear-gradient(to right, var(--white), var(--bg-light));
-            border-left: 4px solid var(--secondary);
-        }
-
-        .timeline-icon {
-            width: 40px;
-            height: 40px;
-            background: var(--white);
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            color: var(--primary);
-            border: 2px solid var(--primary);
-            flex-shrink: 0;
-        }
-
-        .timeline-item.latest .timeline-icon {
-            background: var(--primary);
-            color: var(--white);
-        }
-
-        .timeline-content {
-            flex: 1;
-        }
-
-        .timeline-content h4 {
-            color: var(--text-dark);
-            margin-bottom: 5px;
-            font-size: 16px;
-        }
-
-        .timeline-content p {
-            color: var(--text-light);
-            font-size: 14px;
-            margin-bottom: 5px;
-        }
-
-        .timeline-content .location {
-            color: var(--primary);
-            font-size: 13px;
-            margin-bottom: 5px;
-            display: flex;
-            align-items: center;
-            gap: 4px;
-        }
-
-        .timeline-content .time {
-            color: #999;
-            font-size: 12px;
-            display: flex;
-            align-items: center;
-            gap: 4px;
-        }
-
-        /* Text Colors */
-        .text-success { color: var(--success); }
-        .text-warning { color: var(--warning); }
-        .text-danger { color: var(--danger); }
-
-        /* System Status */
-        .system-status {
-            position: fixed;
-            bottom: 20px;
-            right: 20px;
-            padding: 8px 16px;
-            background: var(--white);
-            border-radius: 30px;
-            box-shadow: var(--shadow);
-            font-size: 12px;
-            display: flex;
-            align-items: center;
-            gap: 8px;
-            z-index: 1000;
-        }
-
-        .status-dot {
-            width: 8px;
-            height: 8px;
-            border-radius: 50%;
-            display: inline-block;
-        }
-        .status-dot.connected { background: var(--success); box-shadow: 0 0 0 2px rgba(40,167,69,0.2); }
-        .status-dot.disconnected { background: var(--danger); box-shadow: 0 0 0 2px rgba(220,53,69,0.2); }
-        .status-dot.checking { background: var(--warning); box-shadow: 0 0 0 2px rgba(255,193,7,0.2); }
-
-        .track-another {
-            text-align: center;
-            margin-top: 20px;
-        }
-        .track-another button {
-            background: none;
-            border: none;
-            color: var(--primary);
-            cursor: pointer;
-            font-size: 14px;
-            text-decoration: underline;
-        }
-        .track-another button:hover {
-            color: var(--primary-dark);
-        }
-
-        /* Footer */
-        footer {
-            background: var(--text-dark);
-            color: var(--white);
-            padding: 3rem 0;
-            margin-top: 60px;
-        }
-        .footer-content {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-            gap: 2rem;
-        }
-        .footer-section h3 {
-            margin-bottom: 1rem;
-            display: flex;
-            align-items: center;
-            gap: 0.5rem;
-        }
-        .footer-links {
-            list-style: none;
-        }
-        .footer-links li {
-            margin-bottom: 0.5rem;
-        }
-        .footer-links a {
-            color: #ccc;
-            text-decoration: none;
-            transition: color 0.3s;
-        }
-        .footer-links a:hover {
-            color: var(--white);
-        }
-        .social-links {
-            display: flex;
-            gap: 1rem;
-            margin-top: 1rem;
-        }
-        .social-links a {
-            width: 40px;
-            height: 40px;
-            background: rgba(255,255,255,0.1);
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            color: var(--white);
-            text-decoration: none;
-            transition: background 0.3s;
-        }
-        .social-links a:hover {
-            background: var(--primary);
-        }
-        .copyright {
-            text-align: center;
-            margin-top: 3rem;
-            padding-top: 2rem;
-            border-top: 1px solid #444;
-            color: #ccc;
-        }
-
-        /* Responsive */
-        @media (max-width: 768px) {
+            display: block; padding: 12px 16px; font-size: 15px; font-weight: 500;
+            color: var(--dark); text-decoration: none; border-radius: 10px; transition: background .15s;
+        }
+        .mobile-nav-links a:hover { background: var(--bg); color: var(--primary); }
+
+        /* ── Page ─────────────────────────────────────────────────────────── */
+        .page { padding-top: 64px; min-height: 100vh; display: flex; flex-direction: column; }
+
+        /* ── Hero ─────────────────────────────────────────────────────────── */
+        .hero {
+            background: var(--white); border-bottom: 1px solid var(--border);
+            padding: 64px 24px 56px; text-align: center;
+        }
+        .hero-eyebrow {
+            display: inline-flex; align-items: center; gap: 7px;
+            font-size: 12px; font-weight: 600; letter-spacing: .8px;
+            text-transform: uppercase; color: var(--primary);
+            background: rgba(63,136,197,.08);
+            padding: 5px 14px; border-radius: 20px; margin-bottom: 20px;
+        }
+        .hero h1 {
+            font-size: clamp(28px,5vw,44px); font-weight: 700;
+            letter-spacing: -.5px; color: var(--dark);
+            line-height: 1.2; margin-bottom: 12px;
+        }
+        .hero p { font-size: 16px; color: var(--muted); max-width: 480px; margin: 0 auto 36px; }
+        .search-wrap { max-width: 600px; margin: 0 auto; display: flex; gap: 10px; }
+        .search-input-wrap { flex: 1; position: relative; }
+        .search-input-wrap i { position: absolute; left: 16px; top: 50%; transform: translateY(-50%); color: var(--light); font-size: 15px; pointer-events: none; }
+        #trackingNumber {
+            width: 100%; padding: 14px 16px 14px 44px;
+            font-size: 14px; font-family: inherit; font-weight: 500; letter-spacing: .3px;
+            background: var(--bg); border: 1.5px solid var(--border); border-radius: 10px;
+            outline: none; transition: border-color .2s, box-shadow .2s; color: var(--dark);
+        }
+        #trackingNumber::placeholder { color: var(--light); font-weight: 400; }
+        #trackingNumber:focus { border-color: var(--primary); box-shadow: 0 0 0 3px rgba(63,136,197,.12); background: var(--white); }
+        #trackButton {
+            padding: 0 24px; background: var(--primary); color: var(--white);
+            border: none; border-radius: 10px; font-size: 14px; font-weight: 600;
+            font-family: inherit; cursor: pointer; white-space: nowrap;
+            display: flex; align-items: center; gap: 8px;
+            transition: background .2s, transform .15s;
+        }
+        #trackButton:hover:not(:disabled) { background: var(--primary-dark); transform: translateY(-1px); }
+        #trackButton:disabled { opacity: .65; cursor: not-allowed; transform: none; }
+
+        /* ── Content ──────────────────────────────────────────────────────── */
+        .content { flex: 1; padding: 40px 24px 80px; }
+        .content-inner { max-width: 800px; margin: 0 auto; }
+
+        /* loading */
+        .loading { display: flex; flex-direction: column; align-items: center; gap: 14px; padding: 60px 0; }
+        .spinner { width: 36px; height: 36px; border: 3px solid var(--border); border-top-color: var(--primary); border-radius: 50%; animation: spin .8s linear infinite; }
+        @keyframes spin { to { transform: rotate(360deg); } }
+        .loading p { font-size: 14px; color: var(--muted); }
+
+        /* error */
+        .error-box { display: flex; align-items: flex-start; gap: 12px; background: #FEF2F2; border: 1px solid #FECACA; border-radius: var(--radius); padding: 16px 18px; }
+        .error-box i { color: var(--danger); margin-top: 2px; }
+        .error-box span { font-size: 14px; color: #991B1B; }
+
+        /* result */
+        .result { animation: fadeUp .35s ease; }
+        @keyframes fadeUp { from { opacity:0; transform:translateY(12px); } to { opacity:1; transform:translateY(0); } }
+
+        /* status hero */
+        .status-hero {
+            background: var(--white); border: 1px solid var(--border);
+            border-radius: var(--radius); padding: 24px; margin-bottom: 16px;
+            display: flex; align-items: center; gap: 18px; flex-wrap: wrap;
+            box-shadow: var(--shadow-sm);
+        }
+        .status-icon-wrap { width: 56px; height: 56px; flex-shrink: 0; border-radius: 14px; display: flex; align-items: center; justify-content: center; font-size: 22px; }
+        .status-hero-info { flex: 1; min-width: 0; }
+        .status-hero-info h2 { font-size: 20px; font-weight: 700; letter-spacing: -.2px; margin-bottom: 2px; }
+        .hero-location { font-size: 13px; color: var(--muted); display: flex; align-items: center; gap: 5px; }
+        .status-hero-meta { display: flex; flex-direction: column; align-items: flex-end; gap: 6px; flex-shrink: 0; }
+        .tracking-pill { font-size: 12px; font-weight: 700; letter-spacing: .5px; font-family: monospace; background: var(--bg); border: 1px solid var(--border); padding: 5px 12px; border-radius: 20px; color: var(--dark); white-space: nowrap; }
+        .copy-btn { display: inline-flex; align-items: center; gap: 5px; font-size: 12px; font-weight: 600; background: var(--primary); color: var(--white); border: none; border-radius: 8px; padding: 5px 12px; cursor: pointer; transition: background .2s; font-family: inherit; }
+        .copy-btn:hover { background: var(--primary-dark); }
+        .copy-btn.copied { background: var(--success); }
+        .completed-tag { font-size: 11px; font-weight: 700; letter-spacing: .5px; color: var(--success); background: rgba(22,163,74,.1); padding: 4px 10px; border-radius: 20px; }
+
+        /* cards */
+        .card { background: var(--white); border: 1px solid var(--border); border-radius: var(--radius); overflow: hidden; margin-bottom: 16px; box-shadow: var(--shadow-sm); }
+        .card-header { padding: 14px 20px; border-bottom: 1px solid var(--border); display: flex; align-items: center; gap: 9px; }
+        .card-header i { color: var(--primary); font-size: 13px; }
+        .card-header span { font-size: 13px; font-weight: 700; letter-spacing: .2px; color: var(--dark); }
+        .card-body { padding: 20px; }
+
+        /* info grid */
+        .info-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(170px, 1fr)); gap: 16px; }
+        .info-item { display: flex; flex-direction: column; gap: 3px; }
+        .lbl { font-size: 11px; font-weight: 600; letter-spacing: .6px; text-transform: uppercase; color: var(--light); }
+        .val { font-size: 14px; font-weight: 600; color: var(--dark); word-break: break-word; }
+        .desc-row { margin-top: 14px; padding-top: 14px; border-top: 1px solid var(--border); }
+        .desc-row .val { font-weight: 400; font-size: 14px; color: var(--dark); line-height: 1.5; }
+
+        /* progress */
+        .progress-row { display: flex; flex-wrap: wrap; gap: 20px; }
+        .progress-stat { display: flex; flex-direction: column; gap: 4px; }
+        .val.overdue { color: var(--danger); }
+        .val.today   { color: var(--warning); }
+
+        /* status badge */
+        .status-badge { display: inline-block; font-size: 12px; font-weight: 700; padding: 4px 12px; border-radius: 20px; letter-spacing: .3px; }
+        .status-badge.processing        { background:#F3F0FF; color:#6D28D9; }
+        .status-badge.shipped           { background:#EFF6FF; color:#1D4ED8; }
+        .status-badge.in-transit        { background:#ECFEFF; color:#0E7490; }
+        .status-badge.out-for-delivery  { background:#F0FDF4; color:#15803D; }
+        .status-badge.delivered         { background:#F0FDF4; color:#15803D; }
+        .status-badge.completed         { background:#F0FDF4; color:#15803D; }
+
+        /* images */
+        .image-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(120px,1fr)); gap: 10px; }
+        .image-grid img { width:100%; aspect-ratio:1; object-fit:cover; border-radius:10px; cursor:pointer; transition: transform .2s, box-shadow .2s; border:1px solid var(--border); }
+        .image-grid img:hover { transform:scale(1.04); box-shadow:var(--shadow); }
+
+        /* timeline */
+        .timeline { display: flex; flex-direction: column; }
+        .tl-item { display: flex; gap: 14px; }
+        .tl-left { display: flex; flex-direction: column; align-items: center; width: 32px; flex-shrink: 0; }
+        .tl-dot { width: 32px; height: 32px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 13px; flex-shrink: 0; }
+        .tl-line { width: 2px; flex: 1; background: var(--border); margin: 4px 0; min-height: 12px; }
+        .tl-content { flex: 1; padding-bottom: 18px; }
+        .tl-item:last-child .tl-content { padding-bottom: 0; }
+        .tl-item:last-child .tl-line { display: none; }
+        .tl-badge { display: inline-flex; align-items: center; font-size: 11px; font-weight: 700; letter-spacing: .4px; padding: 3px 9px; border-radius: 6px; margin-bottom: 4px; }
+        .tl-desc { font-size: 13px; color: var(--dark); margin-bottom: 3px; }
+        .tl-meta { font-size: 11px; color: var(--light); display: flex; gap: 12px; flex-wrap: wrap; }
+        .tl-meta span { display: flex; align-items: center; gap: 4px; }
+
+        /* reset */
+        .reset-wrap { text-align: center; margin-top: 24px; }
+        .reset-wrap button { background: none; border: none; font-size: 13px; color: var(--muted); cursor: pointer; font-family: inherit; display: inline-flex; align-items: center; gap: 6px; transition: color .2s; }
+        .reset-wrap button:hover { color: var(--primary); }
+
+        /* lightbox */
+        .lightbox { position: fixed; inset: 0; background: rgba(0,0,0,.88); z-index: 500; display: flex; align-items: center; justify-content: center; cursor: pointer; }
+        .lightbox img { max-width: 90%; max-height: 90%; object-fit: contain; border-radius: 10px; }
+        .lightbox-close { position: absolute; top: 20px; right: 24px; color: white; font-size: 28px; cursor: pointer; line-height: 1; }
+
+        /* status indicator */
+        .status-indicator { position: fixed; bottom: 20px; right: 20px; background: var(--white); border: 1px solid var(--border); border-radius: 30px; padding: 7px 14px; font-size: 12px; color: var(--muted); display: flex; align-items: center; gap: 7px; box-shadow: var(--shadow-sm); z-index: 50; }
+        .dot { width: 7px; height: 7px; border-radius: 50%; }
+        .dot.connected    { background: var(--success); }
+        .dot.disconnected { background: var(--danger); }
+        .dot.checking     { background: var(--warning); animation: pulse 1s infinite; }
+        @keyframes pulse { 0%,100%{opacity:1} 50%{opacity:.4} }
+
+        /* footer */
+        footer { background: var(--dark); color: rgba(255,255,255,.7); padding: 48px 24px; }
+        .footer-inner { max-width: 1100px; margin: 0 auto; display: grid; grid-template-columns: repeat(auto-fit, minmax(200px,1fr)); gap: 32px; }
+        .footer-col h4 { font-size: 13px; font-weight: 700; color: white; margin-bottom: 14px; text-transform: uppercase; letter-spacing: .5px; }
+        .footer-col ul { list-style: none; display: flex; flex-direction: column; gap: 8px; }
+        .footer-col ul li, .footer-col p { font-size: 13px; line-height: 1.5; }
+        .footer-col a { color: rgba(255,255,255,.6); text-decoration: none; transition: color .2s; }
+        .footer-col a:hover { color: white; }
+        .social-row { display: flex; gap: 10px; margin-top: 14px; }
+        .social-row a { width: 36px; height: 36px; border-radius: 50%; background: rgba(255,255,255,.08); display: flex; align-items: center; justify-content: center; color: rgba(255,255,255,.7); text-decoration: none; transition: background .2s, color .2s; }
+        .social-row a:hover { background: var(--primary); color: white; }
+        .footer-bottom { max-width: 1100px; margin: 32px auto 0; padding-top: 24px; border-top: 1px solid rgba(255,255,255,.08); text-align: center; font-size: 12px; color: rgba(255,255,255,.4); }
+
+        .hidden { display: none !important; }
+
+        @media (max-width: 640px) {
             .nav-links { display: none; }
             .mobile-menu-btn { display: block; }
-            .tracking-card { padding: 20px; }
-            .tracking-form { flex-direction: column; }
-            .tracking-form button { width: 100%; }
-            .order-header { flex-direction: column; text-align: center; }
-            .info-grid { grid-template-columns: 1fr; }
-            .section-title { font-size: 2rem; }
-            .quick-tips { flex-direction: column; align-items: center; }
-            .system-status { bottom: 10px; right: 10px; font-size: 10px; padding: 6px 12px; }
-            .image-carousel img { width: 200px; height: 200px; }
+            .search-wrap { flex-direction: column; }
+            #trackButton { width: 100%; justify-content: center; }
+            .hero { padding: 48px 20px 40px; }
+            .status-hero-meta { flex-direction: row; align-items: center; }
         }
         @media print {
-            header, footer, .tracking-form, .tracking-example, .track-another, .system-status { display: none; }
-            .tracking-card { box-shadow: none; padding: 0; }
+            nav, .hero .search-wrap, .reset-wrap, .status-indicator, footer { display: none; }
         }
     </style>
-    <!-- Firebase SDKs -->
     <script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-app-compat.js"></script>
     <script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore-compat.js"></script>
 </head>
 <body>
-    <header>
-        <div class="container">
-            <nav class="nav-container">
-                <a href="index.html" class="logo">
-                    <img src="logo1.png" alt="Lumiminds Logo" class="logo-image" 
-                         onerror="this.src='data:image/svg+xml,%3Csvg xmlns=\'http://www.w3.org/2000/svg\' width=\'40\' height=\'40\' viewBox=\'0 0 40 40\'%3E%3Crect width=\'40\' height=\'40\' fill=\'%233f88c5\'/%3E%3Ctext x=\'8\' y=\'25\' fill=\'white\' font-size=\'20\'%3ELM%3C/text%3E%3C/svg%3E'">
-                    LumiMinds
-                </a>
-                <ul class="nav-links">
-                    <li><a href="index.html">Home</a></li>
-                    <li><a href="services.html">Services</a></li>
-                    <li><a href="work.html">Our Works</a></li>
-                    <li><a href="inventory.html">Inventory</a></li>
-                    <li><a href="track.html" class="active">Track</a></li>
-                    <li><a href="about.html">About</a></li>
-                    <li><a href="contact.html">Contact</a></li>
-                </ul>
-                <button class="mobile-menu-btn"><i class="fas fa-bars"></i></button>
-            </nav>
-        </div>
-    </header>
 
-    <div class="mobile-menu">
-        <div class="mobile-menu-header">
-            <div class="logo">
-                <img src="logo1.png" alt="Lumiminds Logo" class="logo-image" 
-                     onerror="this.src='data:image/svg+xml,%3Csvg xmlns=\'http://www.w3.org/2000/svg\' width=\'40\' height=\'40\' viewBox=\'0 0 40 40\'%3E%3Crect width=\'40\' height=\'40\' fill=\'%233f88c5\'/%3E%3Ctext x=\'8\' y=\'25\' fill=\'white\' font-size=\'20\'%3ELM%3C/text%3E%3C/svg%3E'">
-                LumiMinds
-            </div>
-            <button class="mobile-menu-close"><i class="fas fa-times"></i></button>
-        </div>
-        <ul class="mobile-nav-links">
+<nav>
+    <div class="nav-inner">
+        <a href="index.html" class="nav-logo">
+            <img src="logo1.png" alt="LumiMinds" onerror="this.src='data:image/svg+xml,%3Csvg xmlns=\'http://www.w3.org/2000/svg\' width=\'32\' height=\'32\' viewBox=\'0 0 32 32\'%3E%3Crect width=\'32\' height=\'32\' rx=\'8\' fill=\'%233f88c5\'/%3E%3Ctext x=\'5\' y=\'22\' fill=\'white\' font-size=\'16\' font-weight=\'700\'%3ELM%3C/text%3E%3C/svg%3E'">
+            <span>LumiMinds</span>
+        </a>
+        <ul class="nav-links">
             <li><a href="index.html">Home</a></li>
             <li><a href="services.html">Services</a></li>
             <li><a href="work.html">Our Works</a></li>
@@ -903,490 +269,425 @@
             <li><a href="about.html">About</a></li>
             <li><a href="contact.html">Contact</a></li>
         </ul>
+        <button class="mobile-menu-btn"><i class="fas fa-bars"></i></button>
     </div>
+</nav>
 
-    <section class="tracking-hero">
-        <div class="container">
-            <h1><i class="fas fa-search-location"></i> Track Your Order</h1>
-            <p>Enter your tracking number to check the status of your order</p>
+<div class="mobile-menu" id="mobileMenu">
+    <div class="mobile-menu-header">
+        <a href="index.html" class="nav-logo">
+            <img src="logo1.png" alt="LumiMinds" onerror="this.src='data:image/svg+xml,%3Csvg xmlns=\'http://www.w3.org/2000/svg\' width=\'32\' height=\'32\' viewBox=\'0 0 32 32\'%3E%3Crect width=\'32\' height=\'32\' rx=\'8\' fill=\'%233f88c5\'/%3E%3Ctext x=\'5\' y=\'22\' fill=\'white\' font-size=\'16\' font-weight=\'700\'%3ELM%3C/text%3E%3C/svg%3E'">
+            <span>LumiMinds</span>
+        </a>
+        <button class="mobile-menu-close" id="mobileMenuClose"><i class="fas fa-times"></i></button>
+    </div>
+    <ul class="mobile-nav-links">
+        <li><a href="index.html">Home</a></li>
+        <li><a href="services.html">Services</a></li>
+        <li><a href="work.html">Our Works</a></li>
+        <li><a href="inventory.html">Inventory</a></li>
+        <li><a href="track.html">Track</a></li>
+        <li><a href="about.html">About</a></li>
+        <li><a href="contact.html">Contact</a></li>
+    </ul>
+</div>
+
+<div class="page">
+    <section class="hero">
+        <div class="hero-eyebrow"><i class="fas fa-satellite-dish"></i> Live Tracking</div>
+        <h1>Where is your order?</h1>
+        <p>Enter your tracking number for real-time shipment updates.</p>
+        <div class="search-wrap">
+            <div class="search-input-wrap">
+                <i class="fas fa-hashtag"></i>
+                <input type="text" id="trackingNumber" placeholder="e.g. TRK-2402-ABC123" autocomplete="off" spellcheck="false">
+            </div>
+            <button id="trackButton"><i class="fas fa-search"></i> Track</button>
         </div>
     </section>
 
-    <section class="tracking-main">
-        <div class="container">
-            <div class="tracking-card">
-                <div class="tracking-form">
-                    <input type="text" id="trackingNumber" placeholder="Enter your tracking number" value="">
-                    <button id="trackButton"><i class="fas fa-search"></i> Track Order</button>
+    <div class="content">
+        <div class="content-inner">
+
+            <div id="loading" class="loading hidden">
+                <div class="spinner"></div>
+                <p>Looking up your order…</p>
+            </div>
+
+            <div id="error" class="error-box hidden">
+                <i class="fas fa-exclamation-circle"></i>
+                <span id="errorMessage"></span>
+            </div>
+
+            <div id="orderDetails" class="result hidden">
+
+                <!-- Status hero -->
+                <div class="status-hero">
+                    <div class="status-icon-wrap" id="statusIconWrap">
+                        <i id="statusIconEl" class="fas fa-circle"></i>
+                    </div>
+                    <div class="status-hero-info">
+                        <h2 id="statusLabel">—</h2>
+                        <div class="hero-location">
+                            <i class="fas fa-map-marker-alt" style="color:var(--primary);font-size:11px"></i>
+                            <span id="currentLocation">—</span>
+                        </div>
+                    </div>
+                    <div class="status-hero-meta">
+                        <div class="tracking-pill" id="displayTrackingNumber"></div>
+                        <button class="copy-btn" id="copyBtn" onclick="copyTracking()">
+                            <i class="fas fa-copy"></i> Copy
+                        </button>
+                        <div id="completedBadge" class="completed-tag hidden">
+                            <i class="fas fa-check-circle"></i> Completed
+                        </div>
+                    </div>
                 </div>
 
-                <div id="loading" class="loading hidden">
-                    <div class="spinner"></div>
-                    <p><i class="fas fa-hourglass-half"></i> Fetching order details...</p>
+                <!-- Customer -->
+                <div class="card">
+                    <div class="card-header"><i class="fas fa-user"></i><span>Customer Details</span></div>
+                    <div class="card-body">
+                        <div class="info-grid">
+                            <div class="info-item"><div class="lbl">Name</div><div class="val" id="customerName">—</div></div>
+                            <div class="info-item"><div class="lbl">Phone</div><div class="val" id="customerPhone">—</div></div>
+                            <div class="info-item"><div class="lbl">Email</div><div class="val" id="customerEmail">—</div></div>
+                            <div class="info-item"><div class="lbl">Delivery Location</div><div class="val" id="customerLocation">—</div></div>
+                        </div>
+                    </div>
                 </div>
 
-                <div id="error" class="error hidden">
-                    <i class="fas fa-exclamation-circle"></i>
-                    <span id="errorMessage"></span>
+                <!-- Order details -->
+                <div class="card">
+                    <div class="card-header"><i class="fas fa-box"></i><span>Order Details</span></div>
+                    <div class="card-body">
+                        <div class="info-grid">
+                            <div class="info-item"><div class="lbl">Item</div><div class="val" id="itemName">—</div></div>
+                            <div class="info-item"><div class="lbl">Origin</div><div class="val" id="originCountry">—</div></div>
+                            <div class="info-item"><div class="lbl">Destination</div><div class="val" id="destinationCountry">—</div></div>
+                            <div class="info-item"><div class="lbl">Order Date</div><div class="val" id="orderDate">—</div></div>
+                            <div class="info-item"><div class="lbl">Expected Delivery</div><div class="val" id="expectedDelivery">—</div></div>
+                            <div class="info-item"><div class="lbl">Value</div><div class="val" id="orderValue">—</div></div>
+                        </div>
+                        <div class="desc-row">
+                            <div class="lbl">Description</div>
+                            <div class="val" id="itemDescription">—</div>
+                        </div>
+                    </div>
                 </div>
 
-                <div id="orderDetails" class="order-details hidden">
-                    <div class="order-header">
-                        <h2><i class="fas fa-box-open"></i> Order Information</h2>
-                        <div>
-                            <span class="tracking-number" id="displayTrackingNumber"></span>
-                            <button class="copy-tracking-btn" id="copyBtn" onclick="copyTracking()">
-                                <i class="fas fa-copy"></i> Copy
-                            </button>
-                            <span id="completedBadge" class="tracking-number completed-badge hidden"><i class="fas fa-check-circle"></i> COMPLETED</span>
+                <!-- Current progress -->
+                <div class="card">
+                    <div class="card-header"><i class="fas fa-truck"></i><span>Current Progress</span></div>
+                    <div class="card-body">
+                        <div class="progress-row">
+                            <div class="progress-stat"><div class="lbl">Status</div><span class="status-badge" id="currentStatus">—</span></div>
+                            <div class="progress-stat"><div class="lbl">Last Update</div><div class="val" id="lastUpdateTime">—</div></div>
+                            <div class="progress-stat"><div class="lbl">Days Remaining</div><div class="val" id="daysRemaining">—</div></div>
                         </div>
                     </div>
-                    
-                    <div class="info-card">
-                        <h3><i class="fas fa-user"></i> Customer Details</h3>
-                        <div class="info-grid">
-                            <div class="info-item"><span class="label"><i class="fas fa-user"></i> Name</span><span class="value" id="customerName">-</span></div>
-                            <div class="info-item"><span class="label"><i class="fas fa-phone"></i> Phone</span><span class="value" id="customerPhone">-</span></div>
-                            <div class="info-item"><span class="label"><i class="fas fa-envelope"></i> Email</span><span class="value" id="customerEmail">-</span></div>
-                            <div class="info-item"><span class="label"><i class="fas fa-map-marker-alt"></i> Delivery Location</span><span class="value" id="customerLocation">-</span></div>
-                        </div>
-                    </div>
-                    
-                    <div class="info-card">
-                        <h3><i class="fas fa-shopping-bag"></i> Order Details</h3>
-                        <div class="info-grid">
-                            <div class="info-item"><span class="label"><i class="fas fa-box"></i> Item Name</span><span class="value" id="itemName">-</span></div>
-                            <div class="info-item"><span class="label"><i class="fas fa-globe"></i> Origin Country</span><span class="value" id="originCountry">-</span></div>
-                            <div class="info-item"><span class="label"><i class="fas fa-flag"></i> Destination Country</span><span class="value" id="destinationCountry">-</span></div>
-                            <div class="info-item"><span class="label"><i class="fas fa-calendar-alt"></i> Order Date</span><span class="value" id="orderDate">-</span></div>
-                            <div class="info-item"><span class="label"><i class="fas fa-calendar-check"></i> Expected Delivery</span><span class="value" id="expectedDelivery">-</span></div>
-                            <div class="info-item"><span class="label"><i class="fas fa-money-bill"></i> Order Value</span><span class="value" id="orderValue">-</span></div>
-                        </div>
-                        <div class="description-box">
-                            <span class="label"><i class="fas fa-align-left"></i> Description</span>
-                            <p id="itemDescription">-</p>
-                        </div>
-                    </div>
-                    
-                    <div class="info-card">
-                        <h3><i class="fas fa-truck"></i> Current Progress</h3>
-                        <div class="info-grid">
-                            <div class="info-item"><span class="label"><i class="fas fa-info-circle"></i> Current Status</span><span class="status-badge" id="currentStatus">-</span></div>
-                            <div class="info-item"><span class="label"><i class="fas fa-map-pin"></i> Current Location</span><span class="value" id="currentLocation"><i class="fas fa-map-marker-alt"></i> -</span></div>
-                            <div class="info-item"><span class="label"><i class="fas fa-clock"></i> Last Update</span><span class="value" id="lastUpdateTime"><i class="far fa-clock"></i> -</span></div>
-                            <div class="info-item"><span class="label"><i class="fas fa-hourglass-half"></i> Days Remaining</span><span class="value" id="daysRemaining">-</span></div>
-                        </div>
-                    </div>
+                </div>
 
-                    <!-- Images Section -->
-                    <div id="imagesSection" class="info-card hidden">
-                        <h3><i class="fas fa-images"></i> Order Images</h3>
-                        <div id="imageCarousel" class="image-carousel"></div>
-                    </div>
-                    
-                    <div class="timeline">
-                        <h3><i class="fas fa-history"></i> Tracking History</h3>
-                        <div id="timelineContainer"></div>
-                    </div>
-                    
-                    <div class="track-another">
-                        <button onclick="resetTracking()"><i class="fas fa-redo"></i> Track Another Order</button>
-                    </div>
+                <!-- Images -->
+                <div class="card hidden" id="imagesSection">
+                    <div class="card-header"><i class="fas fa-images"></i><span>Order Images</span></div>
+                    <div class="card-body"><div class="image-grid" id="imageCarousel"></div></div>
+                </div>
+
+                <!-- Timeline -->
+                <div class="card">
+                    <div class="card-header"><i class="fas fa-history"></i><span>Tracking History</span></div>
+                    <div class="card-body"><div class="timeline" id="timelineContainer"></div></div>
+                </div>
+
+                <div class="reset-wrap">
+                    <button onclick="resetTracking()"><i class="fas fa-arrow-left"></i> Track another order</button>
                 </div>
             </div>
         </div>
-    </section>
-
-    <div class="system-status" id="systemStatus">
-        <span class="status-dot checking" id="statusDot"></span>
-        <span id="statusText">Checking connection...</span>
     </div>
+</div>
 
-    <footer>
-        <div class="container">
-            <div class="footer-content">
-                <div class="footer-section">
-                    <h3><i class="fas fa-lightbulb"></i> LumiMinds</h3>
-                    <p>Your trusted partner for comprehensive business solutions including product sourcing and IT services.</p>
-                    <div class="social-links">
-                        <a href="https://web.facebook.com/lumimindszambia"><i class="fab fa-facebook"></i></a>
-                        <a href="https://www.linkedin.com/company/lumiminds-zambia/"><i class="fab fa-linkedin"></i></a>
-                        <a href="https://wa.me/message/MMD4VAX5ZEAGB1"><i class="fab fa-whatsapp"></i></a>
-                    </div>
-                </div>
-                <div class="footer-section">
-                    <h3>Quick Links</h3>
-                    <ul class="footer-links">
-                        <li><a href="index.html">Home</a></li>
-                        <li><a href="services.html">Services</a></li>
-                        <li><a href="work.html">Our Works</a></li>
-                        <li><a href="inventory.html">Inventory</a></li>
-                        <li><a href="about.html">About Us</a></li>
-                        <li><a href="contact.html">Contact</a></li>
-                    </ul>
-                </div>
-                <div class="footer-section">
-                    <h3>Our Services</h3>
-                    <ul class="footer-links">
-                        <li><a href="services.html#product-sourcing">Product Sourcing</a></li>
-                        <li><a href="services.html#it-support">IT Support</a></li>
-                        <li><a href="work.html">Vehicle and Gadget Import</a></li>
-                        <li><a href="services.html#web-dev">Web Development</a></li>
-                        <li><a href="services.html#consultation">IT Consultation</a></li>
-                    </ul>
-                </div>
-                <div class="footer-section">
-                    <h3>Contact Info</h3>
-                    <ul class="footer-links">
-                        <li><i class="fas fa-map-marker-alt"></i> 45 mwasumina Itawa, Ndola, Zambia</li>
-                        <li><i class="fas fa-envelope"></i> lumimindszambia@gmail.com</li>
-                        <li><i class="fas fa-phone"></i> +260 969 820 643</li>
-                        <li><i class="fas fa-clock"></i> Mon-Fri: 8AM-6PM, Sat: 9AM-1PM</li>
-                    </ul>
-                </div>
+<footer>
+    <div class="footer-inner">
+        <div class="footer-col">
+            <h4>LumiMinds</h4>
+            <p>Your trusted partner for product sourcing, IT services, and smart logistics.</p>
+            <div class="social-row">
+                <a href="https://web.facebook.com/lumimindszambia"><i class="fab fa-facebook-f"></i></a>
+                <a href="https://www.linkedin.com/company/lumiminds-zambia/"><i class="fab fa-linkedin-in"></i></a>
+                <a href="https://wa.me/message/MMD4VAX5ZEAGB1"><i class="fab fa-whatsapp"></i></a>
             </div>
-            <div class="copyright"><p>&copy; 2025 LumiMinds Solutions. All rights reserved.</p></div>
         </div>
-    </footer>
+        <div class="footer-col">
+            <h4>Quick Links</h4>
+            <ul>
+                <li><a href="index.html">Home</a></li>
+                <li><a href="services.html">Services</a></li>
+                <li><a href="work.html">Our Works</a></li>
+                <li><a href="inventory.html">Inventory</a></li>
+                <li><a href="about.html">About Us</a></li>
+                <li><a href="contact.html">Contact</a></li>
+            </ul>
+        </div>
+        <div class="footer-col">
+            <h4>Services</h4>
+            <ul>
+                <li><a href="services.html#product-sourcing">Product Sourcing</a></li>
+                <li><a href="services.html#it-support">IT Support</a></li>
+                <li><a href="work.html">Vehicle &amp; Gadget Import</a></li>
+                <li><a href="services.html#web-dev">Web Development</a></li>
+                <li><a href="services.html#consultation">IT Consultation</a></li>
+            </ul>
+        </div>
+        <div class="footer-col">
+            <h4>Contact</h4>
+            <ul>
+                <li><i class="fas fa-map-marker-alt" style="color:var(--primary);margin-right:6px"></i>45 Mwasumina Itawa, Ndola</li>
+                <li><i class="fas fa-envelope" style="color:var(--primary);margin-right:6px"></i>lumimindszambia@gmail.com</li>
+                <li><i class="fas fa-phone" style="color:var(--primary);margin-right:6px"></i>+260 969 820 643</li>
+                <li><i class="fas fa-clock" style="color:var(--primary);margin-right:6px"></i>Mon–Fri 8AM–6PM · Sat 9AM–1PM</li>
+            </ul>
+        </div>
+    </div>
+    <div class="footer-bottom">© 2025 LumiMinds Solutions. All rights reserved.</div>
+</footer>
 
-    <script>
-        // ── Firebase ──────────────────────────────────────────────────────────
-        const firebaseConfig = {
-            apiKey: "AIzaSyC0YfJMqB8JUmY56Z8jhK2nGXhLOjG7-5M",
-            authDomain: "lumi-track.firebaseapp.com",
-            projectId: "lumi-track",
-            storageBucket: "lumi-track.firebasestorage.app",
-            messagingSenderId: "191561749174",
-            appId: "1:191561749174:web:d7f40c32816b24e9b0cc17"
-        };
-        firebase.initializeApp(firebaseConfig);
-        const db = firebase.firestore();
+<div class="status-indicator">
+    <span class="dot checking" id="statusDot"></span>
+    <span id="statusText">Checking…</span>
+</div>
 
-        // ── Supabase ──────────────────────────────────────────────────────────
-        const SB_URL = 'https://ckcpstucwliaaxezmgty.supabase.co/rest/v1';
-        const SB_KEY = 'sb_publishable_N2KORXORW3PuNUPSjhdHFw_kcJmpshS';
-        const sbHeaders = {
-            'apikey': SB_KEY,
-            'Authorization': `Bearer ${SB_KEY}`,
-            'Content-Type': 'application/json'
-        };
+<script>
+    const firebaseConfig = {
+        apiKey: "AIzaSyC0YfJMqB8JUmY56Z8jhK2nGXhLOjG7-5M",
+        authDomain: "lumi-track.firebaseapp.com",
+        projectId: "lumi-track",
+        storageBucket: "lumi-track.firebasestorage.app",
+        messagingSenderId: "191561749174",
+        appId: "1:191561749174:web:d7f40c32816b24e9b0cc17"
+    };
+    firebase.initializeApp(firebaseConfig);
+    const db = firebase.firestore();
 
-        // ── DOM ───────────────────────────────────────────────────────────────
-        const trackingInput   = document.getElementById('trackingNumber');
-        const trackButton     = document.getElementById('trackButton');
-        const loadingDiv      = document.getElementById('loading');
-        const errorDiv        = document.getElementById('error');
-        const errorMessage    = document.getElementById('errorMessage');
-        const orderDetailsDiv = document.getElementById('orderDetails');
-        const statusDot       = document.getElementById('statusDot');
-        const statusText      = document.getElementById('statusText');
+    const trackingInput   = document.getElementById('trackingNumber');
+    const trackButton     = document.getElementById('trackButton');
+    const loadingDiv      = document.getElementById('loading');
+    const errorDiv        = document.getElementById('error');
+    const errorMessage    = document.getElementById('errorMessage');
+    const orderDetailsDiv = document.getElementById('orderDetails');
 
-        // image fallback
-        document.querySelectorAll('img').forEach(img => {
-            img.onerror = function() {
-                this.onerror = null;
-                this.src = 'data:image/svg+xml,%3Csvg xmlns=\'http://www.w3.org/2000/svg\' width=\'40\' height=\'40\' viewBox=\'0 0 40 40\'%3E%3Crect width=\'40\' height=\'40\' fill=\'%233f88c5\'/%3E%3Ctext x=\'8\' y=\'25\' fill=\'white\' font-size=\'20\'%3ELM%3C/text%3E%3C/svg%3E';
-            };
+    // Mobile menu
+    const mobileMenu = document.getElementById('mobileMenu');
+    document.querySelector('.mobile-menu-btn').addEventListener('click', () => {
+        mobileMenu.classList.add('open'); document.body.style.overflow = 'hidden';
+    });
+    document.getElementById('mobileMenuClose').addEventListener('click', () => {
+        mobileMenu.classList.remove('open'); document.body.style.overflow = '';
+    });
+    mobileMenu.querySelectorAll('a').forEach(a => a.addEventListener('click', () => {
+        mobileMenu.classList.remove('open'); document.body.style.overflow = '';
+    }));
+
+    // Connection check
+    async function checkConnection() {
+        try {
+            document.getElementById('statusDot').className = 'dot checking';
+            document.getElementById('statusText').textContent = 'Checking…';
+            await db.collection('orders').limit(1).get();
+            document.getElementById('statusDot').className = 'dot connected';
+            document.getElementById('statusText').textContent = 'Connected';
+        } catch {
+            document.getElementById('statusDot').className = 'dot disconnected';
+            document.getElementById('statusText').textContent = 'Offline';
+        }
+    }
+
+    // Helpers
+    function formatDate(s) {
+        if (!s) return '—';
+        try { return new Date(s).toLocaleDateString('en-US', { year:'numeric', month:'short', day:'numeric' }); }
+        catch { return s; }
+    }
+    function formatDateTime(s) {
+        if (!s) return '—';
+        try { return new Date(s).toLocaleString('en-US', { year:'numeric', month:'short', day:'numeric', hour:'2-digit', minute:'2-digit' }); }
+        catch { return s; }
+    }
+    function daysRemaining(d) {
+        if (!d) return { text:'—', cls:'' };
+        try {
+            const diff = Math.ceil((new Date(d) - new Date()) / 86400000);
+            if (diff < 0) return { text:'Overdue', cls:'overdue' };
+            if (diff === 0) return { text:'Today', cls:'today' };
+            return { text: diff + ' days', cls:'' };
+        } catch { return { text:'—', cls:'' }; }
+    }
+    function statusMeta(status) {
+        const s = (status || '').toLowerCase();
+        if (s.includes('processing'))                   return { cls:'processing',       icon:'fa-clock',       color:'#6D28D9', bg:'#F3F0FF' };
+        if (s.includes('shipped'))                      return { cls:'shipped',          icon:'fa-ship',        color:'#1D4ED8', bg:'#EFF6FF' };
+        if (s.includes('transit'))                      return { cls:'in-transit',       icon:'fa-truck',       color:'#0E7490', bg:'#ECFEFF' };
+        if (s.includes('out')||s.includes('delivery'))  return { cls:'out-for-delivery', icon:'fa-truck-fast',  color:'#15803D', bg:'#F0FDF4' };
+        if (s.includes('delivered'))                    return { cls:'delivered',        icon:'fa-check-circle',color:'#15803D', bg:'#F0FDF4' };
+        if (s.includes('completed'))                    return { cls:'completed',        icon:'fa-check-circle',color:'#15803D', bg:'#F0FDF4' };
+        return { cls:'', icon:'fa-circle', color:'#6B7280', bg:'#F9FAFB' };
+    }
+    function showLightbox(url) {
+        const lb = document.createElement('div');
+        lb.className = 'lightbox';
+        lb.innerHTML = `<span class="lightbox-close">&times;</span><img src="${url}" alt="Order Image">`;
+        document.body.appendChild(lb);
+        lb.onclick = e => { if (e.target === lb) lb.remove(); };
+        lb.querySelector('.lightbox-close').onclick = () => lb.remove();
+    }
+
+    // Increment views
+    async function incrementViewCount(id, currentViews) {
+        try { await db.collection('orders').doc(id).update({ 'tracking.views': (currentViews || 0) + 1 }); }
+        catch {}
+    }
+
+    // Render
+    function updateOrderDetails(data) {
+        const status = data.tracking?.currentStatus || '';
+        const meta   = statusMeta(status);
+
+        const iconWrap = document.getElementById('statusIconWrap');
+        iconWrap.style.background = meta.bg;
+        iconWrap.style.color      = meta.color;
+        document.getElementById('statusIconEl').className = `fas ${meta.icon}`;
+        document.getElementById('statusLabel').textContent = status.toUpperCase().replace(/-/g,' ') || '—';
+        document.getElementById('statusLabel').style.color = meta.color;
+        document.getElementById('currentLocation').textContent = data.tracking?.currentLocation || '—';
+        document.getElementById('completedBadge').classList.toggle('hidden', !data.isCompleted);
+
+        document.getElementById('customerName').textContent     = data.customer?.name     || '—';
+        document.getElementById('customerPhone').textContent    = data.customer?.phone    || '—';
+        document.getElementById('customerEmail').textContent    = data.customer?.email    || '—';
+        document.getElementById('customerLocation').textContent = data.customer?.location || '—';
+
+        document.getElementById('itemName').textContent           = data.order?.itemName           || '—';
+        document.getElementById('originCountry').textContent      = data.order?.originCountry      || '—';
+        document.getElementById('destinationCountry').textContent = data.order?.destinationCountry || '—';
+        document.getElementById('orderDate').textContent          = formatDate(data.order?.orderDate);
+        document.getElementById('expectedDelivery').textContent   = formatDate(data.order?.expectedDelivery);
+        document.getElementById('orderValue').textContent         = data.order?.value
+            ? `${data.order.currency || 'ZMW'} ${Number(data.order.value).toFixed(2)}` : '—';
+        document.getElementById('itemDescription').textContent    = data.order?.description || '—';
+
+        const statusBadge = document.getElementById('currentStatus');
+        statusBadge.textContent = status || '—';
+        statusBadge.className   = `status-badge ${meta.cls}`;
+        document.getElementById('lastUpdateTime').textContent = formatDateTime(data.tracking?.lastUpdate);
+        const dr = daysRemaining(data.order?.expectedDelivery);
+        const drEl = document.getElementById('daysRemaining');
+        drEl.textContent = dr.text; drEl.className = `val ${dr.cls}`;
+
+        // Images
+        const urls = data.imageUrls || [];
+        document.getElementById('imagesSection').classList.toggle('hidden', !urls.length);
+        const carousel = document.getElementById('imageCarousel');
+        carousel.innerHTML = '';
+        urls.forEach(url => {
+            const img = document.createElement('img');
+            img.src = url; img.alt = 'Order Image';
+            img.onclick = () => showLightbox(url);
+            carousel.appendChild(img);
         });
 
-        // mobile menu
-        const mobileMenuBtn   = document.querySelector('.mobile-menu-btn');
-        const mobileMenu      = document.querySelector('.mobile-menu');
-        const mobileMenuClose = document.querySelector('.mobile-menu-close');
-        if (mobileMenuBtn)   mobileMenuBtn.addEventListener('click',  () => { mobileMenu.classList.add('active');    document.body.style.overflow = 'hidden'; });
-        if (mobileMenuClose) mobileMenuClose.addEventListener('click', () => { mobileMenu.classList.remove('active'); document.body.style.overflow = 'auto'; });
-        document.querySelectorAll('.mobile-nav-links a').forEach(link =>
-            link.addEventListener('click', () => { mobileMenu.classList.remove('active'); document.body.style.overflow = 'auto'; })
-        );
-
-        window.addEventListener('scroll', () => {
-            const header = document.querySelector('header');
-            if (window.scrollY > 100) { header.style.background = 'rgba(255,255,255,0.95)'; header.style.backdropFilter = 'blur(10px)'; }
-            else { header.style.background = 'var(--white)'; header.style.backdropFilter = 'none'; }
-        });
-
-        // ── Connection check ──────────────────────────────────────────────────
-        async function checkConnection() {
-            try {
-                statusDot.className = 'status-dot checking';
-                statusText.textContent = 'Checking connection...';
-                await db.collection('orders').limit(1).get();
-                statusDot.className = 'status-dot connected';
-                statusText.textContent = 'Connected to server';
-            } catch (e) {
-                statusDot.className = 'status-dot disconnected';
-                statusText.textContent = 'Connection error';
-            }
-        }
-
-        // ── Helpers ───────────────────────────────────────────────────────────
-        function formatDate(s) {
-            if (!s) return '-';
-            try { return new Date(s).toLocaleDateString('en-US', { year:'numeric', month:'short', day:'numeric' }); }
-            catch(e) { return s; }
-        }
-        function formatDateTime(s) {
-            if (!s) return '-';
-            try { return new Date(s).toLocaleString('en-US', { year:'numeric', month:'short', day:'numeric', hour:'2-digit', minute:'2-digit' }); }
-            catch(e) { return s; }
-        }
-        function calculateDaysRemaining(d) {
-            if (!d) return '-';
-            try {
-                const diff = Math.ceil((new Date(d) - new Date()) / 86400000);
-                if (diff < 0) return 'Overdue';
-                if (diff === 0) return 'Today';
-                return diff + ' days';
-            } catch(e) { return '-'; }
-        }
-        function getStatusBadgeClass(status) {
-            if (!status) return '';
-            const s = status.toLowerCase();
-            if (s.includes('processing'))             return 'processing';
-            if (s.includes('shipped'))                return 'shipped';
-            if (s.includes('transit'))                return 'in-transit';
-            if (s.includes('out') || s.includes('delivery')) return 'out-for-delivery';
-            if (s.includes('delivered'))              return 'delivered';
-            if (s.includes('completed'))              return 'completed';
-            return '';
-        }
-        function getStatusIcon(status) {
-            if (!status) return 'fa-circle';
-            const s = status.toLowerCase();
-            if (s.includes('processing'))   return 'fa-clock';
-            if (s.includes('shipped'))      return 'fa-ship';
-            if (s.includes('transit'))      return 'fa-truck';
-            if (s.includes('out'))          return 'fa-truck-fast';
-            if (s.includes('delivered') || s.includes('completed')) return 'fa-check-circle';
-            return 'fa-circle';
-        }
-        function showLightbox(imageUrl) {
-            const lb = document.createElement('div');
-            lb.className = 'lightbox';
-            lb.innerHTML = `<span class="close-lightbox">&times;</span><img src="${imageUrl}" alt="Order Image">`;
-            document.body.appendChild(lb);
-            lb.onclick = e => { if (e.target === lb) lb.remove(); };
-            lb.querySelector('.close-lightbox').onclick = () => lb.remove();
-        }
-
-        // ── Supabase search ───────────────────────────────────────────────────
-        async function searchSupabase(trackingNumber) {
-            const res = await fetch(
-                `${SB_URL}/orders?select=*,order_timeline(*)&tracking_number=eq.${encodeURIComponent(trackingNumber)}`,
-                { headers: sbHeaders }
-            );
-            if (!res.ok) return null;
-            const rows = await res.json();
-            if (!rows.length) return null;
-
-            const row = rows[0];
-            const timelineRows = (row.order_timeline || [])
-                .sort((a, b) => new Date(a.timestamp) - new Date(b.timestamp));
-
-            // Map flat Supabase columns → nested structure the renderer expects
-            return {
-                _source: 'supabase',
-                _id: row.id,
-                trackingNumber: row.tracking_number,
-                customer: {
-                    name:     row.customer_name,
-                    phone:    row.customer_phone,
-                    email:    row.customer_email,
-                    location: row.customer_location,
-                },
-                order: {
-                    itemName:           row.item_name,
-                    description:        row.item_description,
-                    originCountry:      row.origin_country,
-                    destinationCountry: row.destination_country,
-                    orderDate:          row.order_date,
-                    expectedDelivery:   row.expected_delivery,
-                    value:              row.order_value,
-                    currency:           row.currency || 'ZMW',
-                },
-                tracking: {
-                    currentStatus:   row.current_status,
-                    currentLocation: row.current_location,
-                    lastUpdate:      row.last_update,
-                    views:           row.views || 0,
-                },
-                timeline: timelineRows.map(t => ({
-                    status:      t.status,
-                    description: t.description,
-                    location:    t.location,
-                    timestamp:   t.timestamp,
-                })),
-                imageUrls:   row.image_urls || [],
-                isCompleted: row.is_completed || false,
-            };
-        }
-
-        // ── Firebase search ───────────────────────────────────────────────────
-        async function searchFirebase(trackingNumber) {
-            const snap = await db.collection('orders')
-                .where('trackingNumber', '==', trackingNumber)
-                .limit(1).get();
-            if (snap.empty) return null;
-            const doc = snap.docs[0];
-            return { ...doc.data(), _source: 'firebase', _id: doc.id };
-        }
-
-        // ── Increment views ───────────────────────────────────────────────────
-        async function incrementViewCount(source, id, currentViews) {
-            try {
-                if (source === 'firebase') {
-                    await db.collection('orders').doc(id).update({ 'tracking.views': (currentViews || 0) + 1 });
-                } else {
-                    await fetch(`${SB_URL}/orders?id=eq.${id}`, {
-                        method: 'PATCH',
-                        headers: { ...sbHeaders, 'Prefer': 'return=minimal' },
-                        body: JSON.stringify({ views: (currentViews || 0) + 1 }),
-                    });
-                }
-            } catch(e) {}
-        }
-
-        // ── Render order details ──────────────────────────────────────────────
-        function updateOrderDetails(data) {
-            document.getElementById('customerName').textContent     = data.customer?.name     || '-';
-            document.getElementById('customerPhone').textContent    = data.customer?.phone    || '-';
-            document.getElementById('customerEmail').textContent    = data.customer?.email    || '-';
-            document.getElementById('customerLocation').textContent = data.customer?.location || '-';
-
-            document.getElementById('itemName').textContent           = data.order?.itemName           || '-';
-            document.getElementById('originCountry').textContent      = data.order?.originCountry      || '-';
-            document.getElementById('destinationCountry').textContent = data.order?.destinationCountry || '-';
-            document.getElementById('orderDate').textContent          = formatDate(data.order?.orderDate);
-            document.getElementById('expectedDelivery').textContent   = formatDate(data.order?.expectedDelivery);
-            document.getElementById('orderValue').textContent         = data.order?.value
-                ? `${data.order?.currency || 'ZMW'} ${Number(data.order.value).toFixed(2)}` : '-';
-            document.getElementById('itemDescription').textContent    = data.order?.description || '-';
-
-            const status = data.tracking?.currentStatus || '-';
-            const statusBadge = document.getElementById('currentStatus');
-            statusBadge.textContent = status;
-            statusBadge.className   = `status-badge ${getStatusBadgeClass(status)}`;
-
-            document.getElementById('currentLocation').innerHTML  = `<i class="fas fa-map-marker-alt"></i> ${data.tracking?.currentLocation || '-'}`;
-            document.getElementById('lastUpdateTime').innerHTML   = `<i class="far fa-clock"></i> ${formatDateTime(data.tracking?.lastUpdate)}`;
-
-            const dr   = calculateDaysRemaining(data.order?.expectedDelivery);
-            const drEl = document.getElementById('daysRemaining');
-            drEl.textContent = dr;
-            drEl.className   = dr === 'Overdue' ? 'value text-danger' : (dr === 'Today' ? 'value text-warning' : 'value');
-
-            // Completed badge
-            document.getElementById('completedBadge').classList.toggle('hidden', !data.isCompleted);
-
-            // Images
-            const imageUrls    = data.imageUrls || [];
-            const imagesSection = document.getElementById('imagesSection');
-            const imageCarousel = document.getElementById('imageCarousel');
-            imagesSection.classList.toggle('hidden', imageUrls.length === 0);
-            imageCarousel.innerHTML = '';
-            imageUrls.forEach(url => {
-                const img = document.createElement('img');
-                img.src = url; img.alt = 'Order Image';
-                img.onclick = () => showLightbox(url);
-                imageCarousel.appendChild(img);
-            });
-
-            // Timeline
-            const timelineContainer = document.getElementById('timelineContainer');
-            timelineContainer.innerHTML = '';
-            if (data.timeline && data.timeline.length > 0) {
-                const sorted = [...data.timeline].sort((a, b) => new Date(b.timestamp) - new Date(a.timestamp));
-                sorted.forEach((entry, idx) => {
-                    const item = document.createElement('div');
-                    item.className = `timeline-item ${idx === 0 ? 'latest' : ''}`;
-                    item.innerHTML = `
-                        <div class="timeline-icon"><i class="fas ${getStatusIcon(entry.status)}"></i></div>
-                        <div class="timeline-content">
-                            <h4>${entry.status || 'Unknown'}</h4>
-                            <p>${entry.description || ''}</p>
-                            <div class="location"><i class="fas fa-map-marker-alt"></i> ${entry.location || 'Unknown'}</div>
-                            <div class="time"><i class="far fa-clock"></i> ${formatDateTime(entry.timestamp)}</div>
+        // Timeline
+        const tc = document.getElementById('timelineContainer');
+        tc.innerHTML = '';
+        if (data.timeline?.length) {
+            [...data.timeline]
+                .sort((a,b) => new Date(b.timestamp) - new Date(a.timestamp))
+                .forEach((entry, i) => {
+                    const m  = statusMeta(entry.status);
+                    const ts = entry.timestamp ? formatDateTime(entry.timestamp) : null;
+                    const el = document.createElement('div');
+                    el.className = 'tl-item';
+                    el.innerHTML = `
+                        <div class="tl-left">
+                            <div class="tl-dot" style="background:${m.bg};color:${m.color}">
+                                <i class="fas ${i===0 ? m.icon : 'fa-circle'}" style="font-size:${i===0?'13px':'7px'}"></i>
+                            </div>
+                            <div class="tl-line"></div>
+                        </div>
+                        <div class="tl-content">
+                            <div class="tl-badge" style="background:${m.bg};color:${m.color}">
+                                ${(entry.status||'unknown').toUpperCase().replace(/-/g,' ')}
+                            </div>
+                            ${entry.description ? `<div class="tl-desc">${entry.description}</div>` : ''}
+                            <div class="tl-meta">
+                                ${entry.location ? `<span><i class="fas fa-map-marker-alt"></i>${entry.location}</span>` : ''}
+                                ${ts ? `<span><i class="far fa-clock"></i>${ts}</span>` : ''}
+                            </div>
                         </div>`;
-                    timelineContainer.appendChild(item);
+                    tc.appendChild(el);
                 });
-            } else {
-                timelineContainer.innerHTML = '<p class="text-center">No tracking history available</p>';
-            }
+        } else {
+            tc.innerHTML = '<p style="font-size:13px;color:var(--muted)">No tracking history yet.</p>';
         }
+    }
 
-        // ── Copy tracking number ──────────────────────────────────────────────
-        function copyTracking() {
-            const tn  = document.getElementById('displayTrackingNumber').textContent;
-            const btn = document.getElementById('copyBtn');
-            navigator.clipboard.writeText(tn).then(() => {
-                btn.classList.add('copied');
-                btn.innerHTML = '<i class="fas fa-check"></i> Copied!';
-                setTimeout(() => {
-                    btn.classList.remove('copied');
-                    btn.innerHTML = '<i class="fas fa-copy"></i> Copy';
-                }, 2000);
-            });
+    // Copy
+    function copyTracking() {
+        const tn  = document.getElementById('displayTrackingNumber').textContent;
+        const btn = document.getElementById('copyBtn');
+        navigator.clipboard.writeText(tn).then(() => {
+            btn.classList.add('copied');
+            btn.innerHTML = '<i class="fas fa-check"></i> Copied!';
+            setTimeout(() => { btn.classList.remove('copied'); btn.innerHTML = '<i class="fas fa-copy"></i> Copy'; }, 2000);
+        });
+    }
+
+    // Track
+    async function trackOrder() {
+        const trackingNumber = trackingInput.value.trim().toUpperCase();
+        if (!trackingNumber) { showError('Please enter a tracking number.'); return; }
+
+        orderDetailsDiv.classList.add('hidden');
+        errorDiv.classList.add('hidden');
+        loadingDiv.classList.remove('hidden');
+        trackButton.disabled = true;
+
+        try {
+            const snapshot = await db.collection('orders')
+                .where('trackingNumber', '==', trackingNumber).limit(1).get();
+
+            if (snapshot.empty) throw new Error('Order not found. Please check your tracking number and try again.');
+
+            const doc  = snapshot.docs[0];
+            const data = { ...doc.data(), _id: doc.id };
+
+            incrementViewCount(data._id, data.tracking?.views);
+            document.getElementById('displayTrackingNumber').textContent = data.trackingNumber || '—';
+            updateOrderDetails(data);
+            orderDetailsDiv.classList.remove('hidden');
+        } catch (err) {
+            showError(err.message);
+        } finally {
+            loadingDiv.classList.add('hidden');
+            trackButton.disabled = false;
         }
+    }
 
-        // ── Main track function ───────────────────────────────────────────────
-        async function trackOrder() {
-            // Normalise: trim whitespace and uppercase so TRK-2402-abc123 works
-            const trackingNumber = trackingInput.value.trim().toUpperCase();
-            if (!trackingNumber) { showError('Please enter a tracking number'); return; }
+    function showError(msg) { errorMessage.textContent = msg; errorDiv.classList.remove('hidden'); }
+    function resetTracking() {
+        trackingInput.value = '';
+        orderDetailsDiv.classList.add('hidden');
+        errorDiv.classList.add('hidden');
+        trackingInput.focus();
+    }
 
-            orderDetailsDiv.classList.add('hidden');
-            errorDiv.classList.add('hidden');
-            loadingDiv.classList.remove('hidden');
-            trackButton.disabled = true;
+    trackButton.addEventListener('click', trackOrder);
+    trackingInput.addEventListener('keypress', e => { if (e.key === 'Enter') trackOrder(); });
 
-            try {
-                // Search both backends in parallel
-                const [fbResult, sbResult] = await Promise.allSettled([
-                    searchFirebase(trackingNumber),
-                    searchSupabase(trackingNumber),
-                ]);
+    const urlParam = new URLSearchParams(window.location.search).get('tracking');
+    if (urlParam) { trackingInput.value = urlParam.toUpperCase(); trackOrder(); }
 
-                // Prefer Supabase (new orders); fall back to Firebase (legacy)
-                const data =
-                    (sbResult.status === 'fulfilled' && sbResult.value) ? sbResult.value :
-                    (fbResult.status === 'fulfilled' && fbResult.value) ? fbResult.value :
-                    null;
-
-                if (!data) throw new Error('Order not found. Please check your tracking number and try again.');
-
-                incrementViewCount(data._source, data._id, data.tracking?.views);
-
-                document.getElementById('displayTrackingNumber').textContent = data.trackingNumber || '-';
-                updateOrderDetails(data);
-                orderDetailsDiv.classList.remove('hidden');
-            } catch (error) {
-                showError(error.message);
-            } finally {
-                loadingDiv.classList.add('hidden');
-                trackButton.disabled = false;
-            }
-        }
-
-        function showError(message) {
-            errorMessage.textContent = message;
-            errorDiv.classList.remove('hidden');
-        }
-        function resetTracking() {
-            trackingInput.value = '';
-            orderDetailsDiv.classList.add('hidden');
-            errorDiv.classList.add('hidden');
-            trackingInput.focus();
-        }
-
-        // ── Event listeners ───────────────────────────────────────────────────
-        trackButton.addEventListener('click', trackOrder);
-        trackingInput.addEventListener('keypress', e => { if (e.key === 'Enter') trackOrder(); });
-
-        // Auto-track from URL: track.html?tracking=TRK-2402-ABC123
-        const urlParam = new URLSearchParams(window.location.search).get('tracking');
-        if (urlParam) { trackingInput.value = urlParam.toUpperCase(); trackOrder(); }
-
-        checkConnection();
-    </script>
+    checkConnection();
+</script>
 </body>
 </html>
