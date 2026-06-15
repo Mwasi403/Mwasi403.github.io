@@ -118,6 +118,61 @@
         #trackButton:hover:not(:disabled) { background: var(--primary-dark); transform: translateY(-1px); }
         #trackButton:disabled { opacity: .65; cursor: not-allowed; transform: none; }
 
+        /* ── Recent Orders Strip ──────────────────────────────────────────── */
+        .recent-strip {
+            max-width: 600px; margin: 14px auto 0;
+            display: none; /* shown by JS when cache has entries */
+            flex-direction: column; gap: 8px;
+            text-align: left;
+        }
+        .recent-strip.visible { display: flex; }
+        .recent-label {
+            font-size: 11px; font-weight: 600; letter-spacing: .6px;
+            text-transform: uppercase; color: var(--light);
+            display: flex; align-items: center; gap: 6px;
+        }
+        .recent-label i { font-size: 10px; }
+        .recent-chips {
+            display: flex; flex-wrap: wrap; gap: 8px;
+        }
+        .recent-chip {
+            display: inline-flex; align-items: center; gap: 0;
+            background: var(--white); border: 1.5px solid var(--border);
+            border-radius: 10px; overflow: hidden;
+            transition: border-color .18s, box-shadow .18s;
+            box-shadow: var(--shadow-sm);
+            cursor: pointer;
+        }
+        .recent-chip:hover { border-color: var(--primary); box-shadow: 0 0 0 3px rgba(63,136,197,.10); }
+        .chip-body {
+            display: flex; flex-direction: column; padding: 7px 12px 7px 12px;
+            gap: 1px; min-width: 0;
+        }
+        .chip-item {
+            font-size: 13px; font-weight: 600; color: var(--dark);
+            white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
+            max-width: 180px;
+        }
+        .chip-tracking {
+            font-size: 10px; font-weight: 600; letter-spacing: .5px;
+            color: var(--light); font-family: monospace; white-space: nowrap;
+        }
+        .chip-remove {
+            display: flex; align-items: center; justify-content: center;
+            width: 30px; height: 100%; align-self: stretch;
+            background: none; border: none; border-left: 1px solid var(--border);
+            color: var(--light); cursor: pointer; font-size: 11px;
+            transition: background .15s, color .15s;
+            flex-shrink: 0;
+        }
+        .chip-remove:hover { background: #FEF2F2; color: var(--danger); }
+        .recent-clear {
+            font-size: 11px; font-weight: 500; color: var(--light);
+            background: none; border: none; cursor: pointer; font-family: inherit;
+            padding: 0; transition: color .15s; align-self: flex-start;
+        }
+        .recent-clear:hover { color: var(--danger); }
+
         /* ── Content ──────────────────────────────────────────────────────── */
         .content { flex: 1; padding: 40px 24px 80px; }
         .content-inner { max-width: 800px; margin: 0 auto; }
@@ -252,6 +307,7 @@
             }
             .status-hero { flex-wrap: wrap; gap: 14px; }
             .status-hero-meta { flex-direction: row; align-items: center; flex-wrap: wrap; }
+            .chip-item { max-width: 130px; }
         }
         @media print {
             nav, .hero .search-wrap, .reset-wrap, .status-indicator, footer { display: none; }
@@ -311,6 +367,15 @@
                 <input type="text" id="trackingNumber" placeholder=" Enter your tracking number" autocomplete="off" spellcheck="false">
             </div>
             <button id="trackButton"><i class="fas fa-search"></i> Track</button>
+        </div>
+
+        <!-- ── Recent orders quick-access strip ── -->
+        <div class="recent-strip" id="recentStrip">
+            <div class="recent-label">
+                <i class="fas fa-clock-rotate-left"></i> Recently tracked
+                <button class="recent-clear" id="clearAllBtn" title="Remove all">Clear all</button>
+            </div>
+            <div class="recent-chips" id="recentChips"></div>
         </div>
     </section>
 
@@ -485,7 +550,7 @@
     const errorMessage    = document.getElementById('errorMessage');
     const orderDetailsDiv = document.getElementById('orderDetails');
 
-    // Mobile menu
+    // ── Mobile menu ────────────────────────────────────────────────────────
     const mobileMenu = document.getElementById('mobileMenu');
     document.querySelector('.mobile-menu-btn').addEventListener('click', () => {
         mobileMenu.classList.add('open'); document.body.style.overflow = 'hidden';
@@ -497,7 +562,7 @@
         mobileMenu.classList.remove('open'); document.body.style.overflow = '';
     }));
 
-    // Connection check
+    // ── Connection check ───────────────────────────────────────────────────
     async function checkConnection() {
         try {
             document.getElementById('statusDot').className = 'dot checking';
@@ -511,7 +576,114 @@
         }
     }
 
-    // Helpers
+    // ── Recent-order cache ─────────────────────────────────────────────────
+    const CACHE_KEY    = 'lumi_recent_orders';
+    const CACHE_TTL_MS = 14 * 24 * 60 * 60 * 1000; // 2 weeks
+    const CACHE_MAX    = 10;
+
+    function readCache() {
+        try {
+            const raw = localStorage.getItem(CACHE_KEY);
+            if (!raw) return [];
+            const entries = JSON.parse(raw);
+            // Evict expired entries on read
+            const now = Date.now();
+            return entries.filter(e => now - e.savedAt < CACHE_TTL_MS);
+        } catch { return []; }
+    }
+
+    function writeCache(entries) {
+        try { localStorage.setItem(CACHE_KEY, JSON.stringify(entries)); } catch {}
+    }
+
+    /**
+     * Save a successfully-tracked order to cache.
+     * Moves to front if already present (most-recent-first).
+     */
+    function saveToCache(trackingNumber, itemName) {
+        let entries = readCache();
+        // Remove duplicate if it exists
+        entries = entries.filter(e => e.trackingNumber !== trackingNumber);
+        // Prepend new entry
+        entries.unshift({
+            trackingNumber,
+            itemName: itemName || 'Order',
+            savedAt:  Date.now(),
+        });
+        // Trim to max
+        if (entries.length > CACHE_MAX) entries = entries.slice(0, CACHE_MAX);
+        writeCache(entries);
+        renderRecentOrders();
+    }
+
+    function removeFromCache(trackingNumber) {
+        const entries = readCache().filter(e => e.trackingNumber !== trackingNumber);
+        writeCache(entries);
+        renderRecentOrders();
+    }
+
+    function clearCache() {
+        writeCache([]);
+        renderRecentOrders();
+    }
+
+    function renderRecentOrders() {
+        const strip  = document.getElementById('recentStrip');
+        const chips  = document.getElementById('recentChips');
+        const entries = readCache();
+
+        if (!entries.length) {
+            strip.classList.remove('visible');
+            return;
+        }
+
+        strip.classList.add('visible');
+        chips.innerHTML = '';
+
+        entries.forEach(entry => {
+            const chip = document.createElement('div');
+            chip.className = 'recent-chip';
+            chip.title = `Track ${entry.trackingNumber}`;
+
+            const body = document.createElement('div');
+            body.className = 'chip-body';
+            body.innerHTML = `
+                <span class="chip-item">${escapeHtml(entry.itemName)}</span>
+                <span class="chip-tracking">${escapeHtml(entry.trackingNumber)}</span>
+            `;
+            body.addEventListener('click', () => {
+                trackingInput.value = entry.trackingNumber;
+                trackOrder();
+                // Scroll results into view on mobile
+                setTimeout(() => document.querySelector('.content').scrollIntoView({ behavior: 'smooth', block: 'start' }), 200);
+            });
+
+            const removeBtn = document.createElement('button');
+            removeBtn.className = 'chip-remove';
+            removeBtn.title = 'Remove';
+            removeBtn.innerHTML = '<i class="fas fa-times"></i>';
+            removeBtn.addEventListener('click', (e) => {
+                e.stopPropagation();
+                removeFromCache(entry.trackingNumber);
+            });
+
+            chip.appendChild(body);
+            chip.appendChild(removeBtn);
+            chips.appendChild(chip);
+        });
+    }
+
+    document.getElementById('clearAllBtn').addEventListener('click', () => {
+        if (confirm('Remove all recently tracked orders?')) clearCache();
+    });
+
+    function escapeHtml(str) {
+        return String(str)
+            .replace(/&/g,'&amp;').replace(/</g,'&lt;')
+            .replace(/>/g,'&gt;').replace(/"/g,'&quot;');
+    }
+
+    // ── Helpers ────────────────────────────────────────────────────────────
     function formatDate(s) {
         if (!s) return '—';
         try { return new Date(s).toLocaleDateString('en-US', { year:'numeric', month:'short', day:'numeric' }); }
@@ -556,7 +728,7 @@
         catch {}
     }
 
-    // Render
+    // ── Render ─────────────────────────────────────────────────────────────
     function updateOrderDetails(data) {
         const status = data.tracking?.currentStatus || '';
         const meta   = statusMeta(status);
@@ -639,7 +811,7 @@
         }
     }
 
-    // Copy
+    // ── Copy ───────────────────────────────────────────────────────────────
     function copyTracking() {
         const tn  = document.getElementById('displayTrackingNumber').textContent;
         const btn = document.getElementById('copyBtn');
@@ -650,7 +822,7 @@
         });
     }
 
-    // Track
+    // ── Track ──────────────────────────────────────────────────────────────
     async function trackOrder() {
         const trackingNumber = trackingInput.value.trim().toUpperCase();
         if (!trackingNumber) { showError('Please enter a tracking number.'); return; }
@@ -673,6 +845,11 @@
             document.getElementById('displayTrackingNumber').textContent = data.trackingNumber || '—';
             updateOrderDetails(data);
             orderDetailsDiv.classList.remove('hidden');
+
+            // ── Save to cache after a successful lookup ──
+            const itemName = data.order?.itemName || 'Order';
+            saveToCache(trackingNumber, itemName);
+
         } catch (err) {
             showError(err.message);
         } finally {
@@ -695,7 +872,9 @@
     const urlParam = new URLSearchParams(window.location.search).get('tracking');
     if (urlParam) { trackingInput.value = urlParam.toUpperCase(); trackOrder(); }
 
+    // ── Init ───────────────────────────────────────────────────────────────
     checkConnection();
+    renderRecentOrders(); // Show cached orders on load
 </script>
 </body>
 </html>
