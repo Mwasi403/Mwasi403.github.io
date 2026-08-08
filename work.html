@@ -936,7 +936,21 @@
         </div>
     </footer>
 
+    <script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-app-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore-compat.js"></script>
     <script>
+        // Same Firebase project used across the LumiMinds site (see track.html)
+        const firebaseConfig = {
+            apiKey: "AIzaSyC0YfJMqB8JUmY56Z8jhK2nGXhLOjG7-5M",
+            authDomain: "lumi-track.firebaseapp.com",
+            projectId: "lumi-track",
+            storageBucket: "lumi-track.firebasestorage.app",
+            messagingSenderId: "191561749174",
+            appId: "1:191561749174:web:d7f40c32816b24e9b0cc17"
+        };
+        firebase.initializeApp(firebaseConfig);
+        const db = firebase.firestore();
+
         // Mobile Menu Toggle
         const mobileMenuBtn = document.querySelector('.mobile-menu-btn');
         const mobileMenu = document.querySelector('.mobile-menu');
@@ -986,22 +1000,31 @@
             setupModalEvents();
         });
 
-        // Load projects from index file
+        // Load projects from Firestore (collection: works)
         async function loadProjects() {
             const container = document.getElementById('projectsContainer');
-            
+
             try {
-                const response = await fetch('project-json/projects-index.json');
-                if (!response.ok) {
-                    throw new Error(`HTTP error! status: ${response.status}`);
-                }
-                const data = await response.json();
-                
-                // Sort projects by ID in descending order (highest ID first)
-                projectsIndex = data.projects.sort((a, b) => {
-                    return b.id - a.id; // Descending order (highest ID first)
+                const snapshot = await db.collection('works')
+                    .orderBy('createdAt', 'desc')
+                    .get();
+
+                projectsIndex = snapshot.docs.map(doc => {
+                    const data = doc.data();
+                    return {
+                        ...data,
+                        id: doc.id,
+                        filename: doc.id, // kept so data-filename / lookups still work
+                        category: data.category || 'vehicle',
+                        title: data.title || 'Untitled',
+                        previewImage: data.previewImage || '',
+                        images: data.images || [],
+                        description: data.description || '',
+                        details: data.details || [],
+                        testimonial: data.testimonial || null
+                    };
                 });
-                
+
                 renderProjects('all');
             } catch (error) {
                 console.error('Error loading projects:', error);
@@ -1018,18 +1041,10 @@
             }
         }
 
-        // Load individual project data
+        // Project data is already fully loaded from Firestore in loadProjects(),
+        // so this just looks it up from the in-memory list instead of a second fetch.
         async function loadProjectData(filename) {
-            try {
-                const response = await fetch(`project-json/${filename}`);
-                if (!response.ok) {
-                    throw new Error(`HTTP error! status: ${response.status}`);
-                }
-                return await response.json();
-            } catch (error) {
-                console.error('Error loading project data:', error);
-                return null;
-            }
+            return projectsIndex.find(p => p.filename === filename) || null;
         }
 
         // Function to load image with error handling
